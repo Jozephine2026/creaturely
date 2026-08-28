@@ -43,7 +43,7 @@ a.home{
 a.home:hover,a.home:focus-visible{color:var(--ink)}
 a.home:focus-visible{outline:1px solid var(--epigraph);outline-offset:3px}
 
-header{padding:5.5rem 0 2.6rem;text-align:center}
+header{padding:7rem 0 3.6rem;text-align:center}
 .kicker{
   font-family:var(--sans);font-size:0.64rem;letter-spacing:0.3em;text-transform:uppercase;
   color:var(--silver-deep);margin:0 0 1.1rem;
@@ -212,14 +212,17 @@ footer p{
   color:var(--epigraph);margin:0 0 0.4rem;
 }
 .poem p{font-style:italic;color:var(--ink-soft);font-size:1.05rem;margin:0}
+.kicker a{color:inherit;text-decoration:none}
+.kicker a:hover{text-decoration:underline;text-underline-offset:3px}
+body{animation:pagein 620ms ease both}
+@keyframes pagein{from{opacity:0}}
 </style>
 </head>
 <body>
 
-<a class="home" href="index.html">creaturely</a>
 
 <header class="wrap">
-  <p class="kicker">Creaturely &middot; an anatomy &middot; vi</p>
+  <p class="kicker"><a href="index.html">creaturely: a glossary &middot; vi</a></p>
   <h1>sampling &amp; temperature</h1>
   <p class="sub">why every answer is different</p>
 </header>
@@ -389,6 +392,16 @@ document.getElementById("tSampleBtn").addEventListener("click", ()=>{
 });
 document.getElementById("tClearBtn").addEventListener("click", ()=>{ tDraws.innerHTML = ""; });
 refreshT();
+</script>
+<script>
+document.querySelectorAll(".kicker a").forEach(a=>{
+  a.addEventListener("click", e=>{
+    e.preventDefault();
+    document.body.style.transition = "opacity 440ms ease";
+    document.body.style.opacity = "0";
+    setTimeout(()=>{ location.href = a.href; }, 440);
+  });
+});
 </script>
 </body>
 </html>

@@ -43,7 +43,7 @@ a.home{
 a.home:hover,a.home:focus-visible{color:var(--ink)}
 a.home:focus-visible{outline:1px solid var(--epigraph);outline-offset:3px}
 
-header{padding:5.5rem 0 2.6rem;text-align:center}
+header{padding:7rem 0 3.6rem;text-align:center}
 .kicker{
   font-family:var(--sans);font-size:0.64rem;letter-spacing:0.3em;text-transform:uppercase;
   color:var(--silver-deep);margin:0 0 1.1rem;
@@ -208,14 +208,17 @@ footer p{
 .tval{font-family:var(--sans);font-size:0.78rem;color:var(--ink)}
 .anglelbl{font-family:var(--sans);font-size:0.76rem;color:var(--ink-soft);margin-top:0.7rem}
 .anglelbl b{font-weight:400;color:var(--ink)}
+.kicker a{color:inherit;text-decoration:none}
+.kicker a:hover{text-decoration:underline;text-underline-offset:3px}
+body{animation:pagein 620ms ease both}
+@keyframes pagein{from{opacity:0}}
 </style>
 </head>
 <body>
 
-<a class="home" href="index.html">creaturely</a>
 
 <header class="wrap">
-  <p class="kicker">Creaturely &middot; an anatomy &middot; viii</p>
+  <p class="kicker"><a href="index.html">creaturely: a glossary &middot; viii</a></p>
   <h1>superposition</h1>
   <p class="sub">how so much fits in so little</p>
 </header>
@@ -366,6 +369,16 @@ function drawPack(){
 nSlider.addEventListener("input", drawPack);
 window.addEventListener("resize", sizePack);
 sizePack();
+</script>
+<script>
+document.querySelectorAll(".kicker a").forEach(a=>{
+  a.addEventListener("click", e=>{
+    e.preventDefault();
+    document.body.style.transition = "opacity 440ms ease";
+    document.body.style.opacity = "0";
+    setTimeout(()=>{ location.href = a.href; }, 440);
+  });
+});
 </script>
 </body>
 </html>

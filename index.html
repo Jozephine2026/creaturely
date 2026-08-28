@@ -150,9 +150,9 @@ const STYLE = {
   "osprey":       {base:"#B09972", deep:"#7E6A48", tw:0.25, dots:false},
   "swallow":      {base:"#FDBB8E", deep:"#DD8A52", tw:0.25, dots:false},
   "nightingale":  {base:"#B7DBF3", deep:"#7E9DBE", tw:0.25, dots:false},
-  "moth-tiger":   {base:"#EADFAF", deep:"#AB9B8A", tw:0.30, dots:false},
-  "moth-hawk":    {base:"#E0D08E", deep:"#C8A83C", tw:0.30, dots:false},
-  "moth-swallowtail":{base:"#EFC9C4", deep:"#E2A09B", tw:0.30, dots:false},
+  "moth-tiger":   {base:"#EFC9C4", deep:"#E2A09B", tw:0.30, dots:false},
+  "moth-hawk":    {base:"#EADFAF", deep:"#AB9B8A", tw:0.30, dots:false},
+  "moth-swallowtail":{base:"#E0D08E", deep:"#C8A83C", tw:0.30, dots:false},
   /* the asterisk wears the epigraph blue, the annotation colour;
      the ampersand wears the madder, the rare mark */
   "asterisk":     {base:"#A5CBE0", deep:"#5E87A0", tw:0.22, dots:false},
@@ -160,10 +160,12 @@ const STYLE = {
 };
 
 const CHARS = {
-  photonic:"photonicemergls",
-  sonic:"murmurcallsongair",
-  tactile:"touchtraceshiverdw",
-  glyph:"creaturely&*.:"
+  /* the clouds speak in numbers and scientific symbols;
+     only the arriving word still carries letters */
+  photonic:"0123456789\u03bb\u0394\u221a\u03c0\u221e",
+  sonic:"0123456789\u2211\u2248\u00b1\u03b8\u03c0",
+  tactile:"0123456789\u00d7+=\u222b\u0394",
+  glyph:"&*\u00b7:"
 };
 
 /* twinkle grammar, after the coral fix in Animation 1 */
@@ -623,6 +625,18 @@ else {
     setTimeout(go, 1600);
   } else start();
 }
+
+/* soft departure into the glossary */
+document.querySelectorAll(".motif").forEach(a=>{
+  a.addEventListener("click", e=>{
+    const href = a.getAttribute("href");
+    if(!href || href === "#") return;
+    e.preventDefault();
+    document.body.style.transition = "opacity 480ms ease";
+    document.body.style.opacity = "0";
+    setTimeout(()=>{ location.href = href; }, 480);
+  });
+});
 </script>
 </body>
 </html>
