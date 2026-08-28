@@ -1,0 +1,446 @@
+<!DOCTYPE html>
+<html lang="en-CA">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Emergence &middot; Creaturely</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=EB+Garamond:ital,wght@0,400;0,500;1,400&display=swap" rel="stylesheet">
+<style>
+:root{
+  --ground:#F1F2F0;
+  --ink:#2B2E28;
+  --ink-soft:#5A5E55;
+  --moss:#6E7F5C;
+  --lichen:#9FAF92;
+  --light-green:#C4CFB6;
+  --wing:#6B5844;
+  --madder:#8C4A32;
+  --silver:#C9CCC6;
+  --silver-deep:#8A8D87;
+  --epigraph:#8CA3B5;
+  --panel:#FAFBF9;
+  --serif:"EB Garamond",Garamond,"Adobe Garamond Pro",Georgia,serif;
+  --sans:"Avenir Next","Avenir",-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;
+  --measure:34rem;
+}
+*{box-sizing:border-box}
+html{-webkit-text-size-adjust:100%}
+body{
+  margin:0;background:var(--ground);color:var(--ink);
+  font-family:var(--serif);font-size:1.18rem;line-height:1.62;
+  font-feature-settings:"liga" 1,"onum" 1;
+}
+.wrap{max-width:var(--measure);margin:0 auto;padding:0 1.5rem}
+.bleed{max-width:52rem;margin:0 auto;padding:0 1.5rem}
+
+a.home{
+  position:absolute;top:1.2rem;left:1.4rem;
+  font-family:var(--sans);font-size:0.64rem;letter-spacing:0.26em;text-transform:uppercase;
+  color:var(--silver-deep);text-decoration:none;
+}
+a.home:hover,a.home:focus-visible{color:var(--ink)}
+a.home:focus-visible{outline:1px solid var(--epigraph);outline-offset:3px}
+
+header{padding:5.5rem 0 2.6rem;text-align:center}
+.kicker{
+  font-family:var(--sans);font-size:0.64rem;letter-spacing:0.3em;text-transform:uppercase;
+  color:var(--silver-deep);margin:0 0 1.1rem;
+}
+h1{
+  font-weight:400;font-size:clamp(2.4rem,7vw,3.4rem);letter-spacing:0.02em;
+  margin:0;line-height:1.05;
+}
+.sub{
+  font-style:italic;color:var(--ink-soft);font-size:1.15rem;margin:0.8rem 0 0;
+}
+
+section{margin:3.2rem 0}
+.seckick{
+  font-family:var(--sans);font-size:0.62rem;letter-spacing:0.28em;text-transform:uppercase;
+  color:var(--moss);margin:0 0 1rem;
+}
+p{margin:0 0 1.25rem}
+em{font-style:italic}
+
+/* ---------- panels ---------- */
+.panel{
+  background:var(--panel);border:1px solid var(--silver);border-radius:6px;
+  padding:1.4rem 1.4rem 1.5rem;margin:1.8rem 0;
+}
+.panel .plabel{
+  font-family:var(--sans);font-size:0.6rem;letter-spacing:0.24em;text-transform:uppercase;
+  color:var(--silver-deep);margin:0 0 0.9rem;
+}
+
+/* the cutter */
+#cutIn{
+  width:100%;font-family:var(--serif);font-size:1.15rem;color:var(--ink);
+  background:#fff;border:1px solid var(--silver);border-radius:4px;
+  padding:0.6rem 0.8rem;
+}
+#cutIn:focus{outline:1px solid var(--epigraph);outline-offset:2px}
+#chips{margin:1.1rem 0 0.4rem;line-height:2.35}
+.chip{
+  display:inline-block;position:relative;
+  font-size:1.02rem;padding:0.1rem 0.45rem;margin:0 0.22rem 0.35rem 0;
+  border-radius:3px;border:1px solid;
+  white-space:pre;
+}
+.chip .sp{color:var(--silver-deep);opacity:0.85}
+.chip .id{
+  display:block;font-family:var(--sans);font-size:0.58rem;letter-spacing:0.04em;
+  color:var(--silver-deep);text-align:center;margin-top:-1px;
+}
+.c0{background:rgba(110,127,92,0.13);border-color:rgba(110,127,92,0.45)}
+.c1{background:rgba(140,163,181,0.15);border-color:rgba(140,163,181,0.5)}
+.c2{background:rgba(107,88,68,0.11);border-color:rgba(107,88,68,0.4)}
+.c3{background:rgba(159,175,146,0.16);border-color:rgba(159,175,146,0.55)}
+.cm{background:rgba(140,74,50,0.12);border-color:rgba(140,74,50,0.5)}
+.cutmeta{
+  display:flex;align-items:center;justify-content:space-between;gap:1rem;
+  margin-top:0.5rem;flex-wrap:wrap;
+}
+.count{font-style:italic;color:var(--ink-soft);font-size:1rem}
+button.quiet{
+  font-family:var(--sans);font-size:0.62rem;letter-spacing:0.2em;text-transform:uppercase;
+  color:var(--ink-soft);background:none;border:1px solid var(--silver);border-radius:3px;
+  padding:0.45rem 0.8rem;cursor:pointer;
+}
+button.quiet:hover{color:var(--ink);border-color:var(--silver-deep)}
+button.quiet[aria-pressed="true"]{background:var(--ink);color:var(--ground);border-color:var(--ink)}
+button.quiet:focus-visible{outline:1px solid var(--epigraph);outline-offset:3px}
+
+/* strawberry */
+#views{margin-top:0.9rem}
+.viewbtns{display:flex;gap:0.6rem;margin-bottom:1.1rem}
+#yourview .letters{
+  font-size:1.7rem;letter-spacing:0.35em;text-align:center;margin:0.8rem 0 0.5rem;
+}
+#yourview .letters b{font-weight:500;color:var(--madder)}
+.viewnote{font-style:italic;color:var(--ink-soft);font-size:1rem;text-align:center;margin:0.4rem 0 0.2rem}
+#itsview .chips{text-align:center;margin:1rem 0 0.4rem}
+.hidden{display:none}
+
+/* map */
+#map3{width:100%;height:380px;display:block;cursor:grab;touch-action:none;border-radius:4px}
+#map3.dragging{cursor:grabbing}
+#map{width:100%;height:auto;display:block}
+#map text{font-family:var(--serif);font-style:italic;font-size:13px;fill:var(--ink-soft);cursor:pointer}
+#map text.idlabel{font-family:var(--sans);font-style:normal;font-size:9px;letter-spacing:0.05em;fill:var(--silver-deep);opacity:0;pointer-events:none}
+#map .on text.idlabel{opacity:1}
+#map circle{cursor:pointer}
+#map .dot{fill:var(--silver-deep)}
+#map .halo{fill:none;stroke:var(--epigraph);stroke-width:1.2;opacity:0}
+#map line{stroke:var(--epigraph);stroke-width:1;opacity:0}
+#map .on .halo{opacity:0.9}
+#map text.hot{fill:var(--ink)}
+#map .picked .dot{fill:var(--madder)}
+#map .centre text:not(.idlabel){font-style:normal;font-weight:500;fill:var(--ink)}
+#strips{margin-top:1rem}
+.strip{margin:0.7rem 0}
+.strip .slabel{font-style:italic;color:var(--ink-soft);font-size:1rem;margin-bottom:0.25rem}
+.bands{display:flex;height:24px;border:1px solid var(--silver);border-radius:3px;overflow:hidden}
+.bands i{flex:1}
+.bands.vals{height:auto}
+.bands.vals i{display:flex;align-items:center;justify-content:center;padding:0.32rem 0;font-style:normal}
+.bands.vals b{font-family:var(--sans);font-weight:400;font-size:0.66rem;color:var(--ink);
+  background:rgba(255,255,255,0.55);border-radius:2px;padding:0 0.2rem}
+.stripshint{font-style:italic;color:var(--silver-deep);font-size:0.95rem;margin-top:0.6rem}
+
+/* prices */
+.lang{display:grid;grid-template-columns:7.5rem 1fr 3rem;gap:0.7rem;align-items:center;margin:0.55rem 0}
+.lang .lname{font-style:italic;color:var(--ink-soft);font-size:1rem}
+.lang .bar{height:12px;border-radius:2px;background:var(--silver);position:relative;overflow:hidden}
+.lang .bar i{position:absolute;inset:0;width:0;background:var(--silver-deep);border-radius:2px;
+  transition:width 1200ms ease}
+.lang:first-of-type .bar i{background:var(--moss)}
+.lang .n{font-family:var(--sans);font-size:0.72rem;color:var(--ink-soft);text-align:right}
+.lang .sent{grid-column:2/4;font-size:0.92rem;color:var(--silver-deep);margin-top:-0.35rem;
+  overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+
+/* shadow line and honest note */
+.shadow{
+  margin:3rem 0 0;font-size:1.18rem;
+}
+.note{
+  margin:3.4rem 0 0;padding-top:1.4rem;border-top:1px solid var(--silver);
+}
+.note .nkick{
+  font-family:var(--sans);font-size:0.6rem;letter-spacing:0.28em;text-transform:uppercase;
+  color:var(--silver-deep);margin:0 0 0.8rem;
+}
+.note p{font-size:0.98rem;color:var(--ink-soft);margin-bottom:0.9rem}
+.terms{margin-top:2rem;font-family:var(--sans);font-size:0.66rem;letter-spacing:0.14em;
+  text-transform:uppercase;color:var(--silver-deep)}
+.terms b{font-weight:400;color:var(--moss)}
+
+footer{padding:3.5rem 0 3rem;text-align:center}
+footer p{
+  font-family:var(--sans);font-size:0.6rem;letter-spacing:0.26em;text-transform:uppercase;
+  color:var(--silver-deep);margin:0;
+}
+@media (max-width:560px){
+  body{font-size:1.08rem}
+  .lang{grid-template-columns:5.5rem 1fr 2.6rem}
+}
+
+/* in the poems: the recurring connection */
+.poem{
+  margin:2.6rem 0 0;border-left:2px solid var(--epigraph);
+  padding:0.15rem 0 0.15rem 1.1rem;
+}
+.poem .pkick{
+  font-family:var(--sans);font-size:0.6rem;letter-spacing:0.28em;text-transform:uppercase;
+  color:var(--epigraph);margin:0 0 0.4rem;
+}
+.poem p{font-style:italic;color:var(--ink-soft);font-size:1.05rem;margin:0}
+
+.readout{font-style:italic;color:var(--ink-soft);font-size:1rem;margin-top:0.8rem;min-height:1.6em}
+.btnrow{display:flex;gap:0.6rem;flex-wrap:wrap;margin-top:1rem}
+#boidC{width:100%;height:340px;display:block;border-radius:4px;background:#fff;border:1px solid var(--silver)}
+.rules{display:flex;gap:1.2rem;flex-wrap:wrap;margin-top:1rem;font-family:var(--sans);font-size:0.78rem;color:var(--ink)}
+.rules label{display:flex;align-items:center;gap:0.45rem;cursor:pointer}
+.rules input{accent-color:#5E87A0}
+#gatherC{width:100%;height:420px;display:block;cursor:grab;touch-action:none;border-radius:4px}
+#gatherC.dragging{cursor:grabbing}
+</style>
+</head>
+<body>
+
+<a class="home" href="index.html">creaturely</a>
+
+<header class="wrap">
+  <p class="kicker">Creaturely &middot; an anatomy &middot; x</p>
+  <h1>emergence</h1>
+  <p class="sub">where the abilities nobody built come from</p>
+</header>
+
+<main>
+<section class="wrap">
+  <p>One question has been waiting since the first page. The training game is only guess-the-next-token. The machinery is only neurons, weights, and attention. Nobody wrote a translation module, a rhyming module, a module for grief or for arithmetic. Yet the abilities are there. Behaviour of a whole that was not put into its parts is called <em>emergence</em>, and it is the oldest idea in this glossary: older than computers, native to birds, termites, weather, and cities.</p>
+</section>
+
+<section class="wrap">
+  <p class="seckick">i &middot; the flock</p>
+  <p>Start where emergence is easiest to see. Each bird below follows three small rules: keep a little distance, fly roughly the way your neighbours fly, drift toward their middle. No rule mentions a flock. Turn the rules off and on, and watch what exists only when they hold together.</p>
+</section>
+
+<div class="bleed">
+  <div class="panel">
+    <p class="plabel">three rules, one flock</p>
+    <canvas id="boidC" role="img" aria-label="Flocking birds obeying three simple rules"></canvas>
+    <div class="rules">
+      <label><input type="checkbox" id="rSep" checked> keep distance</label>
+      <label><input type="checkbox" id="rAli" checked> match direction</label>
+      <label><input type="checkbox" id="rCoh" checked> seek the middle</label>
+    </div>
+    <p class="readout" id="bRead">the flock is on. it is nowhere in the rules.</p>
+  </div>
+</div>
+
+<section class="wrap">
+  <p>The flock is real. You can watch it turn, split, and re-form. And you can search the three rules forever without finding it, because the flock exists at the level of the whole, produced by the rules but not present in them. Language models sit in the same family. The rule is guess the next token. Guessing well, at enormous scale, turned out to require grammar, so grammar formed. It required facts, so facts pressed themselves into the weights. It required the shapes of reasoning that run through human writing, so those shapes formed too, to a degree that is still being measured and still being argued about. The abilities were never built. They condensed.</p>
+</section>
+
+<section class="wrap">
+  <p class="seckick">ii &middot; the gathering</p>
+  <p>Which brings this glossary to its own edge. Everything it has shown you, the cutting, the space, the noticing, the machinery, the scoring, the dice, the traces, is mechanism, and every mechanism was honest. Yet the poems exist, and this glossary exists, and the collaboration that made both was not in any of the parts either. Below, every term you have gathered across ten pages hangs in one space. Turn it. This is the vocabulary you now own, and the last thing to notice is that its subject was never quite any single page: it was the whole, forming while you read.</p>
+</section>
+
+<div class="bleed">
+  <div class="panel">
+    <p class="plabel">everything you now own</p>
+    <canvas id="gatherC" role="img" aria-label="Every term from the glossary hanging in one slowly turning space"></canvas>
+    <p class="readout" id="gRead">drag to turn &middot; hover a term to see its page.</p>
+  </div>
+</div>
+
+<section class="wrap">
+  <p>A glossary usually ends with its last term. This one ends with the reader. You arrived able to use a model; you leave able to say what it is doing, and the difference between those two is not mechanical at all. Whatever formed in you across these ten pages was also never written in them. It emerged, the way understanding always does: out of parts that do not contain it.</p>
+
+  <div class="poem">
+    <p class="pkick">in the poems</p>
+    <p>The poems are the exhibit. No one wrote them, and someone did. Both sentences are true, and everything in this glossary lives in the space between them.</p>
+  </div>
+
+  <p class="shadow">The parts were counted. The whole was not among them.</p>
+
+  <p class="terms">terms from this page: <b>emergence</b></p>
+
+  <div class="note">
+    <p class="nkick">an honest note</p>
+    <p>The flock is a classic simulation called boids, invented in the 1980s, and it is an analogy for emergence in general, not a picture of how models work. Whether large models&rsquo; abilities arrive suddenly with scale or grow smoothly and only look sudden in our measurements is an open research argument, and this page deliberately does not settle it. What is not in dispute: the abilities were not individually designed, and the field&rsquo;s own researchers are routinely surprised by what forms. The claim that something emerged in you, the reader, is not a scientific claim at all. It is the project&rsquo;s wager.</p>
+  </div>
+</section>
+</main>
+
+<footer>
+  <p>creaturely &middot; alexandra emberley &middot; 2026</p>
+</footer>
+
+<script>
+/* ---------- the flock ---------- */
+const boidC = document.getElementById("boidC");
+const bctx = boidC.getContext("2d");
+let BDPR = Math.min(window.devicePixelRatio||1,2);
+function sizeBoid(){
+  BDPR = Math.min(window.devicePixelRatio||1,2);
+  boidC.width = boidC.clientWidth*BDPR; boidC.height = boidC.clientHeight*BDPR;
+}
+sizeBoid(); window.addEventListener("resize", sizeBoid);
+const NB = 64;
+let boids = Array.from({length:NB}, ()=>({
+  x: Math.random()*600, y: Math.random()*300,
+  vx: (Math.random()-0.5)*2, vy: (Math.random()-0.5)*2
+}));
+const rSep = document.getElementById("rSep");
+const rAli = document.getElementById("rAli");
+const rCoh = document.getElementById("rCoh");
+const bRead = document.getElementById("bRead");
+[rSep,rAli,rCoh].forEach(r=>r.addEventListener("change", ()=>{
+  const on = [rSep,rAli,rCoh].filter(x=>x.checked).length;
+  bRead.textContent =
+    on===3 ? "the flock is on. it is nowhere in the rules." :
+    on===0 ? "no rules: only scattered birds. the flock is gone, though every bird remains." :
+    "with rules missing, the whole loosens. the flock lives in their combination.";
+}));
+function stepBoids(){
+  const W = boidC.clientWidth, H = boidC.clientHeight;
+  for(const b of boids){
+    let sx=0, sy=0, ax=0, ay=0, cx=0, cy=0, n=0;
+    for(const o of boids){
+      if(o===b) continue;
+      const dx=o.x-b.x, dy=o.y-b.y, d=Math.hypot(dx,dy);
+      if(d<70){
+        n++;
+        if(d<18 && d>0){ sx -= dx/d; sy -= dy/d; }
+        ax += o.vx; ay += o.vy;
+        cx += o.x; cy += o.y;
+      }
+    }
+    if(n>0){
+      if(rSep.checked){ b.vx += sx*0.08; b.vy += sy*0.08; }
+      if(rAli.checked){ b.vx += (ax/n - b.vx)*0.045; b.vy += (ay/n - b.vy)*0.045; }
+      if(rCoh.checked){ b.vx += (cx/n - b.x)*0.0022; b.vy += (cy/n - b.y)*0.0022; }
+    }
+    b.vx += (Math.random()-0.5)*0.06; b.vy += (Math.random()-0.5)*0.06;
+    const sp = Math.hypot(b.vx,b.vy) || 1;
+    const cap = 2.1, floor = 0.9;
+    if(sp>cap){ b.vx = b.vx/sp*cap; b.vy = b.vy/sp*cap; }
+    if(sp<floor){ b.vx = b.vx/sp*floor; b.vy = b.vy/sp*floor; }
+    b.x += b.vx; b.y += b.vy;
+    if(b.x<0) b.x += W; if(b.x>W) b.x -= W;
+    if(b.y<0) b.y += H; if(b.y>H) b.y -= H;
+  }
+}
+function drawBoids(){
+  stepBoids();
+  bctx.setTransform(BDPR,0,0,BDPR,0,0);
+  bctx.clearRect(0,0,boidC.clientWidth,boidC.clientHeight);
+  bctx.fillStyle = "rgba(94,135,160,0.9)";
+  for(const b of boids){
+    const a = Math.atan2(b.vy,b.vx);
+    bctx.save();
+    bctx.translate(b.x,b.y); bctx.rotate(a);
+    bctx.beginPath();
+    bctx.moveTo(5,0); bctx.lineTo(-4,2.6); bctx.lineTo(-2,0); bctx.lineTo(-4,-2.6);
+    bctx.fill();
+    bctx.restore();
+  }
+  requestAnimationFrame(drawBoids);
+}
+requestAnimationFrame(drawBoids);
+
+/* ---------- the gathering: every term, one space ---------- */
+function idOf(tok){
+  let h = 5381;
+  for(let i=0;i<tok.length;i++){ h = ((h*33) ^ tok.charCodeAt(i)) >>> 0; }
+  return 1000 + (h % 48999);
+}
+const TERMS = [
+  ["token","i"],["tokenization","i"],["vocabulary","i"],["embedding","i"],["LLM","i"],["algorithm","i"],
+  ["vector","ii"],["cosine similarity","ii"],["vector arithmetic","ii"],
+  ["attention","iii"],["attention weights","iii"],["context window","iii"],
+  ["neuron","iv"],["weight","iv"],["activation","iv"],["layer","iv"],["transformer","iv"],["parameters","iv"],
+  ["inference","v"],["probability distribution","v"],["autoregressive","v"],
+  ["sampling","vi"],["greedy decoding","vi"],["temperature","vi"],
+  ["pretraining","vii"],["loss","vii"],["gradient descent","vii"],["fine-tuning","vii"],["RLHF","vii"],
+  ["feature","viii"],["superposition","viii"],["polysemanticity","viii"],["interpretability","viii"],
+  ["stigmergy","ix"],["prompt","ix"],
+  ["emergence","x"]
+];
+const gatherC = document.getElementById("gatherC");
+const gctx = gatherC.getContext("2d");
+let GDPR = Math.min(window.devicePixelRatio||1,2);
+function sizeGather(){
+  GDPR = Math.min(window.devicePixelRatio||1,2);
+  gatherC.width = gatherC.clientWidth*GDPR; gatherC.height = gatherC.clientHeight*GDPR;
+}
+sizeGather(); window.addEventListener("resize", sizeGather);
+/* deterministic positions from the term itself: the glossary places its own words */
+function h3(s, salt){
+  let h = 2166136261;
+  for(let i=0;i<s.length;i++){ h = (h ^ s.charCodeAt(i)) * 16777619 >>> 0; }
+  h = (h ^ salt*2654435761) >>> 0;
+  return (h % 1000)/1000;
+}
+const gnodes = TERMS.map(([w,pg])=>({
+  w, pg,
+  x: 0.12 + 0.76*h3(w,1),
+  y: 0.12 + 0.76*h3(w,2),
+  z: 0.12 + 0.76*h3(w,3),
+  ph: Math.random()*6.283, sp: 0.7+Math.random()*0.9, sx:0, sy:0, depth:0
+}));
+let gtheta = 0.6, gtilt = 0.26, gdrag=false, gpx=0, gpy=0, glast=0, ghover=null;
+function gProject(n){
+  const x=n.x-0.5, y=n.y-0.5, z=n.z-0.5;
+  const c=Math.cos(gtheta), s=Math.sin(gtheta);
+  const rx=x*c - z*s, rz=x*s + z*c;
+  const W=gatherC.clientWidth, H=gatherC.clientHeight;
+  const S=Math.min(W, H*1.25)*0.82;
+  n.depth=rz; n.sx=W/2+rx*S; n.sy=H/2+(y*S*0.72)-rz*S*Math.sin(gtilt);
+}
+function drawGather(now){
+  if(!gdrag && now-glast>4000) gtheta += 0.0012;
+  const t = now/1000;
+  gctx.setTransform(GDPR,0,0,GDPR,0,0);
+  gctx.clearRect(0,0,gatherC.clientWidth,gatherC.clientHeight);
+  gnodes.forEach(gProject);
+  for(const n of [...gnodes].sort((a,b)=>b.depth-a.depth)){
+    const tw = 0.8+0.2*Math.sin(t*n.sp*2+n.ph);
+    const a = (0.42+(0.5-n.depth)*0.85)*tw;
+    const hov = n===ghover;
+    gctx.fillStyle = hov? "rgba(140,74,50,0.95)" : `rgba(138,141,135,${(a*0.9).toFixed(3)})`;
+    gctx.beginPath(); gctx.arc(n.sx,n.sy, hov? 3.4 : 1.8+(0.5-n.depth)*1.8, 0, 6.2832); gctx.fill();
+    gctx.font = (hov? "500 13px" : "italic 12px") + " 'EB Garamond', Georgia, serif";
+    gctx.fillStyle = hov? "rgba(43,46,40,0.95)" : `rgba(90,94,85,${a.toFixed(3)})`;
+    gctx.fillText(n.w, n.sx+7, n.sy-6);
+    if(hov){
+      gctx.font = "9px 'Avenir Next', sans-serif";
+      gctx.fillStyle = "rgba(138,141,135,0.95)";
+      gctx.fillText("page " + n.pg, n.sx+7, n.sy+13);
+    }
+  }
+  requestAnimationFrame(drawGather);
+}
+requestAnimationFrame(drawGather);
+gatherC.addEventListener("pointerdown",e=>{gdrag=true;gpx=e.clientX;gpy=e.clientY;gatherC.classList.add("dragging");gatherC.setPointerCapture(e.pointerId);glast=performance.now();});
+gatherC.addEventListener("pointermove",e=>{
+  const r = gatherC.getBoundingClientRect();
+  if(gdrag){
+    gtheta+=(e.clientX-gpx)*0.008;
+    gtilt=Math.max(0.05,Math.min(0.6,gtilt+(e.clientY-gpy)*0.003));
+    gpx=e.clientX;gpy=e.clientY;glast=performance.now();
+  } else {
+    const mx=e.clientX-r.left, my=e.clientY-r.top;
+    ghover=null; let bd=22;
+    for(const n of gnodes){ const d=Math.hypot(n.sx-mx,n.sy-my); if(d<bd){bd=d;ghover=n;} }
+  }
+});
+gatherC.addEventListener("pointerup",()=>{gdrag=false;gatherC.classList.remove("dragging");});
+gatherC.addEventListener("pointerleave",()=>{ghover=null;});
+</script>
+</body>
+</html>

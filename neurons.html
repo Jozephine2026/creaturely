@@ -1,0 +1,440 @@
+<!DOCTYPE html>
+<html lang="en-CA">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Neurons &amp; Layers &middot; Creaturely</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=EB+Garamond:ital,wght@0,400;0,500;1,400&display=swap" rel="stylesheet">
+<style>
+:root{
+  --ground:#F1F2F0;
+  --ink:#2B2E28;
+  --ink-soft:#5A5E55;
+  --moss:#6E7F5C;
+  --lichen:#9FAF92;
+  --light-green:#C4CFB6;
+  --wing:#6B5844;
+  --madder:#8C4A32;
+  --silver:#C9CCC6;
+  --silver-deep:#8A8D87;
+  --epigraph:#8CA3B5;
+  --panel:#FAFBF9;
+  --serif:"EB Garamond",Garamond,"Adobe Garamond Pro",Georgia,serif;
+  --sans:"Avenir Next","Avenir",-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;
+  --measure:34rem;
+}
+*{box-sizing:border-box}
+html{-webkit-text-size-adjust:100%}
+body{
+  margin:0;background:var(--ground);color:var(--ink);
+  font-family:var(--serif);font-size:1.18rem;line-height:1.62;
+  font-feature-settings:"liga" 1,"onum" 1;
+}
+.wrap{max-width:var(--measure);margin:0 auto;padding:0 1.5rem}
+.bleed{max-width:52rem;margin:0 auto;padding:0 1.5rem}
+
+a.home{
+  position:absolute;top:1.2rem;left:1.4rem;
+  font-family:var(--sans);font-size:0.64rem;letter-spacing:0.26em;text-transform:uppercase;
+  color:var(--silver-deep);text-decoration:none;
+}
+a.home:hover,a.home:focus-visible{color:var(--ink)}
+a.home:focus-visible{outline:1px solid var(--epigraph);outline-offset:3px}
+
+header{padding:5.5rem 0 2.6rem;text-align:center}
+.kicker{
+  font-family:var(--sans);font-size:0.64rem;letter-spacing:0.3em;text-transform:uppercase;
+  color:var(--silver-deep);margin:0 0 1.1rem;
+}
+h1{
+  font-weight:400;font-size:clamp(2.4rem,7vw,3.4rem);letter-spacing:0.02em;
+  margin:0;line-height:1.05;
+}
+.sub{
+  font-style:italic;color:var(--ink-soft);font-size:1.15rem;margin:0.8rem 0 0;
+}
+
+section{margin:3.2rem 0}
+.seckick{
+  font-family:var(--sans);font-size:0.62rem;letter-spacing:0.28em;text-transform:uppercase;
+  color:var(--moss);margin:0 0 1rem;
+}
+p{margin:0 0 1.25rem}
+em{font-style:italic}
+
+/* ---------- panels ---------- */
+.panel{
+  background:var(--panel);border:1px solid var(--silver);border-radius:6px;
+  padding:1.4rem 1.4rem 1.5rem;margin:1.8rem 0;
+}
+.panel .plabel{
+  font-family:var(--sans);font-size:0.6rem;letter-spacing:0.24em;text-transform:uppercase;
+  color:var(--silver-deep);margin:0 0 0.9rem;
+}
+
+/* the cutter */
+#cutIn{
+  width:100%;font-family:var(--serif);font-size:1.15rem;color:var(--ink);
+  background:#fff;border:1px solid var(--silver);border-radius:4px;
+  padding:0.6rem 0.8rem;
+}
+#cutIn:focus{outline:1px solid var(--epigraph);outline-offset:2px}
+#chips{margin:1.1rem 0 0.4rem;line-height:2.35}
+.chip{
+  display:inline-block;position:relative;
+  font-size:1.02rem;padding:0.1rem 0.45rem;margin:0 0.22rem 0.35rem 0;
+  border-radius:3px;border:1px solid;
+  white-space:pre;
+}
+.chip .sp{color:var(--silver-deep);opacity:0.85}
+.chip .id{
+  display:block;font-family:var(--sans);font-size:0.58rem;letter-spacing:0.04em;
+  color:var(--silver-deep);text-align:center;margin-top:-1px;
+}
+.c0{background:rgba(110,127,92,0.13);border-color:rgba(110,127,92,0.45)}
+.c1{background:rgba(140,163,181,0.15);border-color:rgba(140,163,181,0.5)}
+.c2{background:rgba(107,88,68,0.11);border-color:rgba(107,88,68,0.4)}
+.c3{background:rgba(159,175,146,0.16);border-color:rgba(159,175,146,0.55)}
+.cm{background:rgba(140,74,50,0.12);border-color:rgba(140,74,50,0.5)}
+.cutmeta{
+  display:flex;align-items:center;justify-content:space-between;gap:1rem;
+  margin-top:0.5rem;flex-wrap:wrap;
+}
+.count{font-style:italic;color:var(--ink-soft);font-size:1rem}
+button.quiet{
+  font-family:var(--sans);font-size:0.62rem;letter-spacing:0.2em;text-transform:uppercase;
+  color:var(--ink-soft);background:none;border:1px solid var(--silver);border-radius:3px;
+  padding:0.45rem 0.8rem;cursor:pointer;
+}
+button.quiet:hover{color:var(--ink);border-color:var(--silver-deep)}
+button.quiet[aria-pressed="true"]{background:var(--ink);color:var(--ground);border-color:var(--ink)}
+button.quiet:focus-visible{outline:1px solid var(--epigraph);outline-offset:3px}
+
+/* strawberry */
+#views{margin-top:0.9rem}
+.viewbtns{display:flex;gap:0.6rem;margin-bottom:1.1rem}
+#yourview .letters{
+  font-size:1.7rem;letter-spacing:0.35em;text-align:center;margin:0.8rem 0 0.5rem;
+}
+#yourview .letters b{font-weight:500;color:var(--madder)}
+.viewnote{font-style:italic;color:var(--ink-soft);font-size:1rem;text-align:center;margin:0.4rem 0 0.2rem}
+#itsview .chips{text-align:center;margin:1rem 0 0.4rem}
+.hidden{display:none}
+
+/* map */
+#map{width:100%;height:auto;display:block}
+#map text{font-family:var(--serif);font-style:italic;font-size:13px;fill:var(--ink-soft);cursor:pointer}
+#map text.idlabel{font-family:var(--sans);font-style:normal;font-size:9px;letter-spacing:0.05em;fill:var(--silver-deep);opacity:0;pointer-events:none}
+#map .on text.idlabel{opacity:1}
+#map circle{cursor:pointer}
+#map .dot{fill:var(--silver-deep)}
+#map .halo{fill:none;stroke:var(--epigraph);stroke-width:1.2;opacity:0}
+#map line{stroke:var(--epigraph);stroke-width:1;opacity:0}
+#map .on .halo{opacity:0.9}
+#map text.hot{fill:var(--ink)}
+#map .picked .dot{fill:var(--madder)}
+#map .centre text:not(.idlabel){font-style:normal;font-weight:500;fill:var(--ink)}
+#strips{margin-top:1rem}
+.strip{margin:0.7rem 0}
+.strip .slabel{font-style:italic;color:var(--ink-soft);font-size:1rem;margin-bottom:0.25rem}
+.bands{display:flex;height:24px;border:1px solid var(--silver);border-radius:3px;overflow:hidden}
+.bands i{flex:1}
+.bands.vals{height:auto}
+.bands.vals i{display:flex;align-items:center;justify-content:center;padding:0.32rem 0;font-style:normal}
+.bands.vals b{font-family:var(--sans);font-weight:400;font-size:0.66rem;color:var(--ink);
+  background:rgba(255,255,255,0.55);border-radius:2px;padding:0 0.2rem}
+.stripshint{font-style:italic;color:var(--silver-deep);font-size:0.95rem;margin-top:0.6rem}
+
+/* prices */
+.lang{display:grid;grid-template-columns:7.5rem 1fr 3rem;gap:0.7rem;align-items:center;margin:0.55rem 0}
+.lang .lname{font-style:italic;color:var(--ink-soft);font-size:1rem}
+.lang .bar{height:12px;border-radius:2px;background:var(--silver);position:relative;overflow:hidden}
+.lang .bar i{position:absolute;inset:0;width:0;background:var(--silver-deep);border-radius:2px;
+  transition:width 1200ms ease}
+.lang:first-of-type .bar i{background:var(--moss)}
+.lang .n{font-family:var(--sans);font-size:0.72rem;color:var(--ink-soft);text-align:right}
+.lang .sent{grid-column:2/4;font-size:0.92rem;color:var(--silver-deep);margin-top:-0.35rem;
+  overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+
+/* shadow line and honest note */
+.shadow{
+  margin:3rem 0 0;font-size:1.18rem;
+}
+.note{
+  margin:3.4rem 0 0;padding-top:1.4rem;border-top:1px solid var(--silver);
+}
+.note .nkick{
+  font-family:var(--sans);font-size:0.6rem;letter-spacing:0.28em;text-transform:uppercase;
+  color:var(--silver-deep);margin:0 0 0.8rem;
+}
+.note p{font-size:0.98rem;color:var(--ink-soft);margin-bottom:0.9rem}
+.terms{margin-top:2rem;font-family:var(--sans);font-size:0.66rem;letter-spacing:0.14em;
+  text-transform:uppercase;color:var(--silver-deep)}
+.terms b{font-weight:400;color:var(--moss)}
+
+footer{padding:3.5rem 0 3rem;text-align:center}
+footer p{
+  font-family:var(--sans);font-size:0.6rem;letter-spacing:0.26em;text-transform:uppercase;
+  color:var(--silver-deep);margin:0;
+}
+@media (max-width:560px){
+  body{font-size:1.08rem}
+  .lang{grid-template-columns:5.5rem 1fr 2.6rem}
+}
+
+/* page iv additions */
+.readout{font-style:italic;color:var(--ink-soft);font-size:1rem;margin-top:0.8rem;min-height:1.6em}
+.btnrow{display:flex;gap:0.6rem;flex-wrap:wrap;margin-top:1rem}
+#neuron text{font-family:var(--sans);font-size:11px;fill:var(--ink-soft)}
+#neuron text.val{font-size:12px;fill:var(--ink)}
+#neuron .pos{stroke:var(--moss)}
+#neuron .neg{stroke:var(--madder)}
+#neuron .wire{fill:none;stroke-linecap:round}
+#neuron .cell{fill:var(--panel);stroke:var(--silver-deep);stroke-width:1.6}
+#neuron .out{stroke:#5E87A0;fill:none;stroke-linecap:round}
+.calc{font-family:var(--sans);font-size:0.76rem;color:var(--ink-soft);letter-spacing:0.02em;margin-top:0.8rem;min-height:1.5em}
+.calc b{font-weight:400;color:var(--ink)}
+#stack{width:100%}
+.striplbl{font-family:var(--serif);font-style:italic;font-size:0.95rem;color:var(--ink-soft)}
+.stgrid{display:grid;grid-template-columns:5.2rem 1fr;gap:0.45rem 0.8rem;align-items:center;margin-top:0.6rem}
+.svals{display:flex;height:20px;border:1px solid var(--silver);border-radius:3px;overflow:hidden}
+.svals i{flex:1;transition:background 900ms ease}
+.stgrid .beamrow .striplbl{color:var(--ink);font-style:normal}
+.beamnums{font-family:var(--sans);font-size:0.7rem;color:var(--ink-soft);margin-top:0.55rem;min-height:1.3em}
+
+/* in the poems: the recurring connection */
+.poem{
+  margin:2.6rem 0 0;border-left:2px solid var(--epigraph);
+  padding:0.15rem 0 0.15rem 1.1rem;
+}
+.poem .pkick{
+  font-family:var(--sans);font-size:0.6rem;letter-spacing:0.28em;text-transform:uppercase;
+  color:var(--epigraph);margin:0 0 0.4rem;
+}
+.poem p{font-style:italic;color:var(--ink-soft);font-size:1.05rem;margin:0}
+</style>
+</head>
+<body>
+
+<a class="home" href="index.html">creaturely</a>
+
+<header class="wrap">
+  <p class="kicker">Creaturely &middot; an anatomy &middot; iv</p>
+  <h1>neurons &amp; layers</h1>
+  <p class="sub">the machinery underneath</p>
+</header>
+
+<main>
+<section class="wrap">
+  <p>The last page showed the model adjusting meanings with attention. This page opens the machinery that does the work. All of it, the measuring, the mixing, the moving, runs on one small unit repeated billions of times: the <em>neuron</em>.</p>
+</section>
+
+<section class="wrap">
+  <p class="seckick">i &middot; the unit</p>
+  <p>A neuron is a small calculator. It takes in a few numbers, multiplies each one by its own learned <em>weight</em>, adds the results together, and passes the sum onward. One extra rule finishes it: if the sum comes out negative, the neuron stays silent and sends zero. That rule is called an <em>activation</em>. It is what lets a neuron act like a detector: quiet for most inputs, loud for the pattern its weights are tuned to.</p>
+  <p>Below is a single neuron whose three weights make it a rough detector of glowing things. Feed it words and watch the arithmetic.</p>
+</section>
+
+<div class="bleed">
+  <div class="panel">
+    <p class="plabel">one neuron, fed three words</p>
+    <svg id="neuron" viewBox="0 0 640 230" role="img" aria-label="A single neuron computing a weighted sum"></svg>
+    <div class="btnrow">
+      <button class="quiet" id="wLight" type="button">feed it: light</button>
+      <button class="quiet" id="wSea" type="button">feed it: sea</button>
+      <button class="quiet" id="wMoth" type="button">feed it: moth</button>
+    </div>
+    <p class="calc" id="calc"></p>
+    <p class="readout" id="nRead">press a word.</p>
+  </div>
+</div>
+
+<section class="wrap">
+  <p>Notice what happened with <em>sea</em>: the weighted sum came out negative, the activation held it at zero, and the neuron stayed silent. The weights are the learned part. Nobody set them to detect glow; training nudged them, example by example, until this behaviour appeared. And an honest caution the glossary returns to later: real neurons read values from vectors, not tidy features with names like &ldquo;light&rdquo;, and a single real neuron rarely means one clean thing. Page viii, superposition, is about exactly that.</p>
+</section>
+
+<section class="wrap">
+  <p class="seckick">ii &middot; the stack</p>
+  <p>One neuron computes one number. A <em>layer</em> is thousands of neurons reading the same inputs side by side, each with its own weights. A layer therefore takes in a token&rsquo;s vector and produces a new one: the same word, re-described. The model alternates two moves that this glossary has now shown you. First comes a round of attention, where tokens mix with what they notice. Then comes a layer of neurons, where each mixed vector is reshaped. That pair is called a block. The whole machine, blocks stacked dozens deep, is called a <em>transformer</em>. It is the T in GPT, and it is the architecture underneath nearly every model you will meet.</p>
+  <p>Below, the glossary&rsquo;s sentence climbs the stack. Each token&rsquo;s vector is shown as a strip of values. Send them upward and watch every meaning get rewritten, beam most of all.</p>
+</section>
+
+<div class="bleed">
+  <div class="panel">
+    <p class="plabel">the sentence climbs the stack</p>
+    <div id="stack">
+      <div class="stgrid" id="stgrid"></div>
+    </div>
+    <div class="btnrow">
+      <button class="quiet" id="upBtn" type="button">send the sentence up one block</button>
+      <button class="quiet" id="resetBtn" type="button">start again</button>
+    </div>
+    <p class="beamnums" id="beamnums"></p>
+    <p class="readout" id="sRead">the sentence waits at the bottom of the stack.</p>
+  </div>
+</div>
+
+<section class="wrap">
+  <p>Everything the model learned lives in the weights: every neuron&rsquo;s multipliers, every attention pattern&rsquo;s tuning. Counted together, they are called <em>parameters</em>. When a model is described as having billions of parameters, this is what is being counted. Nothing else is stored. There is no dictionary inside, no shelf of facts; there is only this machinery, and your sentence being rewritten by it, floor after floor, until the top of the stack holds a meaning assembled from everything below.</p>
+
+  <div class="poem">
+    <p class="pkick">in the poems</p>
+    <p>The poems have no hand holding a pen. They have this machinery, climbed once per token, and the training that tuned it.</p>
+  </div>
+
+  <p class="shadow">No one wrote the weights, and no one can simply read them.</p>
+
+  <p class="terms">terms from this page: <b>neuron &middot; weight &middot; activation &middot; layer &middot; transformer &middot; parameters</b></p>
+
+  <div class="note">
+    <p class="nkick">an honest note</p>
+    <p>The neuron here has three inputs with nameable meanings; real neurons take in hundreds of unnamed values, and the activation shown, negative-becomes-zero, is one common choice among several. The value strips are invented for teaching and recoloured by a formula, not computed by a network, and real vectors hold thousands of values, not six. Real transformer blocks also contain plumbing this page omits, and the claim that no one can read the weights is softening at the edges: a research field called interpretability is slowly learning to read them, and page viii visits its central puzzle.</p>
+  </div>
+</section>
+</main>
+
+<footer>
+  <p>creaturely &middot; alexandra emberley &middot; 2026</p>
+</footer>
+
+<script>
+const NS = "http://www.w3.org/2000/svg";
+
+/* ---------- one neuron ---------- */
+const FEATS = ["light","water","motion"];
+const WTS = [0.9, -0.4, 0.3];
+const WORDS = { light:[0.90,0.10,0.30], sea:[0.15,0.90,0.40], moth:[0.60,0.05,0.75] };
+
+const nsvg = document.getElementById("neuron");
+const IY = [55, 115, 175], IX = 120, CX = 360, CY = 115, OX = 560;
+
+const wires = FEATS.map((f,i)=>{
+  const w = document.createElementNS(NS,"path");
+  w.setAttribute("class","wire " + (WTS[i]>=0?"pos":"neg"));
+  w.setAttribute("d",`M${IX+46},${IY[i]} C ${IX+130},${IY[i]} ${CX-130},${CY} ${CX-26},${CY}`);
+  w.style.strokeWidth = Math.abs(WTS[i])*7;
+  w.style.opacity = 0.75;
+  nsvg.appendChild(w);
+  const lbl = document.createElementNS(NS,"text");
+  lbl.setAttribute("x",IX+80); lbl.setAttribute("y",IY[i]-8);
+  lbl.textContent = "\u00d7 " + WTS[i].toFixed(1);
+  nsvg.appendChild(lbl);
+  const name = document.createElementNS(NS,"text");
+  name.setAttribute("x",IX-6); name.setAttribute("y",IY[i]-12);
+  name.setAttribute("text-anchor","end");
+  name.textContent = f;
+  nsvg.appendChild(name);
+  const val = document.createElementNS(NS,"text");
+  val.setAttribute("class","val");
+  val.setAttribute("x",IX-6); val.setAttribute("y",IY[i]+4);
+  val.setAttribute("text-anchor","end");
+  nsvg.appendChild(val);
+  return {val};
+});
+const cell = document.createElementNS(NS,"circle");
+cell.setAttribute("class","cell");
+cell.setAttribute("cx",CX); cell.setAttribute("cy",CY); cell.setAttribute("r",24);
+nsvg.appendChild(cell);
+const sumT = document.createElementNS(NS,"text");
+sumT.setAttribute("class","val"); sumT.setAttribute("x",CX); sumT.setAttribute("y",CY+4);
+sumT.setAttribute("text-anchor","middle");
+nsvg.appendChild(sumT);
+const outWire = document.createElementNS(NS,"path");
+outWire.setAttribute("class","out");
+outWire.setAttribute("d",`M${CX+26},${CY} L${OX},${CY}`);
+outWire.style.strokeWidth = 1;
+nsvg.appendChild(outWire);
+const outT = document.createElementNS(NS,"text");
+outT.setAttribute("class","val"); outT.setAttribute("x",OX+8); outT.setAttribute("y",CY+4);
+nsvg.appendChild(outT);
+
+const calc = document.getElementById("calc");
+const nRead = document.getElementById("nRead");
+function feed(word){
+  const v = WORDS[word];
+  let sum = 0;
+  const terms = v.map((x,i)=>{ sum += x*WTS[i];
+    wires[i].val.textContent = x.toFixed(2);
+    return `(${x.toFixed(2)} \u00d7 ${WTS[i].toFixed(1)})`; });
+  const out = Math.max(0, sum);
+  sumT.textContent = sum.toFixed(2);
+  outT.textContent = out.toFixed(2);
+  outWire.style.strokeWidth = 1 + out*9;
+  outWire.style.opacity = out > 0 ? 0.95 : 0.35;
+  calc.innerHTML = terms.join(" + ") + ` = <b>${sum.toFixed(2)}</b> \u2192 activation \u2192 <b>${out.toFixed(2)}</b>`;
+  nRead.textContent = out > 0
+    ? `${word}: the neuron fires at ${out.toFixed(2)}.`
+    : `${word}: the sum is negative, so the activation holds it at zero. silence.`;
+}
+document.getElementById("wLight").addEventListener("click",()=>feed("light"));
+document.getElementById("wSea").addEventListener("click",()=>feed("sea"));
+document.getElementById("wMoth").addEventListener("click",()=>feed("moth"));
+feed("light");
+
+/* ---------- the stack ---------- */
+const TOKS = ["the","echo","of","a","beam","never","sent"];
+const NV = 6, MAXSTAGE = 3;
+let stage = 0;
+function base(t,i){ return 0.5 + 0.5*Math.sin(1.9*(i+1)*(t+1.3)); }
+function ctxv(i){ return 0.5 + 0.5*Math.sin(2.2*(i+1)*0.9 + 0.6); }
+const MIX = [0.35,0.55,0.30,0.30,0.85,0.45,0.60];   /* how far each token travels; beam most */
+function val(t,i,s){
+  const m = (s/MAXSTAGE)*MIX[t];
+  return (1-m)*base(t,i) + m*ctxv(i);
+}
+function lerp(a,b,t){return a+(b-a)*t}
+function valColour(v){
+  const tq=[47,168,154], mid=[248,254,254], gold=[197,155,16];
+  const c = v<0.5
+    ? [lerp(tq[0],mid[0],v*2), lerp(tq[1],mid[1],v*2), lerp(tq[2],mid[2],v*2)]
+    : [lerp(mid[0],gold[0],(v-0.5)*2), lerp(mid[1],gold[1],(v-0.5)*2), lerp(mid[2],gold[2],(v-0.5)*2)];
+  return `rgb(${c[0]|0},${c[1]|0},${c[2]|0})`;
+}
+const grid = document.getElementById("stgrid");
+const cells = [];
+TOKS.forEach((t,ti)=>{
+  const lbl = document.createElement("span");
+  lbl.className = "striplbl"; lbl.textContent = t;
+  const row = document.createElement("div");
+  row.className = "svals";
+  const rowCells = [];
+  for(let i=0;i<NV;i++){
+    const c = document.createElement("i");
+    row.appendChild(c); rowCells.push(c);
+  }
+  if(t === "beam"){
+    const wrap = document.createElement("div"); wrap.className = "beamrow";
+    wrap.appendChild(lbl); grid.appendChild(wrap);
+  } else grid.appendChild(lbl);
+  grid.appendChild(row);
+  cells.push(rowCells);
+});
+const beamnums = document.getElementById("beamnums");
+const sRead = document.getElementById("sRead");
+const CAPTIONS = [
+  "the sentence waits at the bottom of the stack.",
+  "block one: each token has mixed in what it attended to.",
+  "block two: the neurons have reshaped every vector.",
+  "block three: beam now means the beam of this sentence."
+];
+function render(){
+  TOKS.forEach((t,ti)=>{
+    for(let i=0;i<NV;i++){
+      cells[ti][i].style.background = valColour(val(ti,i,stage));
+    }
+  });
+  const bi = TOKS.indexOf("beam");
+  beamnums.textContent = "beam = [ " +
+    Array.from({length:NV},(_,i)=>val(bi,i,stage).toFixed(2)).join("  ") + " ]";
+  sRead.textContent = CAPTIONS[stage];
+}
+document.getElementById("upBtn").addEventListener("click",()=>{
+  if(stage < MAXSTAGE){ stage++; render(); }
+});
+document.getElementById("resetBtn").addEventListener("click",()=>{ stage = 0; render(); });
+render();
+</script>
+</body>
+</html>

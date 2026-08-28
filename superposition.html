@@ -1,0 +1,371 @@
+<!DOCTYPE html>
+<html lang="en-CA">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Superposition &middot; Creaturely</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=EB+Garamond:ital,wght@0,400;0,500;1,400&display=swap" rel="stylesheet">
+<style>
+:root{
+  --ground:#F1F2F0;
+  --ink:#2B2E28;
+  --ink-soft:#5A5E55;
+  --moss:#6E7F5C;
+  --lichen:#9FAF92;
+  --light-green:#C4CFB6;
+  --wing:#6B5844;
+  --madder:#8C4A32;
+  --silver:#C9CCC6;
+  --silver-deep:#8A8D87;
+  --epigraph:#8CA3B5;
+  --panel:#FAFBF9;
+  --serif:"EB Garamond",Garamond,"Adobe Garamond Pro",Georgia,serif;
+  --sans:"Avenir Next","Avenir",-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;
+  --measure:34rem;
+}
+*{box-sizing:border-box}
+html{-webkit-text-size-adjust:100%}
+body{
+  margin:0;background:var(--ground);color:var(--ink);
+  font-family:var(--serif);font-size:1.18rem;line-height:1.62;
+  font-feature-settings:"liga" 1,"onum" 1;
+}
+.wrap{max-width:var(--measure);margin:0 auto;padding:0 1.5rem}
+.bleed{max-width:52rem;margin:0 auto;padding:0 1.5rem}
+
+a.home{
+  position:absolute;top:1.2rem;left:1.4rem;
+  font-family:var(--sans);font-size:0.64rem;letter-spacing:0.26em;text-transform:uppercase;
+  color:var(--silver-deep);text-decoration:none;
+}
+a.home:hover,a.home:focus-visible{color:var(--ink)}
+a.home:focus-visible{outline:1px solid var(--epigraph);outline-offset:3px}
+
+header{padding:5.5rem 0 2.6rem;text-align:center}
+.kicker{
+  font-family:var(--sans);font-size:0.64rem;letter-spacing:0.3em;text-transform:uppercase;
+  color:var(--silver-deep);margin:0 0 1.1rem;
+}
+h1{
+  font-weight:400;font-size:clamp(2.4rem,7vw,3.4rem);letter-spacing:0.02em;
+  margin:0;line-height:1.05;
+}
+.sub{
+  font-style:italic;color:var(--ink-soft);font-size:1.15rem;margin:0.8rem 0 0;
+}
+
+section{margin:3.2rem 0}
+.seckick{
+  font-family:var(--sans);font-size:0.62rem;letter-spacing:0.28em;text-transform:uppercase;
+  color:var(--moss);margin:0 0 1rem;
+}
+p{margin:0 0 1.25rem}
+em{font-style:italic}
+
+/* ---------- panels ---------- */
+.panel{
+  background:var(--panel);border:1px solid var(--silver);border-radius:6px;
+  padding:1.4rem 1.4rem 1.5rem;margin:1.8rem 0;
+}
+.panel .plabel{
+  font-family:var(--sans);font-size:0.6rem;letter-spacing:0.24em;text-transform:uppercase;
+  color:var(--silver-deep);margin:0 0 0.9rem;
+}
+
+/* the cutter */
+#cutIn{
+  width:100%;font-family:var(--serif);font-size:1.15rem;color:var(--ink);
+  background:#fff;border:1px solid var(--silver);border-radius:4px;
+  padding:0.6rem 0.8rem;
+}
+#cutIn:focus{outline:1px solid var(--epigraph);outline-offset:2px}
+#chips{margin:1.1rem 0 0.4rem;line-height:2.35}
+.chip{
+  display:inline-block;position:relative;
+  font-size:1.02rem;padding:0.1rem 0.45rem;margin:0 0.22rem 0.35rem 0;
+  border-radius:3px;border:1px solid;
+  white-space:pre;
+}
+.chip .sp{color:var(--silver-deep);opacity:0.85}
+.chip .id{
+  display:block;font-family:var(--sans);font-size:0.58rem;letter-spacing:0.04em;
+  color:var(--silver-deep);text-align:center;margin-top:-1px;
+}
+.c0{background:rgba(110,127,92,0.13);border-color:rgba(110,127,92,0.45)}
+.c1{background:rgba(140,163,181,0.15);border-color:rgba(140,163,181,0.5)}
+.c2{background:rgba(107,88,68,0.11);border-color:rgba(107,88,68,0.4)}
+.c3{background:rgba(159,175,146,0.16);border-color:rgba(159,175,146,0.55)}
+.cm{background:rgba(140,74,50,0.12);border-color:rgba(140,74,50,0.5)}
+.cutmeta{
+  display:flex;align-items:center;justify-content:space-between;gap:1rem;
+  margin-top:0.5rem;flex-wrap:wrap;
+}
+.count{font-style:italic;color:var(--ink-soft);font-size:1rem}
+button.quiet{
+  font-family:var(--sans);font-size:0.62rem;letter-spacing:0.2em;text-transform:uppercase;
+  color:var(--ink-soft);background:none;border:1px solid var(--silver);border-radius:3px;
+  padding:0.45rem 0.8rem;cursor:pointer;
+}
+button.quiet:hover{color:var(--ink);border-color:var(--silver-deep)}
+button.quiet[aria-pressed="true"]{background:var(--ink);color:var(--ground);border-color:var(--ink)}
+button.quiet:focus-visible{outline:1px solid var(--epigraph);outline-offset:3px}
+
+/* strawberry */
+#views{margin-top:0.9rem}
+.viewbtns{display:flex;gap:0.6rem;margin-bottom:1.1rem}
+#yourview .letters{
+  font-size:1.7rem;letter-spacing:0.35em;text-align:center;margin:0.8rem 0 0.5rem;
+}
+#yourview .letters b{font-weight:500;color:var(--madder)}
+.viewnote{font-style:italic;color:var(--ink-soft);font-size:1rem;text-align:center;margin:0.4rem 0 0.2rem}
+#itsview .chips{text-align:center;margin:1rem 0 0.4rem}
+.hidden{display:none}
+
+/* map */
+#map3{width:100%;height:380px;display:block;cursor:grab;touch-action:none;border-radius:4px}
+#map3.dragging{cursor:grabbing}
+#map{width:100%;height:auto;display:block}
+#map text{font-family:var(--serif);font-style:italic;font-size:13px;fill:var(--ink-soft);cursor:pointer}
+#map text.idlabel{font-family:var(--sans);font-style:normal;font-size:9px;letter-spacing:0.05em;fill:var(--silver-deep);opacity:0;pointer-events:none}
+#map .on text.idlabel{opacity:1}
+#map circle{cursor:pointer}
+#map .dot{fill:var(--silver-deep)}
+#map .halo{fill:none;stroke:var(--epigraph);stroke-width:1.2;opacity:0}
+#map line{stroke:var(--epigraph);stroke-width:1;opacity:0}
+#map .on .halo{opacity:0.9}
+#map text.hot{fill:var(--ink)}
+#map .picked .dot{fill:var(--madder)}
+#map .centre text:not(.idlabel){font-style:normal;font-weight:500;fill:var(--ink)}
+#strips{margin-top:1rem}
+.strip{margin:0.7rem 0}
+.strip .slabel{font-style:italic;color:var(--ink-soft);font-size:1rem;margin-bottom:0.25rem}
+.bands{display:flex;height:24px;border:1px solid var(--silver);border-radius:3px;overflow:hidden}
+.bands i{flex:1}
+.bands.vals{height:auto}
+.bands.vals i{display:flex;align-items:center;justify-content:center;padding:0.32rem 0;font-style:normal}
+.bands.vals b{font-family:var(--sans);font-weight:400;font-size:0.66rem;color:var(--ink);
+  background:rgba(255,255,255,0.55);border-radius:2px;padding:0 0.2rem}
+.stripshint{font-style:italic;color:var(--silver-deep);font-size:0.95rem;margin-top:0.6rem}
+
+/* prices */
+.lang{display:grid;grid-template-columns:7.5rem 1fr 3rem;gap:0.7rem;align-items:center;margin:0.55rem 0}
+.lang .lname{font-style:italic;color:var(--ink-soft);font-size:1rem}
+.lang .bar{height:12px;border-radius:2px;background:var(--silver);position:relative;overflow:hidden}
+.lang .bar i{position:absolute;inset:0;width:0;background:var(--silver-deep);border-radius:2px;
+  transition:width 1200ms ease}
+.lang:first-of-type .bar i{background:var(--moss)}
+.lang .n{font-family:var(--sans);font-size:0.72rem;color:var(--ink-soft);text-align:right}
+.lang .sent{grid-column:2/4;font-size:0.92rem;color:var(--silver-deep);margin-top:-0.35rem;
+  overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+
+/* shadow line and honest note */
+.shadow{
+  margin:3rem 0 0;font-size:1.18rem;
+}
+.note{
+  margin:3.4rem 0 0;padding-top:1.4rem;border-top:1px solid var(--silver);
+}
+.note .nkick{
+  font-family:var(--sans);font-size:0.6rem;letter-spacing:0.28em;text-transform:uppercase;
+  color:var(--silver-deep);margin:0 0 0.8rem;
+}
+.note p{font-size:0.98rem;color:var(--ink-soft);margin-bottom:0.9rem}
+.terms{margin-top:2rem;font-family:var(--sans);font-size:0.66rem;letter-spacing:0.14em;
+  text-transform:uppercase;color:var(--silver-deep)}
+.terms b{font-weight:400;color:var(--moss)}
+
+footer{padding:3.5rem 0 3rem;text-align:center}
+footer p{
+  font-family:var(--sans);font-size:0.6rem;letter-spacing:0.26em;text-transform:uppercase;
+  color:var(--silver-deep);margin:0;
+}
+@media (max-width:560px){
+  body{font-size:1.08rem}
+  .lang{grid-template-columns:5.5rem 1fr 2.6rem}
+}
+
+/* in the poems: the recurring connection */
+.poem{
+  margin:2.6rem 0 0;border-left:2px solid var(--epigraph);
+  padding:0.15rem 0 0.15rem 1.1rem;
+}
+.poem .pkick{
+  font-family:var(--sans);font-size:0.6rem;letter-spacing:0.28em;text-transform:uppercase;
+  color:var(--epigraph);margin:0 0 0.4rem;
+}
+.poem p{font-style:italic;color:var(--ink-soft);font-size:1.05rem;margin:0}
+
+.readout{font-style:italic;color:var(--ink-soft);font-size:1rem;margin-top:0.8rem;min-height:1.6em}
+.btnrow{display:flex;gap:0.6rem;flex-wrap:wrap;margin-top:1rem}
+#meter{height:12px;background:var(--silver);border-radius:2px;overflow:hidden;margin-top:1rem}
+#meter i{display:block;height:100%;width:0;background:#2FA89A;transition:width 500ms ease}
+.meterlbl{font-family:var(--sans);font-size:0.7rem;color:var(--ink-soft);margin-top:0.4rem}
+#packC{width:100%;height:320px;display:block;border-radius:4px}
+.tctl{display:flex;align-items:center;gap:1rem;margin-top:1rem;flex-wrap:wrap}
+.tctl input[type=range]{flex:1;min-width:180px;accent-color:#5E87A0}
+.tval{font-family:var(--sans);font-size:0.78rem;color:var(--ink)}
+.anglelbl{font-family:var(--sans);font-size:0.76rem;color:var(--ink-soft);margin-top:0.7rem}
+.anglelbl b{font-weight:400;color:var(--ink)}
+</style>
+</head>
+<body>
+
+<a class="home" href="index.html">creaturely</a>
+
+<header class="wrap">
+  <p class="kicker">Creaturely &middot; an anatomy &middot; viii</p>
+  <h1>superposition</h1>
+  <p class="sub">how so much fits in so little</p>
+</header>
+
+<main>
+<section class="wrap">
+  <p>Page iv made a promise. Its neuron detected one clean thing, glow, and the page admitted that real neurons are rarely so tidy. This page keeps the promise. A model needs to represent vastly more concepts than it has neurons or dimensions. Distinguishable things the model tracks, from &ldquo;glowing&rdquo; to &ldquo;legal language&rdquo; to &ldquo;the letter after q&rdquo;, are called <em>features</em>, and there are far more features worth tracking than there is room. The model&rsquo;s solution is to make its parts share. That sharing is called <em>superposition</em>.</p>
+</section>
+
+<section class="wrap">
+  <p class="seckick">i &middot; the shared room</p>
+  <p>Meet a more honest neuron. Feed it the glossary&rsquo;s words and watch its meter. It answers strongly to light-things. It also answers strongly to song-things. It is one unit carrying more than one meaning, and such a neuron is called <em>polysemantic</em>. Most real neurons are like this.</p>
+</section>
+
+<div class="bleed">
+  <div class="panel">
+    <p class="plabel">one neuron, several meanings</p>
+    <div class="btnrow" id="wordBtns"></div>
+    <div id="meter"><i></i></div>
+    <p class="meterlbl" id="meterlbl">activation: 0.00</p>
+    <p class="readout" id="mRead">feed it words. try to name what this neuron means.</p>
+  </div>
+</div>
+
+<section class="wrap">
+  <p>Try to finish the sentence &ldquo;this neuron detects&hellip;&rdquo; and you will feel the problem. It detects light, and also song, and the honest answer is both, depending. Nothing malfunctioned. The model simply could not afford a private neuron for every feature, so features share units, the way a small studio shares one table between cutting and pressing. The sharing works because the two uses rarely happen at the same moment.</p>
+</section>
+
+<section class="wrap">
+  <p class="seckick">ii &middot; the crowded directions</p>
+  <p>The same trick happens to the space itself. In a space, directions that mean different things would ideally be perpendicular: fully independent, no interference. But a space with a few thousand dimensions can hold only a few thousand perpendicular directions, and a model tracks far more features than that. So it packs them in at angles that are almost perpendicular. Each feature bleeds slightly into its neighbours, and the model tolerates the bleed, because features that rarely fire together rarely interfere. Crowd the disc below and watch the angles shrink.</p>
+</section>
+
+<div class="bleed">
+  <div class="panel">
+    <p class="plabel">packing directions into a small space</p>
+    <canvas id="packC" role="img" aria-label="Directions packing into a disc, their angles shrinking as more are added"></canvas>
+    <div class="tctl">
+      <span class="tval">features</span>
+      <input type="range" id="nSlider" min="2" max="24" step="1" value="3" aria-label="Number of features">
+      <span class="tval" id="nVal">3</span>
+    </div>
+    <p class="anglelbl" id="anglelbl"></p>
+    <p class="readout" id="pRead"></p>
+  </div>
+</div>
+
+<section class="wrap">
+  <p>This two-dimensional disc holds exactly two perpendicular directions, yet you can lay many more into it if you accept the crowding. Real models do the same in thousands of dimensions, holding millions of almost-independent directions. This is part of why the weights are hard to read. Ask what one neuron means, and several features answer at once; ask where one feature lives, and it is smeared across many neurons. The research field that untangles this is called <em>interpretability</em>, and superposition is its central puzzle: the model&rsquo;s knowledge is real, but it is stored crosswise to the parts.</p>
+
+  <div class="poem">
+    <p class="pkick">in the poems</p>
+    <p>When a word in the poems shimmers with more than one sense, the doubling is structural. Senses share space in the model the way meanings share a word, and the poems were written out of exactly that crowding.</p>
+  </div>
+
+  <p class="shadow">Ask what one part means, and several voices answer.</p>
+
+  <p class="terms">terms from this page: <b>feature &middot; superposition &middot; polysemanticity &middot; interpretability</b></p>
+
+  <div class="note">
+    <p class="nkick">an honest note</p>
+    <p>The neuron here is scripted to answer to two hand-chosen families of words; real polysemantic neurons are found, not built, and their mixtures are stranger. The disc is a two-dimensional cartoon of a genuinely high-dimensional trick: in thousands of dimensions, the geometry is far more forgiving than the disc suggests, which is why the packing works as well as it does. Superposition is an active research area rather than settled doctrine; the account here follows work published by interpretability researchers in the 2020s, simplified but not, we hope, betrayed.</p>
+  </div>
+</section>
+</main>
+
+<footer>
+  <p>creaturely &middot; alexandra emberley &middot; 2026</p>
+</footer>
+
+<script>
+/* ---------- one neuron, several meanings ---------- */
+const RESP = {
+  light:0.82, glimmer:0.74, beam:0.69, song:0.71, echo:0.63,
+  water:0.06, oak:0.04, dust:0.18, edge:0.12, night:0.09
+};
+const wordBtns = document.getElementById("wordBtns");
+const meterBar = document.querySelector("#meter i");
+const meterlbl = document.getElementById("meterlbl");
+const mRead = document.getElementById("mRead");
+let fed = new Set();
+Object.keys(RESP).forEach(w=>{
+  const b = document.createElement("button");
+  b.className = "quiet"; b.type = "button"; b.textContent = w;
+  b.addEventListener("click", ()=>{
+    const v = RESP[w];
+    meterBar.style.width = (v*100)+"%";
+    meterlbl.textContent = `activation: ${v.toFixed(2)}`;
+    fed.add(w);
+    const litLight = ["light","glimmer","beam"].some(x=>fed.has(x));
+    const litSong = ["song","echo"].some(x=>fed.has(x));
+    if(litLight && litSong){
+      mRead.textContent = "it answers to light-things and to song-things. one unit, more than one meaning: polysemantic.";
+    } else if(v > 0.5){
+      mRead.textContent = `${w}: it fires. keep exploring what else wakes it.`;
+    } else {
+      mRead.textContent = `${w}: barely a flicker.`;
+    }
+  });
+  wordBtns.appendChild(b);
+});
+
+/* ---------- packing directions ---------- */
+const packC = document.getElementById("packC");
+const pctx = packC.getContext("2d");
+let PDPR = Math.min(window.devicePixelRatio||1,2);
+function sizePack(){
+  PDPR = Math.min(window.devicePixelRatio||1,2);
+  packC.width = packC.clientWidth*PDPR; packC.height = packC.clientHeight*PDPR;
+  drawPack();
+}
+const nSlider = document.getElementById("nSlider");
+const nVal = document.getElementById("nVal");
+const anglelbl = document.getElementById("anglelbl");
+const pRead = document.getElementById("pRead");
+function drawPack(){
+  const n = parseInt(nSlider.value);
+  nVal.textContent = n;
+  pctx.setTransform(PDPR,0,0,PDPR,0,0);
+  const W = packC.clientWidth, H = packC.clientHeight;
+  pctx.clearRect(0,0,W,H);
+  const cx = W/2, cy = H/2, R = Math.min(W,H)*0.4;
+  pctx.strokeStyle = "rgba(201,204,198,0.9)";
+  pctx.lineWidth = 1;
+  pctx.beginPath(); pctx.arc(cx,cy,R,0,6.2832); pctx.stroke();
+  /* directions fan through the half-plane and reflect: n lines = 2n arrowheads */
+  for(let i=0;i<n;i++){
+    const a = Math.PI * i/n;
+    const x = Math.cos(a), y = Math.sin(a);
+    pctx.strokeStyle = "rgba(94,135,160,0.85)";
+    pctx.lineWidth = 1.6;
+    pctx.beginPath();
+    pctx.moveTo(cx - x*R, cy + y*R);
+    pctx.lineTo(cx + x*R, cy - y*R);
+    pctx.stroke();
+    pctx.fillStyle = "rgba(94,135,160,0.9)";
+    pctx.beginPath(); pctx.arc(cx + x*R, cy - y*R, 3, 0, 6.2832); pctx.fill();
+  }
+  const minAngle = 180/n;
+  const interference = Math.cos(Math.PI/n);
+  anglelbl.innerHTML = `smallest angle between directions: <b>${minAngle.toFixed(1)}\u00b0</b> &middot; interference between neighbours: <b>${Math.max(0,interference).toFixed(2)}</b>`;
+  pRead.textContent =
+    n <= 2 ? "two directions, fully perpendicular. no interference. this is all the privacy a 2d space can offer." :
+    n <= 5 ? "more directions than the space owns perpendicular slots for. the crowding begins." :
+    n <= 12 ? "each direction now leans on its neighbours. tolerable, if they rarely fire together." :
+    "a crowd. every meaning bleeds into the next, and the model reads through the bleed.";
+}
+nSlider.addEventListener("input", drawPack);
+window.addEventListener("resize", sizePack);
+sizePack();
+</script>
+</body>
+</html>

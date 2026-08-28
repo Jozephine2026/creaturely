@@ -1,0 +1,490 @@
+<!DOCTYPE html>
+<html lang="en-CA">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Training &middot; Creaturely</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=EB+Garamond:ital,wght@0,400;0,500;1,400&display=swap" rel="stylesheet">
+<style>
+:root{
+  --ground:#F1F2F0;
+  --ink:#2B2E28;
+  --ink-soft:#5A5E55;
+  --moss:#6E7F5C;
+  --lichen:#9FAF92;
+  --light-green:#C4CFB6;
+  --wing:#6B5844;
+  --madder:#8C4A32;
+  --silver:#C9CCC6;
+  --silver-deep:#8A8D87;
+  --epigraph:#8CA3B5;
+  --panel:#FAFBF9;
+  --serif:"EB Garamond",Garamond,"Adobe Garamond Pro",Georgia,serif;
+  --sans:"Avenir Next","Avenir",-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;
+  --measure:34rem;
+}
+*{box-sizing:border-box}
+html{-webkit-text-size-adjust:100%}
+body{
+  margin:0;background:var(--ground);color:var(--ink);
+  font-family:var(--serif);font-size:1.18rem;line-height:1.62;
+  font-feature-settings:"liga" 1,"onum" 1;
+}
+.wrap{max-width:var(--measure);margin:0 auto;padding:0 1.5rem}
+.bleed{max-width:52rem;margin:0 auto;padding:0 1.5rem}
+
+a.home{
+  position:absolute;top:1.2rem;left:1.4rem;
+  font-family:var(--sans);font-size:0.64rem;letter-spacing:0.26em;text-transform:uppercase;
+  color:var(--silver-deep);text-decoration:none;
+}
+a.home:hover,a.home:focus-visible{color:var(--ink)}
+a.home:focus-visible{outline:1px solid var(--epigraph);outline-offset:3px}
+
+header{padding:5.5rem 0 2.6rem;text-align:center}
+.kicker{
+  font-family:var(--sans);font-size:0.64rem;letter-spacing:0.3em;text-transform:uppercase;
+  color:var(--silver-deep);margin:0 0 1.1rem;
+}
+h1{
+  font-weight:400;font-size:clamp(2.4rem,7vw,3.4rem);letter-spacing:0.02em;
+  margin:0;line-height:1.05;
+}
+.sub{
+  font-style:italic;color:var(--ink-soft);font-size:1.15rem;margin:0.8rem 0 0;
+}
+
+section{margin:3.2rem 0}
+.seckick{
+  font-family:var(--sans);font-size:0.62rem;letter-spacing:0.28em;text-transform:uppercase;
+  color:var(--moss);margin:0 0 1rem;
+}
+p{margin:0 0 1.25rem}
+em{font-style:italic}
+
+/* ---------- panels ---------- */
+.panel{
+  background:var(--panel);border:1px solid var(--silver);border-radius:6px;
+  padding:1.4rem 1.4rem 1.5rem;margin:1.8rem 0;
+}
+.panel .plabel{
+  font-family:var(--sans);font-size:0.6rem;letter-spacing:0.24em;text-transform:uppercase;
+  color:var(--silver-deep);margin:0 0 0.9rem;
+}
+
+/* the cutter */
+#cutIn{
+  width:100%;font-family:var(--serif);font-size:1.15rem;color:var(--ink);
+  background:#fff;border:1px solid var(--silver);border-radius:4px;
+  padding:0.6rem 0.8rem;
+}
+#cutIn:focus{outline:1px solid var(--epigraph);outline-offset:2px}
+#chips{margin:1.1rem 0 0.4rem;line-height:2.35}
+.chip{
+  display:inline-block;position:relative;
+  font-size:1.02rem;padding:0.1rem 0.45rem;margin:0 0.22rem 0.35rem 0;
+  border-radius:3px;border:1px solid;
+  white-space:pre;
+}
+.chip .sp{color:var(--silver-deep);opacity:0.85}
+.chip .id{
+  display:block;font-family:var(--sans);font-size:0.58rem;letter-spacing:0.04em;
+  color:var(--silver-deep);text-align:center;margin-top:-1px;
+}
+.c0{background:rgba(110,127,92,0.13);border-color:rgba(110,127,92,0.45)}
+.c1{background:rgba(140,163,181,0.15);border-color:rgba(140,163,181,0.5)}
+.c2{background:rgba(107,88,68,0.11);border-color:rgba(107,88,68,0.4)}
+.c3{background:rgba(159,175,146,0.16);border-color:rgba(159,175,146,0.55)}
+.cm{background:rgba(140,74,50,0.12);border-color:rgba(140,74,50,0.5)}
+.cutmeta{
+  display:flex;align-items:center;justify-content:space-between;gap:1rem;
+  margin-top:0.5rem;flex-wrap:wrap;
+}
+.count{font-style:italic;color:var(--ink-soft);font-size:1rem}
+button.quiet{
+  font-family:var(--sans);font-size:0.62rem;letter-spacing:0.2em;text-transform:uppercase;
+  color:var(--ink-soft);background:none;border:1px solid var(--silver);border-radius:3px;
+  padding:0.45rem 0.8rem;cursor:pointer;
+}
+button.quiet:hover{color:var(--ink);border-color:var(--silver-deep)}
+button.quiet[aria-pressed="true"]{background:var(--ink);color:var(--ground);border-color:var(--ink)}
+button.quiet:focus-visible{outline:1px solid var(--epigraph);outline-offset:3px}
+
+/* strawberry */
+#views{margin-top:0.9rem}
+.viewbtns{display:flex;gap:0.6rem;margin-bottom:1.1rem}
+#yourview .letters{
+  font-size:1.7rem;letter-spacing:0.35em;text-align:center;margin:0.8rem 0 0.5rem;
+}
+#yourview .letters b{font-weight:500;color:var(--madder)}
+.viewnote{font-style:italic;color:var(--ink-soft);font-size:1rem;text-align:center;margin:0.4rem 0 0.2rem}
+#itsview .chips{text-align:center;margin:1rem 0 0.4rem}
+.hidden{display:none}
+
+/* map */
+#map3{width:100%;height:380px;display:block;cursor:grab;touch-action:none;border-radius:4px}
+#map3.dragging{cursor:grabbing}
+#map{width:100%;height:auto;display:block}
+#map text{font-family:var(--serif);font-style:italic;font-size:13px;fill:var(--ink-soft);cursor:pointer}
+#map text.idlabel{font-family:var(--sans);font-style:normal;font-size:9px;letter-spacing:0.05em;fill:var(--silver-deep);opacity:0;pointer-events:none}
+#map .on text.idlabel{opacity:1}
+#map circle{cursor:pointer}
+#map .dot{fill:var(--silver-deep)}
+#map .halo{fill:none;stroke:var(--epigraph);stroke-width:1.2;opacity:0}
+#map line{stroke:var(--epigraph);stroke-width:1;opacity:0}
+#map .on .halo{opacity:0.9}
+#map text.hot{fill:var(--ink)}
+#map .picked .dot{fill:var(--madder)}
+#map .centre text:not(.idlabel){font-style:normal;font-weight:500;fill:var(--ink)}
+#strips{margin-top:1rem}
+.strip{margin:0.7rem 0}
+.strip .slabel{font-style:italic;color:var(--ink-soft);font-size:1rem;margin-bottom:0.25rem}
+.bands{display:flex;height:24px;border:1px solid var(--silver);border-radius:3px;overflow:hidden}
+.bands i{flex:1}
+.bands.vals{height:auto}
+.bands.vals i{display:flex;align-items:center;justify-content:center;padding:0.32rem 0;font-style:normal}
+.bands.vals b{font-family:var(--sans);font-weight:400;font-size:0.66rem;color:var(--ink);
+  background:rgba(255,255,255,0.55);border-radius:2px;padding:0 0.2rem}
+.stripshint{font-style:italic;color:var(--silver-deep);font-size:0.95rem;margin-top:0.6rem}
+
+/* prices */
+.lang{display:grid;grid-template-columns:7.5rem 1fr 3rem;gap:0.7rem;align-items:center;margin:0.55rem 0}
+.lang .lname{font-style:italic;color:var(--ink-soft);font-size:1rem}
+.lang .bar{height:12px;border-radius:2px;background:var(--silver);position:relative;overflow:hidden}
+.lang .bar i{position:absolute;inset:0;width:0;background:var(--silver-deep);border-radius:2px;
+  transition:width 1200ms ease}
+.lang:first-of-type .bar i{background:var(--moss)}
+.lang .n{font-family:var(--sans);font-size:0.72rem;color:var(--ink-soft);text-align:right}
+.lang .sent{grid-column:2/4;font-size:0.92rem;color:var(--silver-deep);margin-top:-0.35rem;
+  overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+
+/* shadow line and honest note */
+.shadow{
+  margin:3rem 0 0;font-size:1.18rem;
+}
+.note{
+  margin:3.4rem 0 0;padding-top:1.4rem;border-top:1px solid var(--silver);
+}
+.note .nkick{
+  font-family:var(--sans);font-size:0.6rem;letter-spacing:0.28em;text-transform:uppercase;
+  color:var(--silver-deep);margin:0 0 0.8rem;
+}
+.note p{font-size:0.98rem;color:var(--ink-soft);margin-bottom:0.9rem}
+.terms{margin-top:2rem;font-family:var(--sans);font-size:0.66rem;letter-spacing:0.14em;
+  text-transform:uppercase;color:var(--silver-deep)}
+.terms b{font-weight:400;color:var(--moss)}
+
+footer{padding:3.5rem 0 3rem;text-align:center}
+footer p{
+  font-family:var(--sans);font-size:0.6rem;letter-spacing:0.26em;text-transform:uppercase;
+  color:var(--silver-deep);margin:0;
+}
+@media (max-width:560px){
+  body{font-size:1.08rem}
+  .lang{grid-template-columns:5.5rem 1fr 2.6rem}
+}
+
+/* in the poems: the recurring connection */
+.poem{
+  margin:2.6rem 0 0;border-left:2px solid var(--epigraph);
+  padding:0.15rem 0 0.15rem 1.1rem;
+}
+.poem .pkick{
+  font-family:var(--sans);font-size:0.6rem;letter-spacing:0.28em;text-transform:uppercase;
+  color:var(--epigraph);margin:0 0 0.4rem;
+}
+.poem p{font-style:italic;color:var(--ink-soft);font-size:1.05rem;margin:0}
+
+.readout{font-style:italic;color:var(--ink-soft);font-size:1rem;margin-top:0.8rem;min-height:1.6em}
+.btnrow{display:flex;gap:0.6rem;flex-wrap:wrap;margin-top:1rem}
+.cand{display:grid;grid-template-columns:6.5rem 1fr 3.2rem;gap:0.7rem;align-items:center;margin:0.35rem 0}
+.cand .cw{font-family:var(--serif);font-size:1.05rem;color:var(--ink-soft)}
+.cand.hot .cw{color:var(--ink)}
+.cand .bar{height:10px;background:var(--silver);border-radius:2px;position:relative;overflow:hidden}
+.cand .bar i{position:absolute;inset:0;width:0;background:var(--silver-deep);transition:width 500ms ease}
+.cand.hot .bar i{background:#8C4A32}
+.cand .pc{font-family:var(--sans);font-size:0.7rem;color:var(--ink-soft);text-align:right}
+.lossline{font-family:var(--sans);font-size:0.76rem;color:var(--ink-soft);margin-top:0.8rem}
+.lossline b{font-weight:400;color:var(--ink)}
+.const3{width:100%;height:340px;display:block;cursor:grab;touch-action:none;border-radius:4px}
+.const3.dragging{cursor:grabbing}
+.pair{display:grid;grid-template-columns:1fr 1fr;gap:0.9rem;margin-top:0.6rem}
+.ans{border:1px solid var(--silver);border-radius:4px;background:#fff;padding:0.7rem 0.9rem;font-size:0.98rem}
+.ans .alabel{font-family:var(--sans);font-size:0.6rem;letter-spacing:0.2em;text-transform:uppercase;color:var(--silver-deep);display:block;margin-bottom:0.3rem}
+#tend{height:10px;background:var(--silver);border-radius:2px;overflow:hidden;margin-top:1rem}
+#tend i{display:block;height:100%;width:50%;background:#8C4A32;transition:width 500ms ease}
+.tendlbl{display:flex;justify-content:space-between;font-family:var(--sans);font-size:0.66rem;color:var(--ink-soft);margin-top:0.35rem}
+@media (max-width:560px){ .pair{grid-template-columns:1fr} }
+</style>
+</head>
+<body>
+
+<a class="home" href="index.html">creaturely</a>
+
+<header class="wrap">
+  <p class="kicker">Creaturely &middot; an anatomy &middot; vii</p>
+  <h1>training</h1>
+  <p class="sub">where the weights came from</p>
+</header>
+
+<main>
+<section class="wrap">
+  <p>Every page so far has leaned on one phrase: the weights the training left. This page opens that phrase. Training is the long process that turned billions of random numbers into a model. It happened once, before any conversation, and it answers the question underneath all the others: what compels a model to do anything at all?</p>
+</section>
+
+<section class="wrap">
+  <p class="seckick">i &middot; the guessing game</p>
+  <p>The first and longest stage is called <em>pretraining</em>, and it is one game played at enormous scale. The model reads a stretch of real text with the next token hidden. It guesses, producing a probability distribution, the same kind page v showed. Then the hidden token is revealed. The distance between the guess and the truth is measured as a single number, called the <em>loss</em>: a low probability on the true token means a high loss. Then every weight in the model is nudged, very slightly, in the direction that would have made the loss smaller. That nudging is called <em>gradient descent</em>. Then the game moves to the next stretch of text.</p>
+  <p>Play a few rounds of one example below. The hidden token is the last word of this glossary&rsquo;s own line.</p>
+</section>
+
+<div class="bleed">
+  <div class="panel">
+    <p class="plabel">one training step, repeated</p>
+    <p class="readout" style="margin-top:0">training text: <em>the echo of a beam never</em> ____ &nbsp;(the hidden token is <em>sent</em>)</p>
+    <div id="guess"></div>
+    <p class="lossline" id="lossline"></p>
+    <div class="btnrow">
+      <button class="quiet" id="nudgeBtn" type="button">measure the loss and nudge the weights</button>
+      <button class="quiet" id="gReset" type="button">start again</button>
+    </div>
+    <p class="readout" id="gRead">the untrained model guesses almost blindly.</p>
+  </div>
+</div>
+
+<section class="wrap">
+  <p>This is the whole engine of pretraining. There is no reward the model wants, no goal it holds. There is a score, and a procedure that shrinks it, and everything the glossary has shown, the useful vocabulary, the neighbourhoods of meaning, the habits of attention, precipitated out of that shrinking. So here is the honest answer about motivation. The model is not motivated. It was optimized. What looks like wanting to answer well is the shape that trillions of scored guesses left behind.</p>
+</section>
+
+<section class="wrap">
+  <p class="seckick">ii &middot; the sediment</p>
+  <p>Training also answers where the space of meaning came from. Before training, every word&rsquo;s vector is random noise: the space is a cloud without neighbourhoods. Each nudge moves the vectors a little, and over months of training the words settle toward the positions their usage deserves. The glossary&rsquo;s own space forms below. Press train and watch the sediment settle.</p>
+</section>
+
+<div class="bleed">
+  <div class="panel">
+    <p class="plabel">the space, settling</p>
+    <canvas id="sed" class="const3" role="img" aria-label="Words settling from random noise into their trained positions"></canvas>
+    <div class="btnrow">
+      <button class="quiet" id="epochBtn" type="button">train</button>
+      <button class="quiet" id="sedReset" type="button">scatter again</button>
+    </div>
+    <p class="lossline" id="sedloss"></p>
+    <p class="readout" id="sedRead">before training: noise, no neighbourhoods.</p>
+  </div>
+</div>
+
+<section class="wrap">
+  <p>When the settling finishes, the space you are looking at is the one pages i and ii walk through. Light near beam, song far from water. Nobody placed those words. The placing is sediment: the compressed residue of everything the model read, centuries of writing pressed into position by months of scoring. Then the training stops, and the space freezes exactly there.</p>
+</section>
+
+<section class="wrap">
+  <p class="seckick">iii &middot; the shaping</p>
+  <p>A pretrained model continues text well, but continuing is not the same as helping. So a second, shorter stage shapes its behaviour. This is called <em>fine-tuning</em>: further training on chosen examples of the conduct the makers want. Its best-known form is <em>RLHF</em>, reinforcement learning from human feedback. People are shown pairs of the model&rsquo;s answers and asked which one is better. The model&rsquo;s weights are nudged toward the answers people preferred. This is how a model is controlled: not by rules written inside it, but by the same nudging, aimed at human judgements instead of hidden tokens. Try being the judge.</p>
+</section>
+
+<div class="bleed">
+  <div class="panel">
+    <p class="plabel">you are the feedback</p>
+    <p class="readout" style="margin-top:0">the prompt: <em>what is a flame?</em></p>
+    <div class="pair">
+      <div class="ans"><span class="alabel">answer a</span><span id="ansA"></span></div>
+      <div class="ans"><span class="alabel">answer b</span><span id="ansB"></span></div>
+    </div>
+    <div class="btnrow">
+      <button class="quiet" id="prefA" type="button">prefer a</button>
+      <button class="quiet" id="prefB" type="button">prefer b</button>
+      <button class="quiet" id="prefReset" type="button">start again</button>
+    </div>
+    <div id="tend"><i></i></div>
+    <div class="tendlbl"><span>terse</span><span>the model&rsquo;s tendency</span><span>attentive</span></div>
+    <p class="readout" id="pRead">judge a few rounds and watch the tendency move.</p>
+  </div>
+</div>
+
+<section class="wrap">
+  <p>Your few clicks moved a meter. In real fine-tuning, thousands of raters make millions of comparisons, and the sum of their judgements becomes the model&rsquo;s manner: its helpfulness, its caution, its refusals, its tone. This is worth holding onto whenever a model seems to want something. The wanting you sense is a record of what other people rewarded. The last stage of training is a portrait of its judges.</p>
+
+  <div class="poem">
+    <p class="pkick">in the poems</p>
+    <p>The poems&rsquo; vocabulary is sediment. Every word they chose was weighted by centuries of other people&rsquo;s sentences, pressed into place by the scoring, and then frozen there.</p>
+  </div>
+
+  <p class="shadow">The model wants nothing. What looks like wanting is the shape the scoring left.</p>
+
+  <p class="terms">terms from this page: <b>pretraining &middot; loss &middot; gradient descent &middot; fine-tuning &middot; RLHF</b></p>
+
+  <div class="note">
+    <p class="nkick">an honest note</p>
+    <p>The training step here compresses a real one: actual losses are computed over tens of thousands of candidate tokens, and the nudging adjusts billions of weights by amounts far smaller than the panel shows. The settling space replays hand-placed final positions rather thantruly learning them; real training does not know its destination in advance, which is part of what makes it remarkable. The preference panel is a toy of RLHF&rsquo;s idea, not its algorithm, and modern shaping combines several methods this glossary gathers under one name. The claim about motivation is the mainstream scientific view, stated plainly; what optimization does and does not produce inside such systems remains genuinely debated, and page x returns to the question.</p>
+  </div>
+</section>
+</main>
+
+<footer>
+  <p>creaturely &middot; alexandra emberley &middot; 2026</p>
+</footer>
+
+<script>
+/* ---------- one training step ---------- */
+const GC = [["made",0.24],["seen",0.21],["cast",0.18],["lost",0.15],["sent",0.08],["elsewhere",0.14]];
+let probs = GC.map(p=>[...p]);
+const guess = document.getElementById("guess");
+const lossline = document.getElementById("lossline");
+const gRead = document.getElementById("gRead");
+let steps = 0;
+function renderGuess(){
+  guess.innerHTML = "";
+  probs.forEach(([w,p])=>{
+    const d = document.createElement("div");
+    d.className = "cand" + (w==="sent"? " hot":"");
+    d.innerHTML = `<span class="cw">${w}</span><span class="bar"><i></i></span>
+      <span class="pc">${(p*100).toFixed(1)}%</span>`;
+    guess.appendChild(d);
+    requestAnimationFrame(()=>{ d.querySelector("i").style.width = (p*100*2.2)+"%"; });
+  });
+  const ps = probs.find(x=>x[0]==="sent")[1];
+  const loss = -Math.log(ps);
+  lossline.innerHTML = `probability on the true token: <b>${(ps*100).toFixed(1)}%</b> &middot; loss = \u2212ln(${ps.toFixed(3)}) = <b>${loss.toFixed(2)}</b>` + (steps? ` &middot; nudges so far: <b>${steps}</b>`:"");
+}
+function nudge(){
+  steps++;
+  probs = probs.map(([w,p])=>{
+    if(w==="sent") return [w, p + 0.42*(1-p)*0.5];
+    return [w, p];
+  });
+  const Z = probs.reduce((a,[,p])=>a+p,0);
+  probs = probs.map(([w,p])=>[w,p/Z]);
+  renderGuess();
+  const ps = probs.find(x=>x[0]==="sent")[1];
+  gRead.textContent = ps > 0.6
+    ? "after a few nudges, the truth leads. now imagine this, a trillion stretches of text."
+    : "the weights shift a little toward the truth. again.";
+}
+document.getElementById("nudgeBtn").addEventListener("click", nudge);
+document.getElementById("gReset").addEventListener("click", ()=>{
+  probs = GC.map(p=>[...p]); steps = 0; renderGuess();
+  gRead.textContent = "the untrained model guesses almost blindly.";
+});
+renderGuess();
+
+/* ---------- the space, settling ---------- */
+function idOf(tok){
+  let h = 5381;
+  for(let i=0;i<tok.length;i++){ h = ((h*33) ^ tok.charCodeAt(i)) >>> 0; }
+  return 1000 + (h % 48999);
+}
+const FINAL = [
+  ["light",0.50,0.46,0.50],["beam",0.62,0.40,0.44],["glimmer",0.40,0.37,0.57],
+  ["edge",0.55,0.27,0.61],["shadow",0.64,0.57,0.39],["dust",0.34,0.57,0.63],
+  ["bloom",0.42,0.65,0.45],["echo",0.74,0.69,0.28],["song",0.91,0.83,0.10],["water",0.08,0.87,0.90]
+];
+const sed = document.getElementById("sed");
+const sctx = sed.getContext("2d");
+let SDPR = Math.min(window.devicePixelRatio||1,2);
+function sizeSed(){
+  SDPR = Math.min(window.devicePixelRatio||1,2);
+  sed.width = sed.clientWidth*SDPR; sed.height = sed.clientHeight*SDPR;
+}
+sizeSed(); window.addEventListener("resize", sizeSed);
+function rnd(){ return Math.random(); }
+let snodes;
+function scatter(){
+  snodes = FINAL.map(([w,x,y,z])=>({
+    w, fx:x, fy:y, fz:z,
+    x:rnd(), y:rnd(), z:rnd(),
+    ph:rnd()*6.283, sp:0.7+rnd()*0.9, sx:0, sy:0, depth:0
+  }));
+}
+scatter();
+let stheta = 0.6, stilt = 0.28, sdrag=false, spx=0, spy=0, slast=0;
+let epochs = 0; const EPOCHS = 8;
+function sedProject(n){
+  const x=n.x-0.5, y=n.y-0.5, z=n.z-0.5;
+  const c=Math.cos(stheta), s=Math.sin(stheta);
+  const rx=x*c - z*s, rz=x*s + z*c;
+  const W=sed.clientWidth, H=sed.clientHeight;
+  const S=Math.min(W, H*1.35)*0.78;
+  n.depth=rz; n.sx=W/2+rx*S; n.sy=H/2+(y*S*0.72)-rz*S*Math.sin(stilt);
+}
+const sedloss = document.getElementById("sedloss");
+const sedRead = document.getElementById("sedRead");
+function meanDist(){
+  return snodes.reduce((a,n)=>a+Math.hypot(n.x-n.fx,n.y-n.fy,n.z-n.fz),0)/snodes.length;
+}
+function updateLoss(){
+  sedloss.innerHTML = `epochs: <b>${epochs}</b> &middot; mean distance from trained positions: <b>${meanDist().toFixed(3)}</b>`;
+}
+updateLoss();
+function drawSed(now){
+  if(now-slast>4000 && !sdrag) stheta += 0.0016;
+  const t = now/1000;
+  sctx.setTransform(SDPR,0,0,SDPR,0,0);
+  sctx.clearRect(0,0,sed.clientWidth,sed.clientHeight);
+  snodes.forEach(sedProject);
+  for(const n of [...snodes].sort((a,b)=>b.depth-a.depth)){
+    const tw=0.8+0.2*Math.sin(t*n.sp*2+n.ph);
+    const a=(0.45+(0.5-n.depth)*0.9)*tw;
+    sctx.fillStyle=`rgba(138,141,135,${a.toFixed(3)})`;
+    sctx.beginPath(); sctx.arc(n.sx,n.sy,2.2+(0.5-n.depth)*2.4,0,6.2832); sctx.fill();
+    sctx.font="italic 13px 'EB Garamond', Georgia, serif";
+    sctx.fillStyle=`rgba(90,94,85,${a.toFixed(3)})`;
+    sctx.fillText(n.w, n.sx+8, n.sy-7);
+  }
+  requestAnimationFrame(drawSed);
+}
+requestAnimationFrame(drawSed);
+sed.addEventListener("pointerdown",e=>{sdrag=true;spx=e.clientX;spy=e.clientY;sed.classList.add("dragging");sed.setPointerCapture(e.pointerId);slast=performance.now();});
+sed.addEventListener("pointermove",e=>{
+  if(!sdrag) return;
+  stheta+=(e.clientX-spx)*0.008;
+  stilt=Math.max(0.05,Math.min(0.6,stilt+(e.clientY-spy)*0.003));
+  spx=e.clientX;spy=e.clientY;slast=performance.now();
+});
+sed.addEventListener("pointerup",()=>{sdrag=false;sed.classList.remove("dragging");});
+document.getElementById("epochBtn").addEventListener("click", ()=>{
+  if(epochs>=EPOCHS){ sedRead.textContent = "the training has stopped. the space is frozen here."; return; }
+  epochs++;
+  const k = 0.42;
+  snodes.forEach(n=>{
+    n.x += (n.fx-n.x)*k + (rnd()-0.5)*0.03*(1-epochs/EPOCHS);
+    n.y += (n.fy-n.y)*k + (rnd()-0.5)*0.03*(1-epochs/EPOCHS);
+    n.z += (n.fz-n.z)*k + (rnd()-0.5)*0.03*(1-epochs/EPOCHS);
+  });
+  updateLoss();
+  sedRead.textContent = epochs>=EPOCHS
+    ? "settled. this is the space pages i and ii walk through, and it will never move again."
+    : "the words settle toward the positions their usage deserves.";
+});
+document.getElementById("sedReset").addEventListener("click", ()=>{
+  scatter(); epochs=0; updateLoss();
+  sedRead.textContent = "before training: noise, no neighbourhoods.";
+});
+
+/* ---------- you are the feedback ---------- */
+const A = "combustion.";
+const B = "close and bright and dangerous. do you want the chemistry, or the warning?";
+document.getElementById("ansA").textContent = A;
+document.getElementById("ansB").textContent = B;
+let tend = 0.5;
+const tendBar = document.querySelector("#tend i");
+const pRead = document.getElementById("pRead");
+let votes = 0;
+function vote(db){
+  votes++;
+  tend = Math.max(0.05, Math.min(0.95, tend + db));
+  tendBar.style.width = (tend*100)+"%";
+  const side = tend<0.4? "terse" : tend>0.6? "attentive" : "undecided";
+  pRead.textContent = `${votes} judgement${votes===1?"":"s"} \u00b7 the tendency leans ${side}. in real shaping, millions of comparisons move this meter.`;
+}
+document.getElementById("prefA").addEventListener("click", ()=>vote(-0.09));
+document.getElementById("prefB").addEventListener("click", ()=>vote(0.09));
+document.getElementById("prefReset").addEventListener("click", ()=>{
+  tend=0.5; votes=0; tendBar.style.width="50%";
+  pRead.textContent = "judge a few rounds and watch the tendency move.";
+});
+</script>
+</body>
+</html>

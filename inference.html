@@ -1,0 +1,436 @@
+<!DOCTYPE html>
+<html lang="en-CA">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Inference &middot; Creaturely</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=EB+Garamond:ital,wght@0,400;0,500;1,400&display=swap" rel="stylesheet">
+<style>
+:root{
+  --ground:#F1F2F0;
+  --ink:#2B2E28;
+  --ink-soft:#5A5E55;
+  --moss:#6E7F5C;
+  --lichen:#9FAF92;
+  --light-green:#C4CFB6;
+  --wing:#6B5844;
+  --madder:#8C4A32;
+  --silver:#C9CCC6;
+  --silver-deep:#8A8D87;
+  --epigraph:#8CA3B5;
+  --panel:#FAFBF9;
+  --serif:"EB Garamond",Garamond,"Adobe Garamond Pro",Georgia,serif;
+  --sans:"Avenir Next","Avenir",-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;
+  --measure:34rem;
+}
+*{box-sizing:border-box}
+html{-webkit-text-size-adjust:100%}
+body{
+  margin:0;background:var(--ground);color:var(--ink);
+  font-family:var(--serif);font-size:1.18rem;line-height:1.62;
+  font-feature-settings:"liga" 1,"onum" 1;
+}
+.wrap{max-width:var(--measure);margin:0 auto;padding:0 1.5rem}
+.bleed{max-width:52rem;margin:0 auto;padding:0 1.5rem}
+
+a.home{
+  position:absolute;top:1.2rem;left:1.4rem;
+  font-family:var(--sans);font-size:0.64rem;letter-spacing:0.26em;text-transform:uppercase;
+  color:var(--silver-deep);text-decoration:none;
+}
+a.home:hover,a.home:focus-visible{color:var(--ink)}
+a.home:focus-visible{outline:1px solid var(--epigraph);outline-offset:3px}
+
+header{padding:5.5rem 0 2.6rem;text-align:center}
+.kicker{
+  font-family:var(--sans);font-size:0.64rem;letter-spacing:0.3em;text-transform:uppercase;
+  color:var(--silver-deep);margin:0 0 1.1rem;
+}
+h1{
+  font-weight:400;font-size:clamp(2.4rem,7vw,3.4rem);letter-spacing:0.02em;
+  margin:0;line-height:1.05;
+}
+.sub{
+  font-style:italic;color:var(--ink-soft);font-size:1.15rem;margin:0.8rem 0 0;
+}
+
+section{margin:3.2rem 0}
+.seckick{
+  font-family:var(--sans);font-size:0.62rem;letter-spacing:0.28em;text-transform:uppercase;
+  color:var(--moss);margin:0 0 1rem;
+}
+p{margin:0 0 1.25rem}
+em{font-style:italic}
+
+/* ---------- panels ---------- */
+.panel{
+  background:var(--panel);border:1px solid var(--silver);border-radius:6px;
+  padding:1.4rem 1.4rem 1.5rem;margin:1.8rem 0;
+}
+.panel .plabel{
+  font-family:var(--sans);font-size:0.6rem;letter-spacing:0.24em;text-transform:uppercase;
+  color:var(--silver-deep);margin:0 0 0.9rem;
+}
+
+/* the cutter */
+#cutIn{
+  width:100%;font-family:var(--serif);font-size:1.15rem;color:var(--ink);
+  background:#fff;border:1px solid var(--silver);border-radius:4px;
+  padding:0.6rem 0.8rem;
+}
+#cutIn:focus{outline:1px solid var(--epigraph);outline-offset:2px}
+#chips{margin:1.1rem 0 0.4rem;line-height:2.35}
+.chip{
+  display:inline-block;position:relative;
+  font-size:1.02rem;padding:0.1rem 0.45rem;margin:0 0.22rem 0.35rem 0;
+  border-radius:3px;border:1px solid;
+  white-space:pre;
+}
+.chip .sp{color:var(--silver-deep);opacity:0.85}
+.chip .id{
+  display:block;font-family:var(--sans);font-size:0.58rem;letter-spacing:0.04em;
+  color:var(--silver-deep);text-align:center;margin-top:-1px;
+}
+.c0{background:rgba(110,127,92,0.13);border-color:rgba(110,127,92,0.45)}
+.c1{background:rgba(140,163,181,0.15);border-color:rgba(140,163,181,0.5)}
+.c2{background:rgba(107,88,68,0.11);border-color:rgba(107,88,68,0.4)}
+.c3{background:rgba(159,175,146,0.16);border-color:rgba(159,175,146,0.55)}
+.cm{background:rgba(140,74,50,0.12);border-color:rgba(140,74,50,0.5)}
+.cutmeta{
+  display:flex;align-items:center;justify-content:space-between;gap:1rem;
+  margin-top:0.5rem;flex-wrap:wrap;
+}
+.count{font-style:italic;color:var(--ink-soft);font-size:1rem}
+button.quiet{
+  font-family:var(--sans);font-size:0.62rem;letter-spacing:0.2em;text-transform:uppercase;
+  color:var(--ink-soft);background:none;border:1px solid var(--silver);border-radius:3px;
+  padding:0.45rem 0.8rem;cursor:pointer;
+}
+button.quiet:hover{color:var(--ink);border-color:var(--silver-deep)}
+button.quiet[aria-pressed="true"]{background:var(--ink);color:var(--ground);border-color:var(--ink)}
+button.quiet:focus-visible{outline:1px solid var(--epigraph);outline-offset:3px}
+
+/* strawberry */
+#views{margin-top:0.9rem}
+.viewbtns{display:flex;gap:0.6rem;margin-bottom:1.1rem}
+#yourview .letters{
+  font-size:1.7rem;letter-spacing:0.35em;text-align:center;margin:0.8rem 0 0.5rem;
+}
+#yourview .letters b{font-weight:500;color:var(--madder)}
+.viewnote{font-style:italic;color:var(--ink-soft);font-size:1rem;text-align:center;margin:0.4rem 0 0.2rem}
+#itsview .chips{text-align:center;margin:1rem 0 0.4rem}
+.hidden{display:none}
+
+/* map */
+#map{width:100%;height:auto;display:block}
+#map text{font-family:var(--serif);font-style:italic;font-size:13px;fill:var(--ink-soft);cursor:pointer}
+#map text.idlabel{font-family:var(--sans);font-style:normal;font-size:9px;letter-spacing:0.05em;fill:var(--silver-deep);opacity:0;pointer-events:none}
+#map .on text.idlabel{opacity:1}
+#map circle{cursor:pointer}
+#map .dot{fill:var(--silver-deep)}
+#map .halo{fill:none;stroke:var(--epigraph);stroke-width:1.2;opacity:0}
+#map line{stroke:var(--epigraph);stroke-width:1;opacity:0}
+#map .on .halo{opacity:0.9}
+#map text.hot{fill:var(--ink)}
+#map .picked .dot{fill:var(--madder)}
+#map .centre text:not(.idlabel){font-style:normal;font-weight:500;fill:var(--ink)}
+#strips{margin-top:1rem}
+.strip{margin:0.7rem 0}
+.strip .slabel{font-style:italic;color:var(--ink-soft);font-size:1rem;margin-bottom:0.25rem}
+.bands{display:flex;height:24px;border:1px solid var(--silver);border-radius:3px;overflow:hidden}
+.bands i{flex:1}
+.bands.vals{height:auto}
+.bands.vals i{display:flex;align-items:center;justify-content:center;padding:0.32rem 0;font-style:normal}
+.bands.vals b{font-family:var(--sans);font-weight:400;font-size:0.66rem;color:var(--ink);
+  background:rgba(255,255,255,0.55);border-radius:2px;padding:0 0.2rem}
+.stripshint{font-style:italic;color:var(--silver-deep);font-size:0.95rem;margin-top:0.6rem}
+
+/* prices */
+.lang{display:grid;grid-template-columns:7.5rem 1fr 3rem;gap:0.7rem;align-items:center;margin:0.55rem 0}
+.lang .lname{font-style:italic;color:var(--ink-soft);font-size:1rem}
+.lang .bar{height:12px;border-radius:2px;background:var(--silver);position:relative;overflow:hidden}
+.lang .bar i{position:absolute;inset:0;width:0;background:var(--silver-deep);border-radius:2px;
+  transition:width 1200ms ease}
+.lang:first-of-type .bar i{background:var(--moss)}
+.lang .n{font-family:var(--sans);font-size:0.72rem;color:var(--ink-soft);text-align:right}
+.lang .sent{grid-column:2/4;font-size:0.92rem;color:var(--silver-deep);margin-top:-0.35rem;
+  overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+
+/* shadow line and honest note */
+.shadow{
+  margin:3rem 0 0;font-size:1.18rem;
+}
+.note{
+  margin:3.4rem 0 0;padding-top:1.4rem;border-top:1px solid var(--silver);
+}
+.note .nkick{
+  font-family:var(--sans);font-size:0.6rem;letter-spacing:0.28em;text-transform:uppercase;
+  color:var(--silver-deep);margin:0 0 0.8rem;
+}
+.note p{font-size:0.98rem;color:var(--ink-soft);margin-bottom:0.9rem}
+.terms{margin-top:2rem;font-family:var(--sans);font-size:0.66rem;letter-spacing:0.14em;
+  text-transform:uppercase;color:var(--silver-deep)}
+.terms b{font-weight:400;color:var(--moss)}
+
+footer{padding:3.5rem 0 3rem;text-align:center}
+footer p{
+  font-family:var(--sans);font-size:0.6rem;letter-spacing:0.26em;text-transform:uppercase;
+  color:var(--silver-deep);margin:0;
+}
+@media (max-width:560px){
+  body{font-size:1.08rem}
+  .lang{grid-template-columns:5.5rem 1fr 2.6rem}
+}
+
+/* page v additions */
+.readout{font-style:italic;color:var(--ink-soft);font-size:1rem;margin-top:0.8rem;min-height:1.6em}
+.btnrow{display:flex;gap:0.6rem;flex-wrap:wrap;margin-top:1rem}
+#genline{font-family:var(--serif);font-size:1.25rem;line-height:2;min-height:2.4em;margin:0.2rem 0 0.6rem}
+#genline .tok{padding:0.06rem 0.28rem;border-radius:3px;margin-right:0.14rem;white-space:pre}
+#genline .prompt{background:rgba(140,163,181,0.15);border:1px solid rgba(140,163,181,0.45)}
+#genline .made{background:rgba(47,168,154,0.12);border:1px solid rgba(47,168,154,0.45)}
+#genline .fresh{background:rgba(197,155,16,0.16);border:1px solid rgba(197,155,16,0.55)}
+#genline .tok.sweep{background:rgba(197,155,16,0.28);border-color:rgba(197,155,16,0.7);transition:background 120ms ease}
+.cands{margin-top:0.6rem}
+.cand{display:grid;grid-template-columns:6.5rem 1fr 3.2rem;gap:0.7rem;align-items:center;margin:0.35rem 0}
+.cand .cw{font-family:var(--serif);font-size:1.05rem;color:var(--ink-soft)}
+.cand.top .cw{color:var(--ink)}
+.cand .bar{height:10px;background:var(--silver);border-radius:2px;position:relative;overflow:hidden}
+.cand .bar i{position:absolute;inset:0;width:0;background:var(--silver-deep);transition:width 700ms ease}
+.cand.top .bar i{background:#2FA89A}
+.cand .pc{font-family:var(--sans);font-size:0.7rem;color:var(--ink-soft);text-align:right}
+.loopnote{font-family:var(--sans);font-size:0.7rem;letter-spacing:0.06em;color:var(--silver-deep);margin-top:0.7rem}
+/* the window */
+#turns{display:flex;flex-direction:column;gap:0.4rem;margin-top:0.4rem}
+.turn{border:1px solid var(--silver);border-radius:4px;padding:0.4rem 0.7rem;font-size:0.98rem;
+  background:#fff;transition:opacity 800ms ease, transform 800ms ease}
+.turn .who{font-family:var(--sans);font-size:0.6rem;letter-spacing:0.2em;text-transform:uppercase;color:var(--silver-deep);margin-right:0.5rem}
+.turn.gone{opacity:0.25;transform:translateY(-2px);border-style:dashed}
+#winbar{height:10px;background:var(--silver);border-radius:2px;overflow:hidden;margin-top:0.9rem}
+#winbar i{display:block;height:100%;width:0;background:#5E87A0;transition:width 700ms ease}
+.winlabel{font-family:var(--sans);font-size:0.7rem;color:var(--ink-soft);margin-top:0.4rem}
+
+/* in the poems: the recurring connection */
+.poem{
+  margin:2.6rem 0 0;border-left:2px solid var(--epigraph);
+  padding:0.15rem 0 0.15rem 1.1rem;
+}
+.poem .pkick{
+  font-family:var(--sans);font-size:0.6rem;letter-spacing:0.28em;text-transform:uppercase;
+  color:var(--epigraph);margin:0 0 0.4rem;
+}
+.poem p{font-style:italic;color:var(--ink-soft);font-size:1.05rem;margin:0}
+</style>
+</head>
+<body>
+
+<a class="home" href="index.html">creaturely</a>
+
+<header class="wrap">
+  <p class="kicker">Creaturely &middot; an anatomy &middot; v</p>
+  <h1>inference</h1>
+  <p class="sub">what happens when it answers</p>
+</header>
+
+<main>
+<section class="wrap">
+  <p>The glossary so far has followed a sentence inward: cut into tokens, given vectors, adjusted by attention, rewritten by the stack. This page follows the reply outward. Using a trained model is called <em>inference</em>: the model reads your words and produces new ones. The first thing to know about inference is how small its central move is. The model does one thing. It proposes the next token. Everything else is that move, repeated.</p>
+</section>
+
+<section class="wrap">
+  <p class="seckick">i &middot; the loop</p>
+  <p>Inference runs as a loop. The model reads everything so far, your words and its own words alike. It then produces a score for every token in its vocabulary, and converts the scores into a <em>probability distribution</em>. A distribution gives every possible next token a share of likelihood, and the shares sum to one. One token gets chosen from that distribution. The chosen token joins the sentence. The loop begins again, now reading one token more. This way of writing, where each new token is produced from all the tokens before it, is called <em>autoregressive</em>. It is why a model writes the way it does: one small commitment at a time, each one reshaping the ground for the next.</p>
+  <p>Below, the model of this glossary completes its own sentence. Press the button and watch each cycle: the re-reading, the candidates, the choice.</p>
+</section>
+
+<div class="bleed">
+  <div class="panel">
+    <p class="plabel">one token at a time</p>
+    <p id="genline"></p>
+    <div class="cands" id="cands"></div>
+    <p class="loopnote" id="loopnote"></p>
+    <div class="btnrow">
+      <button class="quiet" id="stepBtn" type="button">produce the next token</button>
+      <button class="quiet" id="againBtn" type="button">start again</button>
+    </div>
+    <p class="readout" id="genRead"></p>
+  </div>
+</div>
+
+<section class="wrap">
+  <p>Watch the counter under the candidates: every cycle re-reads the entire line, attention running over all of it, the whole stack climbed again, for each single token. That is why length costs. And notice that the reply was never fetched from anywhere. There is no finished sentence waiting inside the model. The line assembles itself, choice by choice, and until the last token lands, it does not exist.</p>
+</section>
+
+<section class="wrap">
+  <p class="seckick">ii &middot; the window</p>
+  <p>The loop reads everything so far, but &ldquo;everything&rdquo; has an edge. Page iii introduced the <em>context window</em>: the stretch of tokens the model can attend to at once. In a conversation, your turns and the model&rsquo;s turns fill that window together, and when it is full, the oldest tokens fall outside it. They are not archived or summarized by the model itself; they are simply no longer read.</p>
+</section>
+
+<div class="bleed">
+  <div class="panel">
+    <p class="plabel">the window fills</p>
+    <div id="turns"></div>
+    <div id="winbar"><i></i></div>
+    <p class="winlabel" id="winlabel"></p>
+    <div class="btnrow">
+      <button class="quiet" id="turnBtn" type="button">add a turn to the conversation</button>
+      <button class="quiet" id="winReset" type="button">start again</button>
+    </div>
+    <p class="readout" id="winRead">the window is nearly empty.</p>
+  </div>
+</div>
+
+<section class="wrap">
+  <p>This is the honest answer to a common frustration: the model did not choose to forget the thing you said an hour ago. The thing you said fell outside the window. For the model, what is outside the window has the same standing as what was never written. Just as important: inference changes nothing inside the model. The weights stay exactly as training left them, no matter what you say or how long you talk. The conversation itself is the only memory in the room, a fact the glossary returns to on page ix.</p>
+
+  <div class="poem">
+    <p class="pkick">in the poems</p>
+    <p>Every line of the poems arrived exactly this way: one token at a time, re-reading itself as it grew, not existing until it did.</p>
+  </div>
+
+  <p class="shadow">The model does not remember answering you. The conversation is the only place it happened.</p>
+
+  <p class="terms">terms from this page: <b>inference &middot; probability distribution &middot; autoregressive</b></p>
+
+  <div class="note">
+    <p class="nkick">an honest note</p>
+    <p>The candidate tokens and their probabilities in the loop are set by hand, and the completed line is this page&rsquo;s invention, not the output of a real model; a real step scores tens of thousands of candidates at once, and stopping is itself a token the model can choose. The window panel compresses real sizes: current context windows hold anywhere from thousands to millions of tokens, and products often add machinery outside the model, summaries, retrieved notes, saved memories, to soften the edge. The model itself keeps nothing: that part is exact.</p>
+  </div>
+</section>
+</main>
+
+<footer>
+  <p>creaturely &middot; alexandra emberley &middot; 2026</p>
+</footer>
+
+<script>
+/* ---------- the loop ---------- */
+const PROMPT = ["the","echo","of","a","beam"];
+const STEPS = [
+  {cands:[["never",0.34],["of",0.18],["that",0.12],["still",0.09],["sent",0.07]], pick:"never"},
+  {cands:[["sent",0.41],["cast",0.17],["made",0.11],["seen",0.08],["thrown",0.05]], pick:"sent"},
+  {cands:[["returns",0.28],["fades",0.19],["waits",0.14],["lands",0.09],["sings",0.08]], pick:"returns"},
+  {cands:[["across",0.26],["to",0.21],["through",0.13],["without",0.08],["slowly",0.07]], pick:"across"},
+  {cands:[["the",0.52],["a",0.17],["dark",0.08],["still",0.07],["night",0.04]], pick:"the"},
+  {cands:[["water",0.31],["dark",0.22],["field",0.12],["room",0.09],["sea",0.08]], pick:"water"},
+  {cands:[[".",0.44],[",",0.18],["again",0.12],["and",0.09],["at",0.05]], pick:"."}
+];
+const genline = document.getElementById("genline");
+const cands = document.getElementById("cands");
+const loopnote = document.getElementById("loopnote");
+const genRead = document.getElementById("genRead");
+let made = [];
+
+function renderLine(freshIdx){
+  genline.innerHTML = "";
+  PROMPT.forEach(t=>{
+    const s = document.createElement("span");
+    s.className = "tok prompt"; s.textContent = t;
+    genline.appendChild(s);
+  });
+  made.forEach((t,i)=>{
+    const s = document.createElement("span");
+    s.className = "tok " + (i===freshIdx? "fresh":"made"); s.textContent = t;
+    genline.appendChild(s);
+  });
+}
+function showStep(){
+  if(made.length >= STEPS.length){
+    cands.innerHTML = "";
+    loopnote.textContent = "";
+    genRead.textContent = "the full stop was chosen. the loop ends: the line exists now, and did not before.";
+    return;
+  }
+  const st = STEPS[made.length];
+  cands.innerHTML = "";
+  st.cands.forEach(([w,p],i)=>{
+    const d = document.createElement("div");
+    d.className = "cand" + (i===0? " top":"");
+    d.innerHTML = `<span class="cw">${w === "."? "(full stop)": w}</span>
+      <span class="bar"><i></i></span><span class="pc">${(p*100).toFixed(0)}%</span>`;
+    cands.appendChild(d);
+    requestAnimationFrame(()=>{ d.querySelector("i").style.width = (p*100*2.2) + "%"; });
+  });
+  const n = PROMPT.length + made.length;
+  loopnote.textContent = `re-reading all ${n} tokens \u00b7 scoring the vocabulary \u00b7 top candidates shown`;
+  genRead.textContent = made.length === 0
+    ? "the model proposes. press again to accept its choice and continue."
+    : "";
+}
+const stepBtnEl = document.getElementById("stepBtn");
+stepBtnEl.addEventListener("click", ()=>{
+  if(made.length >= STEPS.length) return;
+  /* the re-reading, made visible: a pass over every token so far */
+  stepBtnEl.disabled = true;
+  const toks = [...genline.children];
+  toks.forEach((el,i)=>{
+    setTimeout(()=>{
+      el.classList.add("sweep");
+      setTimeout(()=>el.classList.remove("sweep"), 260);
+    }, i*90);
+  });
+  setTimeout(()=>{
+    const st = STEPS[made.length];
+    made.push(st.pick);
+    renderLine(made.length-1);
+    showStep();
+    stepBtnEl.disabled = false;
+  }, toks.length*90 + 240);
+});
+document.getElementById("againBtn").addEventListener("click", ()=>{
+  made = []; renderLine(-1); showStep(); genRead.textContent = "";
+});
+renderLine(-1); showStep();
+
+/* ---------- the window ---------- */
+const TURNTEXTS = [
+  ["you","tell me about the osprey."],
+  ["model","the osprey reads the water from above\u2026"],
+  ["you","and what does it listen for?"],
+  ["model","movement, mostly. the water tells on its fish."],
+  ["you","earlier you mentioned the moths?"],
+  ["model","the scarlet tiger flies by day\u2026"],
+  ["you","go back to the beginning of our talk."],
+  ["model","this is where the window matters\u2026"]
+];
+const CAP = 5;   /* the toy window holds five turns */
+const turnsEl = document.getElementById("turns");
+const winbar = document.querySelector("#winbar i");
+const winlabel = document.getElementById("winlabel");
+const winRead = document.getElementById("winRead");
+let ti = 0, live = [];
+
+function refreshWindow(){
+  const over = Math.max(0, live.length - CAP);
+  live.forEach((el,i)=> el.classList.toggle("gone", i < over));
+  const inWin = Math.min(live.length, CAP);
+  winbar.style.width = (inWin/CAP*100) + "%";
+  winlabel.textContent = `context window: ${inWin} of ${CAP} turns` + (over? ` \u00b7 ${over} fallen outside` : "");
+  if(over > 0){
+    winRead.textContent = "the oldest turns are no longer read. to the model, they have the same standing as words never written.";
+  } else if(inWin === CAP){
+    winRead.textContent = "the window is full. the next turn will push the first one out.";
+  } else if(inWin > 0){
+    winRead.textContent = "each turn takes its place in the window.";
+  }
+}
+document.getElementById("turnBtn").addEventListener("click", ()=>{
+  if(ti >= TURNTEXTS.length){ winRead.textContent = "the conversation is over; the window kept only its last stretch."; return; }
+  const [who, text] = TURNTEXTS[ti++];
+  const d = document.createElement("div");
+  d.className = "turn";
+  d.innerHTML = `<span class="who">${who}</span>${text}`;
+  turnsEl.appendChild(d);
+  live.push(d);
+  refreshWindow();
+});
+document.getElementById("winReset").addEventListener("click", ()=>{
+  turnsEl.innerHTML = ""; live = []; ti = 0;
+  winbar.style.width = "0%"; winlabel.textContent = "";
+  winRead.textContent = "the window is nearly empty.";
+});
+</script>
+</body>
+</html>

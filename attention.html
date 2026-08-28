@@ -1,0 +1,517 @@
+<!DOCTYPE html>
+<html lang="en-CA">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Attention &middot; Creaturely</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=EB+Garamond:ital,wght@0,400;0,500;1,400&display=swap" rel="stylesheet">
+<style>
+:root{
+  --ground:#F1F2F0;
+  --ink:#2B2E28;
+  --ink-soft:#5A5E55;
+  --moss:#6E7F5C;
+  --lichen:#9FAF92;
+  --light-green:#C4CFB6;
+  --wing:#6B5844;
+  --madder:#8C4A32;
+  --silver:#C9CCC6;
+  --silver-deep:#8A8D87;
+  --epigraph:#8CA3B5;
+  --panel:#FAFBF9;
+  --serif:"EB Garamond",Garamond,"Adobe Garamond Pro",Georgia,serif;
+  --sans:"Avenir Next","Avenir",-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;
+  --measure:34rem;
+}
+*{box-sizing:border-box}
+html{-webkit-text-size-adjust:100%}
+body{
+  margin:0;background:var(--ground);color:var(--ink);
+  font-family:var(--serif);font-size:1.18rem;line-height:1.62;
+  font-feature-settings:"liga" 1,"onum" 1;
+}
+.wrap{max-width:var(--measure);margin:0 auto;padding:0 1.5rem}
+.bleed{max-width:52rem;margin:0 auto;padding:0 1.5rem}
+
+a.home{
+  position:absolute;top:1.2rem;left:1.4rem;
+  font-family:var(--sans);font-size:0.64rem;letter-spacing:0.26em;text-transform:uppercase;
+  color:var(--silver-deep);text-decoration:none;
+}
+a.home:hover,a.home:focus-visible{color:var(--ink)}
+a.home:focus-visible{outline:1px solid var(--epigraph);outline-offset:3px}
+
+header{padding:5.5rem 0 2.6rem;text-align:center}
+.kicker{
+  font-family:var(--sans);font-size:0.64rem;letter-spacing:0.3em;text-transform:uppercase;
+  color:var(--silver-deep);margin:0 0 1.1rem;
+}
+h1{
+  font-weight:400;font-size:clamp(2.4rem,7vw,3.4rem);letter-spacing:0.02em;
+  margin:0;line-height:1.05;
+}
+.sub{
+  font-style:italic;color:var(--ink-soft);font-size:1.15rem;margin:0.8rem 0 0;
+}
+
+section{margin:3.2rem 0}
+.seckick{
+  font-family:var(--sans);font-size:0.62rem;letter-spacing:0.28em;text-transform:uppercase;
+  color:var(--moss);margin:0 0 1rem;
+}
+p{margin:0 0 1.25rem}
+em{font-style:italic}
+
+/* ---------- panels ---------- */
+.panel{
+  background:var(--panel);border:1px solid var(--silver);border-radius:6px;
+  padding:1.4rem 1.4rem 1.5rem;margin:1.8rem 0;
+}
+.panel .plabel{
+  font-family:var(--sans);font-size:0.6rem;letter-spacing:0.24em;text-transform:uppercase;
+  color:var(--silver-deep);margin:0 0 0.9rem;
+}
+
+/* the cutter */
+#cutIn{
+  width:100%;font-family:var(--serif);font-size:1.15rem;color:var(--ink);
+  background:#fff;border:1px solid var(--silver);border-radius:4px;
+  padding:0.6rem 0.8rem;
+}
+#cutIn:focus{outline:1px solid var(--epigraph);outline-offset:2px}
+#chips{margin:1.1rem 0 0.4rem;line-height:2.35}
+.chip{
+  display:inline-block;position:relative;
+  font-size:1.02rem;padding:0.1rem 0.45rem;margin:0 0.22rem 0.35rem 0;
+  border-radius:3px;border:1px solid;
+  white-space:pre;
+}
+.chip .sp{color:var(--silver-deep);opacity:0.85}
+.chip .id{
+  display:block;font-family:var(--sans);font-size:0.58rem;letter-spacing:0.04em;
+  color:var(--silver-deep);text-align:center;margin-top:-1px;
+}
+.c0{background:rgba(110,127,92,0.13);border-color:rgba(110,127,92,0.45)}
+.c1{background:rgba(140,163,181,0.15);border-color:rgba(140,163,181,0.5)}
+.c2{background:rgba(107,88,68,0.11);border-color:rgba(107,88,68,0.4)}
+.c3{background:rgba(159,175,146,0.16);border-color:rgba(159,175,146,0.55)}
+.cm{background:rgba(140,74,50,0.12);border-color:rgba(140,74,50,0.5)}
+.cutmeta{
+  display:flex;align-items:center;justify-content:space-between;gap:1rem;
+  margin-top:0.5rem;flex-wrap:wrap;
+}
+.count{font-style:italic;color:var(--ink-soft);font-size:1rem}
+button.quiet{
+  font-family:var(--sans);font-size:0.62rem;letter-spacing:0.2em;text-transform:uppercase;
+  color:var(--ink-soft);background:none;border:1px solid var(--silver);border-radius:3px;
+  padding:0.45rem 0.8rem;cursor:pointer;
+}
+button.quiet:hover{color:var(--ink);border-color:var(--silver-deep)}
+button.quiet[aria-pressed="true"]{background:var(--ink);color:var(--ground);border-color:var(--ink)}
+button.quiet:focus-visible{outline:1px solid var(--epigraph);outline-offset:3px}
+
+/* strawberry */
+#views{margin-top:0.9rem}
+.viewbtns{display:flex;gap:0.6rem;margin-bottom:1.1rem}
+#yourview .letters{
+  font-size:1.7rem;letter-spacing:0.35em;text-align:center;margin:0.8rem 0 0.5rem;
+}
+#yourview .letters b{font-weight:500;color:var(--madder)}
+.viewnote{font-style:italic;color:var(--ink-soft);font-size:1rem;text-align:center;margin:0.4rem 0 0.2rem}
+#itsview .chips{text-align:center;margin:1rem 0 0.4rem}
+.hidden{display:none}
+
+/* map */
+#map{width:100%;height:auto;display:block}
+#map text{font-family:var(--serif);font-style:italic;font-size:13px;fill:var(--ink-soft);cursor:pointer}
+#map text.idlabel{font-family:var(--sans);font-style:normal;font-size:9px;letter-spacing:0.05em;fill:var(--silver-deep);opacity:0;pointer-events:none}
+#map .on text.idlabel{opacity:1}
+#map circle{cursor:pointer}
+#map .dot{fill:var(--silver-deep)}
+#map .halo{fill:none;stroke:var(--epigraph);stroke-width:1.2;opacity:0}
+#map line{stroke:var(--epigraph);stroke-width:1;opacity:0}
+#map .on .halo{opacity:0.9}
+#map text.hot{fill:var(--ink)}
+#map .picked .dot{fill:var(--madder)}
+#map .centre text:not(.idlabel){font-style:normal;font-weight:500;fill:var(--ink)}
+#strips{margin-top:1rem}
+.strip{margin:0.7rem 0}
+.strip .slabel{font-style:italic;color:var(--ink-soft);font-size:1rem;margin-bottom:0.25rem}
+.bands{display:flex;height:24px;border:1px solid var(--silver);border-radius:3px;overflow:hidden}
+.bands i{flex:1}
+.bands.vals{height:auto}
+.bands.vals i{display:flex;align-items:center;justify-content:center;padding:0.32rem 0;font-style:normal}
+.bands.vals b{font-family:var(--sans);font-weight:400;font-size:0.66rem;color:var(--ink);
+  background:rgba(255,255,255,0.55);border-radius:2px;padding:0 0.2rem}
+.stripshint{font-style:italic;color:var(--silver-deep);font-size:0.95rem;margin-top:0.6rem}
+
+/* prices */
+.lang{display:grid;grid-template-columns:7.5rem 1fr 3rem;gap:0.7rem;align-items:center;margin:0.55rem 0}
+.lang .lname{font-style:italic;color:var(--ink-soft);font-size:1rem}
+.lang .bar{height:12px;border-radius:2px;background:var(--silver);position:relative;overflow:hidden}
+.lang .bar i{position:absolute;inset:0;width:0;background:var(--silver-deep);border-radius:2px;
+  transition:width 1200ms ease}
+.lang:first-of-type .bar i{background:var(--moss)}
+.lang .n{font-family:var(--sans);font-size:0.72rem;color:var(--ink-soft);text-align:right}
+.lang .sent{grid-column:2/4;font-size:0.92rem;color:var(--silver-deep);margin-top:-0.35rem;
+  overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+
+/* shadow line and honest note */
+.shadow{
+  margin:3rem 0 0;font-size:1.18rem;
+}
+.note{
+  margin:3.4rem 0 0;padding-top:1.4rem;border-top:1px solid var(--silver);
+}
+.note .nkick{
+  font-family:var(--sans);font-size:0.6rem;letter-spacing:0.28em;text-transform:uppercase;
+  color:var(--silver-deep);margin:0 0 0.8rem;
+}
+.note p{font-size:0.98rem;color:var(--ink-soft);margin-bottom:0.9rem}
+.terms{margin-top:2rem;font-family:var(--sans);font-size:0.66rem;letter-spacing:0.14em;
+  text-transform:uppercase;color:var(--silver-deep)}
+.terms b{font-weight:400;color:var(--moss)}
+
+footer{padding:3.5rem 0 3rem;text-align:center}
+footer p{
+  font-family:var(--sans);font-size:0.6rem;letter-spacing:0.26em;text-transform:uppercase;
+  color:var(--silver-deep);margin:0;
+}
+@media (max-width:560px){
+  body{font-size:1.08rem}
+  .lang{grid-template-columns:5.5rem 1fr 2.6rem}
+}
+
+/* page iii additions */
+#attnC{width:100%;height:280px;display:block;border-radius:4px}
+.const3{width:100%;height:340px;display:block;cursor:grab;touch-action:none;border-radius:4px}
+.const3.dragging{cursor:grabbing}
+#attn text{font-family:var(--serif);font-size:17px;fill:var(--ink);cursor:pointer}
+#attn text.sel{fill:#2FA89A;font-weight:500}
+#attn text.wlabel{font-family:var(--sans);font-size:10px;fill:var(--ink-soft);cursor:default}
+#attn path{fill:none;stroke:#2FA89A;stroke-linecap:round}
+#attn rect{fill:transparent;cursor:pointer}
+.readout{font-style:italic;color:var(--ink-soft);font-size:1rem;margin-top:0.8rem;min-height:1.6em}
+.readout b{font-family:var(--sans);font-weight:400;font-size:0.72rem;color:var(--ink);letter-spacing:0.03em}
+#ctxmap text{font-family:var(--serif);font-style:italic;font-size:13px;fill:var(--ink-soft)}
+#ctxmap .dot{fill:var(--silver-deep)}
+#ctxmap .beam .dot{fill:#2FA89A}
+#ctxmap .beam text{fill:var(--ink);font-style:normal}
+#ctxmap .idlabel{font-family:var(--sans);font-style:normal;font-size:9px;fill:var(--silver-deep)}
+#ctxmap .trail{fill:none;stroke:#2FA89A;stroke-width:1.6;stroke-dasharray:3 4}
+.btnrow{display:flex;gap:0.6rem;flex-wrap:wrap;margin-top:1rem}
+
+/* in the poems: the recurring connection */
+.poem{
+  margin:2.6rem 0 0;border-left:2px solid var(--epigraph);
+  padding:0.15rem 0 0.15rem 1.1rem;
+}
+.poem .pkick{
+  font-family:var(--sans);font-size:0.6rem;letter-spacing:0.28em;text-transform:uppercase;
+  color:var(--epigraph);margin:0 0 0.4rem;
+}
+.poem p{font-style:italic;color:var(--ink-soft);font-size:1.05rem;margin:0}
+</style>
+</head>
+<body>
+
+<a class="home" href="index.html">creaturely</a>
+
+<header class="wrap">
+  <p class="kicker">Creaturely &middot; an anatomy &middot; iii</p>
+  <h1>attention</h1>
+  <p class="sub">how the pieces of a sentence notice each other</p>
+</header>
+
+<main>
+<section class="wrap">
+  <p>The first two pages of this glossary follow a sentence into the space of positions: the model cuts the sentence into tokens, gives each token a vector, and can now measure and trace relationships between words. But every vector so far is a resting position, the word&rsquo;s average meaning across everything the model read. The word <em>beam</em> has one resting vector whether the sentence is about light or about oak. Reading means adjusting those meanings to fit the sentence they are actually in. The mechanism that does the adjusting is called <em>attention</em>.</p>
+</section>
+
+<section class="wrap">
+  <p class="seckick">i &middot; the noticing</p>
+  <p>Attention works like this: every token looks at every other token in the sentence, including itself, and gives each one a score for how much it matters right now. The scores are scaled so that they add up to exactly one. Think of a fixed budget of notice, which each word divides among its neighbours. These scores are called <em>attention weights</em>, and they are numbers the model calculates, not rules anyone wrote. The model can only attend to what sits inside its <em>context window</em>: the stretch of tokens it can see at once.</p>
+  <p>Below is this glossary&rsquo;s sentence, a line from the Photonic Emergence poem. All of the arcs are present all of the time, every word attending to every word at once; press any word to bring its own share of the web forward.</p>
+</section>
+
+<div class="bleed">
+  <div class="panel">
+    <p class="plabel">a budget of notice</p>
+    <canvas id="attnC" role="img" aria-label="Attention flowing between the words of a sentence"></canvas>
+    <p class="readout" id="attnRead">press a word.</p>
+  </div>
+</div>
+
+<section class="wrap">
+  <p>Look at what <em>echo</em> does: it spends most of its notice on <em>beam</em> and <em>sent</em>, because an echo needs a source, and almost none on <em>a</em> or <em>of</em>. Small words spend their budgets too; even <em>the</em> is busy finding out what it belongs to. And every word keeps a little notice for itself. Nothing here is grammar the model was taught. The weights come from the vectors, and the vectors came from the training.</p>
+</section>
+
+<section class="wrap">
+  <p class="seckick">ii &middot; the moving</p>
+  <p>The weights are not the point; they are the recipe. After scoring, each token updates its own vector by mixing in the vectors it attended to, in proportion to their weights. A token that spends most of its notice on <em>beam</em> ends up carrying some of beam&rsquo;s meaning. This is the moment the map from the first page finally moves. After attention, a word&rsquo;s position is no longer its resting average. It is a version adjusted to this sentence. Watch what a sentence does to <em>beam</em>.</p>
+</section>
+
+<div class="bleed">
+  <div class="panel">
+    <p class="plabel">the same word, moved by two sentences</p>
+    <canvas id="ctxmap" class="const3" role="img" aria-label="The word beam moving through the space, pulled by two different sentences"></canvas>
+    <div class="btnrow">
+      <button class="quiet" id="s1Btn" type="button">read: the echo of a beam never sent</button>
+      <button class="quiet" id="s2Btn" type="button">read: a beam of oak held the roof</button>
+    </div>
+    <p class="readout" id="ctxRead">beam rests between its two lives. read a sentence.</p>
+  </div>
+</div>
+
+<section class="wrap">
+  <p>Same word, same token number, same resting vector, and two different arrivals. In the first sentence, <em>echo</em> and <em>sent</em> pull beam toward light; in the second, <em>oak</em> and <em>roof</em> pull it toward timber. The moved position is called a contextual meaning. It is not stored anywhere. The model rebuilds it every time it reads, from the weights and the mixing. This is also why the order and company of your words matter so much when you write to a model. You are not choosing labels; you are arranging the forces that will move every word&rsquo;s position.</p>
+</section>
+
+<section class="wrap">
+  <p>Attention runs many times over, not once. The model scores and mixes, then scores and mixes again on the results, layer after layer, and by the upper layers the tokens carry meanings assembled from the whole sentence. What the machinery of those layers is made of comes next.</p>
+
+  <div class="poem">
+    <p class="pkick">in the poems</p>
+    <p>The poems&rsquo; habit of echo and return is attention made audible: every new word of a line was written while attending to all the words before it.</p>
+  </div>
+
+  <p class="shadow">What the model notices is a habit it learned from other people&rsquo;s sentences.</p>
+
+  <p class="terms">terms from this page: <b>attention &middot; attention weights &middot; context window</b></p>
+
+  <div class="note">
+    <p class="nkick">an honest note</p>
+    <p>The attention weights on this page are set by hand to illustrate the idea; a real model calculates them from the vectors themselves, using pieces called queries and keys that this glossary leaves aside. Real attention also runs many separate patterns at once, called heads, and repeats across dozens of layers, so no single set of weights decides anything alone. The map of beam&rsquo;s movement compresses all of that into one step, and its positions are hand-placed. The flowing particles are an illustration of mixing, not a picture of anything physical moving inside the model. The budget-of-one is real: attention weights genuinely sum to one for each token.</p>
+  </div>
+</section>
+</main>
+
+<footer>
+  <p>creaturely &middot; alexandra emberley &middot; 2026</p>
+</footer>
+
+<script>
+function idOf(tok){
+  let h = 5381;
+  for(let i=0;i<tok.length;i++){ h = ((h*33) ^ tok.charCodeAt(i)) >>> 0; }
+  return 1000 + (h % 48999);
+}
+
+/* ---------- the web of notice, breathing ---------- */
+const TOKS = ["the","echo","of","a","beam","never","sent"];
+const W = {
+  the:   [0.30,0.14,0.08,0.08,0.22,0.06,0.12],
+  echo:  [0.04,0.16,0.04,0.03,0.38,0.13,0.22],
+  of:    [0.10,0.26,0.18,0.06,0.30,0.04,0.06],
+  a:     [0.08,0.10,0.06,0.16,0.44,0.06,0.10],
+  beam:  [0.05,0.30,0.04,0.04,0.20,0.12,0.25],
+  never: [0.04,0.10,0.03,0.03,0.16,0.24,0.40],
+  sent:  [0.05,0.24,0.03,0.03,0.30,0.20,0.15]
+};
+const attnC = document.getElementById("attnC");
+const actx = attnC.getContext("2d");
+const attnRead = document.getElementById("attnRead");
+let ADPR = Math.min(window.devicePixelRatio||1,2);
+function sizeA(){
+  ADPR = Math.min(window.devicePixelRatio||1,2);
+  attnC.width = attnC.clientWidth*ADPR; attnC.height = attnC.clientHeight*ADPR;
+}
+sizeA(); window.addEventListener("resize", sizeA);
+
+let selected = "echo";
+function XA(i){ const W0=attnC.clientWidth; return W0*0.06 + i*(W0*0.88)/(TOKS.length-1); }
+function YA(){ return attnC.clientHeight*0.74; }
+
+/* a point along the arc between word i and word j (self = small loop) */
+function arcPoint(i, j, t){
+  const y = YA();
+  if(i === j){
+    const cx = XA(i), r = 16;
+    const a = Math.PI*(1.15 - 1.3*t);
+    return [cx + r*Math.cos(a), y - 26 + r*Math.sin(a)*0.8 - 6];
+  }
+  const x0=XA(i), x1=XA(j), mid=(x0+x1)/2;
+  const lift = 26 + Math.abs(i-j)*26;
+  const o=1-t;
+  return [o*o*x0 + 2*o*t*mid + t*t*x1,
+          o*o*y-22*o*o + 2*o*t*(y-22-lift) + t*t*(y-22)];
+}
+/* flow particles: sampled from the whole matrix, biased to the selected word */
+const flow = [];
+function spawn(){
+  let i;
+  if(Math.random() < 0.6){ i = TOKS.indexOf(selected); }
+  else { i = Math.floor(Math.random()*TOKS.length); }
+  const row = W[TOKS[i]];
+  let r = Math.random(), acc = 0, j = 0;
+  for(let k=0;k<row.length;k++){ acc += row[k]; if(r<=acc){ j=k; break; } }
+  flow.push({i, j, t:0, sp:0.5+Math.random()*0.5, w:row[j]});
+}
+for(let k=0;k<70;k++){ spawn(); flow[flow.length-1].t = Math.random(); }
+
+function drawAttn(now){
+  actx.setTransform(ADPR,0,0,ADPR,0,0);
+  actx.clearRect(0,0,attnC.clientWidth,attnC.clientHeight);
+  const y = YA();
+  const si = TOKS.indexOf(selected);
+  /* the whole web, faint; the selected word's arcs, forward */
+  for(let i=0;i<TOKS.length;i++){
+    const row = W[TOKS[i]];
+    for(let j=0;j<TOKS.length;j++){
+      const w = row[j];
+      const own = i===si;
+      const alpha = own ? 0.18+w*1.5 : 0.05+w*0.22;
+      actx.strokeStyle = own? `rgba(47,168,154,${Math.min(0.95,alpha)})` : `rgba(138,141,135,${alpha})`;
+      actx.lineWidth = own? Math.max(0.7,w*9) : Math.max(0.4,w*3);
+      actx.beginPath();
+      const steps=20;
+      for(let s=0;s<=steps;s++){
+        const p=arcPoint(i,j,s/steps);
+        s===0? actx.moveTo(p[0],p[1]) : actx.lineTo(p[0],p[1]);
+      }
+      actx.stroke();
+    }
+  }
+  /* the flow */
+  for(const p of flow){
+    p.t += 0.008*p.sp;
+    if(p.t>=1){ Object.assign(p, flow[0]); flow.shift(); spawn(); continue; }
+    const pos = arcPoint(p.i, p.j, p.t);
+    const own = p.i===si;
+    actx.fillStyle = own? `rgba(47,168,154,${0.35+p.w*1.4})` : `rgba(138,141,135,${0.15+p.w*0.7})`;
+    actx.beginPath(); actx.arc(pos[0],pos[1], own? 1.4+p.w*4 : 1+p.w*2.4, 0, 6.2832); actx.fill();
+  }
+  /* the words and, for the selected row, the weights */
+  TOKS.forEach((t,i)=>{
+    actx.font = (t===selected? "500 ":"") + "17px 'EB Garamond', Georgia, serif";
+    actx.fillStyle = t===selected? "rgb(47,168,154)" : "rgb(43,46,40)";
+    actx.textAlign = "center";
+    actx.fillText(t, XA(i), y);
+    if(si>=0){
+      actx.font = "10px 'Avenir Next', sans-serif";
+      actx.fillStyle = "rgba(90,94,85,0.9)";
+      actx.fillText(W[selected][i].toFixed(2), XA(i), y+18);
+    }
+  });
+  actx.textAlign = "start";
+  requestAnimationFrame(drawAttn);
+}
+requestAnimationFrame(drawAttn);
+
+function describe(sel){
+  const row = W[sel], si = TOKS.indexOf(sel);
+  const parts = TOKS.map((t,j)=> j===si? null : `${t} ${row[j].toFixed(2)}`).filter(Boolean);
+  attnRead.innerHTML = `<em>${sel}</em> divides its notice: ` + parts.join(" \u00b7 ")
+    + ` \u00b7 itself ${row[si].toFixed(2)} <b>(sums to 1.00)</b>`;
+}
+attnC.addEventListener("pointerup", e=>{
+  const r = attnC.getBoundingClientRect();
+  const mx = e.clientX - r.left;
+  let best=0, bd=1e9;
+  TOKS.forEach((t,i)=>{ const d=Math.abs(XA(i)-mx); if(d<bd){bd=d;best=i;} });
+  if(bd < 46){ selected = TOKS[best]; describe(selected); }
+});
+describe(selected);
+
+/* ---------- beam, moved through the volume ---------- */
+function Constellation(canvas, words, opts){
+  const ctx = canvas.getContext("2d");
+  let DPR = Math.min(window.devicePixelRatio||1, 2);
+  function size(){
+    DPR = Math.min(window.devicePixelRatio||1, 2);
+    canvas.width = canvas.clientWidth*DPR; canvas.height = canvas.clientHeight*DPR;
+  }
+  size(); window.addEventListener("resize", size);
+  const nodes = words.map(([w,x,y,z])=>({w,x,y,z,ph:Math.random()*6.283,sp:0.7+Math.random()*0.9,sx:0,sy:0,depth:0}));
+  const st = {theta:0.6, tilt:0.28, lastTouch:0, dragging:false, moved:0, px:0, py:0};
+  function project(n){
+    const x=n.x-0.5, y=n.y-0.5, z=n.z-0.5;
+    const c=Math.cos(st.theta), s=Math.sin(st.theta);
+    const rx=x*c - z*s, rz=x*s + z*c;
+    const Wd=canvas.clientWidth, H=canvas.clientHeight;
+    const S=Math.min(Wd, H*1.35)*0.78;
+    n.depth=rz; n.sx=Wd/2+rx*S; n.sy=H/2+(y*S*0.72)-rz*S*Math.sin(st.tilt);
+  }
+  function pt(p){ const n={x:p[0],y:p[1],z:p[2]}; project(n); return n; }
+  const dA = d=>0.45+(0.5-d)*0.9, dS = d=>2.2+(0.5-d)*2.4;
+  function frame(now){
+    const t=now/1000;
+    if(now-st.lastTouch>4000) st.theta += 0.0016;
+    ctx.setTransform(DPR,0,0,DPR,0,0);
+    ctx.clearRect(0,0,canvas.clientWidth,canvas.clientHeight);
+    nodes.forEach(project);
+    if(opts.decorate) opts.decorate(ctx, {nodes, pt, dA, dS, t});
+    for(const n of [...nodes].sort((a,b)=>b.depth-a.depth)){
+      const tw=0.8+0.2*Math.sin(t*n.sp*2+n.ph);
+      const a=dA(n.depth)*tw, r=dS(n.depth);
+      const deco=(opts.nodeStyle && opts.nodeStyle(n))||{};
+      ctx.fillStyle = deco.dot || `rgba(138,141,135,${a.toFixed(3)})`;
+      ctx.beginPath(); ctx.arc(n.sx,n.sy,r*(deco.scale||1),0,6.2832); ctx.fill();
+      ctx.font=(deco.bold?"500 ":"italic ")+"13px 'EB Garamond', Georgia, serif";
+      ctx.fillStyle = deco.label || `rgba(90,94,85,${a.toFixed(3)})`;
+      ctx.fillText(n.w, n.sx+8, n.sy-7);
+      if(deco.sub){
+        ctx.font="9px 'Avenir Next', sans-serif";
+        ctx.fillStyle="rgba(138,141,135,0.95)";
+        ctx.fillText(deco.sub, n.sx+8, n.sy+14);
+      }
+    }
+    requestAnimationFrame(frame);
+  }
+  requestAnimationFrame(frame);
+  canvas.addEventListener("pointerdown",e=>{
+    st.dragging=true; st.px=e.clientX; st.py=e.clientY;
+    canvas.classList.add("dragging"); canvas.setPointerCapture(e.pointerId);
+    st.lastTouch=performance.now();
+  });
+  canvas.addEventListener("pointermove",e=>{
+    if(!st.dragging) return;
+    st.theta+=(e.clientX-st.px)*0.008;
+    st.tilt=Math.max(0.05,Math.min(0.6,st.tilt+(e.clientY-st.py)*0.003));
+    st.px=e.clientX; st.py=e.clientY; st.lastTouch=performance.now();
+  });
+  canvas.addEventListener("pointerup",()=>{st.dragging=false; canvas.classList.remove("dragging");});
+  return {nodes, st, pt};
+}
+
+const CTXWORDS = [
+  ["glow",0.20,0.26,0.42],["light",0.10,0.42,0.50],["echo",0.24,0.54,0.34],
+  ["oak",0.80,0.26,0.60],["roof",0.88,0.44,0.52],["timber",0.76,0.56,0.66]
+];
+const BEAM = {rest:[0.50,0.42,0.50], s1:[0.30,0.42,0.44], s2:[0.68,0.40,0.56]};
+let beamPos = [...BEAM.rest], beamFrom = [...BEAM.rest], beamTo = [...BEAM.rest], beamT = 1;
+const ctxRead = document.getElementById("ctxRead");
+
+const ctxC = Constellation(document.getElementById("ctxmap"), CTXWORDS, {
+  decorate: (ctx,h) => {
+    if(beamT < 1) beamT = Math.min(1, beamT + 0.012);
+    const e = beamT<0.5? 4*beamT**3 : 1-Math.pow(-2*beamT+2,3)/2;
+    beamPos = beamFrom.map((v,i)=> v + (beamTo[i]-v)*e);
+    const R = h.pt(BEAM.rest), P = h.pt(beamPos);
+    if(Math.hypot(P.sx-R.sx,P.sy-R.sy) > 4){
+      ctx.strokeStyle="rgba(47,168,154,0.7)"; ctx.lineWidth=1.4; ctx.setLineDash([3,4]);
+      ctx.beginPath(); ctx.moveTo(R.sx,R.sy); ctx.lineTo(P.sx,P.sy); ctx.stroke();
+      ctx.setLineDash([]);
+    }
+    const a = h.dA(P.depth);
+    ctx.fillStyle = `rgba(47,168,154,${a.toFixed(3)})`;
+    ctx.beginPath(); ctx.arc(P.sx,P.sy, 4.6, 0, 6.2832); ctx.fill();
+    ctx.font="500 13px 'EB Garamond', Georgia, serif";
+    ctx.fillStyle=`rgba(43,46,40,${Math.min(1,a+0.2).toFixed(3)})`;
+    ctx.fillText("beam", P.sx+8, P.sy+4);
+    ctx.font="9px 'Avenir Next', sans-serif";
+    ctx.fillStyle="rgba(138,141,135,0.95)";
+    ctx.fillText("token "+idOf(" beam"), P.sx+8, P.sy+17);
+  }
+});
+function moveBeam(to, msg){
+  beamFrom = [...BEAM.rest]; beamPos = [...BEAM.rest]; beamTo = [...to]; beamT = 0;
+  ctxRead.textContent = msg;
+}
+document.getElementById("s1Btn").addEventListener("click", ()=>moveBeam(BEAM.s1, "echo and sent pull beam toward the light."));
+document.getElementById("s2Btn").addEventListener("click", ()=>moveBeam(BEAM.s2, "oak and roof pull beam toward the timber."));
+</script>
+</body>
+</html>

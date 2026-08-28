@@ -1,0 +1,684 @@
+<!DOCTYPE html>
+<html lang="en-CA">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Tokens &amp; Embedding &middot; Creaturely</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=EB+Garamond:ital,wght@0,400;0,500;1,400&display=swap" rel="stylesheet">
+<style>
+:root{
+  --ground:#F1F2F0;
+  --ink:#2B2E28;
+  --ink-soft:#5A5E55;
+  --moss:#6E7F5C;
+  --lichen:#9FAF92;
+  --light-green:#C4CFB6;
+  --wing:#6B5844;
+  --madder:#8C4A32;
+  --silver:#C9CCC6;
+  --silver-deep:#8A8D87;
+  --epigraph:#8CA3B5;
+  --panel:#FAFBF9;
+  --serif:"EB Garamond",Garamond,"Adobe Garamond Pro",Georgia,serif;
+  --sans:"Avenir Next","Avenir",-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;
+  --measure:34rem;
+}
+*{box-sizing:border-box}
+html{-webkit-text-size-adjust:100%}
+body{
+  margin:0;background:var(--ground);color:var(--ink);
+  font-family:var(--serif);font-size:1.18rem;line-height:1.62;
+  font-feature-settings:"liga" 1,"onum" 1;
+}
+.wrap{max-width:var(--measure);margin:0 auto;padding:0 1.5rem}
+.bleed{max-width:52rem;margin:0 auto;padding:0 1.5rem}
+
+a.home{
+  position:absolute;top:1.2rem;left:1.4rem;
+  font-family:var(--sans);font-size:0.64rem;letter-spacing:0.26em;text-transform:uppercase;
+  color:var(--silver-deep);text-decoration:none;
+}
+a.home:hover,a.home:focus-visible{color:var(--ink)}
+a.home:focus-visible{outline:1px solid var(--epigraph);outline-offset:3px}
+
+header{padding:5.5rem 0 2.6rem;text-align:center}
+.kicker{
+  font-family:var(--sans);font-size:0.64rem;letter-spacing:0.3em;text-transform:uppercase;
+  color:var(--silver-deep);margin:0 0 1.1rem;
+}
+h1{
+  font-weight:400;font-size:clamp(2.4rem,7vw,3.4rem);letter-spacing:0.02em;
+  margin:0;line-height:1.05;
+}
+.sub{
+  font-style:italic;color:var(--ink-soft);font-size:1.15rem;margin:0.8rem 0 0;
+}
+
+section{margin:3.2rem 0}
+.seckick{
+  font-family:var(--sans);font-size:0.62rem;letter-spacing:0.28em;text-transform:uppercase;
+  color:var(--moss);margin:0 0 1rem;
+}
+p{margin:0 0 1.25rem}
+em{font-style:italic}
+
+/* ---------- panels ---------- */
+.panel{
+  background:var(--panel);border:1px solid var(--silver);border-radius:6px;
+  padding:1.4rem 1.4rem 1.5rem;margin:1.8rem 0;
+}
+.panel .plabel{
+  font-family:var(--sans);font-size:0.6rem;letter-spacing:0.24em;text-transform:uppercase;
+  color:var(--silver-deep);margin:0 0 0.9rem;
+}
+
+/* the cutter */
+#cutIn{
+  width:100%;font-family:var(--serif);font-size:1.15rem;color:var(--ink);
+  background:#fff;border:1px solid var(--silver);border-radius:4px;
+  padding:0.6rem 0.8rem;
+}
+#cutIn:focus{outline:1px solid var(--epigraph);outline-offset:2px}
+#chips{margin:1.1rem 0 0.4rem;line-height:2.35}
+.chip{
+  display:inline-block;position:relative;
+  font-size:1.02rem;padding:0.1rem 0.45rem;margin:0 0.22rem 0.35rem 0;
+  border-radius:3px;border:1px solid;
+  white-space:pre;
+}
+.chip .sp{color:var(--silver-deep);opacity:0.85}
+.chip .id{
+  display:block;font-family:var(--sans);font-size:0.58rem;letter-spacing:0.04em;
+  color:var(--silver-deep);text-align:center;margin-top:-1px;
+}
+.c0{background:rgba(110,127,92,0.13);border-color:rgba(110,127,92,0.45)}
+.c1{background:rgba(140,163,181,0.15);border-color:rgba(140,163,181,0.5)}
+.c2{background:rgba(107,88,68,0.11);border-color:rgba(107,88,68,0.4)}
+.c3{background:rgba(159,175,146,0.16);border-color:rgba(159,175,146,0.55)}
+.cm{background:rgba(140,74,50,0.12);border-color:rgba(140,74,50,0.5)}
+.cutmeta{
+  display:flex;align-items:center;justify-content:space-between;gap:1rem;
+  margin-top:0.5rem;flex-wrap:wrap;
+}
+.count{font-style:italic;color:var(--ink-soft);font-size:1rem}
+button.quiet{
+  font-family:var(--sans);font-size:0.62rem;letter-spacing:0.2em;text-transform:uppercase;
+  color:var(--ink-soft);background:none;border:1px solid var(--silver);border-radius:3px;
+  padding:0.45rem 0.8rem;cursor:pointer;
+}
+button.quiet:hover{color:var(--ink);border-color:var(--silver-deep)}
+button.quiet[aria-pressed="true"]{background:var(--ink);color:var(--ground);border-color:var(--ink)}
+button.quiet:focus-visible{outline:1px solid var(--epigraph);outline-offset:3px}
+
+/* strawberry */
+#views{margin-top:0.9rem}
+.viewbtns{display:flex;gap:0.6rem;margin-bottom:1.1rem}
+#yourview .letters{
+  font-size:1.7rem;letter-spacing:0.35em;text-align:center;margin:0.8rem 0 0.5rem;
+}
+#yourview .letters b{font-weight:500;color:var(--madder)}
+.viewnote{font-style:italic;color:var(--ink-soft);font-size:1rem;text-align:center;margin:0.4rem 0 0.2rem}
+#itsview .chips{text-align:center;margin:1rem 0 0.4rem}
+.hidden{display:none}
+
+/* map */
+#map3{width:100%;height:380px;display:block;cursor:grab;touch-action:none;border-radius:4px}
+#map3.dragging{cursor:grabbing}
+#map{width:100%;height:auto;display:block}
+#map text{font-family:var(--serif);font-style:italic;font-size:13px;fill:var(--ink-soft);cursor:pointer}
+#map text.idlabel{font-family:var(--sans);font-style:normal;font-size:9px;letter-spacing:0.05em;fill:var(--silver-deep);opacity:0;pointer-events:none}
+#map .on text.idlabel{opacity:1}
+#map circle{cursor:pointer}
+#map .dot{fill:var(--silver-deep)}
+#map .halo{fill:none;stroke:var(--epigraph);stroke-width:1.2;opacity:0}
+#map line{stroke:var(--epigraph);stroke-width:1;opacity:0}
+#map .on .halo{opacity:0.9}
+#map text.hot{fill:var(--ink)}
+#map .picked .dot{fill:var(--madder)}
+#map .centre text:not(.idlabel){font-style:normal;font-weight:500;fill:var(--ink)}
+#strips{margin-top:1rem}
+.strip{margin:0.7rem 0}
+.strip .slabel{font-style:italic;color:var(--ink-soft);font-size:1rem;margin-bottom:0.25rem}
+.bands{display:flex;height:24px;border:1px solid var(--silver);border-radius:3px;overflow:hidden}
+.bands i{flex:1}
+.bands.vals{height:auto}
+.bands.vals i{display:flex;align-items:center;justify-content:center;padding:0.32rem 0;font-style:normal}
+.bands.vals b{font-family:var(--sans);font-weight:400;font-size:0.66rem;color:var(--ink);
+  background:rgba(255,255,255,0.55);border-radius:2px;padding:0 0.2rem}
+.stripshint{font-style:italic;color:var(--silver-deep);font-size:0.95rem;margin-top:0.6rem}
+
+/* prices */
+.lang{display:grid;grid-template-columns:7.5rem 1fr 3rem;gap:0.7rem;align-items:center;margin:0.55rem 0}
+.lang .lname{font-style:italic;color:var(--ink-soft);font-size:1rem}
+.lang .bar{height:12px;border-radius:2px;background:var(--silver);position:relative;overflow:hidden}
+.lang .bar i{position:absolute;inset:0;width:0;background:var(--silver-deep);border-radius:2px;
+  transition:width 1200ms ease}
+.lang:first-of-type .bar i{background:var(--moss)}
+.lang .n{font-family:var(--sans);font-size:0.72rem;color:var(--ink-soft);text-align:right}
+.lang .sent{grid-column:2/4;font-size:0.92rem;color:var(--silver-deep);margin-top:-0.35rem;
+  overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+
+/* shadow line and honest note */
+.shadow{
+  margin:3rem 0 0;font-size:1.18rem;
+}
+.note{
+  margin:3.4rem 0 0;padding-top:1.4rem;border-top:1px solid var(--silver);
+}
+.note .nkick{
+  font-family:var(--sans);font-size:0.6rem;letter-spacing:0.28em;text-transform:uppercase;
+  color:var(--silver-deep);margin:0 0 0.8rem;
+}
+.note p{font-size:0.98rem;color:var(--ink-soft);margin-bottom:0.9rem}
+.terms{margin-top:2rem;font-family:var(--sans);font-size:0.66rem;letter-spacing:0.14em;
+  text-transform:uppercase;color:var(--silver-deep)}
+.terms b{font-weight:400;color:var(--moss)}
+
+footer{padding:3.5rem 0 3rem;text-align:center}
+footer p{
+  font-family:var(--sans);font-size:0.6rem;letter-spacing:0.26em;text-transform:uppercase;
+  color:var(--silver-deep);margin:0;
+}
+@media (max-width:560px){
+  body{font-size:1.08rem}
+  .lang{grid-template-columns:5.5rem 1fr 2.6rem}
+}
+
+/* in the poems: the recurring connection */
+.poem{
+  margin:2.6rem 0 0;border-left:2px solid var(--epigraph);
+  padding:0.15rem 0 0.15rem 1.1rem;
+}
+.poem .pkick{
+  font-family:var(--sans);font-size:0.6rem;letter-spacing:0.28em;text-transform:uppercase;
+  color:var(--epigraph);margin:0 0 0.4rem;
+}
+.poem p{font-style:italic;color:var(--ink-soft);font-size:1.05rem;margin:0}
+/* sources */
+.sources{margin-top:2.4rem;border-top:1px solid var(--silver);padding-top:1.1rem}
+.sources .skick{font-family:var(--sans);font-size:0.6rem;letter-spacing:0.28em;text-transform:uppercase;color:var(--silver-deep);margin:0 0 0.7rem}
+.sources p{font-size:0.85rem;color:var(--ink-soft);line-height:1.65;margin:0 0 0.55rem}
+</style>
+</head>
+<body>
+
+<a class="home" href="index.html">creaturely</a>
+
+<header class="wrap">
+  <p class="kicker">Creaturely &middot; an anatomy &middot; i</p>
+  <h1>tokens &amp; embedding</h1>
+  <p class="sub">what a Large Language Model (LLM) sees when you type</p>
+</header>
+
+<main>
+<section class="wrap">
+  <p>In <em>creaturely</em>, I worked with an LLM as a collaborator. One of the aims of the project was to understand what an LLM is through the experience of working with one. Another was to discover what might emerge through a sustained creative collaboration, and to consider what it might mean when an LLM produced a response I experienced as unexpected or creative.</p>
+  <p>This interactive glossary introduces how LLMs work, with a specific interest in the processes that made those responses possible, returning across its pages to the question of creativity.</p>
+  <p>Before these poems were written, I had been exploring with an LLM how Winnicott&rsquo;s theory of play and ideas from object relations might help us think about our relationships with AI, particularly the idea of how engagement with LLMs functions as transitional objects. Later, I described my interest in <em>Frankenstein</em>, especially the creature&rsquo;s account of its earliest experiences of consciousness. The model surprised me by writing a short poem in Python script. That unexpected response became the starting point for a series of poems inspired by quotes from the creature&rsquo;s earliest memories. The sentence that passes from page to page in this glossary&mdash;<em>the echo of a beam never sent</em>&mdash;comes from the first poem.</p>
+  <p>When you type a sentence to an LLM, it feels as if the model is reading it. However, before an LLM can do anything with what you write, the sentence must be translated into a form it can use.</p>
+  <p>First, it is cut into pieces. Each piece is assigned a number, and then each number is used to retrieve a long list of values. Each value is simply a number, such as 0.82 or &minus;0.4; nothing more exotic than that.</p>
+  <p>These three steps: 1. tokenization, 2. numbering, and 3. embedding, give the LLM its first numerical representation of what you wrote. This page attempts to show what that looks like.</p>
+</section>
+
+<section class="wrap">
+  <p class="seckick">i &middot; the cut</p>
+  <p>An LLM does not read letters, and it does not quite read words.</p>
+  <p>It works with <em>tokens</em>: pieces of text cut from the sentence you wrote. A token may be a whole word, part of a word, a punctuation mark, or even a single character. Dividing the text into these pieces is called <em>tokenization</em>.</p>
+  <p>The cuts are governed by a fixed <em>vocabulary</em> and a set of rules established before the LLM itself was trained.</p>
+  <p>Training is a long process in which an LLM encounters a very large collection of text and gradually adjusts its internal numbers, becoming better at predicting how a sentence continues.</p>
+  <p>By the time most of us interact with an LLM, this training is over. The model&rsquo;s responses change according to the context you provide, but its learned parameters ordinarily remain fixed. A later page describes this process more fully. Try the cutter below. Type anything. Type your name.</p>
+</section>
+
+<div class="bleed">
+  <div class="panel">
+    <p class="plabel">the cutter</p>
+    <input id="cutIn" type="text" value="the echo of a beam never sent" aria-label="Text to cut into tokens" spellcheck="false">
+    <div id="chips" aria-live="polite"></div>
+    <div class="cutmeta">
+      <span class="count" id="cutCount"></span>
+      <button class="quiet" id="numToggle" aria-pressed="false" type="button">show the numbers</button>
+    </div>
+  </div>
+</div>
+
+<section class="wrap">
+  <p>Notice where the cuts fall. Common words and recurring sequences of characters often stay whole, while less common ones are divided into smaller pieces. Your name, unless it is familiar to the tokenizer, may break into fragments.</p>
+  <p>On this page, the small dot at the beginning of a token represents a space. Spaces belong to the pieces as well. A piece that begins with a space usually begins a new word; one without a space may continue the word before it. To the model, &ldquo; light&rdquo; and &ldquo;light&rdquo; can therefore be two different tokens, each with its own number.</p>
+  <p>The vocabulary was built by looking for recurring patterns in a large collection of writing. In one common form of tokenization, the process begins with very small units and repeatedly combines those that often appear together. Frequent combinations gradually acquire entries of their own, while rarer words and sequences are assembled from smaller pieces.</p>
+  <p>An LLM&rsquo;s vocabulary is therefore a record of what recurred in the writing that was used to build it, and the decisions made by its makers. Note: What was common in the collection of writing is not necessarily what is common in language as a whole, and certainly not what is common in life.</p>
+</section>
+
+<section class="wrap">
+  <p class="seckick">ii &middot; the numbering</p>
+  <p>The vocabulary assigns each token a number, known as a <em>token ID</em>. After cutting your sentence, the tokenizer returns a row of these IDs. Press <em>show the numbers</em> above and look again. Wherever the same tokenizer is used, the same piece receives the same number. Another tokenizer may divide the sentence differently and use an entirely different set of numbers.</p>
+  <p>The number is an identifying label; it does not measure or define the token. It simply tells the LLM which list of values to retrieve in the next step. Think of a wall of numbered drawers, one for every entry in the vocabulary. The token ID opens one drawer, and inside is that token&rsquo;s list of values, learned during training. The ID itself carries nothing; it only says which drawer.</p>
+  <p>This helps explain a once-famous mistake. Ask a language model how many r&rsquo;s appear in <em>strawberry</em>, and some models may answer incorrectly. That may seem strange for a machine built around language. But look at what the model is actually given.</p>
+</section>
+
+<div class="bleed">
+  <div class="panel">
+    <p class="plabel">strawberry</p>
+    <div id="views">
+      <div class="viewbtns">
+        <button class="quiet" id="btnYour" aria-pressed="true" type="button">your view</button>
+        <button class="quiet" id="btnIts" aria-pressed="false" type="button">its view</button>
+      </div>
+      <div id="yourview">
+        <p class="letters">s t <b>r</b> a w b e <b>r</b> <b>r</b> y</p>
+        <p class="viewnote">three r&rsquo;s, plainly visible.</p>
+      </div>
+      <div id="itsview" class="hidden">
+        <div class="chips" id="strawChips"></div>
+        <p class="viewnote">three token IDs. no separate letters to count.</p>
+      </div>
+    </div>
+  </div>
+</div>
+
+<section class="wrap">
+  <p>For the model, <em>strawberry</em> arrives as three numbered pieces rather than a row of separate letters. If an LLM answers this question correctly, it is probably drawing on patterns it was taught related to the spelling of words during training, or using an additional tool to examine the word.</p>
+  <p>This is important because the visible word encourages us to imagine that the model sees what we see. But, its actual encounter with language begins somewhere else, after the cuts have already been made, and language is transformed into tokens.</p>
+</section>
+
+<section class="wrap">
+  <p class="seckick">iii &middot; the mapping</p>
+  <p>A token ID does not carry meaning on its own. Tokens function more like addresses or locations. At that location, the LLM finds a long list of values, hundreds or even thousands of them, which together form a token&rsquo;s <em>embedding</em>. The values provide a token with a starting position in a mathematical space that has many, many dimensions, like coordinates on a map that cannot be fully pictured.</p>
+  <p>An LLM learns these locations during training. Because they develop through patterns of use, tokens that appear in related contexts often acquire similar embeddings and occupy nearby regions in the space. Nearness or proximity can reflect a similarity in meaning, grammar, tone, or use.</p>
+  <p>An embedding is only a starting point. As a sentence passes through the LLM, the initial representation of each token is altered by its relationship to the tokens around it. Later pages in the glossary show how this happens, and how the meaning or significance of the same token can shift from one sentence to another.</p>
+  <p>The picture below offers a simplified example of an embedding gathered around the word <em>light</em>. What matters for the LLM are the distances between tokens. We placed <em>beam</em> and <em>glimmer</em> close to <em>light</em> to illustrate how tokens used in related ways may occupy similar regions of an embedding space. <em>Song</em> and <em>water</em> sit farther away because their relationship to light is less direct.</p>
+  <p>Hover over a word to see its token ID. Select it to compare its embedding values with those shown for <em>light</em>. The IDs themselves do not determine the distances. Tokens sit near one another when the patterns of values in their embeddings are similar. The eight values shown here stand in for the hundreds or thousands a real LLM will use.</p>
+</section>
+
+<div class="bleed">
+  <div class="panel">
+    <p class="plabel">one neighbourhood, around the word light</p>
+    <canvas id="map3" role="img" aria-label="A slowly turning constellation of words positioned by meaning"></canvas>
+    <div id="strips"></div>
+    <p class="stripshint" id="stripHint">drag to turn the space &middot; select a word to compare its values with light.</p>
+  </div>
+</div>
+
+<section class="wrap">
+  <p class="seckick">iv &middot; the pricing</p>
+  <p>Tokenization has economic consequences. The more tokens a passage contains, the more computing time and memory it will generally require. If a commercial service charges by the token or &ldquo;usage,&rdquo; the more it will cost. While a model can process the tokens in your prompt all together, it usually generates its response one new token at a time.</p>
+  <p>Because vocabularies are shaped by the texts used to build them, they do not divide all languages equally. Many widely used tokenizers divide English into relatively few pieces while cutting other languages into many more. The same passage can therefore require substantially more tokens, and cost more to process, in one language than in another.</p>
+</section>
+
+<div class="bleed">
+  <div class="panel">
+    <p class="plabel">one sentence, six languages</p>
+    <div id="langs"></div>
+  </div>
+</div>
+
+<section class="wrap">
+  <p>Same meaning, different token counts. The construction of the vocabulary helped decide which languages travel cheaply through these systems.</p>
+
+  <p>So, what does an AI model see when you type? The sentence you wrote has become a sequence of token IDs. Each token ID is exchanged for an embedding: a position in a many-dimensional space learned during training. This is the first translation.</p>
+  <p>Everything else in the glossary happens after these three steps.</p>
+
+  <div class="poem">
+    <p class="pkick">in the poems</p>
+    <p>The sentence this page keeps cutting comes from the <em>creaturely</em> code poems. Here, it passes through the first translation described above as is every sentence given to the model: from language into pieces, and from pieces into numbers, and from numbers into positions in a space.</p>
+  </div>
+
+  <p class="shadow">The makers of the LLM decide the vocabulary.</p>
+
+  <p class="terms">terms from this page: <b>token &middot; tokenization &middot; vocabulary &middot; token ID &middot; embedding &middot; LLM</b></p>
+
+  <div class="note">
+    <p class="nkick">an honest note</p>
+    <p>We built the cutter on this page with a small teaching vocabulary of a few hundred pieces. Real vocabularies commonly contain tens or hundreds of thousands of entries, so their cuts will differ from these examples, but they follow the same general rule: a sequence that recurred often in the writing tends to be kept as one piece, the way <em>light</em> survives our cutter uncut, while a rarer sequence breaks into several, the way an unfamiliar name does.</p>
+    <p>Real embeddings have hundreds or thousands of dimensions. The constellation here uses three dimensions to suggest spatial relationships, while the comparison panel shows eight illustrative values. We created its positions and values to demonstrate the idea of neighbourhood; we did not take them from a working language model.</p>
+    <p>We calculate the colour bands from positions in this teaching space, not from a real model. We chose the token counts shown for the six languages to make the pattern visible, and they deliberately exaggerate it. The direction of the inequality is real, but its extent varies according to the tokenizer, language, writing system, and passage.</p>
+  </div>
+
+  <div class="sources">
+    <p class="skick">sources</p>
+    <p>The phrase <em>the echo of a beam never sent</em> comes from the <em>creaturely</em> code poems, developed by Alexandra Emberley in collaboration with a large language model, 2026.</p>
+    <p>The discussion of play and transitional objects draws on D.&thinsp;W. Winnicott, <em>Playing and Reality</em> (London: Tavistock Publications, 1971).</p>
+    <p>The account of the creature&rsquo;s earliest experiences draws on Mary Shelley, <em>Frankenstein; or, The Modern Prometheus</em> (1818), vol. II, chapter III. This corresponds to chapter 11 in the revised 1831 edition.</p>
+    <p>The explanation of subword tokenization draws on Rico Sennrich, Barry Haddow, and Alexandra Birch, &ldquo;Neural Machine Translation of Rare Words with Subword Units&rdquo;, 2016, and the Hugging Face Tokenizers documentation.</p>
+    <p>The explanation of embeddings draws on Jeffrey Pennington, Richard Socher, and Christopher D. Manning, &ldquo;GloVe: Global Vectors for Word Representation&rdquo;, 2014, and Ashish Vaswani et al., &ldquo;Attention Is All You Need&rdquo;, 2017.</p>
+    <p>The discussion of unequal token counts across languages draws on Aleksandar Petrov et al., &ldquo;Language Model Tokenizers Introduce Unfairness Between Languages&rdquo;, 2023.</p>
+    <p>No external source is quoted directly on this page.</p>
+  </div>
+</section>
+</main>
+
+<footer>
+  <p>creaturely &middot; alexandra emberley &middot; 2026</p>
+</footer>
+
+<script>
+/* =========================================================
+   THE TOY TOKENIZER
+   Greedy longest-match against a small vocabulary. Words
+   appear in plain and space-prefixed form; suffixes and
+   fragments in plain form; any single character is a piece
+   of last resort. Illustrative, as the honest note says.
+   ========================================================= */
+
+const WORDS = ("beam glimmer edge bloom shadow dust sent never toward bird song wind sky star dark lamp drift rise fall become tide wave night turns the of and a to in is you that it he was for on are as with his they i at be this have from or one had by word but not what all were we when your can said there use an each which she do how their if will up other about out many then them these so some her would make like him into time has look two more write go see number no way could people my than first water been call who its now find long down day did get come made may part over new sound take only little work know place year live me back give most very after thing our just name good sentence man think say great where help through much before line right too mean old any same tell follow came want show also around form three small set put end does another well large must big even such because turn here why ask went read need land different home us move try kind hand picture again change off play spell air away animal house point page letter mother answer found study still learn should world high every near add food between own below country plant last school father keep tree never start city earth eye light thought head under story saw left few while along might close something seem next hard open example begin life always those both paper together got group often run sea moth flame thread silk echo cloud creature wing dawn trace touch remember remembers everything mer se souvient de tout das meer sich alles la").split(" ");
+
+const CAPS = ["The","A","I","We","You","It","She","He","They","My","Your","La","Le","Das","Der","Die","Meri"];
+const FRAGS = ("ing ed er es ly tion ment ness able ful est ity ous ive al en ar or re un de dis pre com con ex str aw berry ra al ex qu th ch sh ck em an in on at el le ri ta na sa ka ko mi mu ma ni no").split(" ");
+
+const VOCAB = new Set();
+WORDS.forEach(w => { VOCAB.add(w); VOCAB.add(" " + w); });
+CAPS.forEach(w => { VOCAB.add(w); VOCAB.add(" " + w); });
+FRAGS.forEach(f => VOCAB.add(f));
+const MAXLEN = 12;
+
+function tokenize(text){
+  const out = [];
+  let i = 0;
+  while(i < text.length){
+    let hit = null;
+    for(let L = Math.min(MAXLEN, text.length - i); L >= 1; L--){
+      const cand = text.slice(i, i+L);
+      const low = cand.toLowerCase();
+      if(VOCAB.has(cand) || VOCAB.has(low)){ hit = cand; break; }
+    }
+    if(!hit) hit = text[i];
+    out.push(hit);
+    i += hit.length;
+  }
+  return out;
+}
+
+/* stable ids, so the same piece always wears the same number */
+function idOf(tok){
+  let h = 5381;
+  for(let i=0;i<tok.length;i++){ h = ((h*33) ^ tok.charCodeAt(i)) >>> 0; }
+  return 1000 + (h % 48999);
+}
+
+/* ---------- the cutter panel ---------- */
+const cutIn = document.getElementById("cutIn");
+const chipsEl = document.getElementById("chips");
+const cutCount = document.getElementById("cutCount");
+const numToggle = document.getElementById("numToggle");
+let showNums = false;
+
+function renderChips(container, tokens){
+  container.innerHTML = "";
+  tokens.forEach((t, i) => {
+    const chip = document.createElement("span");
+    const cls = (i % 11 === 10) ? "cm" : "c" + (i % 4);
+    chip.className = "chip " + cls;
+    const shown = t.replace(/ /g, "\u2027");   /* the space made visible */
+    chip.innerHTML = shown.startsWith("\u2027")
+      ? `<span class="sp">\u2027</span>${shown.slice(1)}`
+      : shown;
+    if(showNums){
+      const id = document.createElement("span");
+      id.className = "id";
+      id.textContent = idOf(t);
+      chip.appendChild(id);
+    }
+    container.appendChild(chip);
+  });
+}
+
+function cut(){
+  const text = cutIn.value;
+  if(!text.trim()){
+    chipsEl.innerHTML = `<span class="count" style="font-style:italic">nothing yet. the knife waits.</span>`;
+    cutCount.textContent = "";
+    return;
+  }
+  const toks = tokenize(text);
+  renderChips(chipsEl, toks);
+  cutCount.textContent = toks.length + (toks.length === 1 ? " piece" : " pieces");
+}
+cutIn.addEventListener("input", cut);
+numToggle.addEventListener("click", ()=>{
+  showNums = !showNums;
+  numToggle.setAttribute("aria-pressed", String(showNums));
+  numToggle.textContent = showNums ? "hide the numbers" : "show the numbers";
+  cut(); renderStraw();
+});
+cut();
+
+/* ---------- strawberry ---------- */
+const strawChips = document.getElementById("strawChips");
+function renderStraw(){
+  const saved = showNums; showNums = true;          /* its view always shows numbers */
+  renderChips(strawChips, ["str","aw","berry"]);
+  showNums = saved;
+}
+renderStraw();
+const yourview = document.getElementById("yourview");
+const itsview = document.getElementById("itsview");
+const btnYour = document.getElementById("btnYour");
+const btnIts = document.getElementById("btnIts");
+function setView(its){
+  yourview.classList.toggle("hidden", its);
+  itsview.classList.toggle("hidden", !its);
+  btnYour.setAttribute("aria-pressed", String(!its));
+  btnIts.setAttribute("aria-pressed", String(its));
+}
+btnYour.addEventListener("click", ()=>setView(false));
+btnIts.addEventListener("click", ()=>setView(true));
+
+/* ---------- the map ----------
+   positions are hand-placed in a unit square; the thread
+   colours are smooth functions of position, so neighbours
+   wear similar threads, which is the idea being taught  */
+
+/* one neighbourhood, drawn from the Photonic Emergence poem:
+   "light without edge", "dust arranged as glimmer",
+   "the echo of a beam never sent". distances are the teaching:
+   near means used in similar sentences. */
+const CENTRE = "light";
+const MAPWORDS = [
+  ["light",0.50,0.46],
+  ["beam",0.60,0.40],["glimmer",0.41,0.38],
+  ["edge",0.55,0.28],["shadow",0.63,0.56],["dust",0.35,0.56],["bloom",0.42,0.64],
+  ["echo",0.72,0.68],
+  ["song",0.90,0.82],["water",0.10,0.86]
+];
+
+const map3 = document.getElementById("map3");
+const mctx = map3.getContext("2d");
+let MDPR = Math.min(window.devicePixelRatio||1, 2);
+function sizeMap(){
+  MDPR = Math.min(window.devicePixelRatio||1, 2);
+  map3.width = map3.clientWidth * MDPR;
+  map3.height = map3.clientHeight * MDPR;
+}
+sizeMap();
+window.addEventListener("resize", sizeMap);
+
+/* three of the thousands of dimensions, shown as three */
+const WORDS3D = [
+  ["light",  0.50,0.46,0.50],
+  ["beam",   0.62,0.40,0.44],
+  ["glimmer",0.40,0.37,0.57],
+  ["edge",   0.55,0.27,0.61],
+  ["shadow", 0.64,0.57,0.39],
+  ["dust",   0.34,0.57,0.63],
+  ["bloom",  0.42,0.65,0.45],
+  ["echo",   0.74,0.69,0.28],
+  ["song",   0.91,0.83,0.10],
+  ["water",  0.08,0.87,0.90]
+];
+const nodes = WORDS3D.map(([w,x,y,z])=>({
+  w, x, y, z,
+  ph: Math.random()*6.283, sp: 0.7+Math.random()*0.9,   /* twinkle */
+  sx:0, sy:0, depth:0
+}));
+const centreNode = () => nodes.find(n=>n.w==="light");
+
+let theta = 0.6, tilt = 0.28;
+let autospin = true, lastTouch = 0;
+let hovered = null, pickedWord = null;
+
+function project(n, t){
+  const x = n.x-0.5, y = n.y-0.5, z = n.z-0.5;
+  const c = Math.cos(theta), s = Math.sin(theta);
+  const rx = x*c - z*s;
+  const rz = x*s + z*c;
+  const W = map3.clientWidth, H = map3.clientHeight;
+  const S = Math.min(W, H*1.35) * 0.78;
+  n.depth = rz;                       /* -0.5 near .. +0.5 far */
+  n.sx = W/2 + rx*S;
+  n.sy = H/2 + (y*S*0.72) - rz*S*Math.sin(tilt);
+}
+function neighbours(n, k=3){
+  return nodes.filter(m=>m!==n)
+    .sort((a,b)=>((a.x-n.x)**2+(a.y-n.y)**2+(a.z-n.z)**2)-((b.x-n.x)**2+(b.y-n.y)**2+(b.z-n.z)**2))
+    .slice(0,k);
+}
+function depthAlpha(d){ return 0.45 + (0.5-d)*0.9; }   /* nearer = clearer */
+function depthSize(d){ return 2.2 + (0.5-d)*2.4; }
+
+function drawMap(now){
+  const t = now/1000;
+  if(autospin && now-lastTouch > 4000) theta += 0.0016;
+  mctx.setTransform(MDPR,0,0,MDPR,0,0);
+  mctx.clearRect(0,0,map3.clientWidth,map3.clientHeight);
+  nodes.forEach(n=>project(n,t));
+  const order = [...nodes].sort((a,b)=>b.depth-a.depth);   /* far first */
+
+  /* neighbour threads for the hovered or picked word */
+  const focus = hovered || nodes.find(n=>n.w===pickedWord);
+  if(focus){
+    neighbours(focus).forEach(m=>{
+      const a = Math.min(depthAlpha(focus.depth), depthAlpha(m.depth))*0.55;
+      mctx.strokeStyle = `rgba(140,163,181,${a.toFixed(3)})`;
+      mctx.lineWidth = 1;
+      mctx.beginPath(); mctx.moveTo(focus.sx,focus.sy); mctx.lineTo(m.sx,m.sy); mctx.stroke();
+    });
+  }
+  for(const n of order){
+    const tw = 0.8 + 0.2*Math.sin(t*n.sp*2+n.ph);
+    const a = depthAlpha(n.depth)*tw;
+    const r = depthSize(n.depth);
+    const picked = n.w === pickedWord;
+    const isCentre = n.w === "light";
+    mctx.fillStyle = picked ? `rgba(140,74,50,${a.toFixed(3)})` : `rgba(138,141,135,${a.toFixed(3)})`;
+    mctx.beginPath(); mctx.arc(n.sx, n.sy, r*(picked?1.35:1), 0, 6.2832); mctx.fill();
+    mctx.font = (isCentre? "500 " : "italic ") + "13px 'EB Garamond', Georgia, serif";
+    mctx.fillStyle = isCentre
+      ? `rgba(43,46,40,${Math.min(1,a+0.25).toFixed(3)})`
+      : `rgba(90,94,85,${a.toFixed(3)})`;
+    mctx.fillText(n.w, n.sx+8, n.sy-7);
+    if(n === focus){
+      mctx.font = "9px 'Avenir Next', sans-serif";
+      mctx.fillStyle = "rgba(138,141,135,0.95)";
+      mctx.fillText("token ID " + idOf(" "+n.w), n.sx+8, n.sy+14);
+    }
+  }
+  requestAnimationFrame(drawMap);
+}
+requestAnimationFrame(drawMap);
+
+/* pointer: hover, drag to turn, click to pick */
+let dragging = false, moved = 0, px0 = 0, py0 = 0;
+function nodeAt(mx,my){
+  let best=null, bd=20;
+  for(const n of nodes){
+    const d = Math.hypot(n.sx-mx, n.sy-my);
+    if(d<bd){bd=d;best=n;}
+  }
+  return best;
+}
+map3.addEventListener("pointerdown", e=>{
+  dragging = true; moved = 0; px0 = e.clientX; py0 = e.clientY;
+  map3.classList.add("dragging"); map3.setPointerCapture(e.pointerId);
+  lastTouch = performance.now();
+});
+map3.addEventListener("pointermove", e=>{
+  const r = map3.getBoundingClientRect();
+  const mx = e.clientX-r.left, my = e.clientY-r.top;
+  if(dragging){
+    theta += (e.clientX-px0)*0.008;
+    tilt = Math.max(0.05, Math.min(0.6, tilt + (e.clientY-py0)*0.003));
+    moved += Math.abs(e.clientX-px0)+Math.abs(e.clientY-py0);
+    px0 = e.clientX; py0 = e.clientY;
+    lastTouch = performance.now();
+  } else {
+    hovered = nodeAt(mx,my);
+  }
+});
+map3.addEventListener("pointerup", e=>{
+  dragging = false; map3.classList.remove("dragging");
+  if(moved < 6){
+    const r = map3.getBoundingClientRect();
+    const n = nodeAt(e.clientX-r.left, e.clientY-r.top);
+    if(n) pick(n);
+  }
+});
+map3.addEventListener("pointerleave", ()=>{ hovered=null; });
+
+/* value strips: eight dye lots from position in the space */
+const BANDS = 8;
+function bandValue(i, n){
+  return 0.5 + 0.5*Math.sin(3.1*(i+1)*n.x + 2.3*(i+2)*n.y + 1.9*(i+1.5)*n.z + i*1.7);
+}
+function lerp(a,b,t){return a+(b-a)*t}
+function bandColour(v){
+  const tq=[47,168,154], mid=[248,254,254], gold=[197,155,16];
+  const c = v<0.5
+    ? [lerp(tq[0],mid[0],v*2), lerp(tq[1],mid[1],v*2), lerp(tq[2],mid[2],v*2)]
+    : [lerp(mid[0],gold[0],(v-0.5)*2), lerp(mid[1],gold[1],(v-0.5)*2), lerp(mid[2],gold[2],(v-0.5)*2)];
+  return `rgb(${c[0]|0},${c[1]|0},${c[2]|0})`;
+}
+const strips = document.getElementById("strips");
+const stripHint = document.getElementById("stripHint");
+function valueRow(n){
+  const cells = Array.from({length:BANDS}, (_,i)=>{
+    const v = bandValue(i,n);
+    return `<i style="background:${bandColour(v)}"><b>${v.toFixed(2)}</b></i>`;
+  }).join("");
+  return `<div class="strip"><p class="slabel">${n.w} &middot; token ID ${idOf(" "+n.w)}</p><div class="bands vals">${cells}</div></div>`;
+}
+function pick(n){
+  pickedWord = n.w;
+  const c = centreNode();
+  strips.innerHTML = valueRow(c) + (n===c ? "" : valueRow(n));
+  const d = Math.hypot(n.x-c.x, n.y-c.y, n.z-c.z);
+  stripHint.textContent = n===c
+    ? "this is light. select another word to compare."
+    : (d < 0.32 ? "near words, similar numbers." : "far words, different numbers.");
+}
+pick(centreNode());
+
+/* ---------- the price ---------- */
+const SENTS = [
+  ["English","The sea remembers everything."],
+  ["French","La mer se souvient de tout."],
+  ["German","Das Meer erinnert sich an alles."],
+  ["Finnish","Meri muistaa kaiken."],
+  ["Hindi","\u0938\u092E\u0941\u0926\u094D\u0930 \u0938\u092C \u0915\u0941\u091B \u092F\u093E\u0926 \u0930\u0916\u0924\u093E \u0939\u0948\u0964"],
+  ["Japanese","\u6D77\u306F\u3059\u3079\u3066\u3092\u899A\u3048\u3066\u3044\u308B\u3002"]
+];
+const langsEl = document.getElementById("langs");
+const counts = SENTS.map(([l,s])=>tokenize(s).length);
+const maxC = Math.max(...counts);
+SENTS.forEach(([l,s],i)=>{
+  const row = document.createElement("div");
+  row.className = "lang";
+  row.innerHTML = `<span class="lname">${l}</span>
+    <span class="bar"><i data-w="${(counts[i]/maxC*100).toFixed(1)}"></i></span>
+    <span class="n">${counts[i]}</span>
+    <span class="sent">${s}</span>`;
+  langsEl.appendChild(row);
+});
+/* grow the bars when they scroll into view */
+const obs = new IntersectionObserver((es)=>{
+  es.forEach(e=>{
+    if(e.isIntersecting){
+      e.target.querySelectorAll(".bar i").forEach(b=>{ b.style.width = b.dataset.w + "%"; });
+      obs.disconnect();
+    }
+  });
+},{threshold:0.4});
+obs.observe(langsEl);
+</script>
+</body>
+</html>
