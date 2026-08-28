@@ -126,16 +126,16 @@ const MOTIFS = [
   /* ten creatures, evenly spaced, read clockwise from the
      shooting star at the top, in the order of the guide.
      the two glyphs hang below the ring, like a maker's mark. */
-  {id:"shooting-star", name:"shooting star · tokens & embedding", row:"photonic", href:"tokens.html", angle:36},
-  {id:"coral",         name:"coral · vectors",     row:"photonic", href:"vectors.html", angle:72},
-  {id:"seahorse",      name:"seahorse · attention", row:"photonic", href:"attention.html", angle:108},
-  {id:"osprey",        name:"osprey · neurons & layers",  row:"sonic", href:"neurons.html", angle:144},
-  {id:"swallow",       name:"tree swallow · inference", row:"sonic", href:"inference.html", angle:180},
-  {id:"nightingale",   name:"nightingale · sampling & temperature", row:"sonic", href:"sampling.html", angle:216},
-  {id:"moth-tiger",    name:"scarlet tiger · training", row:"tactile", href:"training.html", angle:252},
-  {id:"moth-hawk",     name:"hawkmoth · superposition", row:"tactile", href:"superposition.html", angle:288},
-  {id:"moth-swallowtail", name:"sphinx moth · stigmergy", row:"tactile", href:"stigmergy.html", angle:324},
-  {id:"star-seahorse", name:"star seahorse · emergence", row:"photonic", href:"emergence.html", angle:0},
+  {id:"shooting-star", name:"shooting star · tokens & embedding", row:"photonic", href:"tokens.html", angle:0},
+  {id:"coral", name:"coral · vectors", row:"photonic", href:"vectors.html", angle:36},
+  {id:"seahorse", name:"seahorse · attention", row:"photonic", href:"attention.html", angle:72},
+  {id:"osprey", name:"osprey · inference", row:"sonic", href:"inference.html", angle:144},
+  {id:"swallow", name:"tree swallow · sampling & temperature", row:"sonic", href:"sampling.html", angle:180},
+  {id:"nightingale", name:"nightingale · training", row:"sonic", href:"training.html", angle:216},
+  {id:"moth-tiger", name:"scarlet tiger · superposition", row:"tactile", href:"superposition.html", angle:252},
+  {id:"moth-hawk", name:"hawkmoth · stigmergy", row:"tactile", href:"stigmergy.html", angle:288},
+  {id:"moth-swallowtail", name:"sphinx moth · emergence", row:"tactile", href:"emergence.html", angle:324},
+  {id:"star-seahorse", name:"star seahorse · neurons & layers", row:"photonic", href:"neurons.html", angle:108},
   {id:"ampersand",     name:"on collaboration and authorship", row:"glyph", href:"#", glyph:true, side:-1},
   {id:"asterisk",      name:"about the project", row:"glyph", href:"#", glyph:true, side:1}
 ];
@@ -523,7 +523,7 @@ LETTERS.forEach(ch => {
    the leftmost letters feed the left of the circle, the rightmost
    the right, so the word breaks apart in place */
 const LETTER_TO_CLOUD = ["moth-hawk","moth-tiger","moth-swallowtail","nightingale",
-  "star-seahorse","swallow","shooting-star","osprey","coral","seahorse"];
+  "shooting-star","swallow","coral","osprey","seahorse","star-seahorse"];
 
 let finished = false;
 let timers = [];
