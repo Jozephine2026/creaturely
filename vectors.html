@@ -217,6 +217,9 @@ footer p{
 .kicker a:hover{text-decoration:underline;text-underline-offset:3px}
 body{animation:pagein 620ms ease both}
 @keyframes pagein{from{opacity:0}}
+.sources{margin-top:2.4rem;border-top:1px solid var(--silver);padding-top:1.1rem}
+.sources .skick{font-family:var(--sans);font-size:0.6rem;letter-spacing:0.28em;text-transform:uppercase;color:var(--silver-deep);margin:0 0 0.7rem}
+.sources p{font-size:0.85rem;color:var(--ink-soft);line-height:1.65;margin:0 0 0.55rem}
 </style>
 </head>
 <body>
@@ -225,17 +228,21 @@ body{animation:pagein 620ms ease both}
 <header class="wrap">
   <p class="kicker"><a href="index.html">creaturely: a glossary &middot; ii</a></p>
   <h1>vectors</h1>
-  <p class="sub">how meaning becomes distance and direction</p>
+  <p class="sub">How meaning becomes geometry.</p>
 </header>
 
 <main>
 <section class="wrap">
-  <p>The first page of this glossary shows how a sentence is cut into numbered pieces, and how an LLM places each piece at a position in a space with many dimensions. This page introduces what these positions make possible: two new abilities the model gains once language has become geometry. Once every piece has a place, the model can do two things: it can now measure relatedness, and it can trace relationships like directions on a map.</p>
+  <p>The first page of the glossary showed how a sentence is divided into numbered pieces, and how an LLM gives each piece a starting position in a space with many dimensions. This page introduces two things those positions make possible. First, the vectors of two tokens can be compared to calculate how similar they are. Second, in some embedding spaces, one vector can be subtracted from another so that the relationship between them becomes a direction that can sometimes be applied elsewhere.</p>
+  <p>These positions are fixed starting points, but this does not mean that a token has one fixed meaning. As a sentence moves through a contemporary LLM, the representation of each token changes in relation to the tokens around it. The next page introduces <em>attention</em>, one of the main processes through which this happens.</p>
 </section>
 
 <section class="wrap">
-  <p class="seckick">i &middot; the measuring</p>
-  <p>A word&rsquo;s coordinates, taken together, are called a <em>vector</em>. A vector is a list of numbers that marks a position. Every word has a vector, and the distance between any two words is a number the model can calculate. Because each word is a list of numbers, the model can compare two words the way you might compare two locations on a map: take their coordinates and calculate how far apart they sit. Nothing consults a dictionary; the distance comes straight from the numbers. A high level of similarity between two words means that these words appeared in similar sentences during the training process, and a low level of similarity means they did not. Select any two words below to see the similarity between them.</p>
+  <p class="seckick">i &middot; similarity</p>
+  <p>A token&rsquo;s coordinates, taken together, form its <em>vector</em>. A vector is an ordered list of numbers. When those numbers locate a token within an embedding space, the vector describes a position. When one vector is subtracted from another, the resulting vector describes the change from one position to the other.</p>
+  <p>During training, the values within these vectors are repeatedly adjusted. Tokens that occur in similar linguistic contexts tend to develop similar patterns of values, while tokens whose uses overlap less tend to develop less similar patterns. A similarity calculation compares these learned patterns numerically.</p>
+  <p>Similarity does not mean that two words have the same meaning. It measures a relationship between the ways they appeared in the training texts. Select any two words below to compare them.</p>
+  <p>On this page, the token examples are whole words so that each word can be represented by a single vector.</p>
 </section>
 
 <div class="bleed">
@@ -247,7 +254,10 @@ body{animation:pagein 620ms ease both}
 </div>
 
 <section class="wrap">
-  <p>This is the first useful thing a position creates. The model never needs to be told that &ldquo;beam&rdquo; belongs with &ldquo;light&rdquo;, or that &ldquo;water&rdquo; does not belong with &ldquo;song&rdquo;. The training placed them at their distances, and now the LLM can simply measure the closeness, or proximity, for any pair of words. Real models make this measurement with a calculation called <em>cosine similarity</em>, which compares the directions of two vectors. Below, the short film puts this relationship into motion: every word has a point and proximity is likeness.</p>
+  <p>These positions preserve patterns of relationship found in the training texts. A dictionary gives us definitions written to explain the meanings of words. An embedding does something different: it records patterns in how words were used.</p>
+  <p>In the teaching example on this page, <em>beam</em> and <em>light</em> occupy similar positions to represent their overlapping patterns of use. <em>Water</em> and <em>song</em> are placed farther apart to represent a less direct relationship. Once the positions have been established, their similarity can be calculated from the numbers in their vectors.</p>
+  <p>Embedding systems commonly make this comparison through a calculation called <em>cosine similarity</em>. Picture each vector as an arrow drawn from the centre of the space to the word&rsquo;s position. Cosine similarity ignores how long the two arrows are and asks how closely their directions agree. Two arrows pointing almost the same way receive a high score, even if one reaches much farther than the other. Two arrows at right angles receive a score near zero.</p>
+  <p>Below, the short film puts the idea of proximity into motion: every word has a point, and nearness becomes a form of likeness.</p>
 </section>
 
 <div class="bleed">
@@ -258,8 +268,10 @@ body{animation:pagein 620ms ease both}
 </div>
 
 <section class="wrap">
-  <p class="seckick">ii &middot; the turning</p>
-  <p>The second thing positions create is stranger. In this space, a relationship between two words becomes a direction: the step you would take to get from one to the other. Once the model finds a direction, it can reuse it somewhere else. Below, we can see that the step from <em>seahorse</em> to <em>sea</em> is the step from a creature to the place it lives.</p>
+  <p class="seckick">ii &middot; vector arithmetic</p>
+  <p>A second kind of relationship appears when, instead of comparing the positions of two words, we calculate the difference between them. Subtracting the vector for the first word from the vector for the second produces another list of numbers. Each number records how much one coordinate must change to move from the first position to the second. Taken together, these changes form a direction through the many-dimensional space.</p>
+  <p>The new vector therefore records a relationship rather than a position. In some embedding spaces, pairs of words that share a similar relationship produce steps that point in roughly the same direction.</p>
+  <p>The teaching space below uses the step from <em>seahorse</em> to <em>sea</em> to represent the movement from a creature to its associated environment. The interactive asks what happens when the same step begins with another creature.</p>
 </section>
 
 <div class="bleed">
@@ -275,30 +287,51 @@ body{animation:pagein 620ms ease both}
 </div>
 
 <section class="wrap">
-  <p>The landing point is not exactly on a word: the arithmetic gives a position, and the LLM finds the nearest word to it. The nearest word to <em>bird</em> plus the creature-to-home step is <em>sky</em>. The nearest word to the same step from <em>moth</em> is <em>night</em>. The step from moth to <em>flame</em> is a real direction too, but a different one: attraction rather than home. Each relationship runs along its own direction, and the trick only works when you reuse the same one. Try the step from <em>sea</em> and it lands near nothing, because this direction only means something when it starts with a creature. It exists as a direction that repeats across the space, because the training text used these pairs of words in repeated ways. This trick became famous in an early system called word2vec, where researchers found that the step from <em>man</em> to <em>woman</em>, applied to <em>king</em>, landed near <em>queen</em>. The technique is called <em>vector arithmetic</em>: subtracting one vector from another to find a relationship and adding it somewhere else to reuse it.</p>
+  <p>In this teaching space, adding the creature-to-environment step to <em>bird</em> produces a position nearest to <em>sky</em>. Adding the same step to <em>moth</em> produces a position nearest to <em>night</em>. The arithmetic does not ordinarily land exactly on the vector of another word. It produces a position, and the system finds the word whose vector lies closest to it.</p>
+  <p>The step from moth to <em>flame</em> forms a direction too, but it describes another kind of relationship: attraction rather than environment. Because the two directions were calculated from different relationships, one cannot simply stand in for the other.</p>
+  <p>The same mathematical step can be added to any vector, but the result will not always make sense. If the creature-to-environment step begins at <em>sea</em>, the arithmetic still produces a position, although that position does not lie near a word with any recognizable connection to the relationship. The calculation has continued to work, but the analogy has not.</p>
+  <p>In a real embedding, a recurring direction can emerge when related pairs of words have appeared in similar patterns of use. This technique became famous through an early word-embedding system called word2vec. Researchers found that the step from <em>man</em> to <em>woman</em>, when applied to <em>king</em>, produced a position close to <em>queen</em>. A relationship between words had become an approximately linear direction within the embedding space.</p>
+  <p>The technique became known as <em>vector arithmetic</em>: subtracting one vector from another to describe a relationship, then adding that difference somewhere else to see whether the relationship repeats.</p>
 </section>
 
 <section class="wrap">
-  <p class="seckick">iii &middot; the inheriting</p>
-  <p>However, the same researchers found something else. In that early system, the step from <em>he</em> to <em>she</em>, when applied to <em>doctor</em>, landed near <em>nurse</em>; applied to <em>computer programmer</em>, it landed near <em>homemaker</em>.</p>
-  <p>It&rsquo;s important to remember that these directions record how words were actually used in the writing that the model was learning from. That writing contains the patterns of the people who wrote it, including patterns that we may question. New models are now trained with more care, but the principle itself has not changed: the geometry of the space (relationships between words) is based on the record of usage, not of truth. Follow a direction, and you are following a path of written history.</p>
+  <p class="seckick">iii &middot; inherited patterns</p>
+  <p>Researchers studying these early embeddings found something else. In a widely used word2vec embedding trained on Google News, applying the step from <em>man</em> to <em>woman</em> to <em>computer programmer</em> produced a position near <em>homemaker</em>. Applying the step from <em>father</em> to <em>mother</em> to <em>doctor</em> produced a position near <em>nurse</em>. Social stereotypes present in the training text had become part of the geometry.</p>
+  <p>It is important to remember what these directions record. They are not discoveries about the world, but patterns learned from a particular body of writing: a collection shaped by who produced it, what was preserved, and what its makers chose to include. The assumptions and inequalities carried by that writing can therefore become part of the relationships the model learns.</p>
+  <p>Current models are trained and evaluated differently, and developers may use filtering, fine-tuning, and other methods intended to reduce harmful associations. These measures do not make the problem disappear. The underlying principle remains: the geometry is learned from patterns of usage, not from an independent account of what is true.</p>
+  <p>Follow a direction, and you are following a path of written history.</p>
 </section>
 
 <section class="wrap">
-  <p>So, a position is not just about storage of words or points. For the model, it is a place from which it measures distances and takes directions. At this stage, this is all preparation. The model has not yet interpreted your sentence as a sentence. The next page shows this act of &ldquo;reading&rdquo;, where the separate pieces of a sentence begin to notice each other.</p>
+  <p>A vector is not simply a way of storing a token as a point. It gives the model a starting position from which relationships can be compared, similarities measured, and, in some embedding spaces, directions traced.</p>
+  <p>At this stage, however, we have described only the starting representation of each separate token. The model has not yet interpreted your sentence as a sentence. The next page introduces the process we experience as &ldquo;reading,&rdquo; when the representation of each token begins to be shaped by the tokens around it.</p>
 
   <div class="poem">
     <p class="pkick">in the poems</p>
-    <p>When the poems reach from beam to glimmer to echo, they are moving along these directions. Nearness in the space is how their words found each other.</p>
+    <p><em>Beam</em>, <em>glimmer</em>, and <em>echo</em> were already related within the model before the poem began. Their nearness alone does not explain the poem, but it is one of the conditions that allowed the words to find one another.</p>
   </div>
 
-  <p class="shadow">The model learned its directions from what has been written.</p>
-
-  <p class="terms">terms from this page: <b>vector &middot; cosine similarity &middot; vector arithmetic</b></p>
+  <p class="terms">terms from this page: <b>vector &middot; cosine similarity &middot; vector arithmetic &middot; word2vec</b></p>
 
   <div class="note">
     <p class="nkick">an honest note</p>
-    <p>The spaces on this page show three hand-placed dimensions of the hundreds or thousands real models use, and their slow turning is presentational; real models measure similarity across all their dimensions at once, usually with a calculation called cosine similarity, which compares directions rather than plain distances. The similarity numbers here are calculated from distance on this toy map. The word2vec findings, including king and queen, and doctor and nurse, are documented results from research on real systems in the 2010s, not inventions of this page; in real spaces the arithmetic works approximately, not perfectly. The step shown here lands cleanly because we drew the map so that it would.</p>
+    <p>The teaching spaces on this page use three hand-placed dimensions in place of the hundreds or thousands used by real embeddings. Their slow turning is presentational; real models compare vectors across all their dimensions at once.</p>
+    <p>The similarity numbers in the interactive are calculated from straight-line distance within this teaching space. Embedding systems commonly use cosine similarity, which compares the angle between vectors rather than the distance between their endpoints. The interactive therefore illustrates the general idea of similarity without reproducing that calculation.</p>
+    <p>Cosine similarity is one method for comparing embeddings. It is not, by itself, the process through which a contemporary LLM interprets a sentence. As the tokens pass through a transformer, their representations change according to their context. The next pages introduce this process.</p>
+    <p>The creature-to-environment directions were drawn by hand so that the arithmetic would land cleanly. In a real embedding, vector arithmetic works approximately and unevenly, and its results depend on both the model and the writing used to train it.</p>
+    <p>The word2vec examples involving king and queen, computer programmer and homemaker, and doctor and nurse are documented outputs from systems studied during the 2010s; they were not invented for this page. Later research has questioned whether analogy completions, by themselves, provide a reliable measure of bias. Other forms of analysis have nevertheless demonstrated that social associations and inequalities can be learned from language corpora and reproduced within word embeddings.</p>
+    <p>Early systems such as word2vec assigned one stable vector to each word. Contemporary LLMs usually begin with token embeddings and then repeatedly alter the representation of each token according to its context. Vector arithmetic offers an important illustration of relationships within learned spaces, but it is not a complete account of how a contemporary language model interprets or produces a sentence.</p>
+  </div>
+
+  <div class="sources">
+    <p class="skick">sources</p>
+    <p>The explanation of word2vec and vector arithmetic draws on Tomas Mikolov et al., &ldquo;Efficient Estimation of Word Representations in Vector Space&rdquo;, 2013, and Tomas Mikolov, Wen-tau Yih, and Geoffrey Zweig, &ldquo;Linguistic Regularities in Continuous Space Word Representations&rdquo;, 2013.</p>
+    <p>The examples involving computer programmer and homemaker, and doctor and nurse, draw on Tolga Bolukbasi et al., &ldquo;Man Is to Computer Programmer as Woman Is to Homemaker? Debiasing Word Embeddings&rdquo;, 2016.</p>
+    <p>The broader discussion of social associations learned from language corpora draws on Aylin Caliskan, Joanna J. Bryson, and Arvind Narayanan, &ldquo;Semantics Derived Automatically from Language Corpora Contain Human-like Biases&rdquo;, 2017.</p>
+    <p>The caution concerning the use of analogy completions as measures of bias draws on Malvina Nissim, Rik van Noord, and Rob van der Goot, &ldquo;Fair Is Better than Sensational: Man Is to Doctor as Woman Is to Doctor&rdquo;, 2019.</p>
+    <p>The distinction between static word embeddings and the changing contextual representations used in transformer models draws on Ashish Vaswani et al., &ldquo;Attention Is All You Need&rdquo;, 2017.</p>
+    <p>The film <em>How Vectors Work</em> was made within the <em>creaturely</em> project, 2026.</p>
+    <p>No external source is quoted directly on this page.</p>
   </div>
 </section>
 </main>
@@ -481,7 +514,7 @@ const turnC = Constellation(document.getElementById("turnmap"),
       lit.add(near.word);
       turnRead.textContent = `lands nearest: ${near.word}.`;
     } else {
-      turnRead.textContent = "lands near nothing. this direction only means something from a creature.";
+      turnRead.textContent = "lands near nothing. the calculation worked; the analogy did not.";
     }
   },
   decorate: (ctx,h) => {
@@ -504,7 +537,7 @@ const turnC = Constellation(document.getElementById("turnmap"),
 stepBtn.addEventListener("click", ()=>{
   stepShown=true; lit=new Set(["seahorse","sea"]);
   arith.textContent = `sea ${trip(TW3.sea)} \u2212 seahorse ${trip(TW3.seahorse)} = the step ${trip(STEP3)}`;
-  turnRead.textContent = "the step from a creature to the place it lives. now press any other word to try it from there. turn the space and watch the arrows stay parallel.";
+  turnRead.textContent = "the step from a creature to its environment. now press any other word to try it from there. turn the space and watch the arrows stay parallel.";
   stepBtn.disabled = true;
 });
 </script>
@@ -523,6 +556,7 @@ stepBtn.addEventListener("click", ()=>{
 document.querySelectorAll(".kicker a").forEach(a=>{
   a.addEventListener("click", e=>{
     e.preventDefault();
+    document.body.style.animation = "none";   /* release the arrival fade so the departure can run */
     document.body.style.transition = "opacity 440ms ease";
     document.body.style.opacity = "0";
     setTimeout(()=>{ location.href = a.href; }, 440);

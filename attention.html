@@ -217,6 +217,9 @@ footer p{
 .kicker a:hover{text-decoration:underline;text-underline-offset:3px}
 body{animation:pagein 620ms ease both}
 @keyframes pagein{from{opacity:0}}
+.sources{margin-top:2.4rem;border-top:1px solid var(--silver);padding-top:1.1rem}
+.sources .skick{font-family:var(--sans);font-size:0.6rem;letter-spacing:0.28em;text-transform:uppercase;color:var(--silver-deep);margin:0 0 0.7rem}
+.sources p{font-size:0.85rem;color:var(--ink-soft);line-height:1.65;margin:0 0 0.55rem}
 </style>
 </head>
 <body>
@@ -225,68 +228,93 @@ body{animation:pagein 620ms ease both}
 <header class="wrap">
   <p class="kicker"><a href="index.html">creaturely: a glossary &middot; iii</a></p>
   <h1>attention</h1>
-  <p class="sub">how the pieces of a sentence notice each other</p>
+  <p class="sub">How tokens shape one another in context.</p>
 </header>
 
 <main>
 <section class="wrap">
-  <p>The first two pages of this glossary follow a sentence into the space of positions: the model cuts the sentence into tokens, gives each token a vector, and can now measure and trace relationships between words. But every vector so far is a resting position, the word&rsquo;s average meaning across everything the model read. The word <em>beam</em> has one resting vector whether the sentence is about light or about oak. Reading means adjusting those meanings to fit the sentence they are actually in. The mechanism that does the adjusting is called <em>attention</em>.</p>
+  <p>The first two pages of the glossary showed how a sentence is divided into tokens, how each token receives a vector, and how those vectors can be compared and subtracted. So far, however, each token has been represented only by its initial embedding: a vector learned during training and retrieved whenever that token appears.</p>
+  <p>Once these initial vectors have been retrieved, they pass into a <em>transformer</em>: the layered neural network architecture at the centre of most contemporary LLMs. As the sentence passes through its layers, the transformer repeatedly updates the representation of each token in relation to its context. The token <em>beam</em> begins with the same embedding whether the sentence concerns light or oak, but it does not remain there. <em>Attention</em> is one of the main processes through which its meaning changes.</p>
 </section>
 
 <section class="wrap">
-  <p class="seckick">i &middot; the noticing</p>
-  <p>Attention works like this: every token looks at every other token in the sentence, including itself, and gives each one a score for how much it matters right now. The scores are scaled so that they add up to exactly one. Think of a fixed budget of notice, which each word divides among its neighbours. These scores are called <em>attention weights</em>, and they are numbers the model calculates, not rules anyone wrote. The model can only attend to what sits inside its <em>context window</em>: the stretch of tokens it can see at once.</p>
-  <p>Below is this glossary&rsquo;s sentence, a line from the Photonic Emergence poem. All of the arcs are present all of the time, every word attending to every word at once; press any word to bring its own share of the web forward.</p>
+  <p class="seckick">i &middot; attention weights</p>
+  <p>Within each transformer layer, attention calculates connections among the token positions. The connections are not made by following a set of written rules about grammar or meaning.</p>
+  <p>In a text-generating LLM, each token uses attention to look back across the tokens available within its <em>context window</em>. It can attend to itself and to the tokens that come before it, but not to tokens that come after. The context window is the stretch of text available to a model at one time. Anything outside that window cannot receive an attention weight. A context window is not the same as a chat window; it often includes the entire conversation so far, or a summary of it.</p>
+  <p>For each allowed connection, the model calculates a score. To do this, it transforms the current token&rsquo;s vector into a <em>query</em> and transforms each available token&rsquo;s vector into a <em>key</em>. Comparing a query with each key produces a set of scores indicating which earlier positions may be the most relevant to the token being updated.</p>
+  <p>These scores are then converted into <em>attention weights</em>. For one token, in one attention head, the weights are non-negative and together must add up to one. A larger weight means that a position contributes more to the next step; a smaller weight means that it contributes less. The model learns the transformations used to calculate these scores during training. A transformation here is a learned table of numbers, called a matrix, that converts one vector into another; the query and the key are each produced by applying a different matrix to a token&rsquo;s current vector, and the numbers in those matrices are set during training.</p>
+  <p>In the visualization below is the sentence <em>the echo of a beam never sent</em>. Press a word to see one pattern of attention for its position. Each of the lines points to a token that it is allowed to draw information from. A stronger line represents a larger attention weight. Because a text-generating transformer is designed to predict what comes next, a later position can draw on earlier ones, but an earlier position cannot draw on words that have not yet appeared.</p>
 </section>
 
 <div class="bleed">
   <div class="panel">
-    <p class="plabel">a budget of notice</p>
+    <p class="plabel">attention weights, one position at a time</p>
     <canvas id="attnC" role="img" aria-label="Attention flowing between the words of a sentence"></canvas>
     <p class="readout" id="attnRead">press a word.</p>
   </div>
 </div>
 
 <section class="wrap">
-  <p>Look at what <em>echo</em> does: it spends most of its notice on <em>beam</em> and <em>sent</em>, because an echo needs a source, and almost none on <em>a</em> or <em>of</em>. Small words spend their budgets too; even <em>the</em> is busy finding out what it belongs to. And every word keeps a little notice for itself. Nothing here is grammar the model was taught. The weights come from the vectors, and the vectors came from the training.</p>
+  <p>In this example, <em>sent</em> gives much of its attention weight to <em>echo</em> and <em>beam</em>, and less to words such as <em>the</em> and <em>a</em>. Because <em>sent</em> occurs near the end of the line, all of these earlier positions are available to it.</p>
+  <p><em>Echo</em>, by contrast, can attend only to <em>the</em> and to itself. It cannot yet attend to <em>beam</em> or <em>sent</em>, because those tokens come later in the sequence.</p>
+  <p>These weights do not imply that the model is consciously aware of one word more than another. They are numerical proportions used to decide how strongly information from each available position will contribute to the next representation.</p>
+  <p>The resulting pattern reflects regularities in grammar, meaning, tone, or use that the model absorbed from the examples used during training. This does not mean that the model has learned explicit rules about language or meaning, or that it applies a separate attention to grammar, meaning, or tone. The same attention mechanism can contribute to many kinds of relationship at once, while other calculations within each transformer layer also help shape the token&rsquo;s updated representation.</p>
 </section>
 
 <section class="wrap">
-  <p class="seckick">ii &middot; the moving</p>
-  <p>The weights are not the point; they are the recipe. After scoring, each token updates its own vector by mixing in the vectors it attended to, in proportion to their weights. A token that spends most of its notice on <em>beam</em> ends up carrying some of beam&rsquo;s meaning. This is the moment the map from the first page finally moves. After attention, a word&rsquo;s position is no longer its resting average. It is a version adjusted to this sentence. Watch what a sentence does to <em>beam</em>.</p>
+  <p class="seckick">ii &middot; contextual representations</p>
+  <p>The attention weights are not an end in themselves. They only determine how the information from the available tokens is combined.</p>
+  <p>The model transforms each available token&rsquo;s current representation into another vector called a <em>value</em>. It multiplies each value by its attention weight and adds the weighted values together. A value given a larger weight contributes more strongly to the result.</p>
+  <p>This combined information is used to update the representation of the token doing the attending. If <em>beam</em> gives substantial weight to an earlier occurrence of <em>light</em>, information carried by light will have a larger influence on beam&rsquo;s next representation.</p>
+  <p>If we picture vectors as positions, this is where the starting positions begin to move. After attention and the other calculations within a transformer layer, a token is represented not only by its initial embedding but by a vector adjusted to its particular context. The panel below shows how two different preceding contexts alter <em>beam</em>.</p>
 </section>
 
 <div class="bleed">
   <div class="panel">
-    <p class="plabel">the same word, moved by two sentences</p>
+    <p class="plabel">the same token, adjusted by two sentences</p>
     <canvas id="ctxmap" class="const3" role="img" aria-label="The word beam moving through the space, pulled by two different sentences"></canvas>
     <div class="btnrow">
-      <button class="quiet" id="s1Btn" type="button">read: the echo of a beam never sent</button>
-      <button class="quiet" id="s2Btn" type="button">read: a beam of oak held the roof</button>
+      <button class="quiet" id="s1Btn" type="button">read: light gathered into a beam</button>
+      <button class="quiet" id="s2Btn" type="button">read: the roof rested on an oak beam</button>
     </div>
-    <p class="readout" id="ctxRead">beam rests between its two lives. read a sentence.</p>
+    <p class="readout" id="ctxRead">beam rests at its initial embedding. read a sentence.</p>
   </div>
 </div>
 
 <section class="wrap">
-  <p>Same word, same token number, same resting vector, and two different arrivals. In the first sentence, <em>echo</em> and <em>sent</em> pull beam toward light; in the second, <em>oak</em> and <em>roof</em> pull it toward timber. The moved position is called a contextual meaning. It is not stored anywhere. The model rebuilds it every time it reads, from the weights and the mixing. This is also why the order and company of your words matter so much when you write to a model. You are not choosing labels; you are arranging the forces that will move every word&rsquo;s position.</p>
+  <p>Same token, same token ID, and same initial embedding, but two different results.</p>
+  <p>In <em>light gathered into a beam</em>, the preceding words draw beam toward illumination. In <em>the roof rested on an oak beam</em>, roof and oak draw it toward timber and construction.</p>
+  <p>The adjusted vector is often called a <em>contextual representation</em>. It is created for the specific occurrence of the token as the sentence passes through the model. It is not stored as a new definition of beam, nor does it permanently alter the token&rsquo;s initial embedding. A new context will produce a new representation.</p>
+  <p>This is one reason why the order and company of your words matter when you write to an LLM. You are not simply selecting from or tapping into fixed meanings like you might find in a dictionary. You are arranging a context from which the model then constructs a representation for each position.</p>
 </section>
 
 <section class="wrap">
-  <p>Attention runs many times over, not once. The model scores and mixes, then scores and mixes again on the results, layer after layer, and by the upper layers the tokens carry meanings assembled from the whole sentence. What the machinery of those layers is made of comes next.</p>
+  <p>In a transformer, attention runs in layer after layer, not only once. Contemporary LLMs may contain dozens or more than a hundred such layers. Within each layer, the model calculates attention patterns, combines information, and performs further transformations. The resulting representations pass into the next layer, where the process begins again.</p>
+  <p>By the later layers, a token can carry information gathered from many earlier positions in the available context. Its vector has become a record not only of which token it is, but of how that occurrence is being used here.</p>
+  <p>The next page introduces the other major calculations within a transformer layer: the neurons and the transformations they perform.</p>
 
   <div class="poem">
     <p class="pkick">in the poems</p>
-    <p>The poems&rsquo; habit of echo and return is attention made audible: every new word of a line was written while attending to all the words before it.</p>
+    <p>In the poems, the repeated movement of echo and return offers one way of imagining attention: each new token was generated in relation to tokens that came before it.</p>
   </div>
 
-  <p class="shadow">What the model notices is a habit it learned from other people&rsquo;s sentences.</p>
-
-  <p class="terms">terms from this page: <b>attention &middot; attention weights &middot; context window</b></p>
+  <p class="terms">terms from this page: <b>transformer &middot; attention &middot; query &middot; key &middot; value &middot; attention weight &middot; context window &middot; contextual representation</b></p>
 
   <div class="note">
     <p class="nkick">an honest note</p>
-    <p>The attention weights on this page are set by hand to illustrate the idea; a real model calculates them from the vectors themselves, using pieces called queries and keys that this glossary leaves aside. Real attention also runs many separate patterns at once, called heads, and repeats across dozens of layers, so no single set of weights decides anything alone. The map of beam&rsquo;s movement compresses all of that into one step, and its positions are hand-placed. The flowing particles are an illustration of mixing, not a picture of anything physical moving inside the model. The budget-of-one is real: attention weights genuinely sum to one for each token.</p>
+    <p>The attention weights on this page were set by hand to illustrate the idea. A working LLM calculates queries, keys, values, and attention weights from its current representations using transformations learned during training.</p>
+    <p>For each token, each attention head produces its own set of weights. The weights within that set add up to one, making them relative proportions within the weighted combination. This mathematical normalization is the only sense in which attention behaves like a fixed &ldquo;budget&rdquo;; it does not describe a literal quantity of awareness or notice.</p>
+    <p>An attention weight is not a general measure of how important a word is to the model&rsquo;s response. It describes one connection involving one token, in one attention head, at one layer of the transformer.</p>
+    <p>Real transformers calculate several attention patterns at once, using multiple heads, and repeat the process across many layers. Different heads can form different patterns of connection. No single attention pattern determines a token&rsquo;s representation on its own.</p>
+    <p>The flowing particles in the interactive illustrate the weighted combining of information; they are not a picture of anything physically moving inside the model. The beam panel also compresses many heads, layers, and additional calculations into one hand-drawn movement.</p>
+    <p>Attention is not the only process that alters a token&rsquo;s representation. Each transformer layer contains other transformations, introduced on the next page, and preserves information through connections that this page leaves aside. Positional information, which allows the model to distinguish where tokens occur in the sequence, is also omitted from the teaching diagrams.</p>
+  </div>
+
+  <div class="sources">
+    <p class="skick">sources</p>
+    <p>The explanation of causal self-attention, scaled attention weights, and multi-head attention draws on Ashish Vaswani et al., &ldquo;Attention Is All You Need&rdquo;, 2017.</p>
+    <p>The earlier development of attention in neural language systems draws on Dzmitry Bahdanau, Kyunghyun Cho, and Yoshua Bengio, &ldquo;Neural Machine Translation by Jointly Learning to Align and Translate&rdquo;, 2015.</p>
+    <p>The account of contextual representations draws on Daniel Jurafsky and James H. Martin, <em>Speech and Language Processing</em>, third-edition draft, and Jay Alammar, &ldquo;The Illustrated Transformer&rdquo;, 2018.</p>
   </div>
 </section>
 </main>
@@ -302,15 +330,17 @@ function idOf(tok){
   return 1000 + (h % 48999);
 }
 
-/* ---------- the web of notice, breathing ---------- */
+/* ---------- the attention web ---------- */
 const TOKS = ["the","echo","of","a","beam","never","sent"];
 const W = {
-  the:   [0.30,0.14,0.08,0.08,0.22,0.06,0.12],
-  echo:  [0.04,0.16,0.04,0.03,0.38,0.13,0.22],
-  of:    [0.10,0.26,0.18,0.06,0.30,0.04,0.06],
-  a:     [0.08,0.10,0.06,0.16,0.44,0.06,0.10],
-  beam:  [0.05,0.30,0.04,0.04,0.20,0.12,0.25],
-  never: [0.04,0.10,0.03,0.03,0.16,0.24,0.40],
+  /* causal: each position attends only to itself and to earlier positions;
+     later positions receive no weight (0). rows sum to one. */
+  the:   [1.00,0,0,0,0,0,0],
+  echo:  [0.35,0.65,0,0,0,0,0],
+  of:    [0.14,0.62,0.24,0,0,0,0],
+  a:     [0.10,0.34,0.20,0.36,0,0,0],
+  beam:  [0.06,0.40,0.08,0.14,0.32,0,0],
+  never: [0.05,0.22,0.04,0.06,0.33,0.30,0],
   sent:  [0.05,0.24,0.03,0.03,0.30,0.20,0.15]
 };
 const attnC = document.getElementById("attnC");
@@ -323,7 +353,7 @@ function sizeA(){
 }
 sizeA(); window.addEventListener("resize", sizeA);
 
-let selected = "echo";
+let selected = "sent";
 function XA(i){ const W0=attnC.clientWidth; return W0*0.06 + i*(W0*0.88)/(TOKS.length-1); }
 function YA(){ return attnC.clientHeight*0.74; }
 
@@ -405,9 +435,9 @@ requestAnimationFrame(drawAttn);
 
 function describe(sel){
   const row = W[sel], si = TOKS.indexOf(sel);
-  const parts = TOKS.map((t,j)=> j===si? null : `${t} ${row[j].toFixed(2)}`).filter(Boolean);
-  attnRead.innerHTML = `<em>${sel}</em> divides its notice: ` + parts.join(" \u00b7 ")
-    + ` \u00b7 itself ${row[si].toFixed(2)} <b>(sums to 1.00)</b>`;
+  const parts = TOKS.map((t,j)=> (j===si || row[j]===0)? null : `${t} ${row[j].toFixed(2)}`).filter(Boolean);
+  attnRead.innerHTML = `<em>${sel}</em>, attention weights: ` + (parts.length? parts.join(" \u00b7 ") + " \u00b7 " : "")
+    + `itself ${row[si].toFixed(2)} <b>(sums to 1.00)</b>`;
 }
 attnC.addEventListener("pointerup", e=>{
   const r = attnC.getBoundingClientRect();
@@ -480,7 +510,7 @@ function Constellation(canvas, words, opts){
 }
 
 const CTXWORDS = [
-  ["glow",0.20,0.26,0.42],["light",0.10,0.42,0.50],["echo",0.24,0.54,0.34],
+  ["glow",0.20,0.26,0.42],["light",0.10,0.42,0.50],["gathered",0.24,0.54,0.34],
   ["oak",0.80,0.26,0.60],["roof",0.88,0.44,0.52],["timber",0.76,0.56,0.66]
 ];
 const BEAM = {rest:[0.50,0.42,0.50], s1:[0.30,0.42,0.44], s2:[0.68,0.40,0.56]};
@@ -513,13 +543,14 @@ function moveBeam(to, msg){
   beamFrom = [...BEAM.rest]; beamPos = [...BEAM.rest]; beamTo = [...to]; beamT = 0;
   ctxRead.textContent = msg;
 }
-document.getElementById("s1Btn").addEventListener("click", ()=>moveBeam(BEAM.s1, "echo and sent pull beam toward the light."));
-document.getElementById("s2Btn").addEventListener("click", ()=>moveBeam(BEAM.s2, "oak and roof pull beam toward the timber."));
+document.getElementById("s1Btn").addEventListener("click", ()=>moveBeam(BEAM.s1, "the preceding words draw beam toward illumination."));
+document.getElementById("s2Btn").addEventListener("click", ()=>moveBeam(BEAM.s2, "roof and oak draw beam toward timber."));
 </script>
 <script>
 document.querySelectorAll(".kicker a").forEach(a=>{
   a.addEventListener("click", e=>{
     e.preventDefault();
+    document.body.style.animation = "none";   /* release the arrival fade so the departure can run */
     document.body.style.transition = "opacity 440ms ease";
     document.body.style.opacity = "0";
     setTimeout(()=>{ location.href = a.href; }, 440);

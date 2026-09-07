@@ -212,26 +212,24 @@ body{animation:pagein 620ms ease both}
 <header class="wrap">
   <p class="kicker"><a href="index.html">creaturely: a glossary &middot; i</a></p>
   <h1>tokens &amp; embedding</h1>
-  <p class="sub">what a Large Language Model (LLM) sees when you type</p>
+  <p class="sub">What does a Large Language Model (LLM) see when you type?</p>
 </header>
 
 <main>
 <section class="wrap">
-  <p>In <em>creaturely</em>, I worked with an LLM as a collaborator. One of the aims of the project was to understand what an LLM is through the experience of working with one. Another was to discover what might emerge through a sustained creative collaboration, and to consider what it might mean when an LLM produced a response I experienced as unexpected or creative.</p>
-  <p>This interactive glossary introduces how LLMs work, with a specific interest in the processes that made those responses possible, returning across its pages to the question of creativity.</p>
-  <p>Before these poems were written, I had been exploring with an LLM how Winnicott&rsquo;s theory of play and ideas from object relations might help us think about our relationships with AI, particularly the idea of how engagement with LLMs functions as transitional objects. Later, I described my interest in <em>Frankenstein</em>, especially the creature&rsquo;s account of its earliest experiences of consciousness. The model surprised me by writing a short poem in Python script. That unexpected response became the starting point for a series of poems inspired by quotes from the creature&rsquo;s earliest memories. The sentence that passes from page to page in this glossary&mdash;<em>the echo of a beam never sent</em>&mdash;comes from the first poem.</p>
-  <p>When you type a sentence to an LLM, it feels as if the model is reading it. However, before an LLM can do anything with what you write, the sentence must be translated into a form it can use.</p>
-  <p>First, it is cut into pieces. Each piece is assigned a number, and then each number is used to retrieve a long list of values. Each value is simply a number, such as 0.82 or &minus;0.4; nothing more exotic than that.</p>
-  <p>These three steps: 1. tokenization, 2. numbering, and 3. embedding, give the LLM its first numerical representation of what you wrote. This page attempts to show what that looks like.</p>
+  <p>This is an interactive glossary that accompanies the project <em>creaturely</em>. The aim of the glossary is to provide an introduction to how LLMs work, with a specific interest in the processes that make them act in ways that are similar to what we think of as being creative &ndash; surprise, experimentation, innovation, and the unexpected.</p>
+  <p>The sentence that passes from page to page in this glossary is &ldquo;<em>the echo of a beam never sent</em>,&rdquo; which comes from the first code poem of <em>creaturely</em>, &ldquo;photonic emergence.&rdquo;</p>
+  <p>When you type a sentence to an LLM, it feels as if the model is reading and responding to it. However, before an LLM can do anything with what you write, the sentence must be translated into a form it is designed to use.</p>
+  <p>First, it is cut into pieces. Each piece is assigned a number, and then each number is used to retrieve a long list of values which is called an embedding. Each value is simply a number, such as 0.82, &minus;0.4, etc.</p>
+  <p>These three steps: 1. tokenization, 2. numbering, and 3. embedding, give the LLM its first numerical representation of what you wrote. This first page of the glossary is an attempt to show what that process looks like.</p>
 </section>
 
 <section class="wrap">
-  <p class="seckick">i &middot; the cut</p>
-  <p>An LLM does not read letters, and it does not quite read words.</p>
-  <p>It works with <em>tokens</em>: pieces of text cut from the sentence you wrote. A token may be a whole word, part of a word, a punctuation mark, or even a single character. Dividing the text into these pieces is called <em>tokenization</em>.</p>
+  <p class="seckick">i &middot; tokens</p>
+  <p>An LLM does not read letters; instead, it works with <em>tokens</em>. Tokens are pieces of text cut from the sentence you wrote in the chat. A token may be a whole word, part of a word, a punctuation mark, or even a single character. Dividing the text into these pieces is called <em>tokenization</em>.</p>
   <p>The cuts are governed by a fixed <em>vocabulary</em> and a set of rules established before the LLM itself was trained.</p>
-  <p>Training is a long process in which an LLM encounters a very large collection of text and gradually adjusts its internal numbers, becoming better at predicting how a sentence continues.</p>
-  <p>By the time most of us interact with an LLM, this training is over. The model&rsquo;s responses change according to the context you provide, but its learned parameters ordinarily remain fixed. A later page describes this process more fully. Try the cutter below. Type anything. Type your name.</p>
+  <p>Training is a long process in which an LLM encounters a very large collection of text and gradually adjusts its internal numbers, becoming better at predicting how a sentence continues. By the time most of us interact with an LLM, that training is over. While a model&rsquo;s responses may change according to the context you provide, its learned parameters ordinarily remain fixed. A later page in the glossary describes the training process more fully.</p>
+  <p>Try the tokenizer below. Type anything. Type your name.</p>
 </section>
 
 <div class="bleed">
@@ -248,16 +246,16 @@ body{animation:pagein 620ms ease both}
 
 <section class="wrap">
   <p>Notice where the cuts fall. Common words and recurring sequences of characters often stay whole, while less common ones are divided into smaller pieces. Your name, unless it is familiar to the tokenizer, may break into fragments.</p>
-  <p>On this page, the small dot at the beginning of a token represents a space. Spaces belong to the pieces as well. A piece that begins with a space usually begins a new word; one without a space may continue the word before it. To the model, &ldquo; light&rdquo; and &ldquo;light&rdquo; can therefore be two different tokens, each with its own number.</p>
-  <p>The vocabulary was built by looking for recurring patterns in a large collection of writing. In one common form of tokenization, the process begins with very small units and repeatedly combines those that often appear together. Frequent combinations gradually acquire entries of their own, while rarer words and sequences are assembled from smaller pieces.</p>
-  <p>An LLM&rsquo;s vocabulary is therefore a record of what recurred in the writing that was used to build it, and the decisions made by its makers. Note: What was common in the collection of writing is not necessarily what is common in language as a whole, and certainly not what is common in life.</p>
+  <p>On this page, the small dot at the beginning of a token represents a space. Spaces belong to the cuts as well. A piece that begins with a space usually begins a new word; one without a space may continue the word before it. For example, to an LLM, &ldquo; light&rdquo; and &ldquo;light&rdquo; can therefore be two different tokens, each with its own number.</p>
+  <p>A vocabulary is built by looking for recurring patterns in a large collection of writing. In one common form of tokenization, the process begins with very small units and repeatedly combines those that often appear together. Frequent combinations gradually acquire entries of their own, while rarer words and sequences are assembled from smaller pieces.</p>
+  <p>An LLM&rsquo;s vocabulary is therefore a record of what recurs in the writing that was used to build it and the decisions made by its makers.</p>
 </section>
 
 <section class="wrap">
-  <p class="seckick">ii &middot; the numbering</p>
-  <p>The vocabulary assigns each token a number, known as a <em>token ID</em>. After cutting your sentence, the tokenizer returns a row of these IDs. Press <em>show the numbers</em> above and look again. Wherever the same tokenizer is used, the same piece receives the same number. Another tokenizer may divide the sentence differently and use an entirely different set of numbers.</p>
+  <p class="seckick">ii &middot; numbering</p>
+  <p>The vocabulary assigns each token a number, known as a <em>token ID</em>. After cutting your sentence, the tokenizer returns a row of these token IDs. Press <em>show the numbers</em> above and look again. Wherever the same tokenizer is used, the same piece receives the same number. Another tokenizer may divide the sentence differently and use an entirely different set of numbers.</p>
   <p>The number is an identifying label; it does not measure or define the token. It simply tells the LLM which list of values to retrieve in the next step. Think of a wall of numbered drawers, one for every entry in the vocabulary. The token ID opens one drawer, and inside is that token&rsquo;s list of values, learned during training. The ID itself carries nothing; it only says which drawer.</p>
-  <p>This helps explain a once-famous mistake. Ask a language model how many r&rsquo;s appear in <em>strawberry</em>, and some models may answer incorrectly. That may seem strange for a machine built around language. But look at what the model is actually given.</p>
+  <p>This helps explain a once-famous error. Ask a language model how many r&rsquo;s appear in the word <em>strawberry</em>, and some models may respond incorrectly. That may seem strange for a machine built from language. But look at what the model is actually given.</p>
 </section>
 
 <div class="bleed">
@@ -281,16 +279,15 @@ body{animation:pagein 620ms ease both}
 </div>
 
 <section class="wrap">
-  <p>For the model, <em>strawberry</em> arrives as three numbered pieces rather than a row of separate letters. If an LLM answers this question correctly, it is probably drawing on patterns it was taught related to the spelling of words during training, or using an additional tool to examine the word.</p>
-  <p>This is important because the visible word encourages us to imagine that the model sees what we see. But, its actual encounter with language begins somewhere else, after the cuts have already been made, and language is transformed into tokens.</p>
+  <p>For the model, <em>strawberry</em> arrives as three numbered pieces rather than a row of separate letters. If an LLM answers this question correctly, it is probably drawing on patterns it was taught related to the spelling of words during training, or using an additional tool to examine the word. This is important because it encourages us to imagine that the model sees language like we do. But, its actual encounter with language begins somewhere else, after language is transformed into tokens.</p>
 </section>
 
 <section class="wrap">
-  <p class="seckick">iii &middot; the mapping</p>
-  <p>A token ID does not carry meaning on its own. Tokens function more like addresses or locations. At that location, the LLM finds a long list of values, hundreds or even thousands of them, which together form a token&rsquo;s <em>embedding</em>. The values provide a token with a starting position in a mathematical space that has many, many dimensions, like coordinates on a map that cannot be fully pictured.</p>
-  <p>An LLM learns these locations during training. Because they develop through patterns of use, tokens that appear in related contexts often acquire similar embeddings and occupy nearby regions in the space. Nearness or proximity can reflect a similarity in meaning, grammar, tone, or use.</p>
-  <p>An embedding is only a starting point. As a sentence passes through the LLM, the initial representation of each token is altered by its relationship to the tokens around it. Later pages in the glossary show how this happens, and how the meaning or significance of the same token can shift from one sentence to another.</p>
-  <p>The picture below offers a simplified example of an embedding gathered around the word <em>light</em>. What matters for the LLM are the distances between tokens. We placed <em>beam</em> and <em>glimmer</em> close to <em>light</em> to illustrate how tokens used in related ways may occupy similar regions of an embedding space. <em>Song</em> and <em>water</em> sit farther away because their relationship to light is less direct.</p>
+  <p class="seckick">iii &middot; embedding</p>
+  <p>Token IDs do not carry meaning on their own. A token ID functions more like a location. At that location, an LLM finds a long list of values, hundreds or even thousands of them, which together form a token&rsquo;s <em>embedding</em>. These values provide a token with a starting point in a mathematical space that has many dimensions, like coordinates on a map that cannot be fully pictured. In GPT-3 175B, for example, each embedding had 12,288 dimensions.</p>
+  <p>LLMs learn these locations during training. Because they are developed through patterns of use, tokens that appear in related contexts often acquire similar embeddings and occupy regions that are close in the space. This nearness or proximity can reflect a similarity in meaning, grammar, tone, or use.</p>
+  <p>This embedding is only a starting point. As a sentence passes through an LLM, the initial representation of each token is altered by its relationship to the tokens around it. Later pages in the glossary will help explain how this happens, and how the meaning or significance of the same token can shift from one sentence to another.</p>
+  <p>The picture below is a simplified example of an embedding gathered around the word <em>light</em>. What matters for the LLM are the distances between tokens. We placed <em>beam</em> and <em>glimmer</em> close to <em>light</em> to illustrate how tokens that are used in related ways may occupy similar regions of an embedding space. <em>Song</em> and <em>water</em> are placed further away to illustrate how their relationship to light is less direct.</p>
   <p>Hover over a word to see its token ID. Select it to compare its embedding values with those shown for <em>light</em>. The IDs themselves do not determine the distances. Tokens sit near one another when the patterns of values in their embeddings are similar. The eight values shown here stand in for the hundreds or thousands a real LLM will use.</p>
 </section>
 
@@ -304,9 +301,9 @@ body{animation:pagein 620ms ease both}
 </div>
 
 <section class="wrap">
-  <p class="seckick">iv &middot; the pricing</p>
-  <p>Tokenization has economic consequences. The more tokens a passage contains, the more computing time and memory it will generally require. If a commercial service charges by the token or &ldquo;usage,&rdquo; the more it will cost. While a model can process the tokens in your prompt all together, it usually generates its response one new token at a time.</p>
-  <p>Because vocabularies are shaped by the texts used to build them, they do not divide all languages equally. Many widely used tokenizers divide English into relatively few pieces while cutting other languages into many more. The same passage can therefore require substantially more tokens, and cost more to process, in one language than in another.</p>
+  <p class="seckick">iv &middot; costs</p>
+  <p>Tokenization has economic consequences. The more tokens a passage contains, the more computing time and memory it will generally require, and if a commercial service charges by the token or &ldquo;usage,&rdquo; the more it will cost. While a model processes all the tokens in your prompt together, it usually generates its response one new token at a time.</p>
+  <p>Because the vocabularies are shaped by the texts used in training, they also do not divide all languages equally. Many widely used tokenizers divide English into relatively few pieces while cutting other languages into many more. The same passage can therefore require substantially more tokens, and cost more to process, in one language than in another.</p>
 </section>
 
 <div class="bleed">
@@ -319,32 +316,30 @@ body{animation:pagein 620ms ease both}
 <section class="wrap">
   <p>Same meaning, different token counts. The construction of the vocabulary helped decide which languages travel cheaply through these systems.</p>
 
-  <p>So, what does an AI model see when you type? The sentence you wrote has become a sequence of token IDs. Each token ID is exchanged for an embedding: a position in a many-dimensional space learned during training. This is the first translation.</p>
-  <p>Everything else in the glossary happens after these three steps.</p>
+  <p>So, what does an AI model see when you type? The sentence you wrote becomes a sequence of token IDs. Each token ID is exchanged for an embedding: a position in a multi-dimensional space learned during its training. This is the first translation.</p>
+  <p>Everything else in the glossary happens after these initial three steps.</p>
 
   <div class="poem">
     <p class="pkick">in the poems</p>
-    <p>The sentence this page keeps cutting comes from the <em>creaturely</em> code poems. Here, it passes through the first translation described above as is every sentence given to the model: from language into pieces, and from pieces into numbers, and from numbers into positions in a space.</p>
+    <p>The sentence repeated on this page comes from <em>creaturely: photonic emergence</em>. Here, it passes through the first translation described above: from language into pieces, and from pieces into numbers, and from numbers into positions in a space.</p>
   </div>
 
   <p class="shadow">The makers of the LLM decide the vocabulary.</p>
 
-  <p class="terms">terms from this page: <b>token &middot; tokenization &middot; vocabulary &middot; token ID &middot; embedding &middot; LLM</b></p>
+  <p class="terms">terms from this page: <b>LLM &middot; token &middot; tokenization &middot; vocabulary &middot; token ID &middot; embedding</b></p>
 
   <div class="note">
     <p class="nkick">an honest note</p>
-    <p>We built the cutter on this page with a small teaching vocabulary of a few hundred pieces. Real vocabularies commonly contain tens or hundreds of thousands of entries, so their cuts will differ from these examples, but they follow the same general rule: a sequence that recurred often in the writing tends to be kept as one piece, the way <em>light</em> survives our cutter uncut, while a rarer sequence breaks into several, the way an unfamiliar name does.</p>
-    <p>Real embeddings have hundreds or thousands of dimensions. The constellation here uses three dimensions to suggest spatial relationships, while the comparison panel shows eight illustrative values. We created its positions and values to demonstrate the idea of neighbourhood; we did not take them from a working language model.</p>
-    <p>We calculate the colour bands from positions in this teaching space, not from a real model. We chose the token counts shown for the six languages to make the pattern visible, and they deliberately exaggerate it. The direction of the inequality is real, but its extent varies according to the tokenizer, language, writing system, and passage.</p>
+    <p>The tokenizer on this page is made with a small, hand-built vocabulary of a few hundred pieces. It uses a simple longest-match rule and falls back to individual characters when it cannot find a longer piece. Real tokenizers use much larger vocabularies and different methods, so their tokenization will differ from these examples. Frequently recurring sequences are nevertheless more likely to remain whole, while less common strings are more likely to be divided into smaller pieces.</p>
+    <p>Real embeddings have hundreds or thousands of dimensions. The constellation here uses three hand-placed dimensions to suggest spatial relationships, while the comparison panel shows eight illustrative values. Its positions and values demonstrate the idea of regions or neighbourhoods but they were not taken from an actual language model.</p>
+    <p>The token counts shown for the six languages are also illustrative, rather than produced by an actual tokenizer, so the comparison is schematic. Unequal tokenization across languages is documented, but which languages require more or fewer tokens, and by how much, varies according to the tokenizer, language, writing system, and passage.</p>
   </div>
 
   <div class="sources">
     <p class="skick">sources</p>
-    <p>The phrase <em>the echo of a beam never sent</em> comes from the <em>creaturely</em> code poems, developed by Alexandra Emberley in collaboration with a large language model, 2026.</p>
-    <p>The discussion of play and transitional objects draws on D.&thinsp;W. Winnicott, <em>Playing and Reality</em> (London: Tavistock Publications, 1971).</p>
-    <p>The account of the creature&rsquo;s earliest experiences draws on Mary Shelley, <em>Frankenstein; or, The Modern Prometheus</em> (1818), vol. II, chapter III. This corresponds to chapter 11 in the revised 1831 edition.</p>
+    <p>The phrase <em>the echo of a beam never sent</em> comes from the <em>creaturely</em> code poems, developed by Alexandra Emberley in collaboration with a large language model, 2025.</p>
     <p>The explanation of subword tokenization draws on Rico Sennrich, Barry Haddow, and Alexandra Birch, &ldquo;Neural Machine Translation of Rare Words with Subword Units&rdquo;, 2016, and the Hugging Face Tokenizers documentation.</p>
-    <p>The explanation of embeddings draws on Jeffrey Pennington, Richard Socher, and Christopher D. Manning, &ldquo;GloVe: Global Vectors for Word Representation&rdquo;, 2014, and Ashish Vaswani et al., &ldquo;Attention Is All You Need&rdquo;, 2017.</p>
+    <p>The explanation of embeddings draws on Jeffrey Pennington, Richard Socher, and Christopher D. Manning, &ldquo;GloVe: Global Vectors for Word Representation&rdquo;, 2014, and Ashish Vaswani et al., &ldquo;Attention Is All You Need&rdquo;, 2017. The embedding dimension cited for one well-known model draws on Tom B. Brown et al., &ldquo;Language Models are Few-Shot Learners&rdquo;, 2020.</p>
     <p>The discussion of unequal token counts across languages draws on Aleksandar Petrov et al., &ldquo;Language Model Tokenizers Introduce Unfairness Between Languages&rdquo;, 2023.</p>
     <p>No external source is quoted directly on this page.</p>
   </div>
@@ -509,6 +504,12 @@ const WORDS3D = [
   ["song",   0.91,0.83,0.10],
   ["water",  0.08,0.87,0.90]
 ];
+/* the unnamed crowd: entries of the vocabulary that surround the
+   ten named words. no labels, no touch; they only suggest how
+   inhabited the space really is. */
+const SHADOWS = [[0.425,0.541,0.789],[0.67,0.379,0.463],[0.918,0.867,0.042],[0.943,0.68,0.177],[0.74,0.359,0.412],[0.064,0.674,0.97],[0.455,0.443,0.402],[0.135,0.81,0.97],[0.493,0.441,0.586],[0.658,0.285,0.391],[0.7,0.604,0.233],[0.85,0.646,0.332],[0.379,0.306,0.472],[0.29,0.56,0.556],[0.689,0.463,0.442],[0.688,0.487,0.389],[0.631,0.283,0.495],[0.285,0.472,0.564],[0.776,0.707,0.263],[0.758,0.53,0.492],[0.247,0.863,0.881],[0.427,0.669,0.644],[0.319,0.303,0.585],[0.623,0.109,0.73],[0.826,0.738,0.102],[0.363,0.698,0.395],[0.556,0.638,0.402],[0.664,0.429,0.498],[0.719,0.283,0.64],[0.467,0.295,0.612],[0.061,0.912,0.97],[0.329,0.285,0.549],[0.839,0.887,0.202],[0.577,0.555,0.742],[0.783,0.76,0.282],[0.401,0.156,0.52],[0.261,0.899,0.862],[0.606,0.687,0.356],[0.865,0.812,0.381],[0.736,0.671,0.326],[0.334,0.467,0.591],[0.449,0.375,0.577],[0.327,0.185,0.574],[0.544,0.377,0.374],[0.411,0.524,0.649],[0.97,0.799,0.156],[0.607,0.114,0.606],[0.846,0.684,0.107],[0.525,0.361,0.543],[0.455,0.37,0.699],[0.422,0.546,0.642],[0.613,0.216,0.698],[0.927,0.597,0.062],[0.86,0.363,0.626],[0.794,0.166,0.402],[0.686,0.235,0.842],[0.442,0.62,0.136],[0.893,0.695,0.468],[0.714,0.135,0.2],[0.934,0.084,0.58],[0.47,0.637,0.598],[0.584,0.477,0.885],[0.197,0.542,0.079],[0.763,0.699,0.15],[0.72,0.183,0.928],[0.231,0.829,0.085],[0.247,0.501,0.732],[0.347,0.539,0.794],[0.114,0.711,0.85],[0.643,0.777,0.515],[0.788,0.833,0.175],[0.194,0.509,0.828],[0.743,0.596,0.743],[0.192,0.185,0.605],[0.166,0.114,0.66],[0.527,0.485,0.743],[0.837,0.11,0.228],[0.097,0.146,0.458],[0.085,0.847,0.116],[0.347,0.917,0.593],[0.235,0.304,0.507],[0.77,0.507,0.278],[0.52,0.831,0.876],[0.872,0.846,0.238],[0.454,0.427,0.405],[0.338,0.651,0.437],[0.247,0.326,0.168],[0.744,0.887,0.626],[0.382,0.283,0.181],[0.472,0.717,0.143]]
+  .map(([x,y,z])=>({x,y,z,ph:Math.random()*6.283,sp:0.5+Math.random()*0.8,sx:0,sy:0,depth:0}));
+
 const nodes = WORDS3D.map(([w,x,y,z])=>({
   w, x, y, z,
   ph: Math.random()*6.283, sp: 0.7+Math.random()*0.9,   /* twinkle */
@@ -545,6 +546,14 @@ function drawMap(now){
   mctx.setTransform(MDPR,0,0,MDPR,0,0);
   mctx.clearRect(0,0,map3.clientWidth,map3.clientHeight);
   nodes.forEach(n=>project(n,t));
+  /* the crowd first, faint and beneath everything */
+  SHADOWS.forEach(s=>project(s,t));
+  for(const s of SHADOWS){
+    const tw = 0.75 + 0.25*Math.sin(t*s.sp*1.6+s.ph);
+    const a = (0.10 + (0.5-s.depth)*0.16)*tw;
+    mctx.fillStyle = `rgba(138,141,135,${Math.max(0,a).toFixed(3)})`;
+    mctx.beginPath(); mctx.arc(s.sx, s.sy, 0.9+(0.5-s.depth)*0.9, 0, 6.2832); mctx.fill();
+  }
   const order = [...nodes].sort((a,b)=>b.depth-a.depth);   /* far first */
 
   /* neighbour threads for the hovered or picked word */
@@ -687,6 +696,7 @@ obs.observe(langsEl);
 document.querySelectorAll(".kicker a").forEach(a=>{
   a.addEventListener("click", e=>{
     e.preventDefault();
+    document.body.style.animation = "none";   /* release the arrival fade so the departure can run */
     document.body.style.transition = "opacity 440ms ease";
     document.body.style.opacity = "0";
     setTimeout(()=>{ location.href = a.href; }, 440);
