@@ -547,6 +547,9 @@ document.getElementById("s1Btn").addEventListener("click", ()=>moveBeam(BEAM.s1,
 document.getElementById("s2Btn").addEventListener("click", ()=>moveBeam(BEAM.s2, "roof and oak draw beam toward timber."));
 </script>
 <script>
+window.addEventListener("pageshow", e=>{
+  if(e.persisted){ document.body.style.animation = "none"; document.body.style.transition = "none"; document.body.style.opacity = "1"; }
+});
 document.querySelectorAll(".kicker a").forEach(a=>{
   a.addEventListener("click", e=>{
     e.preventDefault();

@@ -42,7 +42,7 @@ body{
   display:inline-block;
   opacity:0;
 }
-#word span.ch.in{opacity:1;transition:opacity 3600ms ease}
+#word span.ch.in{opacity:1;transition:opacity 2800ms ease}
 #word span.ch.out{
   opacity:0;transform:translateY(-14px);filter:blur(2px);
   transition:opacity 2600ms ease, transform 2600ms ease, filter 2600ms ease;
@@ -174,7 +174,7 @@ const TWINKLE = {steadyMin:0.48, steadyMax:0.72, brightBase:0.72, brightSwing:0.
 
 /* pacing, in milliseconds; everything slow */
 const T = {
-  typeStart:1400,     /* first letter appears                */
+  typeStart:900,      /* the word begins to appear           */
   typeStep:320,       /* per letter                          */
   holdAfter:3600,     /* the word rests, complete            */
   releaseWindow:8000, /* each letter leaves at its own moment
@@ -593,7 +593,7 @@ function tick(now){
 function run(){
   /* the whole word fades in together */
   timers.push(setTimeout(()=>letterSpans.forEach(s=>s.classList.add("in")), T.typeStart));
-  const typed = T.typeStart + 3600;
+  const typed = T.typeStart + 2800;
   const releaseStart = typed + T.holdAfter;
   /* each letter chooses its own moment */
   let latest = 0;
@@ -636,6 +636,14 @@ document.querySelectorAll(".motif").forEach(a=>{
     document.body.style.opacity = "0";
     setTimeout(()=>{ location.href = href; }, 480);
   });
+});
+
+/* if the browser restores this page from its cache (returning from a glossary
+   page), it comes back exactly as it left: faded out, clock stopped. start fresh. */
+window.addEventListener("pageshow", e=>{
+  if(e.persisted){ location.reload(); return; }
+  document.body.style.transition = "none";
+  document.body.style.opacity = "1";
 });
 </script>
 </body>

@@ -553,6 +553,9 @@ stepBtn.addEventListener("click", ()=>{
 })();
 </script>
 <script>
+window.addEventListener("pageshow", e=>{
+  if(e.persisted){ document.body.style.animation = "none"; document.body.style.transition = "none"; document.body.style.opacity = "1"; }
+});
 document.querySelectorAll(".kicker a").forEach(a=>{
   a.addEventListener("click", e=>{
     e.preventDefault();
