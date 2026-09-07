@@ -366,6 +366,10 @@ body{animation:pagein 620ms ease both}
 .fig-at .canvas-wrap{margin-top:0}
 /* the image keeps only its instrument */
 .fig-at .reg,.fig-at .reading,.fig-at .strata-block,.fig-at .closing{display:none}
+.fig-at{margin:3.6rem 0 0}
+.fig-at .grid-wrap{display:block;margin-top:0}
+.fig-at .cloth-frame{max-width:640px;margin:0 auto}
+.fig-at .panel{margin-top:1.4rem;max-width:640px;margin-left:auto;margin-right:auto}
 </style>
 <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400&display=swap" rel="stylesheet">
 </head>
@@ -380,85 +384,6 @@ body{animation:pagein 620ms ease both}
 
 <main>
 <section class="wrap">
-  <div class="fig-at"><div class="stage">
-  
-  
-  
-
-  <div class="grid-wrap">
-    <div>
-      <div class="cloth-frame">
-        <span class="corner c-tl"></span><span class="corner c-tr"></span>
-        <span class="corner c-bl"></span><span class="corner c-br"></span>
-        <svg class="field" id="at-field" viewBox="0 0 384 384" role="application"
-             aria-label="Attention field. Twelve by twelve grid of patches. Select a patch to see which other patches it attends to. Arrow keys move the selected patch."
-             tabindex="0"></svg>
-      </div>
-      <div class="field-cap">
-        <span>query patch <b id="at-q-read">&mdash;</b></span>
-        <span>tap a patch &middot; arrow keys to move</span>
-      </div>
-    </div>
-
-    <div class="panel">
-      <div class="ctl-group">
-        <p class="ctl-label">Attention head</p>
-        <div class="heads" id="at-heads" role="group" aria-label="Attention head">
-          <button class="head-btn" data-head="mix" aria-pressed="true"><span class="swatch" style="background:var(--thread-warm)"></span>Blended</button>
-          <button class="head-btn" data-head="local" aria-pressed="false"><span class="swatch" style="background:var(--thread-cool)"></span>Neighbours</button>
-          <button class="head-btn" data-head="figure" aria-pressed="false"><span class="swatch" style="background:var(--thread-purp)"></span>By likeness</button>
-          <button class="head-btn" data-head="contrast" aria-pressed="false"><span class="swatch" style="background:var(--thread-teal)"></span>Across the edge</button>
-        </div>
-      </div>
-
-      <div class="ctl-group">
-        <p class="ctl-label">Depth &middot; layer</p>
-        <div class="layer-row">
-          <input type="range" id="at-layer" min="1" max="6" step="1" value="1" aria-label="Layer, one to six">
-          <span class="layer-read" id="at-layer-read">1 / 6</span>
-        </div>
-      </div>
-
-      <div class="ctl-group">
-        <p class="ctl-label">Show</p>
-        <div class="toggles">
-          <label class="tog"><input type="checkbox" id="at-t-threads" checked> threads</label>
-          <label class="tog"><input type="checkbox" id="at-t-heat" checked> weight as heat</label>
-        </div>
-      </div>
-
-      <div class="reading">
-        <p class="r-title">What this head is doing</p>
-        <p id="at-read-body"></p>
-        <p class="layer-note" id="at-read-layer"></p>
-      </div>
-    </div>
-  </div>
-
-  <div class="strata-block">
-    <div class="strata-head">
-      <h2>The reading accumulates</h2>
-      <p>A transformer is many of these layers stacked. Each one does not replace the surface beneath it; it adds its reading to a running one. The result is a worked surface, re-inscribed with every pass, never wiped clean.</p>
-    </div>
-    <div class="strata-stage">
-      <svg class="strata" id="at-strata" viewBox="0 0 240 260" role="img" aria-label="Six translucent layers stacked, each showing the attention reading at that depth for the current patch. The current layer sits crisp on top."></svg>
-      <p class="strata-cap">Six layers, one query. The earliest reading sits at the bottom, faint; each later layer settles on top of it. The crisp sheet is the layer you are looking at now &mdash; <b>tap a sheet to move there</b>. Freud called the analogous thing a mystic writing pad: a surface that keeps the trace of everything written on it while always presenting a clean face.</p>
-    </div>
-  </div>
-
-  <div class="closing">
-    <div>
-      <h3>Field, not sequence</h3>
-      <p>A loom builds a row at a time, and a needle commits one stitch before the next. Attention has no such order. Every patch is weighed against every other in a single parallel pass, and geometry has to be <span class="soft">told</span> to it through a position signal rather than given by the cloth. The grid above is not a path the model walks. It is the relation it computes all at once.</p>
-    </div>
-    <div>
-      <h3>Where the surprise lives</h3>
-      <p>The weights are not authored by hand in a real model; they are learned. So the groupings a patch reaches for, what counts as alike, what holds an edge, are not ones you specified. When making-with such a system returns something you did not put there, this is the room it came out of: the learned pattern of attention, legible after the fact, the way a worked surface can be reread once it is still.</p>
-    </div>
-  </div>
-
-  
-</div></div>
 
   <p>The first two pages of the glossary showed how a sentence is divided into tokens, how each token receives a vector, and how those vectors can be compared and subtracted. So far, however, each token has been represented only by its initial embedding: a vector learned during training and retrieved whenever that token appears.</p>
   <p>Once these initial vectors have been retrieved, they pass into a <em>transformer</em>: the layered neural network architecture at the centre of most contemporary LLMs. As the sentence passes through its layers, the transformer repeatedly updates the representation of each token in relation to its context. The token <em>beam</em> begins with the same embedding whether the sentence concerns light or oak, but it does not remain there. <em>Attention</em> is one of the main processes through which its meaning changes.</p>
@@ -547,6 +472,86 @@ body{animation:pagein 620ms ease both}
     <p>The earlier development of attention in neural language systems draws on Dzmitry Bahdanau, Kyunghyun Cho, and Yoshua Bengio, &ldquo;Neural Machine Translation by Jointly Learning to Align and Translate&rdquo;, 2015.</p>
     <p>The account of contextual representations draws on Daniel Jurafsky and James H. Martin, <em>Speech and Language Processing</em>, third-edition draft, and Jay Alammar, &ldquo;The Illustrated Transformer&rdquo;, 2018.</p>
   </div>
+  <div class="fig-at"><div class="stage">
+  
+  
+  
+
+  <div class="grid-wrap">
+    <div>
+      <div class="cloth-frame">
+        <span class="corner c-tl"></span><span class="corner c-tr"></span>
+        <span class="corner c-bl"></span><span class="corner c-br"></span>
+        <svg class="field" id="at-field" viewBox="0 0 384 384" role="application"
+             aria-label="Attention field. Twelve by twelve grid of patches. Select a patch to see which other patches it attends to. Arrow keys move the selected patch."
+             tabindex="0"></svg>
+      </div>
+      <div class="field-cap">
+        <span>query patch <b id="at-q-read">&mdash;</b></span>
+        <span>tap a patch &middot; arrow keys to move</span>
+      </div>
+    </div>
+
+    <div class="panel">
+      <div class="ctl-group">
+        <p class="ctl-label">Attention head</p>
+        <div class="heads" id="at-heads" role="group" aria-label="Attention head">
+          <button class="head-btn" data-head="mix" aria-pressed="true"><span class="swatch" style="background:var(--thread-warm)"></span>Blended</button>
+          <button class="head-btn" data-head="local" aria-pressed="false"><span class="swatch" style="background:var(--thread-cool)"></span>Neighbours</button>
+          <button class="head-btn" data-head="figure" aria-pressed="false"><span class="swatch" style="background:var(--thread-purp)"></span>By likeness</button>
+          <button class="head-btn" data-head="contrast" aria-pressed="false"><span class="swatch" style="background:var(--thread-teal)"></span>Across the edge</button>
+        </div>
+      </div>
+
+      <div class="ctl-group">
+        <p class="ctl-label">Depth &middot; layer</p>
+        <div class="layer-row">
+          <input type="range" id="at-layer" min="1" max="6" step="1" value="1" aria-label="Layer, one to six">
+          <span class="layer-read" id="at-layer-read">1 / 6</span>
+        </div>
+      </div>
+
+      <div class="ctl-group">
+        <p class="ctl-label">Show</p>
+        <div class="toggles">
+          <label class="tog"><input type="checkbox" id="at-t-threads" checked> threads</label>
+          <label class="tog"><input type="checkbox" id="at-t-heat" checked> weight as heat</label>
+        </div>
+      </div>
+
+      <div class="reading">
+        <p class="r-title">What this head is doing</p>
+        <p id="at-read-body"></p>
+        <p class="layer-note" id="at-read-layer"></p>
+      </div>
+    </div>
+  </div>
+
+  <div class="strata-block">
+    <div class="strata-head">
+      <h2>The reading accumulates</h2>
+      <p>A transformer is many of these layers stacked. Each one does not replace the surface beneath it; it adds its reading to a running one. The result is a worked surface, re-inscribed with every pass, never wiped clean.</p>
+    </div>
+    <div class="strata-stage">
+      <svg class="strata" id="at-strata" viewBox="0 0 240 260" role="img" aria-label="Six translucent layers stacked, each showing the attention reading at that depth for the current patch. The current layer sits crisp on top."></svg>
+      <p class="strata-cap">Six layers, one query. The earliest reading sits at the bottom, faint; each later layer settles on top of it. The crisp sheet is the layer you are looking at now &mdash; <b>tap a sheet to move there</b>. Freud called the analogous thing a mystic writing pad: a surface that keeps the trace of everything written on it while always presenting a clean face.</p>
+    </div>
+  </div>
+
+  <div class="closing">
+    <div>
+      <h3>Field, not sequence</h3>
+      <p>A loom builds a row at a time, and a needle commits one stitch before the next. Attention has no such order. Every patch is weighed against every other in a single parallel pass, and geometry has to be <span class="soft">told</span> to it through a position signal rather than given by the cloth. The grid above is not a path the model walks. It is the relation it computes all at once.</p>
+    </div>
+    <div>
+      <h3>Where the surprise lives</h3>
+      <p>The weights are not authored by hand in a real model; they are learned. So the groupings a patch reaches for, what counts as alike, what holds an edge, are not ones you specified. When making-with such a system returns something you did not put there, this is the room it came out of: the learned pattern of attention, legible after the fact, the way a worked surface can be reread once it is still.</p>
+    </div>
+  </div>
+
+  
+</div></div>
+
 </section>
 </main>
 
