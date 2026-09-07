@@ -218,7 +218,53 @@ footer p{
 .kicker a:hover{text-decoration:underline;text-underline-offset:3px}
 body{animation:pagein 620ms ease both}
 @keyframes pagein{from{opacity:0}}
+.sources{margin-top:2.4rem;border-top:1px solid var(--silver);padding-top:1.1rem}
+.sources .skick{font-family:var(--sans);font-size:0.6rem;letter-spacing:0.28em;text-transform:uppercase;color:var(--silver-deep);margin:0 0 0.7rem}
+.sources p{font-size:0.85rem;color:var(--ink-soft);line-height:1.65;margin:0 0 0.55rem}
+.note details{margin-top:0.7rem}
+.note summary{cursor:pointer;font-family:var(--sans);font-size:0.6rem;letter-spacing:0.22em;text-transform:uppercase;color:var(--silver-deep);list-style:none}
+.note summary::-webkit-details-marker{display:none}
+.note summary::before{content:"+ ";}
+.note details[open] summary::before{content:"\2013 ";}
+.note details p{margin-top:0.55rem}
+.fig-nl{
+    --ink:#eef6f6; --ink-2:#f8fefe; --hair:#d3e3e2;
+    --turq:#2f8f86; --purp:#8d6f9e;
+    --text:#2b3a3d; --text-dim:#6c8082;
+    --disp:'Jost','Avenir Next','Century Gothic',sans-serif;
+    --body:'Inter',system-ui,sans-serif;
+    --mono:'IBM Plex Mono',ui-monospace,monospace;
+  }
+.fig-nl *{box-sizing:border-box}
+.fig-nl .eyebrow{font-family:var(--mono);font-size:11px;letter-spacing:.32em;text-transform:uppercase;color:#8d6f9e;margin:0 0 16px}
+.fig-nl h1.title{font-family:var(--disp);font-weight:300;font-size:clamp(30px,5.4vw,52px);line-height:1.05;letter-spacing:-.01em;margin:0 0 20px}
+.fig-nl .lede{font-size:clamp(14px,1.5vw,16.5px);max-width:60ch;color:var(--text-dim);margin:0 0 4px}
+.fig-nl .lede b{color:var(--text);font-weight:500}
+.fig-nl .canvas-wrap{position:relative;margin-top:30px;border:1px solid var(--hair);border-radius:2px;background:var(--ink-2);aspect-ratio:8/6;overflow:hidden;cursor:pointer}
+.fig-nl .canvas-wrap canvas{position:absolute;inset:0;width:100%;height:100%;display:block}
+.fig-nl .corner{position:absolute;width:11px;height:11px;border:1px solid var(--hair);z-index:2}
+.fig-nl .c-tl{top:8px;left:8px;border-right:0;border-bottom:0}.c-tr{top:8px;right:8px;border-left:0;border-bottom:0}
+.fig-nl .c-bl{bottom:8px;left:8px;border-right:0;border-top:0}.c-br{bottom:8px;right:8px;border-left:0;border-top:0}
+.fig-nl .prompt{position:absolute;inset:0;display:flex;align-items:flex-end;justify-content:center;padding-bottom:22px;pointer-events:none;transition:opacity .7s ease}
+.fig-nl .prompt span{font-family:var(--mono);font-size:12px;letter-spacing:.24em;text-transform:uppercase;color:var(--text-dim);border:1px solid var(--hair);border-radius:2px;padding:10px 16px;background:rgba(248,254,254,.6)}
+.fig-nl .undercap{display:flex;justify-content:space-between;align-items:center;gap:16px;flex-wrap:wrap;margin-top:14px;font-family:var(--mono);font-size:11px;color:var(--text-dim)}
+.fig-nl .undercap .controls{display:flex;gap:10px}
+.fig-nl .btn{font-family:var(--mono);font-size:11px;background:transparent;color:var(--text-dim);border:1px solid var(--hair);border-radius:2px;padding:7px 12px;cursor:pointer;transition:color .18s,border-color .18s}
+.fig-nl .btn:hover{color:var(--text);border-color:#aecdcb}
+.fig-nl .btn:focus-visible{outline:2px solid var(--turq);outline-offset:2px}
+.fig-nl .reg{margin-top:44px;border-top:1px solid var(--hair);padding-top:28px;display:grid;grid-template-columns:repeat(3,1fr);gap:26px}
+.fig-nl .reg h3{font-family:var(--mono);font-size:10.5px;letter-spacing:.2em;text-transform:uppercase;margin:0 0 9px;font-weight:400}
+.fig-nl .reg .r1 h3{color:var(--turq)}.reg .r2 h3{color:var(--purp)}.reg .r3 h3{color:#c98a5a}
+.fig-nl .reg p{margin:0;font-size:13.5px;color:var(--text);max-width:40ch}
+.fig-nl .reg p .soft{color:var(--text-dim)}
+.fig-nl .note{margin-top:36px;font-family:var(--mono);font-size:11px;color:var(--text-dim);border:1px dashed #c2d6d4;border-radius:2px;padding:12px 14px;line-height:1.6;max-width:74ch}
+
+.fig-nl{margin:-1.2rem 0 2.8rem;font-family:'Inter',system-ui,sans-serif}
+.fig-nl .canvas-wrap{margin-top:0}
+/* the image keeps only its instrument */
+.fig-nl .reg{display:none}
 </style>
+<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400&display=swap" rel="stylesheet">
 </head>
 <body>
 
@@ -226,18 +272,47 @@ body{animation:pagein 620ms ease both}
 <header class="wrap">
   <p class="kicker"><a href="index.html">creaturely: a glossary &middot; iv</a></p>
   <h1>neurons &amp; layers</h1>
-  <p class="sub">the machinery underneath</p>
+  <p class="sub">The arithmetic inside a transformer layer.</p>
 </header>
 
 <main>
 <section class="wrap">
-  <p>The last page showed the model adjusting meanings with attention. This page opens the machinery that does the work. All of it, the measuring, the mixing, the moving, runs on one small unit repeated billions of times: the <em>neuron</em>.</p>
+  <div class="fig-nl"><div class="stage">
+  
+  
+  
+
+  <div class="canvas-wrap" id="nl-wrap">
+    <span class="corner c-tl"></span><span class="corner c-tr"></span><span class="corner c-bl"></span><span class="corner c-br"></span>
+    <canvas id="nl-cv" aria-label="A stack of translucent layers shown at an angle, each with faint numbers. Click to send a pulse that passes back through every layer and returns to the front."></canvas>
+    <div class="prompt" id="nl-prompt"><span>click to send a sound</span></div>
+  </div>
+
+  <div class="undercap">
+    <span id="nl-status">the stack is still</span>
+    <div class="controls">
+      <button class="btn" id="nl-send">send a sound</button>
+      <button class="btn" id="nl-slow" aria-pressed="false">slower</button>
+    </div>
+  </div>
+
+  <div class="reg">
+    <div class="r1"><h3>In &middot; through the layers</h3><p>The pass enters at the front and moves back through the stack, lifting each layer's numbers as it crosses. <span class="soft">Every sheet is a fixed field; the travelling brightness is the only thing alive.</span></p></div>
+    <div class="r2"><h3>Back &middot; the return</h3><p>It turns at the far layer and comes back through the same sheets, now in the seahorse-star purple, carrying what it gathered. <span class="soft">A return is the felt shape of the exchange, even where the machine runs only forward.</span></p></div>
+    <div class="r3"><h3>Out &middot; altered</h3><p>It arrives at the front surface a little transformed, resolving toward coral, and then the stack is silent again. <span class="soft">Unchanged, exactly as before you spoke.</span></p></div>
+  </div>
+
+  
+</div></div>
+
+  <p>The previous page introduced the transformer and one of its two main calculations, attention, which lets each token draw information from the tokens before it. This page introduces the other: a set of calculations, applied to each token on its own, that reshape its representation between rounds of attention. These calculations are built from one small unit repeated many millions of times. The unit is called a <em>neuron</em>.</p>
+  <p>The name is borrowed from biology, but the resemblance is loose. A neuron in an LLM is a piece of arithmetic, and this page shows what that arithmetic is.</p>
 </section>
 
 <section class="wrap">
-  <p class="seckick">i &middot; the unit</p>
-  <p>A neuron is a small calculator. It takes in a few numbers, multiplies each one by its own learned <em>weight</em>, adds the results together, and passes the sum onward. One extra rule finishes it: if the sum comes out negative, the neuron stays silent and sends zero. That rule is called an <em>activation</em>. It is what lets a neuron act like a detector: quiet for most inputs, loud for the pattern its weights are tuned to.</p>
-  <p>Below is a single neuron whose three weights make it a rough detector of glowing things. Feed it words and watch the arithmetic.</p>
+  <p class="seckick">i &middot; neurons</p>
+  <p>A neuron takes in a list of numbers, multiplies each one by its own <em>weight</em>, adds the results together, and passes the sum onward. The weights are numbers that belong to that neuron and are set during training. A final rule decides what the neuron sends: if the sum falls below zero, it sends zero; otherwise it sends the sum. This rule is called an <em>activation function</em>. The form used in the example below is called ReLU; contemporary LLMs often use smoother variants that behave in a similar way. The activation function is what allows a neuron to act like a detector: it stays at zero for most inputs and produces a larger number only when the inputs fit the pattern its weights favour.</p>
+  <p>Below is a single neuron with three weights, chosen so that it responds to words associated with glowing. Feed it a word and follow the arithmetic.</p>
 </section>
 
 <div class="bleed">
@@ -255,13 +330,13 @@ body{animation:pagein 620ms ease both}
 </div>
 
 <section class="wrap">
-  <p>Notice what happened with <em>sea</em>: the weighted sum came out negative, the activation held it at zero, and the neuron stayed silent. The weights are the learned part. Nobody set them to detect glow; training nudged them, example by example, until this behaviour appeared. And an honest caution the glossary returns to later: real neurons read values from vectors, not tidy features with names like &ldquo;light&rdquo;, and a single real neuron rarely means one clean thing. Page viii, superposition, is about exactly that.</p>
+  <p>Notice what happens with <em>sea</em>: the weighted sum is negative, the activation function holds it at zero, and the neuron sends nothing onward. The weights are the learned part. Nobody set them to detect glowing; during training, they were adjusted example by example until this behaviour appeared. Two cautions belong here. First, a real neuron reads values from a vector rather than tidy features with names like <em>light</em>. Second, a single real neuron rarely corresponds to one clean idea; page viii, on superposition, is about exactly that.</p>
 </section>
 
 <section class="wrap">
-  <p class="seckick">ii &middot; the stack</p>
-  <p>One neuron computes one number. A <em>layer</em> is thousands of neurons reading the same inputs side by side, each with its own weights. A layer therefore takes in a token&rsquo;s vector and produces a new one: the same word, re-described. The model alternates two moves that this glossary has now shown you. First comes a round of attention, where tokens mix with what they notice. Then comes a layer of neurons, where each mixed vector is reshaped. That pair is called a block. The whole machine, blocks stacked dozens deep, is called a <em>transformer</em>. It is the T in GPT, and it is the architecture underneath nearly every model you will meet.</p>
-  <p>Below, the glossary&rsquo;s sentence climbs the stack. Each token&rsquo;s vector is shown as a strip of values. Send them upward and watch every meaning get rewritten, beam most of all.</p>
+  <p class="seckick">ii &middot; layers and blocks</p>
+  <p>One neuron produces one number. A <em>layer</em> of neurons is thousands of them reading the same inputs side by side, each with its own weights. In a transformer, these layers are arranged into a <em>feed-forward network</em> that takes in a token&rsquo;s vector and produces a new one: the same token, re-described. Each transformer <em>block</em> therefore alternates two calculations. First, attention lets each token draw information from the tokens before it. Then the feed-forward network reshapes each token&rsquo;s vector on its own. A transformer is made of these blocks stacked one above another, dozens deep in contemporary LLMs.</p>
+  <p>Below, the sentence from the poems climbs the stack. Each token&rsquo;s vector is shown as a strip of values. Send the sentence upward and watch each representation change, <em>beam</em> most of all.</p>
 </section>
 
 <div class="bleed">
@@ -280,20 +355,33 @@ body{animation:pagein 620ms ease both}
 </div>
 
 <section class="wrap">
-  <p>Everything the model learned lives in the weights: every neuron&rsquo;s multipliers, every attention pattern&rsquo;s tuning. Counted together, they are called <em>parameters</em>. When a model is described as having billions of parameters, this is what is being counted. Nothing else is stored. There is no dictionary inside, no shelf of facts; there is only this machinery, and your sentence being rewritten by it, floor after floor, until the top of the stack holds a meaning assembled from everything below.</p>
+  <p>Everything an LLM learned is held in its weights: every neuron&rsquo;s multipliers and every matrix used by attention. Counted together, these numbers are called <em>parameters</em>. When a model is described as having billions of parameters, this is what is being counted. No one wrote these numbers directly, and reading them is a research problem in its own right. There is no dictionary stored inside and no shelf of facts, only this arithmetic and the sentence being rewritten by it, block after block, until the top of the stack holds a representation assembled from everything below.</p>
+  <p>The next page follows what happens at the top of the stack: how the model turns that representation into its next token.</p>
 
   <div class="poem">
     <p class="pkick">in the poems</p>
-    <p>The poems have no hand holding a pen. They have this machinery, climbed once per token, and the training that tuned it.</p>
+    <p>The poems were produced by this machinery, passed through once per token, and by the training that set its weights.</p>
   </div>
 
-  <p class="shadow">No one wrote the weights, and no one can simply read them.</p>
-
-  <p class="terms">terms from this page: <b>neuron &middot; weight &middot; activation &middot; layer &middot; transformer &middot; parameters</b></p>
+  <p class="terms">terms from this page: <b>neuron &middot; weight &middot; activation function &middot; layer &middot; feed-forward network &middot; block &middot; parameters</b></p>
 
   <div class="note">
-    <p class="nkick">an honest note</p>
-    <p>The neuron here has three inputs with nameable meanings; real neurons take in hundreds of unnamed values, and the activation shown, negative-becomes-zero, is one common choice among several. The value strips are invented for teaching and recoloured by a formula, not computed by a network, and real vectors hold thousands of values, not six. Real transformer blocks also contain plumbing this page omits, and the claim that no one can read the weights is softening at the edges: a research field called interpretability is slowly learning to read them, and page viii visits its central puzzle.</p>
+    <p class="nkick">a note on the visualizations</p>
+    <p>Every visualization in this glossary is an approximation. The panels were built by hand to illustrate an idea; they were not computed by a working model, and real LLMs are larger, less tidy, and less legible than anything shown here. Their purpose is to bridge the gap between the complexity of an LLM&rsquo;s inner workings and human experience, which is what a good visualization tends to do.</p>
+    <details>
+      <summary>notes on this page</summary>
+      <p>The neuron on this page has three inputs with nameable meanings. A real neuron takes in hundreds or thousands of values without names, and its activation function is one of several in use; the negative-becomes-zero rule shown here is the simplest.</p>
+    <p>The value strips in the stack panel are invented for teaching and recoloured by a formula. They were not computed by a network, and real vectors hold thousands of values rather than six.</p>
+    <p>Real transformer blocks also contain calculations this page omits, including normalization steps and the residual connections mentioned on the previous page. Attention itself contains learned matrices but no neurons in the sense described here; the term usually refers to the feed-forward network.</p>
+    <p>The claim that no one can read the weights is softening. A research field called interpretability is developing methods to read them, and page viii visits its central puzzle.</p>
+    </details>
+  </div>
+
+  <div class="sources">
+    <p class="skick">sources</p>
+    <p>The account of the feed-forward network within each transformer block draws on Ashish Vaswani et al., &ldquo;Attention Is All You Need&rdquo;, 2017.</p>
+    <p>The activation function shown draws on Vinod Nair and Geoffrey E. Hinton, &ldquo;Rectified Linear Units Improve Restricted Boltzmann Machines&rdquo;, 2010; the smoother variants mentioned draw on Dan Hendrycks and Kevin Gimpel, &ldquo;Gaussian Error Linear Units (GELUs)&rdquo;, 2016.</p>
+    <p>The explanation of neural units and layers draws on Daniel Jurafsky and James H. Martin, <em>Speech and Language Processing</em>, third-edition draft. Parameter counts for large models draw on Tom B. Brown et al., &ldquo;Language Models are Few-Shot Learners&rdquo;, 2020.</p>
   </div>
 </section>
 </main>
@@ -440,9 +528,161 @@ document.getElementById("resetBtn").addEventListener("click",()=>{ stage = 0; re
 render();
 </script>
 <script>
+/* the opening image */
+(function(){
+  var reduce=window.matchMedia&&window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  var wrap=document.getElementById('nl-wrap'), cv=document.getElementById('nl-cv'), ctx=cv.getContext('2d');
+  var statusEl=document.getElementById('nl-status'), promptEl=document.getElementById('nl-prompt');
+  var dpr=Math.max(1,Math.min(2.5,window.devicePixelRatio||1));
+  var W,H;
+
+  var SLATE=[124,146,150], TURQ=[90,206,196], PURP=[176,150,190], CORAL=[255,176,128], GOLD=[251,219,113];
+  function rgba(c,a){return 'rgba('+c[0]+','+c[1]+','+c[2]+','+a+')';}
+  function lerp(a,b,t){return [Math.round(a[0]+(b[0]-a[0])*t),Math.round(a[1]+(b[1]-a[1])*t),Math.round(a[2]+(b[2]-a[2])*t)];}
+  function ease(t){return t<0.5?2*t*t:1-Math.pow(-2*t+2,2)/2;}
+
+  var N=10;                 // layers
+  var GC=6, GR=4;           // numbers grid per layer
+
+  // seeded distinct numbers per layer
+  function mulberry32(a){return function(){a|=0;a=a+0x6D2B79F5|0;var t=Math.imul(a^a>>>15,1|a);t=t+Math.imul(t^t>>>7,61|t)^t;return ((t^t>>>14)>>>0)/4294967296;};}
+  var rnd=mulberry32(70114);
+  var nums=[]; for(var i=0;i<N;i++){var row=[];for(var k=0;k<GC*GR;k++){var v=(rnd()*2-1)*0.95;row.push(v<0?('-'+Math.abs(v).toFixed(2).slice(1)):Math.abs(v).toFixed(2).slice(1));}nums.push(row);}
+
+  // projection params (set in layout)
+  var marginX, baseY, planeW, planeH, ddx, ddy;
+  function layout(){
+    W=wrap.clientWidth; H=wrap.clientHeight;
+    cv.width=Math.round(W*dpr); cv.height=Math.round(H*dpr); ctx.setTransform(dpr,0,0,dpr,0,0);
+    planeW=W*0.50; planeH=H*0.46;
+    ddx=W*0.040; ddy=H*0.040;
+    marginX=W*0.085; baseY=H*0.44;
+    drawStill();
+  }
+  // point on layer i at (u,v) in [0,1] -> screen
+  function px(i,u){return marginX + i*ddx + u*planeW;}
+  function py(i,v){return baseY - i*ddy + v*planeH;}
+
+  var speed=1, active=false, t0=0, running=false;
+
+  function send(){
+    active=true; t0=performance.now(); promptEl.style.opacity='0';
+    statusEl.textContent='a sound is passing through';
+    if(!running){running=true; requestAnimationFrame(frame);}
+  }
+
+  function params(now){
+    var Tin=1.5*speed, Tback=1.5*speed, Tflare=0.5*speed;
+    var el=(now-t0)/1000;
+    if(reduce){Tin=0.7;Tback=0.7;Tflare=0.3;}
+    var zmax=N-1, z, phase, flare=0;
+    if(el<Tin){phase='in'; z=ease(el/Tin)*zmax;}
+    else if(el<Tin+Tback){phase='back'; z=zmax*(1-ease((el-Tin)/Tback));}
+    else if(el<Tin+Tback+Tflare){phase='flare'; z=0; flare=1-(el-Tin-Tback)/Tflare;}
+    else {phase='done'; z=0;}
+    return {z:z,phase:phase,flare:flare};
+  }
+
+  function drawStill(){
+    ctx.clearRect(0,0,W,H);
+    drawStack({z:-5,phase:'idle',flare:0});
+  }
+
+  function frame(now){
+    ctx.clearRect(0,0,W,H);
+    var p=params(now);
+    drawStack(p);
+    if(p.phase==='done'){ active=false; running=false; statusEl.textContent='the stack is still \u00b7 unchanged'; return; }
+    requestAnimationFrame(frame);
+  }
+
+  function drawStack(p){
+    var phaseCol = p.phase==='back'?PURP : (p.phase==='flare'?CORAL:TURQ);
+    var w=0.95; // pulse width across layers
+
+    // depth edges (the 3D box wireframe) drawn first, faint
+    ctx.strokeStyle=rgba(SLATE,0.16); ctx.lineWidth=0.8;
+    var corners=[[0,0],[1,0],[1,1],[0,1]];
+    for(var cI=0;cI<4;cI++){
+      var u=corners[cI][0], v=corners[cI][1];
+      ctx.beginPath(); ctx.moveTo(px(0,u),py(0,v)); ctx.lineTo(px(N-1,u),py(N-1,v)); ctx.stroke();
+    }
+
+    // planes back-to-front
+    for(var i=N-1;i>=0;i--){
+      var inten = (p.phase==='idle')?0 : Math.exp(-((i-p.z)*(i-p.z))/(2*w*w));
+      if(p.phase==='flare'&&i===0) inten=Math.max(inten,p.flare);
+      var col = lerp(SLATE, phaseCol, Math.min(1,inten));
+
+      var x0=px(i,0), y0=py(i,0);
+      // organza fill
+      ctx.fillStyle = rgba(p.phase==='back'?[214,182,216]:[206,221,225], 0.05+0.16*inten);
+      ctx.fillRect(x0, y0, planeW, planeH);
+      // border
+      ctx.strokeStyle = rgba(col, 0.22+0.55*inten); ctx.lineWidth=0.9+1.2*inten;
+      ctx.strokeRect(x0, y0, planeW, planeH);
+
+      // numbers on the sheet
+      ctx.textAlign='center'; ctx.textBaseline='middle';
+      ctx.font='10px '+'IBM Plex Mono, ui-monospace, monospace';
+      for(var r=0;r<GR;r++){for(var c=0;c<GC;c++){
+        var uu=(c+0.5)/GC, vv=(r+0.5)/GR;
+        var na=0.30+0.62*inten;
+        ctx.fillStyle=rgba(col, na);
+        ctx.fillText(nums[i][r*GC+c], px(i,uu), py(i,vv));
+      }}
+
+      // layer label on the near edge
+      if(i===0||i===N-1){
+        ctx.font='9px '+'IBM Plex Mono, ui-monospace, monospace';
+        ctx.fillStyle=rgba(SLATE,0.55); ctx.textAlign='left';
+        ctx.fillText(i===0?'layer 1 \u00b7 surface':'layer '+N, px(i,0)+2, py(i,1)+12);
+      }
+    }
+
+    // travelling wavefront sheet at fractional z (drawn over, soft)
+    if(p.phase==='in'||p.phase==='back'){
+      var z=p.z;
+      ctx.strokeStyle=rgba(phaseCol,0.55); ctx.lineWidth=2;
+      ctx.strokeRect(px(z,0), py(z,0), planeW, planeH);
+      ctx.fillStyle=rgba(phaseCol,0.06);
+      ctx.fillRect(px(z,0), py(z,0), planeW, planeH);
+    }
+
+    // arrival flare at the front surface
+    if(p.phase==='flare'){
+      var cx=px(0,0.5), cy=py(0,0.5);
+      var g=ctx.createRadialGradient(cx,cy,0,cx,cy,planeW*0.6);
+      g.addColorStop(0,rgba(GOLD,0.34*p.flare));
+      g.addColorStop(0.5,rgba(CORAL,0.18*p.flare));
+      g.addColorStop(1,rgba(CORAL,0));
+      ctx.fillStyle=g; ctx.beginPath(); ctx.arc(cx,cy,planeW*0.6,0,Math.PI*2); ctx.fill();
+    }
+
+    // entry cue at front
+    if(p.phase==='idle'){
+      ctx.fillStyle=rgba(SLATE,0.5); ctx.textAlign='center'; ctx.font='10px IBM Plex Mono, ui-monospace, monospace';
+    }
+  }
+
+  wrap.addEventListener('click',function(){ if(!active) send(); });
+  document.getElementById('nl-send').addEventListener('click',function(){ if(!active) send(); });
+  document.getElementById('nl-slow').addEventListener('click',function(){
+    speed=speed===1?2:1; this.setAttribute('aria-pressed',speed===2?'true':'false');
+    this.textContent=speed===2?'normal speed':'slower';
+  });
+  var rt; window.addEventListener('resize',function(){clearTimeout(rt);rt=setTimeout(layout,150);});
+  layout();
+})();
+</script>
+<script>
+window.addEventListener("pageshow", e=>{
+  if(e.persisted){ document.body.style.animation = "none"; document.body.style.transition = "none"; document.body.style.opacity = "1"; }
+});
 document.querySelectorAll(".kicker a").forEach(a=>{
   a.addEventListener("click", e=>{
     e.preventDefault();
+    document.body.style.animation = "none";   /* release the arrival fade so the departure can run */
     document.body.style.transition = "opacity 440ms ease";
     document.body.style.opacity = "0";
     setTimeout(()=>{ location.href = a.href; }, 440);

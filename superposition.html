@@ -212,7 +212,70 @@ footer p{
 .kicker a:hover{text-decoration:underline;text-underline-offset:3px}
 body{animation:pagein 620ms ease both}
 @keyframes pagein{from{opacity:0}}
+.note details{margin-top:0.7rem}
+.note summary{cursor:pointer;font-family:var(--sans);font-size:0.6rem;letter-spacing:0.22em;text-transform:uppercase;color:var(--silver-deep);list-style:none}
+.note summary::-webkit-details-marker{display:none}
+.note summary::before{content:"+ ";}
+.note details[open] summary::before{content:"\2013 ";}
+.note details p{margin-top:0.55rem}
+.fig-sp{
+    --ink:#eef6f6; --ink-2:#f8fefe; --hair:#d3e3e2; --hair-2:#c2d6d4;
+    --turq:#2f8f86; --purp:#8d6f9e; --coral:#cf8254;
+    --text:#2b3a3d; --text-dim:#6c8082;
+    --disp:'Jost','Avenir Next','Century Gothic',sans-serif;
+    --body:'Inter',system-ui,sans-serif;
+    --mono:'IBM Plex Mono',ui-monospace,monospace;
+  }
+.fig-sp *{box-sizing:border-box}
+.fig-sp .eyebrow{font-family:var(--mono);font-size:11px;letter-spacing:.32em;text-transform:uppercase;color:var(--purp);margin:0 0 16px}
+.fig-sp h1.title{font-family:var(--disp);font-weight:300;font-size:clamp(30px,5.4vw,52px);line-height:1.05;letter-spacing:-.01em;margin:0 0 20px}
+.fig-sp .lede{font-size:clamp(14px,1.5vw,16.5px);max-width:62ch;color:var(--text-dim);margin:0 0 4px}
+.fig-sp .lede b{color:var(--text);font-weight:500}
+.fig-sp .section-label{font-family:var(--mono);font-size:10.5px;letter-spacing:.24em;text-transform:uppercase;color:var(--text-dim);margin:38px 0 12px}
+.fig-sp .unit-wrap{position:relative;border:1px solid var(--hair);border-radius:2px;background:var(--ink-2);aspect-ratio:16/5;overflow:hidden}
+.fig-sp .unit-wrap canvas{position:absolute;inset:0;width:100%;height:100%;display:block}
+.fig-sp .unit-cap{display:flex;justify-content:space-between;align-items:center;gap:14px;flex-wrap:wrap;margin-top:10px;font-family:var(--mono);font-size:11px;color:var(--text-dim)}
+.fig-sp .btn{font-family:var(--mono);font-size:11px;background:transparent;color:var(--text-dim);border:1px solid var(--hair);border-radius:2px;padding:7px 12px;cursor:pointer;transition:color .18s,border-color .18s}
+.fig-sp .btn:hover{color:var(--text);border-color:#aecdcb}
+.fig-sp .btn:focus-visible{outline:2px solid var(--turq);outline-offset:2px}
+.fig-sp .pop{display:grid;grid-template-columns:minmax(0,1fr) 230px;gap:26px;align-items:start}
+.fig-sp .neuron-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:10px}
+.fig-sp .neuron{position:relative;aspect-ratio:1;border:1px solid var(--hair);border-radius:3px;background:var(--ink-2);cursor:pointer;transition:background .25s,border-color .25s,box-shadow .25s;display:flex;align-items:center;justify-content:center}
+.fig-sp .neuron span{font-family:var(--mono);font-size:10px;color:var(--text-dim);transition:color .2s}
+.fig-sp .neuron:hover{border-color:var(--hair-2)}
+.fig-sp .neuron.sel{border-color:var(--purp);box-shadow:0 0 0 2px rgba(141,111,158,.3)}
+.fig-sp .neuron:focus-visible{outline:2px solid var(--turq);outline-offset:2px}
+.fig-sp .concepts{display:flex;flex-direction:column;gap:7px}
+.fig-sp .concept{font-family:var(--body);font-size:13px;background:transparent;color:var(--text-dim);border:1px solid var(--hair);border-radius:2px;padding:9px 11px;cursor:pointer;text-align:left;transition:color .2s,border-color .2s,background .2s}
+.fig-sp .concept:hover{color:var(--text);border-color:var(--hair-2)}
+.fig-sp .concept.sel{color:var(--ink-2);background:var(--coral);border-color:var(--coral)}
+.fig-sp .concept.lit{color:var(--purp);border-color:var(--purp)}
+.fig-sp .concept:focus-visible{outline:2px solid var(--turq);outline-offset:2px}
+.fig-sp .caption{margin-top:18px;background:#edf4f2;border-radius:2px;padding:15px 16px;font-size:14px;color:var(--text);min-height:64px}
+.fig-sp .caption b{color:var(--text)}
+.fig-sp .caption .dim{color:var(--text-dim)}
+.fig-sp .sf-list{display:flex;flex-direction:column;gap:6px}
+.fig-sp .sf-row{display:flex;align-items:center;gap:8px;font-family:var(--body);font-size:12.5px;background:transparent;color:var(--text-dim);border:1px solid var(--hair);border-radius:2px;padding:6px 8px;cursor:pointer;text-align:left;transition:color .2s,border-color .2s}
+.fig-sp .sf-row:hover{border-color:var(--hair-2)}
+.fig-sp .sf-row.on{color:var(--teal);border-color:var(--teal)}
+.fig-sp .sf-row .nm{flex:0 0 62px}
+.fig-sp .sf-row .bar{flex:1;height:5px;background:rgba(124,146,150,.16);border-radius:3px;overflow:hidden}
+.fig-sp .sf-row .bar i{display:block;height:100%;width:0;background:var(--teal);transition:width .25s}
+.fig-sp .sf-row.ghost .bar i{background:var(--coral)}
+.fig-sp .sf-row:focus-visible{outline:2px solid var(--teal);outline-offset:2px}
+.fig-sp .reg{margin-top:44px;border-top:1px solid var(--hair);padding-top:28px;display:grid;grid-template-columns:repeat(3,1fr);gap:26px}
+.fig-sp .reg h3{font-family:var(--mono);font-size:10.5px;letter-spacing:.2em;text-transform:uppercase;margin:0 0 9px;font-weight:400}
+.fig-sp .reg .r1 h3{color:var(--text-dim)}.reg .r2 h3{color:var(--turq)}.reg .r3 h3{color:var(--purp)}
+.fig-sp .reg p{margin:0;font-size:13.5px;color:var(--text);max-width:40ch}
+.fig-sp .reg p .soft{color:var(--text-dim)}
+.fig-sp .note{margin-top:36px;font-family:var(--mono);font-size:11px;color:var(--text-dim);border:1px dashed var(--hair-2);border-radius:2px;padding:12px 14px;line-height:1.6;max-width:74ch}
+
+.fig-sp{margin:-1.2rem 0 2.8rem;font-family:'Inter',system-ui,sans-serif}
+.fig-sp .canvas-wrap{margin-top:0}
+/* the image keeps only its instrument */
+.fig-sp .reg,.fig-sp .section-label,.fig-sp .lede,.fig-sp #sp-uwrap,.fig-sp #sp-uwrap + .unit-cap,.fig-sp .pop:has(#sp-grid),.fig-sp .caption{display:none}
 </style>
+<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400&display=swap" rel="stylesheet">
 </head>
 <body>
 
@@ -225,6 +288,60 @@ body{animation:pagein 620ms ease both}
 
 <main>
 <section class="wrap">
+  <div class="fig-sp"><div class="stage">
+  
+  
+  
+
+  <p class="section-label">First &middot; one unit</p>
+  <div class="unit-wrap" id="sp-uwrap">
+    <canvas id="sp-ucv" aria-label="A single neuron: several inputs, each multiplied by a weight, summed, then passed through a squashing curve to an output."></canvas>
+  </div>
+  <div class="unit-cap">
+    <span id="sp-ustatus">a weighted sum, then a squash</span>
+    <button class="btn" id="sp-ufire">send a signal</button>
+  </div>
+
+  <p class="section-label">Then &middot; the population</p>
+  <div class="pop">
+    <div>
+      <div class="neuron-grid" id="sp-grid"></div>
+    </div>
+    <div>
+      <p style="font-family:var(--mono);font-size:10.5px;letter-spacing:.2em;text-transform:uppercase;color:var(--text-dim);margin:0 0 9px">A concept to read</p>
+      <div class="concepts" id="sp-concepts"></div>
+    </div>
+  </div>
+  <div class="caption" id="sp-caption"><span class="dim">Pick a concept to see it spread, or pick a neuron to see what it answers to.</span></div>
+
+  <p class="section-label">Last &middot; superposition</p>
+  <p class="lede" style="margin-bottom:18px">This is how a small space holds more than it should. <b>Seven features, two neurons.</b> Each feature is a direction packed into the same flat plane, so they overlap, superimposed. Toggle them and watch the directions sum into a single point, then watch what the readout can and cannot recover.</p>
+  <div class="pop">
+    <div>
+      <div class="unit-wrap" id="sp-swrap" style="aspect-ratio:1/1;max-width:440px;margin:0 auto">
+        <canvas id="sp-scv" aria-label="A two-dimensional plane with seven feature directions packed into it. Toggling features sums their directions into one activation point; a readout shows which features can be recovered."></canvas>
+      </div>
+      <div class="unit-cap">
+        <span id="sp-sstatus">2 of 7 features active</span>
+        <span><button class="btn" id="sp-s-sparse">sparse</button> <button class="btn" id="sp-s-crowd">crowded</button></span>
+      </div>
+    </div>
+    <div>
+      <p style="font-family:var(--mono);font-size:10.5px;letter-spacing:.2em;text-transform:uppercase;color:var(--text-dim);margin:0 0 9px">Features &middot; tap to toggle</p>
+      <div class="sf-list" id="sp-sflist"></div>
+    </div>
+  </div>
+  <div class="caption" id="sp-scaption"></div>
+
+  <div class="reg">
+    <div class="r1"><h3>The unit &middot; what it computes</h3><p>Each input times a weight, all summed, then squashed so the total stays in bounds. <span class="soft">That squash, the only echo of a living cell's threshold, is the whole of the resemblance.</span></p></div>
+    <div class="r2"><h3>Distributed &middot; a concept spreads</h3><p>No concept lives in one neuron. It is held across many, as a pattern. <span class="soft">Remove any single neuron and the concept mostly survives, because it was never kept in just that one.</span></p></div>
+    <div class="r3"><h3>Polysemantic &middot; a neuron is many</h3><p>And no neuron holds one thing. A single unit fires for several unrelated concepts at once. <span class="soft">You can read every value it takes and still not find the meaning, because the meaning is in the pattern, not the place.</span></p></div>
+  </div>
+
+  
+</div></div>
+
   <p>Page iv made a promise. Its neuron detected one clean thing, glow, and the page admitted that real neurons are rarely so tidy. This page keeps the promise. A model needs to represent vastly more concepts than it has neurons or dimensions. Distinguishable things the model tracks, from &ldquo;glowing&rdquo; to &ldquo;legal language&rdquo; to &ldquo;the letter after q&rdquo;, are called <em>features</em>, and there are far more features worth tracking than there is room. The model&rsquo;s solution is to make its parts share. That sharing is called <em>superposition</em>.</p>
 </section>
 
@@ -279,8 +396,12 @@ body{animation:pagein 620ms ease both}
   <p class="terms">terms from this page: <b>feature &middot; superposition &middot; polysemanticity &middot; interpretability</b></p>
 
   <div class="note">
-    <p class="nkick">an honest note</p>
-    <p>The neuron here is scripted to answer to two hand-chosen families of words; real polysemantic neurons are found, not built, and their mixtures are stranger. The disc is a two-dimensional cartoon of a genuinely high-dimensional trick: in thousands of dimensions, the geometry is far more forgiving than the disc suggests, which is why the packing works as well as it does. Superposition is an active research area rather than settled doctrine; the account here follows work published by interpretability researchers in the 2020s, simplified but not, we hope, betrayed.</p>
+    <p class="nkick">a note on the visualizations</p>
+    <p>Every visualization in this glossary is an approximation. The panels were built by hand to illustrate an idea; they were not computed by a working model, and real LLMs are larger, less tidy, and less legible than anything shown here. Their purpose is to bridge the gap between the complexity of an LLM&rsquo;s inner workings and human experience, which is what a good visualization tends to do.</p>
+    <details>
+      <summary>notes on this page</summary>
+      <p>The neuron here is scripted to answer to two hand-chosen families of words; real polysemantic neurons are found, not built, and their mixtures are stranger. The disc is a two-dimensional cartoon of a genuinely high-dimensional trick: in thousands of dimensions, the geometry is far more forgiving than the disc suggests, which is why the packing works as well as it does. Superposition is an active research area rather than settled doctrine; the account here follows work published by interpretability researchers in the 2020s, simplified but not, we hope, betrayed.</p>
+    </details>
   </div>
 </section>
 </main>
@@ -371,9 +492,211 @@ window.addEventListener("resize", sizePack);
 sizePack();
 </script>
 <script>
+/* the opening image */
+(function(){
+  var reduce=window.matchMedia&&window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+  // ---------- the unit ----------
+  var uwrap=document.getElementById('sp-uwrap'), ucv=document.getElementById('sp-ucv'), uctx=ucv.getContext('2d');
+  var dpr=Math.max(1,Math.min(2.5,window.devicePixelRatio||1)), UW,UH;
+  var SLATE=[124,146,150], TURQ=[47,143,134], PURP=[141,111,158], CORAL=[207,130,84];
+  function rgba(c,a){return 'rgba('+c[0]+','+c[1]+','+c[2]+','+a+')';}
+  function ease(t){return t<0.5?2*t*t:1-Math.pow(-2*t+2,2)/2;}
+
+  var xs=[0.6,-0.3,0.8,0.4], ws=[0.7,0.9,-0.5,0.6];   // fixed inputs and weights
+  var sumTotal=0; for(var i=0;i<xs.length;i++)sumTotal+=xs[i]*ws[i];
+  var outVal=Math.tanh(sumTotal);
+  var uFireT=null, urun=false;
+
+  function ulayout(){UW=uwrap.clientWidth;UH=uwrap.clientHeight;ucv.width=Math.round(UW*dpr);ucv.height=Math.round(UH*dpr);uctx.setTransform(dpr,0,0,dpr,0,0);udraw(1);}
+  function inY(i){return UH*(0.22+i*0.19);}
+  var inX=function(){return UW*0.08;}, sumX=function(){return UW*0.42;}, sqX=function(){return UW*0.68;}, outX=function(){return UW*0.92;};
+
+  function udraw(p){
+    uctx.clearRect(0,0,UW,UH);
+    var sy=UH*0.5;
+    // edges inputs -> sum
+    var running=0;
+    for(var i=0;i<4;i++){
+      var prog=Math.max(0,Math.min(1,(p-0.05*i)/0.45));
+      var x1=inX()+10,y1=inY(i),x2=sumX()-14,y2=sy;
+      uctx.strokeStyle=rgba(xs[i]*ws[i]>=0?TURQ:CORAL,0.25+0.5*prog);
+      uctx.lineWidth=0.8+1.8*Math.abs(xs[i]*ws[i]);
+      uctx.beginPath();uctx.moveTo(x1,y1);uctx.lineTo(x2,y2);uctx.stroke();
+      // weight label
+      uctx.fillStyle=rgba(SLATE,0.7);uctx.font='9px IBM Plex Mono, ui-monospace, monospace';uctx.textAlign='center';
+      uctx.fillText('w '+ws[i].toFixed(1),(x1+x2)/2,(y1+y2)/2-4);
+      // travelling pulse
+      if(prog>0&&prog<1){var px=x1+(x2-x1)*ease(prog),py=y1+(y2-y1)*ease(prog);
+        uctx.fillStyle=rgba(TURQ,0.9);uctx.beginPath();uctx.arc(px,py,3,0,Math.PI*2);uctx.fill();}
+      if(prog>=1)running+=xs[i]*ws[i];
+      // input node
+      uctx.fillStyle=rgba(SLATE,0.9);uctx.beginPath();uctx.arc(inX(),inY(i),7,0,Math.PI*2);uctx.fill();
+      uctx.fillStyle=rgba([248,254,254],1);uctx.font='9px IBM Plex Mono, ui-monospace, monospace';uctx.textAlign='center';uctx.textBaseline='middle';
+      uctx.fillText(xs[i].toFixed(1),inX(),inY(i));
+      uctx.textBaseline='alphabetic';
+    }
+    // sum node
+    var sp=Math.max(0,Math.min(1,(p-0.42)/0.2));
+    uctx.fillStyle=rgba(SLATE,0.12);uctx.strokeStyle=rgba(SLATE,0.5);uctx.lineWidth=1;
+    uctx.beginPath();uctx.arc(sumX(),sy,18,0,Math.PI*2);uctx.fill();uctx.stroke();
+    uctx.fillStyle=rgba(TURQ,0.95);uctx.font='15px Jost, sans-serif';uctx.textAlign='center';uctx.textBaseline='middle';
+    uctx.fillText('\u03a3',sumX(),sy);
+    uctx.fillStyle=rgba(SLATE,0.8);uctx.font='9px IBM Plex Mono, ui-monospace, monospace';
+    uctx.fillText((sp>0?(running||sumTotal).toFixed(2):''),sumX(),sy+30);
+
+    // sum -> squash
+    uctx.strokeStyle=rgba(SLATE,0.4);uctx.lineWidth=1;
+    uctx.beginPath();uctx.moveTo(sumX()+18,sy);uctx.lineTo(sqX()-26,sy);uctx.stroke();
+
+    // squash node: tanh curve
+    var qx=sqX(),qw=24;
+    uctx.strokeStyle=rgba(SLATE,0.5);uctx.lineWidth=1;
+    uctx.strokeRect(qx-qw,sy-qw,qw*2,qw*2);
+    uctx.strokeStyle=rgba(TURQ,0.85);uctx.lineWidth=1.5;uctx.beginPath();
+    for(var t=-1;t<=1.001;t+=0.1){var X=qx+t*qw, Y=sy-Math.tanh(t*2.2)*qw*0.9;if(t===-1)uctx.moveTo(X,Y);else uctx.lineTo(X,Y);}
+    uctx.stroke();
+    var qp=Math.max(0,Math.min(1,(p-0.62)/0.2));
+    if(qp>0){var inx=Math.max(-1,Math.min(1,sumTotal/2.2));var dotX=qx+inx*qw,dotY=sy-Math.tanh(sumTotal)*qw*0.9;
+      uctx.fillStyle=rgba(PURP,0.9);uctx.beginPath();uctx.arc(dotX,dotY,3.5,0,Math.PI*2);uctx.fill();}
+    uctx.fillStyle=rgba(SLATE,0.65);uctx.font='9px IBM Plex Mono, ui-monospace, monospace';uctx.fillText('squash',qx,sy+qw+12);
+
+    // squash -> output
+    var op=Math.max(0,Math.min(1,(p-0.78)/0.2));
+    uctx.strokeStyle=rgba(SLATE,0.4);uctx.beginPath();uctx.moveTo(qx+qw,sy);uctx.lineTo(outX()-12,sy);uctx.stroke();
+    uctx.fillStyle=rgba(PURP,0.25+0.7*op);uctx.beginPath();uctx.arc(outX(),sy,11,0,Math.PI*2);uctx.fill();
+    uctx.fillStyle=rgba([248,254,254],1);uctx.font='10px IBM Plex Mono, ui-monospace, monospace';uctx.textAlign='center';uctx.textBaseline='middle';
+    uctx.fillText(op>0.5?outVal.toFixed(2):'',outX(),sy);uctx.textBaseline='alphabetic';
+    uctx.fillStyle=rgba(SLATE,0.65);uctx.font='9px IBM Plex Mono, ui-monospace, monospace';uctx.fillText('output',outX(),sy+24);
+  }
+  function ufireFrame(now){var p=Math.min(1,(now-uFireT)/1000/(reduce?0.6:1.8));udraw(p);if(p<1)requestAnimationFrame(ufireFrame);else urun=false;}
+  document.getElementById('sp-ufire').addEventListener('click',function(){uFireT=performance.now();if(!urun){urun=true;requestAnimationFrame(ufireFrame);}document.getElementById('sp-ustatus').textContent='inputs \u00d7 weights \u2192 sum '+sumTotal.toFixed(2)+' \u2192 squash \u2192 '+outVal.toFixed(2);});
+
+  // ---------- the population ----------
+  var NN=16, concepts=['seahorse','coral','star','spiral','salt','letter','tide','bone'];
+  function mulberry32(a){return function(){a|=0;a=a+0x6D2B79F5|0;var t=Math.imul(a^a>>>15,1|a);t=t+Math.imul(t^t>>>7,61|t)^t;return ((t^t>>>14)>>>0)/4294967296;};}
+  var rnd=mulberry32(31337);
+  // M[c][n] activation in [0,1], sparse with overlap
+  var M=[];
+  for(var c=0;c<concepts.length;c++){var rowm=[];for(var n=0;n<NN;n++){rowm.push(rnd()<0.34?(0.45+rnd()*0.55):0);}M.push(rowm);}
+  // ensure each concept has >=4 active, each neuron >=2 concepts
+  for(var c2=0;c2<concepts.length;c2++){var cnt=M[c2].filter(function(v){return v>0;}).length;while(cnt<4){var n=Math.floor(rnd()*NN);if(M[c2][n]===0){M[c2][n]=0.45+rnd()*0.55;cnt++;}}}
+  for(var n2=0;n2<NN;n2++){var cc=0;for(var c3=0;c3<concepts.length;c3++)if(M[c3][n2]>0)cc++;while(cc<2){var c4=Math.floor(rnd()*concepts.length);if(M[c4][n2]===0){M[c4][n2]=0.45+rnd()*0.55;cc++;}}}
+
+  var grid=document.getElementById('sp-grid'), conEl=document.getElementById('sp-concepts'), cap=document.getElementById('sp-caption');
+  var neuronEls=[], conceptEls=[];
+  var selConcept=null, selNeuron=null;
+
+  for(var n=0;n<NN;n++){(function(idx){
+    var b=document.createElement('button');b.className='neuron';b.setAttribute('aria-label','neuron '+(idx+1));
+    var s=document.createElement('span');s.textContent='n'+(idx+1);b.appendChild(s);
+    b.addEventListener('click',function(){selectNeuron(idx);});
+    grid.appendChild(b);neuronEls.push(b);
+  })(n);}
+  concepts.forEach(function(name,ci){
+    var b=document.createElement('button');b.className='concept';b.textContent=name;
+    b.addEventListener('click',function(){selectConcept(ci);});
+    conEl.appendChild(b);conceptEls.push(b);
+  });
+
+  function clearStyles(){
+    neuronEls.forEach(function(b){b.style.background='';b.style.boxShadow='';b.style.borderColor='';b.classList.remove('sel');b.querySelector('span').style.color='';});
+    conceptEls.forEach(function(b){b.classList.remove('sel','lit');});
+  }
+  function selectConcept(ci){
+    selConcept=ci;selNeuron=null;clearStyles();
+    conceptEls[ci].classList.add('sel');
+    var count=0;
+    for(var n=0;n<NN;n++){var v=M[ci][n];if(v>0){count++;
+      neuronEls[n].style.background=rgba(TURQ,0.12+0.6*v);
+      neuronEls[n].style.borderColor=rgba(TURQ,0.5);
+      neuronEls[n].querySelector('span').style.color=v>0.6?'#fff':'';
+    }}
+    cap.innerHTML='The concept <b>'+concepts[ci]+'</b> is held across <b>'+count+'</b> of the 16 neurons, each carrying a little of it. '+
+      '<span class="dim">There is no \u201c'+concepts[ci]+' neuron.\u201d Lose any single one and most of the concept remains, because it was never kept in just that place.</span>';
+  }
+  function selectNeuron(idx){
+    selNeuron=idx;selConcept=null;clearStyles();
+    neuronEls[idx].classList.add('sel');
+    var mine=[];for(var c=0;c<concepts.length;c++){if(M[c][idx]>0){mine.push(c);conceptEls[c].classList.add('lit');}}
+    var names=mine.map(function(c){return concepts[c];});
+    var listTxt = names.length>1 ? (names.slice(0,-1).join(', ')+' and '+names[names.length-1]) : (names[0]||'nothing');
+    cap.innerHTML='Neuron <b>n'+(idx+1)+'</b> answers to <b>'+names.length+'</b> concepts: <b>'+listTxt+'</b>. '+
+      '<span class="dim">Things with little in common, lit by the same unit. It holds no single meaning; you can watch every value it takes and never find one.</span>';
+  }
+
+  // ---------- superposition ----------
+  var swrap=document.getElementById('sp-swrap'), scv=document.getElementById('sp-scv'), sctx=scv.getContext('2d');
+  var sW,sH;
+  var sfeat=['seahorse','coral','star','spiral','salt','letter','tide'], sN=sfeat.length;
+  var sdir=[]; for(var si=0;si<sN;si++){var ang=-Math.PI/2+si*2*Math.PI/sN;sdir.push([Math.cos(ang),Math.sin(ang)]);}
+  var sactive=[]; for(var sj=0;sj<sN;sj++)sactive.push(false); sactive[0]=true; sactive[3]=true;
+  var sflist=document.getElementById('sp-sflist'), sfRows=[];
+  sfeat.forEach(function(nm,i){
+    var b=document.createElement('button'); b.className='sf-row';
+    b.innerHTML='<span class="nm">'+nm+'</span><span class="bar"><i></i></span>';
+    b.addEventListener('click',function(){sactive[i]=!sactive[i];sUpdate();});
+    sflist.appendChild(b); sfRows.push(b);
+  });
+  function hVec(){var hx=0,hy=0;for(var i=0;i<sN;i++)if(sactive[i]){hx+=0.8*sdir[i][0];hy+=0.8*sdir[i][1];}return [hx,hy];}
+  function slayout(){sW=swrap.clientWidth;sH=swrap.clientHeight;scv.width=Math.round(sW*dpr);scv.height=Math.round(sH*dpr);sctx.setTransform(dpr,0,0,dpr,0,0);sdraw();}
+  function sdraw(){
+    sctx.clearRect(0,0,sW,sH);
+    var cx=sW/2, cy=sH/2, R=Math.min(sW,sH)*0.36;
+    sctx.strokeStyle=rgba(SLATE,0.18);sctx.lineWidth=0.8;
+    sctx.beginPath();sctx.moveTo(cx-R*1.18,cy);sctx.lineTo(cx+R*1.18,cy);sctx.stroke();
+    sctx.beginPath();sctx.moveTo(cx,cy-R*1.18);sctx.lineTo(cx,cy+R*1.18);sctx.stroke();
+    sctx.fillStyle=rgba(SLATE,0.5);sctx.font='9px IBM Plex Mono, ui-monospace, monospace';sctx.textAlign='left';sctx.textBaseline='alphabetic';
+    sctx.fillText('n1',cx+R*1.18+3,cy+3);sctx.fillText('n2',cx+4,cy-R*1.18-3);
+    sctx.strokeStyle=rgba(SLATE,0.10);sctx.beginPath();sctx.arc(cx,cy,R,0,Math.PI*2);sctx.stroke();
+    for(var i=0;i<sN;i++){
+      var on=sactive[i], ex=cx+sdir[i][0]*R, ey=cy-sdir[i][1]*R;
+      if(on){ sctx.strokeStyle=rgba(TURQ,0.32);sctx.lineWidth=7;sctx.lineCap='round';
+        sctx.beginPath();sctx.moveTo(cx,cy);sctx.lineTo(cx+sdir[i][0]*R*0.8,cy-sdir[i][1]*R*0.8);sctx.stroke();sctx.lineCap='butt'; }
+      sctx.strokeStyle=rgba(on?TURQ:SLATE,on?0.55:0.20);sctx.lineWidth=on?1.5:0.7;
+      sctx.beginPath();sctx.moveTo(cx,cy);sctx.lineTo(ex,ey);sctx.stroke();
+      var lx=cx+sdir[i][0]*(R+18), ly=cy-sdir[i][1]*(R+18);
+      sctx.fillStyle=rgba(on?TURQ:[110,128,130],on?0.95:0.7);sctx.font=(on?'600 ':'')+'10px Inter, system-ui, sans-serif';
+      sctx.textAlign='center';sctx.textBaseline='middle';sctx.fillText(sfeat[i],lx,ly);
+    }
+    var h=hVec(), hx=cx+h[0]*R, hy=cy-h[1]*R;
+    sctx.strokeStyle=rgba(PURP,0.85);sctx.lineWidth=2;sctx.beginPath();sctx.moveTo(cx,cy);sctx.lineTo(hx,hy);sctx.stroke();
+    sctx.fillStyle=rgba(PURP,0.95);sctx.beginPath();sctx.arc(hx,hy,5,0,Math.PI*2);sctx.fill();
+    if(h[0]!==0||h[1]!==0){sctx.fillStyle=rgba(SLATE,0.6);sctx.textAlign='center';sctx.textBaseline='alphabetic';sctx.font='9px IBM Plex Mono, ui-monospace, monospace';sctx.fillText('activation',hx,hy-11);}
+  }
+  function sUpdate(){
+    var h=hVec(), count=0;
+    for(var i=0;i<sN;i++){
+      var score=sdir[i][0]*h[0]+sdir[i][1]*h[1];
+      var w=Math.max(0,Math.min(1,score/1.4));
+      var row=sfRows[i]; row.querySelector('i').style.width=(w*100)+'%';
+      row.classList.toggle('on',sactive[i]);
+      row.classList.toggle('ghost',(!sactive[i] && score>0.2));
+      if(sactive[i])count++;
+    }
+    document.getElementById('sp-sstatus').textContent=count+' of '+sN+' features active';
+    var cap=document.getElementById('sp-scaption');
+    if(count===0)cap.innerHTML='<span class="dim">Nothing is active. Toggle a feature to send activation into the plane.</span>';
+    else if(count<=2)cap.innerHTML='Few features fire, so their directions rarely collide. <span class="dim">Each active one still reads back clearly and the silent ones stay near zero. This sparsity is what lets a two-neuron plane hold seven features at all.</span>';
+    else if(count<=4)cap.innerHTML='The overlaps are starting to interfere. <span class="dim">Watch the silent features creep up, shown in coral: the readout is beginning to hallucinate faint presences that were never switched on.</span>';
+    else cap.innerHTML='Now the plane is crowded. <span class="dim">The directions pile up and the readout can no longer tell on from off; the ghost bars rival the real ones. Superposition holds only because, in a real network, this rarely happens: real features are sparse.</span>';
+    sdraw();
+  }
+  document.getElementById('sp-s-sparse').addEventListener('click',function(){for(var i=0;i<sN;i++)sactive[i]=false;sactive[0]=true;sactive[3]=true;sUpdate();});
+  document.getElementById('sp-s-crowd').addEventListener('click',function(){for(var i=0;i<sN;i++)sactive[i]=(i!==5);sUpdate();});
+
+  var rt;window.addEventListener('resize',function(){clearTimeout(rt);rt=setTimeout(function(){ulayout();slayout();},150);});
+  ulayout(); slayout(); sUpdate();
+})();
+</script>
+<script>
+window.addEventListener("pageshow", e=>{
+  if(e.persisted){ document.body.style.animation = "none"; document.body.style.transition = "none"; document.body.style.opacity = "1"; }
+});
 document.querySelectorAll(".kicker a").forEach(a=>{
   a.addEventListener("click", e=>{
     e.preventDefault();
+    document.body.style.animation = "none";   /* release the arrival fade so the departure can run */
     document.body.style.transition = "opacity 440ms ease";
     document.body.style.opacity = "0";
     setTimeout(()=>{ location.href = a.href; }, 440);
