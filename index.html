@@ -176,7 +176,7 @@ const TWINKLE = {steadyMin:0.48, steadyMax:0.72, brightBase:0.72, brightSwing:0.
 const T = {
   typeStart:900,      /* the word begins to appear           */
   typeStep:320,       /* per letter                          */
-  holdAfter:4000,     /* the word rests, complete            */
+  holdAfter:2800,     /* the word rests, complete: three beats */
   releaseWindow:7000, /* each letter leaves at its own moment
                          somewhere inside this window        */
   trickle:2200,       /* window over which a letter's cloud
@@ -617,7 +617,18 @@ document.addEventListener("click", ()=>{ if(!finished) skip(); });
 window.addEventListener("resize", ()=>{ sizeCanvas(); layoutRing(); });
 
 requestAnimationFrame(tick);
+/* returning from a glossary page: no ceremony, the ring simply fades in */
+const returning = location.hash === "#ring" ||
+  (document.referrer && (()=>{ try{ return new URL(document.referrer).origin === location.origin; }catch(e){ return false; } })());
 if(reduced){ settleAll(); }
+else if(returning){
+  document.body.style.opacity = "0";
+  settleAll();
+  requestAnimationFrame(()=>{ requestAnimationFrame(()=>{
+    document.body.style.transition = "opacity 700ms ease";
+    document.body.style.opacity = "1";
+  }); });
+}
 else {
   const start = ()=>run();
   if(document.fonts && document.fonts.ready){
@@ -644,8 +655,6 @@ document.querySelectorAll(".motif").forEach(a=>{
    page), it comes back exactly as it left: faded out, clock stopped. start fresh. */
 window.addEventListener("pageshow", e=>{
   if(e.persisted){ location.reload(); return; }
-  document.body.style.transition = "none";
-  document.body.style.opacity = "1";
 });
 </script>
 </body>

@@ -221,13 +221,19 @@ footer p{
 .kicker a:hover{text-decoration:underline;text-underline-offset:3px}
 body{animation:pagein 620ms ease both}
 @keyframes pagein{from{opacity:0}}
+.note details{margin-top:0.7rem}
+.note summary{cursor:pointer;font-family:var(--sans);font-size:0.6rem;letter-spacing:0.22em;text-transform:uppercase;color:var(--silver-deep);list-style:none}
+.note summary::-webkit-details-marker{display:none}
+.note summary::before{content:"+ ";}
+.note details[open] summary::before{content:"\2013 ";}
+.note details p{margin-top:0.55rem}
 </style>
 </head>
 <body>
 
 
 <header class="wrap">
-  <p class="kicker"><a href="index.html">creaturely: a glossary &middot; vii</a></p>
+  <p class="kicker"><a href="index.html#ring">creaturely: a glossary &middot; vii</a></p>
   <h1>training</h1>
   <p class="sub">where the weights came from</p>
 </header>
@@ -320,8 +326,12 @@ body{animation:pagein 620ms ease both}
   <p class="terms">terms from this page: <b>pretraining &middot; loss &middot; gradient descent &middot; fine-tuning &middot; RLHF</b></p>
 
   <div class="note">
-    <p class="nkick">an honest note</p>
-    <p>The training step here compresses a real one: actual losses are computed over tens of thousands of candidate tokens, and the nudging adjusts billions of weights by amounts far smaller than the panel shows. The settling space replays hand-placed final positions rather thantruly learning them; real training does not know its destination in advance, which is part of what makes it remarkable. The preference panel is a toy of RLHF&rsquo;s idea, not its algorithm, and modern shaping combines several methods this glossary gathers under one name. The claim about motivation is the mainstream scientific view, stated plainly; what optimization does and does not produce inside such systems remains genuinely debated, and page x returns to the question.</p>
+    <p class="nkick">a note on the visualizations</p>
+    <p>Every visualization in this glossary is an approximation. The panels were built by hand to illustrate an idea; they were not computed by a working model, and real LLMs are larger, less tidy, and less legible than anything shown here. Their purpose is to bridge the gap between the complexity of an LLM&rsquo;s inner workings and human experience, which is what a good visualization tends to do.</p>
+    <details>
+      <summary>notes on this page</summary>
+      <p>The training step here compresses a real one: actual losses are computed over tens of thousands of candidate tokens, and the nudging adjusts billions of weights by amounts far smaller than the panel shows. The settling space replays hand-placed final positions rather thantruly learning them; real training does not know its destination in advance, which is part of what makes it remarkable. The preference panel is a toy of RLHF&rsquo;s idea, not its algorithm, and modern shaping combines several methods this glossary gathers under one name. The claim about motivation is the mainstream scientific view, stated plainly; what optimization does and does not produce inside such systems remains genuinely debated, and page x returns to the question.</p>
+    </details>
   </div>
 </section>
 </main>
@@ -490,9 +500,13 @@ document.getElementById("prefReset").addEventListener("click", ()=>{
 });
 </script>
 <script>
+window.addEventListener("pageshow", e=>{
+  if(e.persisted){ document.body.style.animation = "none"; document.body.style.transition = "none"; document.body.style.opacity = "1"; }
+});
 document.querySelectorAll(".kicker a").forEach(a=>{
   a.addEventListener("click", e=>{
     e.preventDefault();
+    document.body.style.animation = "none";   /* release the arrival fade so the departure can run */
     document.body.style.transition = "opacity 440ms ease";
     document.body.style.opacity = "0";
     setTimeout(()=>{ location.href = a.href; }, 440);

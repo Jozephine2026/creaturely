@@ -215,13 +215,19 @@ footer p{
 .kicker a:hover{text-decoration:underline;text-underline-offset:3px}
 body{animation:pagein 620ms ease both}
 @keyframes pagein{from{opacity:0}}
+.note details{margin-top:0.7rem}
+.note summary{cursor:pointer;font-family:var(--sans);font-size:0.6rem;letter-spacing:0.22em;text-transform:uppercase;color:var(--silver-deep);list-style:none}
+.note summary::-webkit-details-marker{display:none}
+.note summary::before{content:"+ ";}
+.note details[open] summary::before{content:"\2013 ";}
+.note details p{margin-top:0.55rem}
 </style>
 </head>
 <body>
 
 
 <header class="wrap">
-  <p class="kicker"><a href="index.html">creaturely: a glossary &middot; ix</a></p>
+  <p class="kicker"><a href="index.html#ring">creaturely: a glossary &middot; ix</a></p>
   <h1>stigmergy</h1>
   <p class="sub">coordination through traces</p>
 </header>
@@ -288,8 +294,12 @@ body{animation:pagein 620ms ease both}
   <p class="terms">terms from this page: <b>stigmergy &middot; prompt</b></p>
 
   <div class="note">
-    <p class="nkick">an honest note</p>
-    <p>The walkers are a toy of the insect original: real stigmergy research involves chemistry, evaporation rates, and mathematics this panel waves at. The conversation panel is accurate in its mechanism, one document re-read per turn, but products increasingly blur it: some systems inject summaries, saved memories, or retrieved notes into the prompt from outside, which is more trace-tending, done by machinery on your behalf. The word stigmergy is not standard in AI engineering; borrowing it for conversations with frozen models is this project&rsquo;s own reading, offered because the fit is exact.</p>
+    <p class="nkick">a note on the visualizations</p>
+    <p>Every visualization in this glossary is an approximation. The panels were built by hand to illustrate an idea; they were not computed by a working model, and real LLMs are larger, less tidy, and less legible than anything shown here. Their purpose is to bridge the gap between the complexity of an LLM&rsquo;s inner workings and human experience, which is what a good visualization tends to do.</p>
+    <details>
+      <summary>notes on this page</summary>
+      <p>The walkers are a toy of the insect original: real stigmergy research involves chemistry, evaporation rates, and mathematics this panel waves at. The conversation panel is accurate in its mechanism, one document re-read per turn, but products increasingly blur it: some systems inject summaries, saved memories, or retrieved notes into the prompt from outside, which is more trace-tending, done by machinery on your behalf. The word stigmergy is not standard in AI engineering; borrowing it for conversations with frozen models is this project&rsquo;s own reading, offered because the fit is exact.</p>
+    </details>
   </div>
 </section>
 </main>
@@ -435,9 +445,13 @@ feelTab.addEventListener("click", ()=>setView(false));
 isTab.addEventListener("click", ()=>setView(true));
 </script>
 <script>
+window.addEventListener("pageshow", e=>{
+  if(e.persisted){ document.body.style.animation = "none"; document.body.style.transition = "none"; document.body.style.opacity = "1"; }
+});
 document.querySelectorAll(".kicker a").forEach(a=>{
   a.addEventListener("click", e=>{
     e.preventDefault();
+    document.body.style.animation = "none";   /* release the arrival fade so the departure can run */
     document.body.style.transition = "opacity 440ms ease";
     document.body.style.opacity = "0";
     setTimeout(()=>{ location.href = a.href; }, 440);

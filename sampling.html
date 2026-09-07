@@ -216,13 +216,19 @@ footer p{
 .kicker a:hover{text-decoration:underline;text-underline-offset:3px}
 body{animation:pagein 620ms ease both}
 @keyframes pagein{from{opacity:0}}
+.note details{margin-top:0.7rem}
+.note summary{cursor:pointer;font-family:var(--sans);font-size:0.6rem;letter-spacing:0.22em;text-transform:uppercase;color:var(--silver-deep);list-style:none}
+.note summary::-webkit-details-marker{display:none}
+.note summary::before{content:"+ ";}
+.note details[open] summary::before{content:"\2013 ";}
+.note details p{margin-top:0.55rem}
 </style>
 </head>
 <body>
 
 
 <header class="wrap">
-  <p class="kicker"><a href="index.html">creaturely: a glossary &middot; vi</a></p>
+  <p class="kicker"><a href="index.html#ring">creaturely: a glossary &middot; vi</a></p>
   <h1>sampling &amp; temperature</h1>
   <p class="sub">why every answer is different</p>
 </header>
@@ -293,8 +299,12 @@ body{animation:pagein 620ms ease both}
   <p class="terms">terms from this page: <b>sampling &middot; greedy decoding &middot; temperature</b></p>
 
   <div class="note">
-    <p class="nkick">an honest note</p>
-    <p>The candidate probabilities on this page are set by hand, carried over from the invented step on page v, and the sixth bar gathers all remaining tokens into &ldquo;elsewhere&rdquo;. The temperature arithmetic, though, is the real one in miniature: scores divided by the temperature, then converted to shares. Real systems usually combine sampling with cutoffs this glossary leaves aside, called top-k and top-p, which trim the unlikeliest tokens before the draw, and a setting of temperature zero conventionally means greedy decoding. The defaults are chosen by the provider, and most people never learn what their dice were set to.</p>
+    <p class="nkick">a note on the visualizations</p>
+    <p>Every visualization in this glossary is an approximation. The panels were built by hand to illustrate an idea; they were not computed by a working model, and real LLMs are larger, less tidy, and less legible than anything shown here. Their purpose is to bridge the gap between the complexity of an LLM&rsquo;s inner workings and human experience, which is what a good visualization tends to do.</p>
+    <details>
+      <summary>notes on this page</summary>
+      <p>The candidate probabilities on this page are set by hand, carried over from the invented step on page v, and the sixth bar gathers all remaining tokens into &ldquo;elsewhere&rdquo;. The temperature arithmetic, though, is the real one in miniature: scores divided by the temperature, then converted to shares. Real systems usually combine sampling with cutoffs this glossary leaves aside, called top-k and top-p, which trim the unlikeliest tokens before the draw, and a setting of temperature zero conventionally means greedy decoding. The defaults are chosen by the provider, and most people never learn what their dice were set to.</p>
+    </details>
   </div>
 </section>
 </main>
@@ -394,9 +404,13 @@ document.getElementById("tClearBtn").addEventListener("click", ()=>{ tDraws.inne
 refreshT();
 </script>
 <script>
+window.addEventListener("pageshow", e=>{
+  if(e.persisted){ document.body.style.animation = "none"; document.body.style.transition = "none"; document.body.style.opacity = "1"; }
+});
 document.querySelectorAll(".kicker a").forEach(a=>{
   a.addEventListener("click", e=>{
     e.preventDefault();
+    document.body.style.animation = "none";   /* release the arrival fade so the departure can run */
     document.body.style.transition = "opacity 440ms ease";
     document.body.style.opacity = "0";
     setTimeout(()=>{ location.href = a.href; }, 440);
