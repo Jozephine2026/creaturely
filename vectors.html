@@ -220,6 +220,12 @@ body{animation:pagein 620ms ease both}
 .sources{margin-top:2.4rem;border-top:1px solid var(--silver);padding-top:1.1rem}
 .sources .skick{font-family:var(--sans);font-size:0.6rem;letter-spacing:0.28em;text-transform:uppercase;color:var(--silver-deep);margin:0 0 0.7rem}
 .sources p{font-size:0.85rem;color:var(--ink-soft);line-height:1.65;margin:0 0 0.55rem}
+.note details{margin-top:0.7rem}
+.note summary{cursor:pointer;font-family:var(--sans);font-size:0.6rem;letter-spacing:0.22em;text-transform:uppercase;color:var(--silver-deep);list-style:none}
+.note summary::-webkit-details-marker{display:none}
+.note summary::before{content:"+ ";}
+.note details[open] summary::before{content:"\2013 ";}
+.note details p{margin-top:0.55rem}
 </style>
 </head>
 <body>
@@ -314,13 +320,17 @@ body{animation:pagein 620ms ease both}
   <p class="terms">terms from this page: <b>vector &middot; cosine similarity &middot; vector arithmetic &middot; word2vec</b></p>
 
   <div class="note">
-    <p class="nkick">an honest note</p>
-    <p>The teaching spaces on this page use three hand-placed dimensions in place of the hundreds or thousands used by real embeddings. Their slow turning is presentational; real models compare vectors across all their dimensions at once.</p>
+    <p class="nkick">a note on the visualizations</p>
+    <p>Every visualization in this glossary is an approximation. The panels were built by hand to illustrate an idea; they were not computed by a working model, and real LLMs are larger, less tidy, and less legible than anything shown here. Their purpose is to bridge the gap between the complexity of an LLM&rsquo;s inner workings and human experience, which is what a good visualization tends to do.</p>
+    <details>
+      <summary>notes on this page</summary>
+      <p>The teaching spaces on this page use three hand-placed dimensions in place of the hundreds or thousands used by real embeddings. Their slow turning is presentational; real models compare vectors across all their dimensions at once.</p>
     <p>The similarity numbers in the interactive are calculated from straight-line distance within this teaching space. Embedding systems commonly use cosine similarity, which compares the angle between vectors rather than the distance between their endpoints. The interactive therefore illustrates the general idea of similarity without reproducing that calculation.</p>
     <p>Cosine similarity is one method for comparing embeddings. It is not, by itself, the process through which a contemporary LLM interprets a sentence. As the tokens pass through a transformer, their representations change according to their context. The next pages introduce this process.</p>
     <p>The creature-to-environment directions were drawn by hand so that the arithmetic would land cleanly. In a real embedding, vector arithmetic works approximately and unevenly, and its results depend on both the model and the writing used to train it.</p>
     <p>The word2vec examples involving king and queen, computer programmer and homemaker, and doctor and nurse are documented outputs from systems studied during the 2010s; they were not invented for this page. Later research has questioned whether analogy completions, by themselves, provide a reliable measure of bias. Other forms of analysis have nevertheless demonstrated that social associations and inequalities can be learned from language corpora and reproduced within word embeddings.</p>
     <p>Early systems such as word2vec assigned one stable vector to each word. Contemporary LLMs usually begin with token embeddings and then repeatedly alter the representation of each token according to its context. Vector arithmetic offers an important illustration of relationships within learned spaces, but it is not a complete account of how a contemporary language model interprets or produces a sentence.</p>
+    </details>
   </div>
 
   <div class="sources">
@@ -331,7 +341,6 @@ body{animation:pagein 620ms ease both}
     <p>The caution concerning the use of analogy completions as measures of bias draws on Malvina Nissim, Rik van Noord, and Rob van der Goot, &ldquo;Fair Is Better than Sensational: Man Is to Doctor as Woman Is to Doctor&rdquo;, 2019.</p>
     <p>The distinction between static word embeddings and the changing contextual representations used in transformer models draws on Ashish Vaswani et al., &ldquo;Attention Is All You Need&rdquo;, 2017.</p>
     <p>The film <em>How Vectors Work</em> was made within the <em>creaturely</em> project, 2026.</p>
-    <p>No external source is quoted directly on this page.</p>
   </div>
 </section>
 </main>

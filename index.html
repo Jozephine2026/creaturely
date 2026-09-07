@@ -176,8 +176,8 @@ const TWINKLE = {steadyMin:0.48, steadyMax:0.72, brightBase:0.72, brightSwing:0.
 const T = {
   typeStart:900,      /* the word begins to appear           */
   typeStep:320,       /* per letter                          */
-  holdAfter:3600,     /* the word rests, complete            */
-  releaseWindow:8000, /* each letter leaves at its own moment
+  holdAfter:4000,     /* the word rests, complete            */
+  releaseWindow:7000, /* each letter leaves at its own moment
                          somewhere inside this window        */
   trickle:2200,       /* window over which a letter's cloud
                          streams out of it                   */
@@ -598,7 +598,9 @@ function run(){
   /* each letter chooses its own moment */
   let latest = 0;
   LETTERS.forEach((_,i)=>{
-    const at = releaseStart + Math.random()*T.releaseWindow;
+    /* staggered rather than random, so the first departure comes promptly
+       and the rest follow in their own order; a little jitter keeps it human */
+    const at = releaseStart + (i / letterSpans.length) * T.releaseWindow + Math.random()*500;
     latest = Math.max(latest, at);
     timers.push(setTimeout(()=>releaseLetter(i), at));
   });

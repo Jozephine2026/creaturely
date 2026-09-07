@@ -204,6 +204,12 @@ footer p{
 .kicker a:hover{text-decoration:underline;text-underline-offset:3px}
 body{animation:pagein 620ms ease both}
 @keyframes pagein{from{opacity:0}}
+.note details{margin-top:0.7rem}
+.note summary{cursor:pointer;font-family:var(--sans);font-size:0.6rem;letter-spacing:0.22em;text-transform:uppercase;color:var(--silver-deep);list-style:none}
+.note summary::-webkit-details-marker{display:none}
+.note summary::before{content:"+ ";}
+.note details[open] summary::before{content:"\2013 ";}
+.note details p{margin-top:0.55rem}
 </style>
 </head>
 <body>
@@ -329,10 +335,14 @@ body{animation:pagein 620ms ease both}
   <p class="terms">terms from this page: <b>LLM &middot; token &middot; tokenization &middot; vocabulary &middot; token ID &middot; embedding</b></p>
 
   <div class="note">
-    <p class="nkick">an honest note</p>
-    <p>The tokenizer on this page is made with a small, hand-built vocabulary of a few hundred pieces. It uses a simple longest-match rule and falls back to individual characters when it cannot find a longer piece. Real tokenizers use much larger vocabularies and different methods, so their tokenization will differ from these examples. Frequently recurring sequences are nevertheless more likely to remain whole, while less common strings are more likely to be divided into smaller pieces.</p>
+    <p class="nkick">a note on the visualizations</p>
+    <p>Every visualization in this glossary is an approximation. The panels were built by hand to illustrate an idea; they were not computed by a working model, and real LLMs are larger, less tidy, and less legible than anything shown here. Their purpose is to bridge the gap between the complexity of an LLM&rsquo;s inner workings and human experience, which is what a good visualization tends to do.</p>
+    <details>
+      <summary>notes on this page</summary>
+      <p>The tokenizer on this page is made with a small, hand-built vocabulary of a few hundred pieces. It uses a simple longest-match rule and falls back to individual characters when it cannot find a longer piece. Real tokenizers use much larger vocabularies and different methods, so their tokenization will differ from these examples. Frequently recurring sequences are nevertheless more likely to remain whole, while less common strings are more likely to be divided into smaller pieces.</p>
     <p>Real embeddings have hundreds or thousands of dimensions. The constellation here uses three hand-placed dimensions to suggest spatial relationships, while the comparison panel shows eight illustrative values. Its positions and values demonstrate the idea of regions or neighbourhoods but they were not taken from an actual language model.</p>
     <p>The token counts shown for the six languages are also illustrative, rather than produced by an actual tokenizer, so the comparison is schematic. Unequal tokenization across languages is documented, but which languages require more or fewer tokens, and by how much, varies according to the tokenizer, language, writing system, and passage.</p>
+    </details>
   </div>
 
   <div class="sources">
@@ -341,7 +351,6 @@ body{animation:pagein 620ms ease both}
     <p>The explanation of subword tokenization draws on Rico Sennrich, Barry Haddow, and Alexandra Birch, &ldquo;Neural Machine Translation of Rare Words with Subword Units&rdquo;, 2016, and the Hugging Face Tokenizers documentation.</p>
     <p>The explanation of embeddings draws on Jeffrey Pennington, Richard Socher, and Christopher D. Manning, &ldquo;GloVe: Global Vectors for Word Representation&rdquo;, 2014, and Ashish Vaswani et al., &ldquo;Attention Is All You Need&rdquo;, 2017. The embedding dimension cited for one well-known model draws on Tom B. Brown et al., &ldquo;Language Models are Few-Shot Learners&rdquo;, 2020.</p>
     <p>The discussion of unequal token counts across languages draws on Aleksandar Petrov et al., &ldquo;Language Model Tokenizers Introduce Unfairness Between Languages&rdquo;, 2023.</p>
-    <p>No external source is quoted directly on this page.</p>
   </div>
 </section>
 </main>
