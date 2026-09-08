@@ -212,6 +212,7 @@ footer p{
   color:var(--epigraph);margin:0 0 0.4rem;
 }
 .poem p{font-style:italic;color:var(--ink-soft);font-size:1.05rem;margin:0}
+.poem p + p{margin-top:0.6rem}
 .kicker a{color:inherit;text-decoration:none}
 .kicker a:hover{text-decoration:underline;text-underline-offset:3px}
 body{animation:pagein 620ms ease both}
@@ -222,6 +223,9 @@ body{animation:pagein 620ms ease both}
 .note summary::before{content:"+ ";}
 .note details[open] summary::before{content:"\2013 ";}
 .note details p{margin-top:0.55rem}
+.sources{margin-top:2.4rem;border-top:1px solid var(--silver);padding-top:1.1rem}
+.sources .skick{font-family:var(--sans);font-size:0.6rem;letter-spacing:0.28em;text-transform:uppercase;color:var(--silver-deep);margin:0 0 0.7rem}
+.sources p{font-size:0.85rem;color:var(--ink-soft);line-height:1.65;margin:0 0 0.55rem}
 </style>
 </head>
 <body>
@@ -230,18 +234,20 @@ body{animation:pagein 620ms ease both}
 <header class="wrap">
   <p class="kicker"><a href="index.html#ring">creaturely: a glossary &middot; vi</a></p>
   <h1>sampling &amp; temperature</h1>
-  <p class="sub">why every answer is different</p>
+  <p class="sub">Why the same question does not return the same answer.</p>
 </header>
 
 <main>
 <section class="wrap">
-  <p>The last page ended every cycle of the loop the same way: one token gets chosen from the probability distribution. This page opens that choice. Inside it sits the answer to a question everyone asks sooner or later: why does the same question, asked twice, come back differently? The answer is that choosing is not deciding. It is drawing.</p>
+  <p>The previous page ended each cycle of the generation process by turning the text into a probability distribution for the next token, then choosing one token from it. This page looks more closely at that moment of choice. Inside it is one important part of the answer to a question most people ask sooner or later about an LLM&rsquo;s response: why does the same question, asked twice, come back differently?</p>
+  <p>In many LLM systems, the next token is not simply the one with the highest probability. It is drawn from a distribution.</p>
 </section>
 
 <section class="wrap">
-  <p class="seckick">i &middot; the draw</p>
-  <p>There are two honest ways to choose from a distribution. The first is to always take the most likely token. This is called <em>greedy decoding</em>, and it makes the model deterministic: the same words in will produce the same words out, every time. The second is to draw from the distribution the way a lottery draws from weighted tickets: the likeliest token wins most often, but any token can win, in proportion to its share. This is called <em>sampling</em>, and it is what most systems actually do.</p>
-  <p>Below is one step from the last page&rsquo;s loop, the moment after &ldquo;the echo of a beam never sent returns across the&rdquo;. Choose both ways, several times each, and watch the difference arrive.</p>
+  <p class="seckick">i &middot; greedy decoding and sampling</p>
+  <p>There are two common ways to choose a token from a distribution. The first is to take the most likely token. This is called <em>greedy decoding</em>. In principle, when the model, context, and settings remain the same, greedy decoding follows the same path each time: the same words in produce the same words out.</p>
+  <p>The second is to draw from the distribution as a lottery draws from weighted tickets. A token with a large share of the probability is more likely to be drawn, but a token with a smaller share may still be chosen. This is called <em>sampling</em>, and many text-generating systems use some form of it.</p>
+  <p>Below is one step from the previous page&rsquo;s example: the moment after <em>the echo of a beam never sent returns across the</em>. Choose both ways, several times each, and compare the results.</p>
 </section>
 
 <div class="bleed">
@@ -260,12 +266,14 @@ body{animation:pagein 620ms ease both}
 </div>
 
 <section class="wrap">
-  <p>Press <em>sample</em> enough times and the tally starts to look like the bars: water most often, dark sometimes, sea now and then. Each single draw is unpredictable; the pattern of many draws is not. This is the precise sense in which a model is and is not predictable, and it is why regenerating an answer gives you a sibling of the first one rather than a copy.</p>
+  <p>Press <em>sample</em> enough times and the tally begins to resemble the bars: <em>water</em> most often, <em>dark</em> sometimes, <em>sea</em> now and then. Any one draw cannot be predicted from the probabilities alone, but across many draws their proportions will begin to appear.</p>
+  <p>This is one way in which an LLM is and is not predictable. The distribution shapes what is more or less likely, while sampling allows different paths through it. It is one reason that regenerating an answer can produce another variation rather than a copy. In a system that uses sampling, a new draw is made each time a token is chosen.</p>
 </section>
 
 <section class="wrap">
-  <p class="seckick">ii &middot; the dial</p>
-  <p>Before the draw, one number can reshape the whole distribution. It is called <em>temperature</em>. Low temperature sharpens the distribution, pushing probability toward the front-runners until sampling behaves almost like greed. High temperature flattens it, giving the unlikely tokens a real voice. The arithmetic is small. Each token&rsquo;s score is divided by the temperature before the scores become probabilities. The dial below performs that exact calculation on this step.</p>
+  <p class="seckick">ii &middot; temperature</p>
+  <p>Before the draw, one setting can reshape the whole distribution. It is called <em>temperature</em>. Each token&rsquo;s score is divided by the temperature before the scores are converted into probabilities, a conversion performed by a function called <em>softmax</em>.</p>
+  <p>A low temperature sharpens the distribution, moving more of the probability toward the front-runners until sampling behaves almost like greedy decoding. A high temperature flattens it, giving less likely tokens a greater chance of being drawn. The dial below performs this calculation in miniature.</p>
 </section>
 
 <div class="bleed">
@@ -287,24 +295,36 @@ body{animation:pagein 620ms ease both}
 </div>
 
 <section class="wrap">
-  <p>Temperature is often described as a creativity dial, and you can see why: at 0.2 the line will end in water nearly every time, and at 2.5 the sentence might find the sea, or the dark, or somewhere stranger. But it is worth holding on to what the dial actually is. It does not add ideas, moods, or intentions. It rescales scores the model already computed. Every &ldquo;creative&rdquo; choice it permits was already present in the distribution, waiting at a lower share. The wildness was in the model all along; temperature only decides how much of it gets a ticket.</p>
+  <p>Temperature is often described as a creativity setting, and it is easy to see why. At 0.2, the line will end in <em>water</em> nearly every time. At 2.5, the sentence might find the sea, or the dark, or somewhere stranger.</p>
+  <p>It is worth being precise about what the setting does. Temperature does not add ideas, moods, or intentions. It rescales scores the model has already computed. A higher temperature gives more probability to alternatives that previously held smaller shares.</p>
+  <p>A wider field of possible choices may produce language that feels more surprising, but it may also produce language that is less coherent. Temperature changes the amount of variation in the draw; it does not measure creativity.</p>
+  <p>The scores beneath the distribution were produced by the model&rsquo;s learned parameters working on the text already in context. Those parameters were shaped during training. The next page introduces how.</p>
 
   <div class="poem">
     <p class="pkick">in the poems</p>
-    <p>This is where the poems&rsquo; capacity to surprise their own makers lives: a throw of dice inside every line. At temperature zero, they would have been one poem, the same every time.</p>
+    <p>Part of the poems&rsquo; capacity to surprise the maker may live here: in the draw made at each new token. The distribution shaped what was likely, while sampling left room for another choice.</p>
+    <p>If the most likely token had always been chosen, the generation or loop would in principle have followed the same path each time, provided that the model, context, and settings remained the same.</p>
   </div>
 
-  <p class="shadow">Inside every answer there is a throw of dice.</p>
-
-  <p class="terms">terms from this page: <b>sampling &middot; greedy decoding &middot; temperature</b></p>
+  <p class="terms">terms from this page: <b>greedy decoding &middot; sampling &middot; temperature &middot; softmax</b></p>
 
   <div class="note">
     <p class="nkick">a note on the visualizations</p>
     <p>Every visualization in this glossary is an approximation. The panels were built by hand to illustrate an idea; they were not computed by a working model, and real LLMs are larger, less tidy, and less legible than anything shown here. Their purpose is to bridge the gap between the complexity of an LLM&rsquo;s inner workings and human experience, which is what a good visualization tends to do.</p>
     <details>
       <summary>notes on this page</summary>
-      <p>The candidate probabilities on this page are set by hand, carried over from the invented step on page v, and the sixth bar gathers all remaining tokens into &ldquo;elsewhere&rdquo;. The temperature arithmetic, though, is the real one in miniature: scores divided by the temperature, then converted to shares. Real systems usually combine sampling with cutoffs this glossary leaves aside, called top-k and top-p, which trim the unlikeliest tokens before the draw, and a setting of temperature zero conventionally means greedy decoding. The defaults are chosen by the provider, and most people never learn what their dice were set to.</p>
+      <p>The candidate probabilities on this page were set by hand and carried over from the invented step on page v. The sixth bar gathers all remaining tokens into <em>elsewhere</em>. The temperature arithmetic, however, is the real operation in miniature: the scores are divided by the temperature and then converted into shares by the softmax.</p>
+      <p>Working systems may combine temperature with cutoffs that this page leaves aside. In top-k sampling, only a fixed number of the most likely tokens remain in the draw. In top-p sampling, the system keeps the smallest group of likely tokens whose probabilities together reach a chosen threshold. The remaining tokens are excluded before sampling.</p>
+      <p>A temperature setting of zero conventionally means greedy decoding; the temperature calculation itself cannot divide scores by zero. Even greedy decoding is not always perfectly repeatable in practice, since the model, surrounding context, system settings, or numerical details of the computation may vary between runs.</p>
+      <p>The provider of a system chooses its default decoding settings, and most people interacting through a chat interface are not shown exactly what those settings are.</p>
     </details>
+  </div>
+
+  <div class="sources">
+    <p class="skick">sources</p>
+    <p>The account of greedy decoding, sampling, and temperature draws on Daniel Jurafsky and James H. Martin, <em>Speech and Language Processing</em>, third-edition draft.</p>
+    <p>The discussion of top-p or nucleus sampling draws on Ari Holtzman et al., &ldquo;The Curious Case of Neural Text Degeneration&rdquo;, 2020. The account of top-k sampling also draws on Angela Fan, Mike Lewis, and Yann Dauphin, &ldquo;Hierarchical Neural Story Generation&rdquo;, 2018, which provides an early example of its use in neural text generation.</p>
+    <p>The explanation of temperature as a way of rescaling scores before the softmax draws on Geoffrey Hinton, Oriol Vinyals, and Jeff Dean, &ldquo;Distilling the Knowledge in a Neural Network&rdquo;, 2015.</p>
   </div>
 </section>
 </main>
