@@ -196,6 +196,7 @@ footer p{
   color:var(--epigraph);margin:0 0 0.4rem;
 }
 .poem p{font-style:italic;color:var(--ink-soft);font-size:1.05rem;margin:0}
+.poem p + p{margin-top:0.6rem}
 
 .readout{font-style:italic;color:var(--ink-soft);font-size:1rem;margin-top:0.8rem;min-height:1.6em}
 .btnrow{display:flex;gap:0.6rem;flex-wrap:wrap;margin-top:1rem}
@@ -278,6 +279,9 @@ body{animation:pagein 620ms ease both}
 .fig-sp #sp-swrap{max-width:560px}
 .fig-sp .sf-list{max-width:560px;margin:1rem auto 0}
 .fig-sp .pop > div > p{text-align:center}
+.sources{margin-top:2.4rem;border-top:1px solid var(--silver);padding-top:1.1rem}
+.sources .skick{font-family:var(--sans);font-size:0.6rem;letter-spacing:0.28em;text-transform:uppercase;color:var(--silver-deep);margin:0 0 0.7rem}
+.sources p{font-size:0.85rem;color:var(--ink-soft);line-height:1.65;margin:0 0 0.55rem}
 </style>
 <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400&display=swap" rel="stylesheet">
 </head>
@@ -287,7 +291,7 @@ body{animation:pagein 620ms ease both}
 <header class="wrap">
   <p class="kicker"><a href="index.html#ring">creaturely: a glossary &middot; viii</a></p>
   <h1>superposition</h1>
-  <p class="sub">how so much fits in so little</p>
+  <p class="sub">How a model fits more features than it has dimensions to hold them.</p>
 </header>
 
 <main>
@@ -346,12 +350,15 @@ body{animation:pagein 620ms ease both}
   
 </div></div>
 
-  <p>Page iv made a promise. Its neuron detected one clean thing, glow, and the page admitted that real neurons are rarely so tidy. This page keeps the promise. A model needs to represent vastly more concepts than it has neurons or dimensions. Distinguishable things the model tracks, from &ldquo;glowing&rdquo; to &ldquo;legal language&rdquo; to &ldquo;the letter after q&rdquo;, are called <em>features</em>, and there are far more features worth tracking than there is room. The model&rsquo;s solution is to make its parts share. That sharing is called <em>superposition</em>.</p>
+  <p>The previous entry followed training as the model&rsquo;s parameters acquired structure. The result, however, is not a system in which every learned pattern receives a separate place.</p>
+  <p>Interpretability researchers use the word <em>feature</em> for a recurring property or pattern represented in a model&rsquo;s activity. A feature might respond to glowing, legal language, a sequence in code, or the letter that tends to follow q. Some are easy to name; many are not.</p>
+  <p>A model appears to represent more features than it has individual neurons or dimensions available to hold separately. One leading account of how they fit is called <em>superposition</em>: rather than giving every feature a private place, the model represents many of them through shared parts.</p>
 </section>
 
 <section class="wrap">
-  <p class="seckick">i &middot; the shared room</p>
-  <p>Meet a more honest neuron. Feed it the glossary&rsquo;s words and watch its meter. It answers strongly to light-things. It also answers strongly to song-things. It is one unit carrying more than one meaning, and such a neuron is called <em>polysemantic</em>. Most real neurons are like this.</p>
+  <p class="seckick">i &middot; polysemantic neurons</p>
+  <p>The neuron introduced earlier was designed to respond to one tidy feature: glowing. The neuron below is deliberately less tidy. Feed it words from the glossary and watch its meter. It responds strongly to words about light, but it also responds to words about song.</p>
+  <p>This simplified behaviour is called <em>polysemantic</em>: one neuron participates in more than one feature. Researchers have found many neurons whose activity cannot be explained by one clear, nameable idea.</p>
 </section>
 
 <div class="bleed">
@@ -365,12 +372,16 @@ body{animation:pagein 620ms ease both}
 </div>
 
 <section class="wrap">
-  <p>Try to finish the sentence &ldquo;this neuron detects&hellip;&rdquo; and you will feel the problem. It detects light, and also song, and the honest answer is both, depending. Nothing malfunctioned. The model simply could not afford a private neuron for every feature, so features share units, the way a small studio shares one table between cutting and pressing. The sharing works because the two uses rarely happen at the same moment.</p>
+  <p>Try to complete the sentence &ldquo;this neuron detects&hellip;&rdquo; and the difficulty appears. Light is true, and song is also true, but neither answer describes everything the neuron does.</p>
+  <p>This does not mean that the neuron contains two complete meanings. A feature is usually represented through a pattern involving many neurons, while the activity of one neuron may contribute to several features. The question therefore begins to shift from &ldquo;what does this neuron mean?&rdquo; to &ldquo;which patterns does it help represent?&rdquo;</p>
+  <p>This sharing can work because many features are <em>sparse</em>: on a typical input, most of them are not strongly active. If features concerning light and song seldom become active at the same moment, they can use some of the same capacity with relatively little confusion. Sparsity makes the sharing possible, although it does not remove <em>interference</em> altogether.</p>
 </section>
 
 <section class="wrap">
-  <p class="seckick">ii &middot; the crowded directions</p>
-  <p>The same trick happens to the space itself. In a space, directions that mean different things would ideally be perpendicular: fully independent, no interference. But a space with a few thousand dimensions can hold only a few thousand perpendicular directions, and a model tracks far more features than that. So it packs them in at angles that are almost perpendicular. Each feature bleeds slightly into its neighbours, and the model tolerates the bleed, because features that rarely fire together rarely interfere. Crowd the disc below and watch the angles shrink.</p>
+  <p class="seckick">ii &middot; features in superposition</p>
+  <p>The same idea can be pictured through vectors. Imagine that each feature is represented by a direction in an activation space. If two directions are perpendicular, they can vary independently without being mistaken for one another.</p>
+  <p>A space with a thousand dimensions can contain only a thousand directions that are all exactly perpendicular. A model, however, may benefit from representing far more than a thousand features. When those features are sparse, it can pack additional directions into the space at angles. The directions are no longer perfectly independent, but the model can tolerate some interference when the features seldom become active together.</p>
+  <p>Training balances the usefulness of representing another feature against the interference that feature creates. Crowd the disc below and watch the separation between its directions shrink.</p>
 </section>
 
 <div class="bleed">
@@ -388,24 +399,36 @@ body{animation:pagein 620ms ease both}
 </div>
 
 <section class="wrap">
-  <p>This two-dimensional disc holds exactly two perpendicular directions, yet you can lay many more into it if you accept the crowding. Real models do the same in thousands of dimensions, holding millions of almost-independent directions. This is part of why the weights are hard to read. Ask what one neuron means, and several features answer at once; ask where one feature lives, and it is smeared across many neurons. The research field that untangles this is called <em>interpretability</em>, and superposition is its central puzzle: the model&rsquo;s knowledge is real, but it is stored crosswise to the parts.</p>
+  <p>The disc makes the bargain visible. In two dimensions, only two directions can be mutually perpendicular. More directions can be added, but as the space becomes crowded, they become harder to distinguish.</p>
+  <p>A real model works in spaces with thousands of dimensions. These larger spaces can accommodate many more directions with far less crowding than the disc suggests. Research on superposition proposes that neural networks take advantage of this geometry, allowing more features to be represented than the number of dimensions would otherwise permit.</p>
+  <p>This is one reason the parameters are difficult to read. Ask what one neuron means, and several features may answer at once. Ask where one feature lives, and it may be spread across many neurons. <em>Interpretability</em> is the field that tries to untangle these relationships. Recent methods attempt to separate shared representations into individual features again, with promising but partial results.</p>
+  <p>The parameters therefore hold patterns that their individual parts do not display cleanly. The next entry turns from the model&rsquo;s internal representations to the conversation around it, and to a different kind of memory.</p>
 
   <div class="poem">
     <p class="pkick">in the poems</p>
-    <p>When a word in the poems shimmers with more than one sense, the doubling is structural. Senses share space in the model the way meanings share a word, and the poems were written out of exactly that crowding.</p>
-  </div>
+    <p>In the poems, one word can call up light, sound, movement, and memory at once. The model&rsquo;s internal representation may likewise bring several overlapping features into play together.</p>
+    <p>The poems were written from a space in which meanings do not each have a private room.</p></div>
 
-  <p class="shadow">Ask what one part means, and several voices answer.</p>
-
-  <p class="terms">terms from this page: <b>feature &middot; superposition &middot; polysemanticity &middot; interpretability</b></p>
+  <p class="terms">terms from this page: <b>feature &middot; polysemantic &middot; superposition &middot; sparsity &middot; interference &middot; interpretability</b></p>
 
   <div class="note">
     <p class="nkick">a note on the visualizations</p>
     <p>Every visualization in this glossary is an approximation. The panels were built by hand to illustrate an idea; they were not computed by a working model, and real LLMs are larger, less tidy, and less legible than anything shown here. Their purpose is to bridge the gap between the complexity of an LLM&rsquo;s inner workings and human experience, which is what a good visualization tends to do.</p>
     <details>
       <summary>notes on this page</summary>
-      <p>The neuron here is scripted to answer to two hand-chosen families of words; real polysemantic neurons are found, not built, and their mixtures are stranger. The disc is a two-dimensional cartoon of a genuinely high-dimensional trick: in thousands of dimensions, the geometry is far more forgiving than the disc suggests, which is why the packing works as well as it does. Superposition is an active research area rather than settled doctrine; the account here follows work published by interpretability researchers in the 2020s, simplified but not, we hope, betrayed.</p>
+      <p>The neuron in the first panel is scripted to respond to two hand-chosen families of words. It illustrates polysemantic behaviour but does not reproduce the activity of a neuron found in a working model. Real mixtures are discovered through analysis rather than assigned in advance, and they can be far less easy to name.</p>
+      <p>There is no single, universally settled definition of a feature. On this page, the word describes a recurring pattern in a model&rsquo;s activity associated with some property, context, or function. The names researchers give such patterns are interpretations based on the examples that activate them; the model does not attach those labels itself.</p>
+      <p>The disc is a two-dimensional teaching image of a high-dimensional arrangement. Feature directions are not literal arrows stored inside a model. They are patterns described mathematically across many numerical values. In thousands of dimensions, many directions can remain nearly perpendicular, making the geometry far more forgiving than the disc suggests.</p>
+      <p>Toy models show how the sparsity and importance of features can encourage superposition. Evidence from trained networks is consistent with this account, but the extent and organization of superposition in large language models remain active areas of research.</p>
+      <p>Methods called sparse autoencoders attempt to decompose a model&rsquo;s activity into a larger collection of features, only a small number of which are active at one time. These methods have recovered many patterns that people can interpret, but they do not yet provide a complete or uniquely correct map of what a model represents.</p>
     </details>
+  </div>
+
+  <div class="sources">
+    <p class="skick">sources</p>
+    <p>The account of polysemantic neurons draws on Chris Olah et al., &ldquo;Zoom In: An Introduction to Circuits&rdquo;, 2020. This work studied neural networks for images rather than language models, but introduced the interpretability problem that the teaching neuron illustrates.</p>
+    <p>The explanation of sparsity, interference, and features represented in superposition draws on Nelson Elhage et al., &ldquo;Toy Models of Superposition&rdquo;, 2022.</p>
+    <p>The account of sparse autoencoders and the attempt to recover features from shared representations draws on Trenton Bricken et al., &ldquo;Towards Monosemanticity: Decomposing Language Models With Dictionary Learning&rdquo;, 2023, and Adly Templeton et al., &ldquo;Scaling Monosemanticity: Extracting Interpretable Features from Claude 3 Sonnet&rdquo;, 2024.</p>
   </div>
 </section>
 </main>

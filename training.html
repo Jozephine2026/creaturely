@@ -227,6 +227,9 @@ body{animation:pagein 620ms ease both}
 .note summary::before{content:"+ ";}
 .note details[open] summary::before{content:"\2013 ";}
 .note details p{margin-top:0.55rem}
+.sources{margin-top:2.4rem;border-top:1px solid var(--silver);padding-top:1.1rem}
+.sources .skick{font-family:var(--sans);font-size:0.6rem;letter-spacing:0.28em;text-transform:uppercase;color:var(--silver-deep);margin:0 0 0.7rem}
+.sources p{font-size:0.85rem;color:var(--ink-soft);line-height:1.65;margin:0 0 0.55rem}
 </style>
 </head>
 <body>
@@ -235,18 +238,22 @@ body{animation:pagein 620ms ease both}
 <header class="wrap">
   <p class="kicker"><a href="index.html#ring">creaturely: a glossary &middot; vii</a></p>
   <h1>training</h1>
-  <p class="sub">where the weights came from</p>
+  <p class="sub">How the parameters were learned.</p>
 </header>
 
 <main>
 <section class="wrap">
-  <p>Every page so far has leaned on one phrase: the weights the training left. This page opens that phrase. Training is the long process that turned billions of random numbers into a model. It happened once, before any conversation, and it answers the question underneath all the others: what compels a model to do anything at all?</p>
+  <p>This page seeks to introduce <em>training</em>: the process through which billions of numbers that begin mostly at random become the learned parameters of a working LLM.</p>
+  <p>Training is one part of how a model is made, and it takes place before an ordinary conversation begins. It helps answer a larger question: how is a model able to do what it does?</p>
 </section>
 
 <section class="wrap">
-  <p class="seckick">i &middot; the guessing game</p>
-  <p>The first and longest stage is called <em>pretraining</em>, and it is one game played at enormous scale. The model reads a stretch of real text with the next token hidden. It guesses, producing a probability distribution, the same kind page v showed. Then the hidden token is revealed. The distance between the guess and the truth is measured as a single number, called the <em>loss</em>: a low probability on the true token means a high loss. Then every weight in the model is nudged, very slightly, in the direction that would have made the loss smaller. That nudging is called <em>gradient descent</em>. Then the game moves to the next stretch of text.</p>
-  <p>Play a few rounds of one example below. The hidden token is the last word of this glossary&rsquo;s own line.</p>
+  <p class="seckick">i &middot; pretraining and loss</p>
+  <p>The first and longest stage is called <em>pretraining</em>. At its centre is one procedure repeated at an enormous scale.</p>
+  <p>The model is given stretches of real text and trained to predict the token that comes next. It produces a probability distribution over the possibilities, like the distributions introduced in inference. The actual next token in the training text becomes the target. The less probability the model assigned to that token, the higher its <em>loss</em>.</p>
+  <p>The loss is then traced backward through the model. A procedure called <em>backpropagation</em> calculates how changes to the parameters will affect it. An <em>optimizer</em>, usually based on <em>gradient descent</em>, uses that information to make very small adjustments intended to reduce the loss.</p>
+  <p>Then the procedure begins again, across many positions, many batches, and an enormous collection of text. The calculations are distributed across large clusters of specialized processors, such as graphics processing units (GPUs) or tensor processing units (TPUs). Prediction, measurement, adjustment: through this cycle, repeated again and again, the model&rsquo;s parameters gradually cease to be random.</p>
+  <p>Below is one prediction from this process, isolated and slowed down. The target is the last word of the sentence that runs through this glossary. Measure the loss and adjust the weights a few times, and watch the prediction improve.</p>
 </section>
 
 <div class="bleed">
@@ -259,17 +266,20 @@ body{animation:pagein 620ms ease both}
       <button class="quiet" id="nudgeBtn" type="button">measure the loss and nudge the weights</button>
       <button class="quiet" id="gReset" type="button">start again</button>
     </div>
-    <p class="readout" id="gRead">the untrained model guesses almost blindly.</p>
+    <p class="readout" id="gRead">before training, the model guesses almost blindly.</p>
   </div>
 </div>
 
 <section class="wrap">
-  <p>This is the whole engine of pretraining. There is no reward the model wants, no goal it holds. There is a score, and a procedure that shrinks it, and everything the glossary has shown, the useful vocabulary, the neighbourhoods of meaning, the habits of attention, precipitated out of that shrinking. So here is the honest answer about motivation. The model is not motivated. It was optimized. What looks like wanting to answer well is the shape that trillions of scored guesses left behind.</p>
+  <p>This is the engine of pretraining. The procedure does not require the model to understand the loss or hold it as a goal. It measures an error, traces it backward, and adjusts the numbers.</p>
+  <p>Through this repeated reduction of loss, token embeddings develop neighbourhoods, attention develops patterns, and the transformations inside the layers become responsive to recurring structures in the text.</p>
+  <p>Training provides us with an account of optimization, not evidence of motivation. When we describe a model as wanting to answer well, we are translating this optimized tendency into human terms. The individual predictions made during training are not stored, but their accumulated effects remain in the parameters.</p>
 </section>
 
 <section class="wrap">
-  <p class="seckick">ii &middot; the sediment</p>
-  <p>Training also answers where the space of meaning came from. Before training, every word&rsquo;s vector is random noise: the space is a cloud without neighbourhoods. Each nudge moves the vectors a little, and over months of training the words settle toward the positions their usage deserves. The glossary&rsquo;s own space forms below. Press train and watch the sediment settle.</p>
+  <p class="seckick">ii &middot; the embedding space</p>
+  <p>Training also helps answer where the embedding space comes from. Before training, each token&rsquo;s vector typically begins at a largely random position: the space has no meaningful neighbourhoods. As the loss is reduced, these vectors are adjusted along with the rest of the model. Across training, tokens come to occupy positions that reflect patterns in how they appeared in the text.</p>
+  <p>The glossary&rsquo;s teaching space forms below. Press <em>train</em> and watch the positions settle.</p>
 </section>
 
 <div class="bleed">
@@ -286,12 +296,16 @@ body{animation:pagein 620ms ease both}
 </div>
 
 <section class="wrap">
-  <p>When the settling finishes, the space you are looking at is the one pages i and ii walk through. Light near beam, song far from water. Nobody placed those words. The placing is sediment: the compressed residue of everything the model read, centuries of writing pressed into position by months of scoring. Then the training stops, and the space freezes exactly there.</p>
+  <p>When the settling finishes, the space resembles the one introduced in tokens &amp; embedding and vectors: <em>light</em> near <em>beam</em>, <em>song</em> far from <em>water</em>.</p>
+  <p>In this panel, we placed those words by hand. In a working model, nobody assigns tokens their final positions. The positions emerge from the accumulated adjustments made during training.</p>
+  <p>They are not a complete record of everything the model encountered. They preserve compressed patterns in how tokens appeared across the training text. When pretraining ends, the space remains fixed unless another stage of training alters it. By the time an ordinary conversation begins, the training is over and the space no longer moves.</p>
 </section>
 
 <section class="wrap">
-  <p class="seckick">iii &middot; the shaping</p>
-  <p>A pretrained model continues text well, but continuing is not the same as helping. So a second, shorter stage shapes its behaviour. This is called <em>fine-tuning</em>: further training on chosen examples of the conduct the makers want. Its best-known form is <em>RLHF</em>, reinforcement learning from human feedback. People are shown pairs of the model&rsquo;s answers and asked which one is better. The model&rsquo;s weights are nudged toward the answers people preferred. This is how a model is controlled: not by rules written inside it, but by the same nudging, aimed at human judgements instead of hidden tokens. Try being the judge.</p>
+  <p class="seckick">iii &middot; post-training and fine-tuning</p>
+  <p>A pretrained model can continue text, but continuing is not the same as answering helpfully. A further set of stages therefore shapes how it responds. These stages are often gathered under the name <em>post-training</em>.</p>
+  <p>Post-training commonly includes <em>fine-tuning</em> on chosen examples of the kinds of response the model&rsquo;s makers want it to produce. One influential further method is <em>reinforcement learning from human feedback</em>, or RLHF. People compare pairs of the model&rsquo;s answers and judge which is better. A separate <em>reward model</em> is trained to predict those judgements, and the LLM&rsquo;s parameters are then adjusted to produce answers that the reward model scores more highly.</p>
+  <p>The parameters are again changed through optimization, but the objective has shifted. The model is now being shaped not only by patterns in the training text, but by examples and preferences concerning how it should respond. Try being the judge below.</p>
 </section>
 
 <div class="bleed">
@@ -314,24 +328,34 @@ body{animation:pagein 620ms ease both}
 </div>
 
 <section class="wrap">
-  <p>Your few clicks moved a meter. In real fine-tuning, thousands of raters make millions of comparisons, and the sum of their judgements becomes the model&rsquo;s manner: its helpfulness, its caution, its refusals, its tone. This is worth holding onto whenever a model seems to want something. The wanting you sense is a record of what other people rewarded. The last stage of training is a portrait of its judges.</p>
+  <p>Your few clicks moved a meter. In a working process, many people may compare many replies. Together with written examples, policies, and other forms of evaluation, their judgements help shape the model&rsquo;s manner: its helpfulness, its caution, its refusals, and its tone.</p>
+  <p>This is worth holding onto whenever a model seems to want something. Its behaviour may partly reflect tendencies reinforced during post-training: patterns of response that people, or other evaluators designed by people, rated more highly.</p>
+  <p>The parameters, then, were shaped in stages: first by patterns across a vast body of text, then by selected examples and judgements about how the model should respond. The next entry, superposition, returns to those parameters and to a puzzle about how many patterns they can hold at once.</p>
 
   <div class="poem">
     <p class="pkick">in the poems</p>
-    <p>The poems&rsquo; vocabulary is sediment. Every word they chose was weighted by centuries of other people&rsquo;s sentences, pressed into place by the scoring, and then frozen there.</p>
-  </div>
+    <p>By the time the poems began, these stages of training had already shaped the model&rsquo;s fixed weights. Every word it offered came from possibilities formed through patterns across other people&rsquo;s writing and later judgements about how an assistant should respond.</p></div>
 
-  <p class="shadow">The model wants nothing. What looks like wanting is the shape the scoring left.</p>
-
-  <p class="terms">terms from this page: <b>pretraining &middot; loss &middot; gradient descent &middot; fine-tuning &middot; RLHF</b></p>
+  <p class="terms">terms from this page: <b>training &middot; pretraining &middot; loss &middot; backpropagation &middot; gradient descent &middot; optimizer &middot; post-training &middot; fine-tuning &middot; RLHF &middot; reward model</b></p>
 
   <div class="note">
     <p class="nkick">a note on the visualizations</p>
     <p>Every visualization in this glossary is an approximation. The panels were built by hand to illustrate an idea; they were not computed by a working model, and real LLMs are larger, less tidy, and less legible than anything shown here. Their purpose is to bridge the gap between the complexity of an LLM&rsquo;s inner workings and human experience, which is what a good visualization tends to do.</p>
     <details>
       <summary>notes on this page</summary>
-      <p>The training step here compresses a real one: actual losses are computed over tens of thousands of candidate tokens, and the nudging adjusts billions of weights by amounts far smaller than the panel shows. The settling space replays hand-placed final positions rather thantruly learning them; real training does not know its destination in advance, which is part of what makes it remarkable. The preference panel is a toy of RLHF&rsquo;s idea, not its algorithm, and modern shaping combines several methods this glossary gathers under one name. The claim about motivation is the mainstream scientific view, stated plainly; what optimization does and does not produce inside such systems remains genuinely debated, and page x returns to the question.</p>
+      <p>The training panel isolates one predicted token and repeats the adjustment immediately. Real pretraining calculates losses across many token positions and many examples at once, combines the resulting gradients, and then updates the parameters. Not every parameter changes by the same amount, and some may change scarcely at all during a particular step.</p>
+      <p>The settling space replays hand-placed final positions rather than learning them. Real training does not know the space&rsquo;s destination in advance. Its structure emerges from the repeated adjustments made across many examples.</p>
+      <p>The preference panel is a teaching version of one part of RLHF, not a reproduction of its algorithm. Working systems combine several approaches to post-training. These may include supervised fine-tuning on written demonstrations, RLHF using a learned reward model, direct preference optimization without a separate reward model, and feedback generated by other models following written principles.</p>
+      <p>This page distinguishes optimization, which can be described through the training procedure, from motivation, which is an interpretation of the resulting behaviour. Whether richer accounts of agency or motivation are warranted remains a subject of research and debate. The final entry returns to that question.</p>
     </details>
+  </div>
+
+  <div class="sources">
+    <p class="skick">sources</p>
+    <p>The account of pretraining as next-token prediction draws on Alec Radford et al., &ldquo;Language Models are Unsupervised Multitask Learners&rdquo;, 2019, and Tom B. Brown et al., &ldquo;Language Models are Few-Shot Learners&rdquo;, 2020.</p>
+    <p>The explanation of loss, gradient descent, and backpropagation draws on David E. Rumelhart, Geoffrey E. Hinton, and Ronald J. Williams, &ldquo;Learning Representations by Back-Propagating Errors&rdquo;, 1986, and Daniel Jurafsky and James H. Martin, <em>Speech and Language Processing</em>, third-edition draft.</p>
+    <p>The account of reinforcement learning from human feedback draws on Paul F. Christiano et al., &ldquo;Deep Reinforcement Learning from Human Preferences&rdquo;, 2017, and Long Ouyang et al., &ldquo;Training Language Models to Follow Instructions with Human Feedback&rdquo;, 2022.</p>
+    <p>The note on other approaches to post-training draws on Rafael Rafailov et al., &ldquo;Direct Preference Optimization: Your Language Model Is Secretly a Reward Model&rdquo;, 2023, and Yuntao Bai et al., &ldquo;Constitutional AI: Harmlessness from AI Feedback&rdquo;, 2022.</p>
   </div>
 </section>
 </main>
@@ -379,7 +403,7 @@ function nudge(){
 document.getElementById("nudgeBtn").addEventListener("click", nudge);
 document.getElementById("gReset").addEventListener("click", ()=>{
   probs = GC.map(p=>[...p]); steps = 0; renderGuess();
-  gRead.textContent = "the untrained model guesses almost blindly.";
+  gRead.textContent = "before training, the model guesses almost blindly.";
 });
 renderGuess();
 
