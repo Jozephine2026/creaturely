@@ -234,13 +234,13 @@ body{animation:pagein 620ms ease both}
 <header class="wrap">
   <p class="kicker"><a href="index.html#ring">creaturely: a glossary &middot; vi</a></p>
   <h1>sampling &amp; temperature</h1>
-  <p class="sub">Why the same question does not return the same answer.</p>
+  <p class="sub">Why the same question can return a different answer.</p>
 </header>
 
 <main>
 <section class="wrap">
-  <p>The previous page ended each cycle of the generation process by turning the text into a probability distribution for the next token, then choosing one token from it. This page looks more closely at that moment of choice. Inside it is one important part of the answer to a question most people ask sooner or later about an LLM&rsquo;s response: why does the same question, asked twice, come back differently?</p>
-  <p>In many LLM systems, the next token is not simply the one with the highest probability. It is drawn from a distribution.</p>
+  <p>The previous page showed how each cycle of inference ends: the model produces a probability distribution for the next token, and one token is chosen from it. This page looks more closely at how that choice can be made.</p>
+  <p>Inside it is one important part of the answer to a question most people ask sooner or later: why does the same question, asked twice, sometimes come back differently? In many LLM systems, the next token is not simply the one with the highest probability. It is drawn from a distribution.</p>
 </section>
 
 <section class="wrap">
@@ -266,7 +266,7 @@ body{animation:pagein 620ms ease both}
 </div>
 
 <section class="wrap">
-  <p>Press <em>sample</em> enough times and the tally begins to resemble the bars: <em>water</em> most often, <em>dark</em> sometimes, <em>sea</em> now and then. Any one draw cannot be predicted from the probabilities alone, but across many draws their proportions will begin to appear.</p>
+  <p>Press <em>sample</em> enough times and the tally begins to resemble the bars: <em>water</em> most often, <em>dark</em> sometimes, <em>sea</em> now and then. Any one draw cannot be predicted from the probabilities alone, but across many draws their proportions begin to appear.</p>
   <p>This is one way in which an LLM is and is not predictable. The distribution shapes what is more or less likely, while sampling allows different paths through it. It is one reason that regenerating an answer can produce another variation rather than a copy. In a system that uses sampling, a new draw is made each time a token is chosen.</p>
 </section>
 
@@ -298,12 +298,12 @@ body{animation:pagein 620ms ease both}
   <p>Temperature is often described as a creativity setting, and it is easy to see why. At 0.2, the line will end in <em>water</em> nearly every time. At 2.5, the sentence might find the sea, or the dark, or somewhere stranger.</p>
   <p>It is worth being precise about what the setting does. Temperature does not add ideas, moods, or intentions. It rescales scores the model has already computed. A higher temperature gives more probability to alternatives that previously held smaller shares.</p>
   <p>A wider field of possible choices may produce language that feels more surprising, but it may also produce language that is less coherent. Temperature changes the amount of variation in the draw; it does not measure creativity.</p>
-  <p>The scores beneath the distribution were produced by the model&rsquo;s learned parameters working on the text already in context. Those parameters were shaped during training. The next page introduces how.</p>
+  <p>The model produced the scores beneath the distribution by processing the text already in context through parameters learned during training. The next page introduces how those parameters were shaped.</p>
 
   <div class="poem">
     <p class="pkick">in the poems</p>
-    <p>Part of the poems&rsquo; capacity to surprise the maker may live here: in the draw made at each new token. The distribution shaped what was likely, while sampling left room for another choice.</p>
-    <p>If the most likely token had always been chosen, the generation or loop would in principle have followed the same path each time, provided that the model, context, and settings remained the same.</p>
+    <p>Part of the poems&rsquo; capacity to surprise their maker may live here: in the draw made at each new token. The distribution shaped what was likely, while sampling left room for another choice.</p>
+    <p>If the most likely token had always been chosen, the generation would in principle have followed the same path each time, provided that the model, context, and settings remained the same.</p>
   </div>
 
   <p class="terms">terms from this page: <b>greedy decoding &middot; sampling &middot; temperature &middot; softmax</b></p>
