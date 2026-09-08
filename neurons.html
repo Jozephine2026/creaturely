@@ -305,7 +305,7 @@ body{animation:pagein 620ms ease both}
   
 </div></div>
 
-  <p>The previous page introduced the transformer and one of the two main kinds of calculation repeated within each of its blocks: attention, which lets each token draw information from the tokens before it. This page introduces the other: the <em>feed-forward network</em>, a set of calculations applied to each token on its own that reshape its representation between rounds of attention. These calculations are built from one small kind of unit repeated many millions of times. The unit is called a <em>neuron</em>.</p>
+  <p>The previous entry introduced the transformer and one of the two main kinds of calculation repeated within each of its blocks: attention, which lets each token draw information from the tokens before it. This page introduces the other: the <em>feed-forward network</em>, a set of calculations applied to each token on its own that reshape its representation between rounds of attention. These calculations are built from one small kind of unit repeated many millions of times. The unit is called a <em>neuron</em>.</p>
   <p>The name is borrowed from biology, but the resemblance is loose. A neuron in an LLM is a piece of arithmetic, and this page seeks to show what that arithmetic is.</p>
 </section>
 
@@ -334,7 +334,7 @@ body{animation:pagein 620ms ease both}
 <section class="wrap">
   <p>Notice what happens with <em>sea</em>: the weighted sum is negative, the activation function holds it at zero, and this neuron sends zero onward. This does not mean that <em>sea</em> disappears. This is one neuron among many, and only its own output is zero.</p>
   <p>On this page, we chose the weights by hand to make the behaviour visible. In a real LLM, nobody assigns a neuron the task of detecting glowing. Its weights are adjusted during training, across many examples, as part of the model learning to predict what comes next.</p>
-  <p>Two cautions belong here. First, a real neuron reads the numerical values in a vector, not tidy features with names attached. Second, a single real neuron rarely corresponds to one clean idea; page viii, on superposition, is about exactly that.</p>
+  <p>Two cautions belong here. First, a real neuron reads the numerical values in a vector, not tidy features with names attached. Second, a single real neuron rarely corresponds to one clean idea; the entry on superposition is about exactly that.</p>
 </section>
 
 <section class="wrap">
@@ -363,7 +363,7 @@ body{animation:pagein 620ms ease both}
   <p>What an LLM retains from training is encoded across its learned numbers: the token embeddings, every neuron&rsquo;s weights, and every matrix used by attention and the feed-forward networks. Counted together, these numbers are called <em>parameters</em>. When a model is described as having billions of parameters, this is what is being counted. No one wrote these numbers directly, and learning how to read them is a research problem in its own right.</p>
   <p>By the time most of us interact with an LLM, its training is over. During an ordinary interaction, the parameters remain fixed. Your words do not rewrite its weights. What changes are the temporary representations produced as the sentence passes through them.</p>
   <p>There is no dictionary stored inside and no shelf of facts, only patterns held across these numbers and the sentence&rsquo;s representations being rewritten by them, block after block. The token IDs remain the same, but their internal representations change. At the top of the stack, the model uses the final representation to predict what token might come next.</p>
-  <p>The next page follows that final step: how the model turns the representation at the top of the stack into its next token.</p>
+  <p>The next entry follows that final step: how the model turns the representation at the top of the stack into its next token.</p>
 
   <div class="poem">
     <p class="pkick">in the poems</p>
@@ -382,7 +382,7 @@ body{animation:pagein 620ms ease both}
       <p>When the neuron in the panel returns zero for <em>sea</em>, only that neuron&rsquo;s output is zero. Other neurons may still respond, and a residual connection carries the incoming representation around the feed-forward network.</p>
       <p>The value strips in the stack panel are invented for teaching and recoloured by a formula. They were not computed by a network, and real vectors hold hundreds or thousands of values rather than six.</p>
       <p>Real transformer blocks also contain calculations this page compresses or omits, including normalization and residual connections. Their exact arrangement varies among transformer architectures. Attention itself contains learned matrices but no neurons in the sense described here; on this page, the term refers to the intermediate units within the feed-forward network.</p>
-      <p>The claim that no one can read the weights is beginning to soften. A research field called interpretability is developing methods for making parts of them legible, although these methods do not yet provide a complete reading of what a large model has learned. Page viii visits one of the field&rsquo;s central puzzles.</p>
+      <p>The claim that no one can read the weights is beginning to soften. A research field called interpretability is developing methods for making parts of them legible, although these methods do not yet provide a complete reading of what a large model has learned. The entry on superposition visits one of the field&rsquo;s central puzzles.</p>
     </details>
   </div>
 

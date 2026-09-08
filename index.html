@@ -33,7 +33,7 @@ body{
 }
 #word{
   font-family:var(--serif);font-weight:400;
-  font-size:clamp(2.3rem,8vw,4.8rem);
+  font-size:clamp(2.8rem,9.6vw,6rem);
   letter-spacing:0.06em;
   color:var(--title);
   display:flex;align-items:baseline;
@@ -64,12 +64,12 @@ body{
   min-height:100vh;display:flex;align-items:center;justify-content:center;
   padding:2rem 1rem 3rem;
 }
-#ring{margin-bottom:min(11vw,9vh)}
+#ring{margin-bottom:min(8vw,6vh)}
 /* the collar: twelve creatures on a ring, clasp at the bottom,
    the centre left empty where the neck would go */
 #ring{
   position:relative;
-  width:min(94vw,76vh);
+  width:min(96vw,86vh);
   aspect-ratio:1/1;
 }
 .motif{
@@ -176,7 +176,7 @@ const TWINKLE = {steadyMin:0.48, steadyMax:0.72, brightBase:0.72, brightSwing:0.
 const T = {
   typeStart:900,      /* the word begins to appear           */
   typeStep:320,       /* per letter                          */
-  holdAfter:2800,     /* the word rests, complete: three beats */
+  holdAfter:1800,     /* the word rests, complete: a breath   */
   releaseWindow:7000, /* each letter leaves at its own moment
                          somewhere inside this window        */
   trickle:2200,       /* window over which a letter's cloud
@@ -595,12 +595,13 @@ function run(){
   timers.push(setTimeout(()=>letterSpans.forEach(s=>s.classList.add("in")), T.typeStart));
   const typed = T.typeStart + 2800;
   const releaseStart = typed + T.holdAfter;
+  const departureOrder = letterSpans.map((_, i) => i).sort(() => Math.random() - 0.5);
   /* each letter chooses its own moment */
   let latest = 0;
   LETTERS.forEach((_,i)=>{
-    /* staggered rather than random, so the first departure comes promptly
-       and the rest follow in their own order; a little jitter keeps it human */
-    const at = releaseStart + (i / letterSpans.length) * T.releaseWindow + Math.random()*500;
+    /* random order, evenly spaced: the first leaves promptly, the rest follow
+       in an order nobody chose */
+    const at = releaseStart + (departureOrder.indexOf(i) / letterSpans.length) * T.releaseWindow + Math.random()*400;
     latest = Math.max(latest, at);
     timers.push(setTimeout(()=>releaseLetter(i), at));
   });

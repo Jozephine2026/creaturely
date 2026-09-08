@@ -241,8 +241,8 @@ body{animation:pagein 620ms ease both}
 <main>
 <section class="wrap">
 
-  <p>The first page of the glossary showed how a sentence is divided into numbered pieces, and how an LLM gives each piece a starting position in a space with many dimensions. This page introduces two things those positions make possible. First, the vectors of two tokens can be compared to calculate how similar they are. Second, in some embedding spaces, one vector can be subtracted from another so that the relationship between them becomes a direction that can sometimes be applied elsewhere.</p>
-  <p>These positions are fixed starting points, but this does not mean that a token has one fixed meaning. As a sentence moves through a contemporary LLM, the representation of each token changes in relation to the tokens around it. The next page introduces <em>attention</em>, one of the main processes through which this happens.</p>
+  <p>The first entry of the glossary showed how a sentence is divided into numbered pieces, and how an LLM gives each piece a starting position in a space with many dimensions. This page introduces two things those positions make possible. First, the vectors of two tokens can be compared to calculate how similar they are. Second, in some embedding spaces, one vector can be subtracted from another so that the relationship between them becomes a direction that can sometimes be applied elsewhere.</p>
+  <p>These positions are fixed starting points, but this does not mean that a token has one fixed meaning. As a sentence moves through a contemporary LLM, the representation of each token changes in relation to the tokens around it. The next entry introduces <em>attention</em>, one of the main processes through which this happens.</p>
 </section>
 
 <section class="wrap">
@@ -321,7 +321,7 @@ body{animation:pagein 620ms ease both}
 
 <section class="wrap">
   <p>A vector is not simply a way of storing a token as a point. It gives the model a starting position from which relationships can be compared, similarities measured, and, in some embedding spaces, directions traced.</p>
-  <p>At this stage, however, we have described only the starting representation of each separate token. The model has not yet interpreted your sentence as a sentence. The next page introduces the process we experience as &ldquo;reading,&rdquo; when the representation of each token begins to be shaped by the tokens around it.</p>
+  <p>At this stage, however, we have described only the starting representation of each separate token. The model has not yet interpreted your sentence as a sentence. The next entry introduces the process we experience as &ldquo;reading,&rdquo; when the representation of each token begins to be shaped by the tokens around it.</p>
 
   <div class="poem">
     <p class="pkick">in the poems</p>
@@ -337,7 +337,7 @@ body{animation:pagein 620ms ease both}
       <summary>notes on this page</summary>
       <p>The teaching spaces on this page use three hand-placed dimensions in place of the hundreds or thousands used by real embeddings. Their slow turning is presentational; real models compare vectors across all their dimensions at once.</p>
     <p>The similarity numbers in the interactive are calculated from straight-line distance within this teaching space. Embedding systems commonly use cosine similarity, which compares the angle between vectors rather than the distance between their endpoints. The interactive therefore illustrates the general idea of similarity without reproducing that calculation.</p>
-    <p>Cosine similarity is one method for comparing embeddings. It is not, by itself, the process through which a contemporary LLM interprets a sentence. As the tokens pass through a transformer, their representations change according to their context. The next pages introduce this process.</p>
+    <p>Cosine similarity is one method for comparing embeddings. It is not, by itself, the process through which a contemporary LLM interprets a sentence. As the tokens pass through a transformer, their representations change according to their context. The next entries introduce this process.</p>
     <p>The creature-to-environment directions were drawn by hand so that the arithmetic would land cleanly. In a real embedding, vector arithmetic works approximately and unevenly, and its results depend on both the model and the writing used to train it.</p>
     <p>The word2vec examples involving king and queen, computer programmer and homemaker, and doctor and nurse are documented outputs from systems studied during the 2010s; they were not invented for this page. Later research has questioned whether analogy completions, by themselves, provide a reliable measure of bias. Other forms of analysis have nevertheless demonstrated that social associations and inequalities can be learned from language corpora and reproduced within word embeddings.</p>
     <p>Early systems such as word2vec assigned one stable vector to each word. Contemporary LLMs usually begin with token embeddings and then repeatedly alter the representation of each token according to its context. Vector arithmetic offers an important illustration of relationships within learned spaces, but it is not a complete account of how a contemporary language model interprets or produces a sentence.</p>

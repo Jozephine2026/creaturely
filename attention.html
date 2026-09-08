@@ -385,7 +385,7 @@ body{animation:pagein 620ms ease both}
 <main>
 <section class="wrap">
 
-  <p>The first two pages of the glossary showed how a sentence is divided into tokens, how each token receives a vector, and how those vectors can be compared and subtracted. So far, however, each token has been represented only by its initial embedding: a vector learned during training and retrieved whenever that token appears.</p>
+  <p>The first two entries of the glossary showed how a sentence is divided into tokens, how each token receives a vector, and how those vectors can be compared and subtracted. So far, however, each token has been represented only by its initial embedding: a vector learned during training and retrieved whenever that token appears.</p>
   <p>Once these initial vectors have been retrieved, they pass into a <em>transformer</em>: the layered neural network architecture at the centre of most contemporary LLMs. As the sentence passes through its layers, the transformer repeatedly updates the representation of each token in relation to its context. The token <em>beam</em> begins with the same embedding whether the sentence concerns light or oak, but it does not remain there. <em>Attention</em> is one of the main processes through which its meaning changes.</p>
 </section>
 
@@ -443,7 +443,7 @@ body{animation:pagein 620ms ease both}
 <section class="wrap">
   <p>In a transformer, attention runs in layer after layer, not only once. Contemporary LLMs may contain dozens or more than a hundred such layers. Within each layer, the model calculates attention patterns, combines information, and performs further transformations. The resulting representations pass into the next layer, where the process begins again.</p>
   <p>By the later layers, a token can carry information gathered from many earlier positions in the available context. Its vector has become a record not only of which token it is, but of how that occurrence is being used here.</p>
-  <p>The next page introduces the other major calculations within a transformer layer: the neurons and the transformations they perform.</p>
+  <p>The next entry introduces the other major calculations within a transformer layer: the neurons and the transformations they perform.</p>
 
   <div class="poem">
     <p class="pkick">in the poems</p>
@@ -462,7 +462,7 @@ body{animation:pagein 620ms ease both}
     <p>An attention weight is not a general measure of how important a word is to the model&rsquo;s response. It describes one connection involving one token, in one attention head, at one layer of the transformer.</p>
     <p>Real transformers calculate several attention patterns at once, using multiple heads, and repeat the process across many layers. Different heads can form different patterns of connection. No single attention pattern determines a token&rsquo;s representation on its own.</p>
     <p>The flowing particles in the interactive illustrate the weighted combining of information; they are not a picture of anything physically moving inside the model. The beam panel also compresses many heads, layers, and additional calculations into one hand-drawn movement.</p>
-    <p>Attention is not the only process that alters a token&rsquo;s representation. Each transformer layer contains other transformations, introduced on the next page, and preserves information through connections that this page leaves aside. Positional information, which allows the model to distinguish where tokens occur in the sequence, is also omitted from the teaching diagrams.</p>
+    <p>Attention is not the only process that alters a token&rsquo;s representation. Each transformer layer contains other transformations, introduced in the next entry, and preserves information through connections that this page leaves aside. Positional information, which allows the model to distinguish where tokens occur in the sequence, is also omitted from the teaching diagrams.</p>
     </details>
   </div>
 

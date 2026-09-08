@@ -312,7 +312,7 @@ body{animation:pagein 620ms ease both}
 
 <section class="wrap">
   <p class="seckick">ii &middot; the context window</p>
-  <p>The loop works from everything available so far, but &ldquo;everything&rdquo; has an edge. Page iii introduced the <em>context window</em>: the stretch of tokens the model can attend to at one time. In a conversation, your turns and the model&rsquo;s turns fill that window together, along with any instructions or other material supplied by the system.</p>
+  <p>The loop works from everything available so far, but &ldquo;everything&rdquo; has an edge. The entry on attention introduced the <em>context window</em>: the stretch of tokens the model can attend to at one time. In a conversation, your turns and the model&rsquo;s turns fill that window together, along with any instructions or other material supplied by the system.</p>
   <p>When the window is full, the surrounding system must stop, shorten, or replace some of what it supplies. In the simplest arrangement, the oldest tokens are left out of the next turn. The model does not archive them for itself. A surrounding system may save, summarize, or retrieve earlier material, but it must place that material back into the context before the model can use it again.</p>
 </section>
 
@@ -333,8 +333,8 @@ body{animation:pagein 620ms ease both}
 <section class="wrap">
   <p>This helps explain a common frustration. One reason a model may appear to forget something said much earlier is that the earlier words are no longer inside its context window. The model can also fail to use information that remains within the window. It does not choose to forget. It works only from the context it is given and the patterns it learned during training and now holds in its parameters.</p>
   <p>Just as important, ordinary inference does not rewrite those parameters. Temporary representations and stored calculations are created as the model produces its reply, but they do not become new training or alter its learned weights. The weights remain fixed. Your words change the context and the reply produced from it, but they do not retrain the model.</p>
-  <p>The model&rsquo;s weights therefore keep no record of having answered or interacted with you. Within a conversation, the context window carries the exchange forward. A chat service may also save the conversation or store memories outside the model and supply them again as context later. Page ix returns to this distinction.</p>
-  <p>The next page describes the one step this page has left closed: how a single token is chosen from the distribution.</p>
+  <p>The model&rsquo;s weights therefore keep no record of having answered or interacted with you. Within a conversation, the context window carries the exchange forward. A chat service may also save the conversation or store memories outside the model and supply them again as context later. The entry on stigmergy returns to this distinction.</p>
+  <p>The next entry describes the one step this page has left closed: how a single token is chosen from the distribution.</p>
 
   <div class="poem">
     <p class="pkick">in the poems</p>

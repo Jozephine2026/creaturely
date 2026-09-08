@@ -224,17 +224,17 @@ body{animation:pagein 620ms ease both}
 <main>
 <section class="wrap">
   <p>This is an interactive glossary that accompanies the project <em>creaturely</em>. The aim of the glossary is to provide an introduction to how LLMs work, with a specific interest in the processes that make them act in ways that are similar to what we think of as being creative &ndash; surprise, experimentation, innovation, and the unexpected.</p>
-  <p>The sentence that passes from page to page in this glossary is &ldquo;<em>the echo of a beam never sent</em>,&rdquo; which comes from the first code poem of <em>creaturely</em>, &ldquo;photonic emergence.&rdquo;</p>
+  <p>The sentence that passes from entry to entry in this glossary is &ldquo;<em>the echo of a beam never sent</em>,&rdquo; which comes from the first code poem of <em>creaturely</em>, &ldquo;photonic emergence.&rdquo;</p>
   <p>When you type a sentence to an LLM, it feels as if the model is reading and responding to it. However, before an LLM can do anything with what you write, the sentence must be translated into a form it is designed to use.</p>
   <p>First, it is cut into pieces. Each piece is assigned a number, and then each number is used to retrieve a long list of values which is called an embedding. Each value is simply a number, such as 0.82, &minus;0.4, etc.</p>
-  <p>These three steps: 1. tokenization, 2. numbering, and 3. embedding, give the LLM its first numerical representation of what you wrote. This first page of the glossary is an attempt to show what that process looks like.</p>
+  <p>These three steps: 1. tokenization, 2. numbering, and 3. embedding, give the LLM its first numerical representation of what you wrote. This first entry of the glossary is an attempt to show what that process looks like.</p>
 </section>
 
 <section class="wrap">
   <p class="seckick">i &middot; tokens</p>
   <p>An LLM does not read letters; instead, it works with <em>tokens</em>. Tokens are pieces of text cut from the sentence you wrote in the chat. A token may be a whole word, part of a word, a punctuation mark, or even a single character. Dividing the text into these pieces is called <em>tokenization</em>.</p>
   <p>The cuts are governed by a fixed <em>vocabulary</em> and a set of rules established before the LLM itself was trained.</p>
-  <p>Training is a long process in which an LLM encounters a very large collection of text and gradually adjusts its internal numbers, becoming better at predicting how a sentence continues. By the time most of us interact with an LLM, that training is over. While a model&rsquo;s responses may change according to the context you provide, its learned parameters ordinarily remain fixed. A later page in the glossary describes the training process more fully.</p>
+  <p>Training is a long process in which an LLM encounters a very large collection of text and gradually adjusts its internal numbers, becoming better at predicting how a sentence continues. By the time most of us interact with an LLM, that training is over. While a model&rsquo;s responses may change according to the context you provide, its learned parameters ordinarily remain fixed. A later entry in the glossary describes the training process more fully.</p>
   <p>Try the tokenizer below. Type anything. Type your name.</p>
 </section>
 
@@ -292,7 +292,7 @@ body{animation:pagein 620ms ease both}
   <p class="seckick">iii &middot; embedding</p>
   <p>Token IDs do not carry meaning on their own. A token ID functions more like a location. At that location, an LLM finds a long list of values, hundreds or even thousands of them, which together form a token&rsquo;s <em>embedding</em>. These values provide a token with a starting point in a mathematical space that has many dimensions, like coordinates on a map that cannot be fully pictured. In GPT-3 175B, for example, each embedding had 12,288 dimensions.</p>
   <p>LLMs learn these locations during training. Because they are developed through patterns of use, tokens that appear in related contexts often acquire similar embeddings and occupy regions that are close in the space. This nearness or proximity can reflect a similarity in meaning, grammar, tone, or use.</p>
-  <p>This embedding is only a starting point. As a sentence passes through an LLM, the initial representation of each token is altered by its relationship to the tokens around it. Later pages in the glossary will help explain how this happens, and how the meaning or significance of the same token can shift from one sentence to another.</p>
+  <p>This embedding is only a starting point. As a sentence passes through an LLM, the initial representation of each token is altered by its relationship to the tokens around it. Later entries in the glossary will help explain how this happens, and how the meaning or significance of the same token can shift from one sentence to another.</p>
   <p>The picture below is a simplified example of an embedding gathered around the word <em>light</em>. What matters for the LLM are the distances between tokens. We placed <em>beam</em> and <em>glimmer</em> close to <em>light</em> to illustrate how tokens that are used in related ways may occupy similar regions of an embedding space. <em>Song</em> and <em>water</em> are placed further away to illustrate how their relationship to light is less direct.</p>
   <p>Hover over a word to see its token ID. Select it to compare its embedding values with those shown for <em>light</em>. The IDs themselves do not determine the distances. Tokens sit near one another when the patterns of values in their embeddings are similar. The eight values shown here stand in for the hundreds or thousands a real LLM will use.</p>
 </section>

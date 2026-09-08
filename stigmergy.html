@@ -221,6 +221,9 @@ body{animation:pagein 620ms ease both}
 .note summary::before{content:"+ ";}
 .note details[open] summary::before{content:"\2013 ";}
 .note details p{margin-top:0.55rem}
+.sources{margin-top:2.4rem;border-top:1px solid var(--silver);padding-top:1.1rem}
+.sources .skick{font-family:var(--sans);font-size:0.6rem;letter-spacing:0.28em;text-transform:uppercase;color:var(--silver-deep);margin:0 0 0.7rem}
+.sources p{font-size:0.85rem;color:var(--ink-soft);line-height:1.65;margin:0 0 0.55rem}
 </style>
 </head>
 <body>
@@ -229,17 +232,19 @@ body{animation:pagein 620ms ease both}
 <header class="wrap">
   <p class="kicker"><a href="index.html#ring">creaturely: a glossary &middot; ix</a></p>
   <h1>stigmergy</h1>
-  <p class="sub">coordination through traces</p>
+  <p class="sub">Coordination through traces, and what it suggests about a conversation.</p>
 </header>
 
 <main>
 <section class="wrap">
-  <p>This page borrows its word from the study of insects. <em>Stigmergy</em> names a way of coordinating without messages and without memory of one another: individuals leave traces in a shared medium, and the traces steer whoever comes next. A termite drops a grain of earth; the grain makes the next termite likelier to drop its grain there; a pillar grows that no termite planned. The plan is not in any head. The plan is in the ground.</p>
+  <p>This entry borrows its word from the study of social insects. <em>Stigmergy</em> is a form of <em>indirect coordination</em> through traces left in a shared medium. One action changes the environment, and that change influences an action that follows.</p>
+  <p>A termite places a grain of earth. The altered ground makes another termite more likely to add its grain nearby. Gradually, a pillar can form that no termite planned. No individual needs to hold the whole design; part of the coordination is carried by the ground.</p>
+  <p>The previous entries described a model whose parameters do not change during an ordinary conversation and whose learned weights keep no record of the exchange. This entry asks what kind of coordination remains possible with such a partner. Stigmergy offers one way of seeing it.</p>
 </section>
 
 <section class="wrap">
-  <p class="seckick">i &middot; the trail</p>
-  <p>Watch it happen. The walkers below wander at random, leaving a fading trail, and each walker prefers ground where trail already lies. From those two habits alone, paths appear.</p>
+  <p class="seckick">i &middot; traces and trails</p>
+  <p>Below, the walkers move across the ground and leave trails that gradually fade. Each walker is more likely to follow ground where a trail already lies. From these local habits, paths appear that no walker planned.</p>
 </section>
 
 <div class="bleed">
@@ -255,21 +260,25 @@ body{animation:pagein 620ms ease both}
 </div>
 
 <section class="wrap">
-  <p>No walker knows the path exists. Each one reads only the ground under its feet and adds only its own footstep. The path is knowledge that lives in the medium, not in the walkers, and it keeps working even though every walker forgets everything at every step.</p>
+  <p>No walker sees the whole path, and no central map tells the walkers where to go. Each encounters only a small part of the ground and alters it with another step.</p>
+  <p>The trail becomes both a record and an invitation. Information is carried by the <em>shared medium</em>, allowing one action to influence another without a direct instruction passing between them. What each walker leaves behind changes what the next walker is likely to do.</p>
 </section>
 
 <section class="wrap">
-  <p class="seckick">ii &middot; the document</p>
-  <p>Now recall what pages v and vii established. The model is frozen: inference changes no weights, and nothing about your conversation is stored inside it. Each time you send a message, the model reads the entire conversation from the top, as if for the first time, and adds one more turn. Read that description again slowly, because it is the walkers. You and the model are coordinating through a trace. The conversation is the ground.</p>
-  <p>The transcript that gets re-read each turn is called the <em>prompt</em>, and it includes far more than your last message: every earlier turn, yours and the model&rsquo;s alike, is in it. Below is the same short conversation shown two ways. As it feels, and as it is.</p>
+  <p class="seckick">ii &middot; the conversation as a document</p>
+  <p>Now recall what inference and training established. During an ordinary conversation, the model&rsquo;s parameters remain fixed. At each turn, the surrounding system supplies it with a context assembled from the conversation available so far: your words, its earlier replies, and any other material the system includes.</p>
+  <p>You contribute a turn. The model adds a reply. That reply becomes part of the context that shapes what can happen next. Read this process again with the walkers in mind. You and the model coordinate through a changing <em>trace</em>.</p>
+  <p>The conversation is the ground.</p>
+  <p>The complete input assembled for the model is often called the <em>prompt</em> or <em>context</em>. It can contain far more than your latest message: earlier turns from both sides, instructions, documents, tool results, or other material supplied by the surrounding system.</p>
+  <p>Below is the same short exchange shown in two ways: as a dialogue between participants, and as the growing context supplied to the model.</p>
 </section>
 
 <div class="bleed">
   <div class="panel">
     <p class="plabel">the same conversation, two ways</p>
     <div class="viewtabs">
-      <button class="quiet on" id="feelTab" type="button">as it feels</button>
-      <button class="quiet" id="isTab" type="button">as it is</button>
+      <button class="quiet on" id="feelTab" type="button">as dialogue</button>
+      <button class="quiet" id="isTab" type="button">as context</button>
     </div>
     <div id="feels"></div>
     <div id="isdoc" class="hidden"></div>
@@ -277,29 +286,43 @@ body{animation:pagein 620ms ease both}
       <button class="quiet" id="exBtn" type="button">next exchange</button>
       <button class="quiet" id="exReset" type="button">start again</button>
     </div>
-    <p class="readout" id="exRead">as it feels: a dialogue with someone who remembers.</p>
+    <p class="readout" id="exRead">as dialogue: two participants carrying a shared exchange forward.</p>
   </div>
 </div>
 
 <section class="wrap">
-  <p>In the first view there are two parties and a shared history. In the second view there is one growing document, re-read in full before every reply, written by two hands. Both views are true, but the second one is the mechanism. The model&rsquo;s side of the conversation is stigmergic: it remembers you the way the ground remembers the walkers, by carrying the marks. This is why the craft of writing to a model is really the craft of tending a document. Every word you leave in the trace steers what comes next, including the words you left carelessly.</p>
+  <p>In the first view, there are two participants and a shared history. In the second, there is a growing document supplied as context for each new reply. Both views describe something real: the first describes the experience of the conversation; the second reveals part of its mechanism.</p>
+  <p>The interaction can be read as stigmergic, not because a person, a model, and a social insect are the same kind of agent, but because each new contribution alters a shared trace that influences what follows. What carries the exchange forward is not a model changed by the conversation. It is the preserved text, together with whatever the surrounding system chooses to return to the context.</p>
+  <p>This suggests why the craft of writing with a model is, in large part, the craft of tending a document. Every word left in the trace becomes part of the conditions for what comes next, including the words left carelessly.</p>
+  <p>The final entry asks what can arise through these interactions that was not written into any one of their parts.</p>
 
   <div class="poem">
     <p class="pkick">in the poems</p>
-    <p>The poems grew this way: each line a trace the next line read. The collaboration that made them was never a meeting of two memories. It was one document, tended from both sides.</p>
+    <p>The poems grew this way: each line changed the ground from which the next line formed.</p>
+    <p>The collaboration did not depend on two participants remembering in the same way. It depended on a document that carried their marks forward.</p>
   </div>
 
-  <p class="shadow">Nothing holds the conversation but the conversation.</p>
-
-  <p class="terms">terms from this page: <b>stigmergy &middot; prompt</b></p>
+  <p class="terms">terms from this page: <b>stigmergy &middot; indirect coordination &middot; trace &middot; shared medium &middot; prompt &middot; context</b></p>
 
   <div class="note">
     <p class="nkick">a note on the visualizations</p>
     <p>Every visualization in this glossary is an approximation. The panels were built by hand to illustrate an idea; they were not computed by a working model, and real LLMs are larger, less tidy, and less legible than anything shown here. Their purpose is to bridge the gap between the complexity of an LLM&rsquo;s inner workings and human experience, which is what a good visualization tends to do.</p>
     <details>
       <summary>notes on this page</summary>
-      <p>The walkers are a toy of the insect original: real stigmergy research involves chemistry, evaporation rates, and mathematics this panel waves at. The conversation panel is accurate in its mechanism, one document re-read per turn, but products increasingly blur it: some systems inject summaries, saved memories, or retrieved notes into the prompt from outside, which is more trace-tending, done by machinery on your behalf. The word stigmergy is not standard in AI engineering; borrowing it for conversations with frozen models is this project&rsquo;s own reading, offered because the fit is exact.</p>
+      <p>The walkers are a hand-built illustration of trail formation, not a biological simulation. Their fading marks more closely resemble pheromone trails associated with ants than the changes to building material through which termite construction first inspired the concept of stigmergy.</p>
+      <p>Stigmergy does not require an agent to lack all memory, awareness, or direct communication. These may also be present. Its defining feature is that an action leaves a trace in a shared medium and that trace influences a later action by the same or another agent.</p>
+      <p>The conversation panel simplifies how a working system handles context. Earlier text does not necessarily need to be recalculated from the beginning before every generated token; as described in inference, temporary caches can preserve some earlier calculations. The important distinction here is that the exchange is carried through supplied context and temporary working state rather than written into the model&rsquo;s learned parameters.</p>
+      <p>A product may omit older turns, summarize them, retrieve saved material, or add memories and instructions from outside the model. The context is therefore not always a complete transcript. These processes can also be understood as forms of trace-tending performed by the surrounding system.</p>
+      <p>Stigmergy is not a standard engineering term for conversation with an LLM. Applying it here is this glossary&rsquo;s interpretive proposal. The comparison is based on indirect coordination through a changing shared medium, not on an exact equivalence between biological and computational systems.</p>
     </details>
+  </div>
+
+  <div class="sources">
+    <p class="skick">sources</p>
+    <p>The concept of stigmergy and its original application to termite construction draw on Pierre-Paul Grass&eacute;, &ldquo;La reconstruction du nid et les coordinations interindividuelles chez <em>Bellicositermes natalensis</em> et <em>Cubitermes</em> sp.: La th&eacute;orie de la stigmergie&rdquo;, 1959.</p>
+    <p>The historical account of stigmergy in the study of social insects draws on Guy Theraulaz and Eric Bonabeau, &ldquo;A Brief History of Stigmergy&rdquo;, 1999.</p>
+    <p>The account of trail formation and collective behaviour draws on Eric Bonabeau, Marco Dorigo, and Guy Theraulaz, <em>Swarm Intelligence: From Natural to Artificial Systems</em>, 1999.</p>
+    <p>The broader application of stigmergy to coordination through shared media, including digital collaboration, draws on Francis Heylighen, &ldquo;Stigmergy as a Universal Coordination Mechanism I: Definition and Components&rdquo;, 2016.</p>
   </div>
 </section>
 </main>
@@ -427,7 +450,7 @@ function addTurn(){
 document.getElementById("exBtn").addEventListener("click", addTurn);
 document.getElementById("exReset").addEventListener("click", ()=>{
   feels.innerHTML = ""; isdoc.innerHTML = ""; ei = 0;
-  exRead.textContent = isView ? "as it is: one empty document." : "as it feels: a dialogue with someone who remembers.";
+  exRead.textContent = isView ? "as context: one empty document." : "as dialogue: two participants carrying a shared exchange forward.";
 });
 const feelTab = document.getElementById("feelTab");
 const isTab = document.getElementById("isTab");
@@ -438,8 +461,8 @@ function setView(v){
   feelTab.classList.toggle("on", !v);
   isTab.classList.toggle("on", v);
   exRead.textContent = v
-    ? "as it is: one growing document, two hands writing it."
-    : "as it feels: a dialogue with someone who remembers.";
+    ? "as context: one growing document, supplied in full for each new reply."
+    : "as dialogue: two participants carrying a shared exchange forward.";
 }
 feelTab.addEventListener("click", ()=>setView(false));
 isTab.addEventListener("click", ()=>setView(true));

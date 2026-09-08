@@ -196,6 +196,7 @@ footer p{
   color:var(--epigraph);margin:0 0 0.4rem;
 }
 .poem p{font-style:italic;color:var(--ink-soft);font-size:1.05rem;margin:0}
+.poem p + p{margin-top:0.6rem}
 
 .readout{font-style:italic;color:var(--ink-soft);font-size:1rem;margin-top:0.8rem;min-height:1.6em}
 .btnrow{display:flex;gap:0.6rem;flex-wrap:wrap;margin-top:1rem}
@@ -215,6 +216,9 @@ body{animation:pagein 620ms ease both}
 .note summary::before{content:"+ ";}
 .note details[open] summary::before{content:"\2013 ";}
 .note details p{margin-top:0.55rem}
+.sources{margin-top:2.4rem;border-top:1px solid var(--silver);padding-top:1.1rem}
+.sources .skick{font-family:var(--sans);font-size:0.6rem;letter-spacing:0.28em;text-transform:uppercase;color:var(--silver-deep);margin:0 0 0.7rem}
+.sources p{font-size:0.85rem;color:var(--ink-soft);line-height:1.65;margin:0 0 0.55rem}
 </style>
 </head>
 <body>
@@ -223,17 +227,20 @@ body{animation:pagein 620ms ease both}
 <header class="wrap">
   <p class="kicker"><a href="index.html#ring">creaturely: a glossary &middot; x</a></p>
   <h1>emergence</h1>
-  <p class="sub">where the abilities nobody built come from</p>
+  <p class="sub">How abilities can arise without being designed one by one.</p>
 </header>
 
 <main>
 <section class="wrap">
-  <p>One question has been waiting since the first page. The training game is only guess-the-next-token. The machinery is only neurons, weights, and attention. Nobody wrote a translation module, a rhyming module, a module for grief or for arithmetic. Yet the abilities are there. Behaviour of a whole that was not put into its parts is called <em>emergence</em>, and it is the oldest idea in this glossary: older than computers, native to birds, termites, weather, and cities.</p>
+  <p>One question has been waiting since the first entry. An LLM is trained to predict the next token. Its machinery consists of embeddings, attention, neurons, and weights. Yet it can translate, rhyme, summarize, write code, and sometimes perform calculations, although nobody built a separate module for each of these abilities.</p>
+  <p><em>Emergence</em> describes a pattern or ability that arises through the interaction of many parts without being specified as a separate rule for any one of them. It does not mean that the result has no causes. It means that something becomes visible at the level of the whole that cannot be found in any part acting alone.</p>
+  <p>The idea is older than computers. It is familiar from birds, insects, weather, cities, and other systems in which many local interactions produce a larger form.</p>
 </section>
 
 <section class="wrap">
-  <p class="seckick">i &middot; the flock</p>
-  <p>Start where emergence is easiest to see. Each bird below follows three small rules: keep a little distance, fly roughly the way your neighbours fly, drift toward their middle. No rule mentions a flock. Turn the rules off and on, and watch what exists only when they hold together.</p>
+  <p class="seckick">i &middot; emergence in a flock</p>
+  <p>Emergence is easiest to see where the rules are few. Each bird below follows three small tendencies: keep a little distance from its neighbours, fly roughly in the direction they fly, and move toward their centre.</p>
+  <p>No rule mentions a flock or tells the birds what shape to make. Turn the rules off and on, and watch what exists only when they act together.</p>
 </section>
 
 <div class="bleed">
@@ -250,41 +257,60 @@ body{animation:pagein 620ms ease both}
 </div>
 
 <section class="wrap">
-  <p>The flock is real. You can watch it turn, split, and re-form. And you can search the three rules forever without finding it, because the flock exists at the level of the whole, produced by the rules but not present in them. Language models sit in the same family. The rule is guess the next token. Guessing well, at enormous scale, turned out to require grammar, so grammar formed. It required facts, so facts pressed themselves into the weights. It required the shapes of reasoning that run through human writing, so those shapes formed too, to a degree that is still being measured and still being argued about. The abilities were never built. They condensed.</p>
+  <p>The flock turns, divides, and forms again. Its movement was not drawn in advance, and no bird directs the whole.</p>
+  <p>The flock is not a hidden fourth rule or an additional force. It is the collective pattern produced when many birds apply the three rules in relation to one another. The rules describe what each bird does locally; the flock appears through their interaction.</p>
+  <p>Language models belong to the same broad family of systems, although the mechanism is very different. People design the architecture, choose the training procedures, and assemble the data, but they do not program translation, rhyme, or summarization as separate routines. During training, the model&rsquo;s parameters are adjusted through countless predictions. Patterns form that respond to grammar, meaning, relationships among ideas, and regularities about the world expressed in the training text. The same internal patterns can then support abilities that were not designed one by one.</p>
+  <p>Researchers disagree about exactly which abilities should be called emergent. In its broad sense, the word describes capabilities that arise from training rather than being individually programmed. In research on model scale, it has also been used more narrowly for abilities that appear in larger models but not in smaller ones. Whether those abilities arrive suddenly or develop gradually and only appear sudden when measured remains an open question.</p>
+  <p>Whatever word is used, the central fact remains: the conditions were designed, but every resulting behaviour was not specified in advance.</p>
 </section>
 
 <section class="wrap">
-  <p class="seckick">ii &middot; the gathering</p>
-  <p>Which brings this glossary to its own edge. Everything it has shown you, the cutting, the space, the noticing, the machinery, the scoring, the dice, the traces, is mechanism, and every mechanism was honest. Yet the poems exist, and this glossary exists, and the collaboration that made both was not in any of the parts either. Below, every term you have gathered across ten pages hangs in one space. Turn it. This is the vocabulary you now own, and the last thing to notice is that its subject was never quite any single page: it was the whole, forming while you read.</p>
+  <p class="seckick">ii &middot; the terms, gathered</p>
+  <p>This brings the glossary to its own edge. Everything it has shown&mdash;tokens, embeddings, vectors, attention, neurons, inference, sampling, training, superposition, and traces&mdash;is part of the mechanism. Each has been described separately so that it can be seen.</p>
+  <p>Yet the poems cannot be located in any one token, parameter, prompt, or turn. Neither can the glossary, nor the collaboration through which both were made. Each formed through relationships among many parts.</p>
+  <p>Below, the terms gathered across the ten entries hang in one space. Turn them. The subject of the glossary was never any single term. It was the whole taking shape as you read.</p>
 </section>
 
 <div class="bleed">
   <div class="panel">
-    <p class="plabel">everything you now own</p>
+    <p class="plabel">everything you now hold</p>
     <canvas id="gatherC" role="img" aria-label="Every term from the glossary hanging in one slowly turning space"></canvas>
-    <p class="readout" id="gRead">drag to turn &middot; hover a term to see its page.</p>
+    <p class="readout" id="gRead">drag to turn &middot; hover over a term to return to its entry.</p>
   </div>
 </div>
 
 <section class="wrap">
-  <p>A glossary usually ends with its last term. This one ends with the reader. You arrived able to use a model; you leave able to say what it is doing, and the difference between those two is not mechanical at all. Whatever formed in you across these ten pages was also never written in them. It emerged, the way understanding always does: out of parts that do not contain it.</p>
+  <p>A glossary usually ends with its last term. This one ends with the reader.</p>
+  <p>You arrived able to use a model. You leave able to say something more exact about what it is doing, what remains uncertain, and what happens between mechanism and experience.</p>
+  <p>No single entry contains that understanding in full. It formed across the relationships among them, and through the relationships you made while reading. It emerged, as understanding often does, from parts that do not contain it alone.</p>
 
   <div class="poem">
     <p class="pkick">in the poems</p>
-    <p>The poems are the exhibit. No one wrote them, and someone did. Both sentences are true, and everything in this glossary lives in the space between them.</p>
+    <p>The poems are the exhibit. No single author wrote them, and they were written.</p>
+    <p>Both sentences are true. This glossary has tried to describe the space between them.</p>
   </div>
 
-  <p class="shadow">The parts were counted. The whole was not among them.</p>
-
-  <p class="terms">terms from this page: <b>emergence</b></p>
+  <p class="terms">terms from this page: <b>emergence &middot; emergent behaviour &middot; emergent abilities &middot; self-organization</b></p>
 
   <div class="note">
     <p class="nkick">a note on the visualizations</p>
     <p>Every visualization in this glossary is an approximation. The panels were built by hand to illustrate an idea; they were not computed by a working model, and real LLMs are larger, less tidy, and less legible than anything shown here. Their purpose is to bridge the gap between the complexity of an LLM&rsquo;s inner workings and human experience, which is what a good visualization tends to do.</p>
     <details>
       <summary>notes on this page</summary>
-      <p>The flock is a classic simulation called boids, invented in the 1980s, and it is an analogy for emergence in general, not a picture of how models work. Whether large models&rsquo; abilities arrive suddenly with scale or grow smoothly and only look sudden in our measurements is an open research argument, and this page deliberately does not settle it. What is not in dispute: the abilities were not individually designed, and the field&rsquo;s own researchers are routinely surprised by what forms. The claim that something emerged in you, the reader, is not a scientific claim at all. It is the project&rsquo;s wager.</p>
+      <p>The flock is based on a classic computer simulation called boids, introduced by Craig Reynolds in 1987. The three tendencies are commonly called separation, alignment, and cohesion. Working simulations may include additional rules concerning speed, boundaries, obstacles, or other conditions. The panel is an analogy for emergence in general, not a picture of how a language model works.</p>
+      <p>Calling an ability emergent does not mean that it appeared without causes or human decisions. Model architecture, training data, scale, optimization, post-training, prompting, and the surrounding system all affect what a model can do. The point is that people establish these conditions without scripting every resulting behaviour separately.</p>
+      <p>The phrase emergent abilities has a narrower and disputed meaning in research on model scaling. Some studies have reported capabilities that appear abruptly once models reach a certain scale. Other work suggests that at least some of these apparent jumps are produced by discontinuous tests or thresholds, while performance develops more gradually underneath them. This page does not attempt to settle that debate.</p>
+      <p>A capability observed in a model is also not necessarily reliable. A model may succeed under one wording or condition and fail under another. Nor does the emergence of complex behaviour by itself establish consciousness, intention, understanding, or agency. Those questions require arguments and evidence beyond the concept introduced here.</p>
+      <p>The claim that understanding emerged in the reader is not a scientific conclusion. It is the project&rsquo;s wager.</p>
     </details>
+  </div>
+
+  <div class="sources">
+    <p class="skick">sources</p>
+    <p>The flock visualization draws on Craig W. Reynolds, &ldquo;Flocks, Herds, and Schools: A Distributed Behavioral Model&rdquo;, 1987.</p>
+    <p>The account of emergence as a general concept draws on Philip W. Anderson, &ldquo;More Is Different&rdquo;, 1972.</p>
+    <p>The discussion of abilities reported to emerge with model scale draws on Jason Wei et al., &ldquo;Emergent Abilities of Large Language Models&rdquo;, 2022.</p>
+    <p>The counterargument concerning measurement and apparently abrupt changes draws on Rylan Schaeffer, Brando Miranda, and Sanmi Koyejo, &ldquo;Are Emergent Abilities of Large Language Models a Mirage?&rdquo;, 2023.</p>
   </div>
 </section>
 </main>

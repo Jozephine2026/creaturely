@@ -239,7 +239,7 @@ body{animation:pagein 620ms ease both}
 
 <main>
 <section class="wrap">
-  <p>The previous page showed how each cycle of inference ends: the model produces a probability distribution for the next token, and one token is chosen from it. This page looks more closely at how that choice can be made.</p>
+  <p>The previous entry showed how each cycle of inference ends: the model produces a probability distribution for the next token, and one token is chosen from it. This page looks more closely at how that choice can be made.</p>
   <p>Inside it is one important part of the answer to a question most people ask sooner or later: why does the same question, asked twice, sometimes come back differently? In many LLM systems, the next token is not simply the one with the highest probability. It is drawn from a distribution.</p>
 </section>
 
@@ -247,7 +247,7 @@ body{animation:pagein 620ms ease both}
   <p class="seckick">i &middot; greedy decoding and sampling</p>
   <p>There are two common ways to choose a token from a distribution. The first is to take the most likely token. This is called <em>greedy decoding</em>. In principle, when the model, context, and settings remain the same, greedy decoding follows the same path each time: the same words in produce the same words out.</p>
   <p>The second is to draw from the distribution as a lottery draws from weighted tickets. A token with a large share of the probability is more likely to be drawn, but a token with a smaller share may still be chosen. This is called <em>sampling</em>, and many text-generating systems use some form of it.</p>
-  <p>Below is one step from the previous page&rsquo;s example: the moment after <em>the echo of a beam never sent returns across the</em>. Choose both ways, several times each, and compare the results.</p>
+  <p>Below is one step from the previous entry&rsquo;s example: the moment after <em>the echo of a beam never sent returns across the</em>. Choose both ways, several times each, and compare the results.</p>
 </section>
 
 <div class="bleed">
@@ -298,7 +298,7 @@ body{animation:pagein 620ms ease both}
   <p>Temperature is often described as a creativity setting, and it is easy to see why. At 0.2, the line will end in <em>water</em> nearly every time. At 2.5, the sentence might find the sea, or the dark, or somewhere stranger.</p>
   <p>It is worth being precise about what the setting does. Temperature does not add ideas, moods, or intentions. It rescales scores the model has already computed. A higher temperature gives more probability to alternatives that previously held smaller shares.</p>
   <p>A wider field of possible choices may produce language that feels more surprising, but it may also produce language that is less coherent. Temperature changes the amount of variation in the draw; it does not measure creativity.</p>
-  <p>The model produced the scores beneath the distribution by processing the text already in context through parameters learned during training. The next page introduces how those parameters were shaped.</p>
+  <p>The model produced the scores beneath the distribution by processing the text already in context through parameters learned during training. The next entry introduces how those parameters were shaped.</p>
 
   <div class="poem">
     <p class="pkick">in the poems</p>
@@ -313,7 +313,7 @@ body{animation:pagein 620ms ease both}
     <p>Every visualization in this glossary is an approximation. The panels were built by hand to illustrate an idea; they were not computed by a working model, and real LLMs are larger, less tidy, and less legible than anything shown here. Their purpose is to bridge the gap between the complexity of an LLM&rsquo;s inner workings and human experience, which is what a good visualization tends to do.</p>
     <details>
       <summary>notes on this page</summary>
-      <p>The candidate probabilities on this page were set by hand and carried over from the invented step on page v. The sixth bar gathers all remaining tokens into <em>elsewhere</em>. The temperature arithmetic, however, is the real operation in miniature: the scores are divided by the temperature and then converted into shares by the softmax.</p>
+      <p>The candidate probabilities on this page were set by hand and carried over from the invented step in inference. The sixth bar gathers all remaining tokens into <em>elsewhere</em>. The temperature arithmetic, however, is the real operation in miniature: the scores are divided by the temperature and then converted into shares by the softmax.</p>
       <p>Working systems may combine temperature with cutoffs that this page leaves aside. In top-k sampling, only a fixed number of the most likely tokens remain in the draw. In top-p sampling, the system keeps the smallest group of likely tokens whose probabilities together reach a chosen threshold. The remaining tokens are excluded before sampling.</p>
       <p>A temperature setting of zero conventionally means greedy decoding; the temperature calculation itself cannot divide scores by zero. Even greedy decoding is not always perfectly repeatable in practice, since the model, surrounding context, system settings, or numerical details of the computation may vary between runs.</p>
       <p>The provider of a system chooses its default decoding settings, and most people interacting through a chat interface are not shown exactly what those settings are.</p>
