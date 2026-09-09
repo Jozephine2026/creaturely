@@ -43,7 +43,7 @@ a.home{
 a.home:hover,a.home:focus-visible{color:var(--ink)}
 a.home:focus-visible{outline:1px solid var(--epigraph);outline-offset:3px}
 
-header{padding:7rem 0 3.6rem;text-align:center}
+header.wrap{padding:5.5rem 1.5rem 0.6rem;text-align:center}
 .kicker{
   font-family:var(--sans);font-size:0.64rem;letter-spacing:0.3em;text-transform:uppercase;
   color:var(--silver-deep);margin:0 0 1.1rem;
@@ -56,7 +56,7 @@ h1{
   font-style:italic;color:var(--ink-soft);font-size:1.15rem;margin:0.8rem 0 0;
 }
 
-section{margin:3.2rem 0}
+section.wrap{margin:2.8rem auto}
 .seckick{
   font-family:var(--sans);font-size:0.62rem;letter-spacing:0.28em;text-transform:uppercase;
   color:var(--moss);margin:0 0 1rem;
@@ -259,7 +259,7 @@ body{animation:pagein 620ms ease both}
 .fig-nl .reg p .soft{color:var(--text-dim)}
 .fig-nl .note{margin-top:36px;font-family:var(--mono);font-size:11px;color:var(--text-dim);border:1px dashed #c2d6d4;border-radius:2px;padding:12px 14px;line-height:1.6;max-width:74ch}
 
-.fig-nl{margin:-1.2rem 0 2.8rem;font-family:'Inter',system-ui,sans-serif}
+.fig-nl{margin:0.4rem 0 3rem;font-family:'Inter',system-ui,sans-serif}
 .fig-nl .canvas-wrap{margin-top:0}
 /* the image keeps only its instrument */
 .fig-nl .reg{display:none}
@@ -334,7 +334,7 @@ body{animation:pagein 620ms ease both}
 <section class="wrap">
   <p>Notice what happens with <em>sea</em>: the weighted sum is negative, the activation function holds it at zero, and this neuron sends zero onward. This does not mean that <em>sea</em> disappears. This is one neuron among many, and only its own output is zero.</p>
   <p>On this page, we chose the weights by hand to make the behaviour visible. In a real LLM, nobody assigns a neuron the task of detecting glowing. Its weights are adjusted during training, across many examples, as part of the model learning to predict what comes next.</p>
-  <p>Two cautions belong here. First, a real neuron reads the numerical values in a vector, not tidy features with names attached. Second, a single real neuron rarely corresponds to one clean idea; the entry on superposition is about exactly that.</p>
+  <p>Two cautions belong here. First, a real neuron reads the numerical values in a vector, not tidy properties with names attached. Second, a single real neuron rarely corresponds to one clean idea; the entry on superposition is about exactly that.</p>
 </section>
 
 <section class="wrap">

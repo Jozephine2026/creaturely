@@ -43,7 +43,7 @@ a.home{
 a.home:hover,a.home:focus-visible{color:var(--ink)}
 a.home:focus-visible{outline:1px solid var(--epigraph);outline-offset:3px}
 
-header{padding:7rem 0 3.6rem;text-align:center}
+header.wrap{padding:5.5rem 1.5rem 0.6rem;text-align:center}
 .kicker{
   font-family:var(--sans);font-size:0.64rem;letter-spacing:0.3em;text-transform:uppercase;
   color:var(--silver-deep);margin:0 0 1.1rem;
@@ -56,7 +56,7 @@ h1{
   font-style:italic;color:var(--ink-soft);font-size:1.15rem;margin:0.8rem 0 0;
 }
 
-section{margin:3.2rem 0}
+section.wrap{margin:2.8rem auto}
 .seckick{
   font-family:var(--sans);font-size:0.62rem;letter-spacing:0.28em;text-transform:uppercase;
   color:var(--moss);margin:0 0 1rem;
@@ -304,7 +304,7 @@ body{animation:pagein 620ms ease both}
 </div>
 
 <section class="wrap">
-  <p>In this teaching space, adding the creature-to-environment step to <em>bird</em> produces a position nearest to <em>sky</em>. Adding the same step to <em>moth</em> produces a position nearest to <em>night</em>. The arithmetic does not ordinarily land exactly on the vector of another word. It produces a position, and the system finds the word whose vector lies closest to it.</p>
+  <p>In this teaching space, adding the creature-to-environment step to <em>bird</em> produces a position nearest to <em>sky</em>. Adding the same step to <em>moth</em> produces a position nearest to <em>night</em>. The arithmetic does not ordinarily land exactly on the vector of another word. It produces a position, and the word whose vector lies closest to it is found.</p>
   <p>The step from moth to <em>flame</em> forms a direction too, but it describes another kind of relationship: attraction rather than environment. Because the two directions were calculated from different relationships, one cannot simply stand in for the other.</p>
   <p>The same mathematical step can be added to any vector, but the result will not always make sense. If the creature-to-environment step begins at <em>sea</em>, the arithmetic still produces a position, although that position does not lie near a word with any recognizable connection to the relationship. The calculation has continued to work, but the analogy has not.</p>
   <p>In a real embedding, a recurring direction can emerge when related pairs of words have appeared in similar patterns of use. This technique became famous through an early word-embedding system called word2vec. Researchers found that the step from <em>man</em> to <em>woman</em>, when applied to <em>king</em>, produced a position close to <em>queen</em>. A relationship between words had become an approximately linear direction within the embedding space.</p>
@@ -315,7 +315,7 @@ body{animation:pagein 620ms ease both}
   <p class="seckick">iii &middot; inherited patterns</p>
   <p>Researchers studying these early embeddings found something else. In a widely used word2vec embedding trained on Google News, applying the step from <em>man</em> to <em>woman</em> to <em>computer programmer</em> produced a position near <em>homemaker</em>. Applying the step from <em>father</em> to <em>mother</em> to <em>doctor</em> produced a position near <em>nurse</em>. Social stereotypes present in the training text had become part of the geometry.</p>
   <p>It is important to remember what these directions record. They are not discoveries about the world, but patterns learned from a particular body of writing: a collection shaped by who produced it, what was preserved, and what its makers chose to include. The assumptions and inequalities carried by that writing can therefore become part of the relationships the model learns.</p>
-  <p>Current models are trained and evaluated differently, and developers may use filtering, fine-tuning, and other methods intended to reduce harmful associations. These measures do not make the problem disappear. The underlying principle remains: the geometry is learned from patterns of usage, not from an independent account of what is true.</p>
+  <p>Current models are trained and evaluated differently, and developers may use filtering, further training known as fine-tuning, and other methods intended to reduce harmful associations. These measures do not make the problem disappear. The underlying principle remains: the geometry is learned from patterns of usage, not from an independent account of what is true.</p>
   <p>Follow a direction, and you are following a path of written history.</p>
 </section>
 

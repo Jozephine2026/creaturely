@@ -43,7 +43,7 @@ a.home{
 a.home:hover,a.home:focus-visible{color:var(--ink)}
 a.home:focus-visible{outline:1px solid var(--epigraph);outline-offset:3px}
 
-header{padding:7rem 0 3.6rem;text-align:center}
+header.wrap{padding:5.5rem 1.5rem 0.6rem;text-align:center}
 .kicker{
   font-family:var(--sans);font-size:0.64rem;letter-spacing:0.3em;text-transform:uppercase;
   color:var(--silver-deep);margin:0 0 1.1rem;
@@ -56,7 +56,7 @@ h1{
   font-style:italic;color:var(--ink-soft);font-size:1.15rem;margin:0.8rem 0 0;
 }
 
-section{margin:3.2rem 0}
+section.wrap{margin:2.8rem auto}
 .seckick{
   font-family:var(--sans);font-size:0.62rem;letter-spacing:0.28em;text-transform:uppercase;
   color:var(--moss);margin:0 0 1rem;
@@ -234,7 +234,7 @@ body{animation:pagein 620ms ease both}
   <p class="seckick">i &middot; tokens</p>
   <p>An LLM does not read letters; instead, it works with <em>tokens</em>. Tokens are pieces of text cut from the sentence you wrote in the chat. A token may be a whole word, part of a word, a punctuation mark, or even a single character. Dividing the text into these pieces is called <em>tokenization</em>.</p>
   <p>The cuts are governed by a fixed <em>vocabulary</em> and a set of rules established before the LLM itself was trained.</p>
-  <p>Training is a long process in which an LLM encounters a very large collection of text and gradually adjusts its internal numbers, becoming better at predicting how a sentence continues. By the time most of us interact with an LLM, that training is over. While a model&rsquo;s responses may change according to the context you provide, its learned parameters ordinarily remain fixed. A later entry in the glossary describes the training process more fully.</p>
+  <p>Training is a long process in which an LLM encounters a very large collection of text and gradually adjusts its internal numbers, becoming better at predicting how a sentence continues. By the time most of us interact with an LLM, that training is over. While a model&rsquo;s responses may change according to the context you provide, its learned parameters, the numbers set during training, ordinarily remain fixed. A later entry in the glossary describes the training process more fully.</p>
   <p>Try the tokenizer below. Type anything. Type your name.</p>
 </section>
 

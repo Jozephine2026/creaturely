@@ -43,7 +43,7 @@ a.home{
 a.home:hover,a.home:focus-visible{color:var(--ink)}
 a.home:focus-visible{outline:1px solid var(--epigraph);outline-offset:3px}
 
-header{padding:7rem 0 3.6rem;text-align:center}
+header.wrap{padding:5.5rem 1.5rem 0.6rem;text-align:center}
 .kicker{
   font-family:var(--sans);font-size:0.64rem;letter-spacing:0.3em;text-transform:uppercase;
   color:var(--silver-deep);margin:0 0 1.1rem;
@@ -56,7 +56,7 @@ h1{
   font-style:italic;color:var(--ink-soft);font-size:1.15rem;margin:0.8rem 0 0;
 }
 
-section{margin:3.2rem 0}
+section.wrap{margin:2.8rem auto}
 .seckick{
   font-family:var(--sans);font-size:0.62rem;letter-spacing:0.28em;text-transform:uppercase;
   color:var(--moss);margin:0 0 1rem;
@@ -366,7 +366,7 @@ body{animation:pagein 620ms ease both}
 .fig-at .canvas-wrap{margin-top:0}
 /* the image keeps only its instrument */
 .fig-at .reg,.fig-at .reading,.fig-at .strata-block,.fig-at .closing{display:none}
-.fig-at{margin:3.6rem 0 0}
+.fig-at{margin:2.4rem 0 2.6rem}
 .fig-at .grid-wrap{display:block;margin-top:0}
 .fig-at .cloth-frame{max-width:640px;margin:0 auto}
 .fig-at .panel{margin-top:1.4rem;max-width:640px;margin-left:auto;margin-right:auto}
@@ -444,34 +444,6 @@ body{animation:pagein 620ms ease both}
   <p>In a transformer, attention runs in layer after layer, not only once. Contemporary LLMs may contain dozens or more than a hundred such layers. Within each layer, the model calculates attention patterns, combines information, and performs further transformations. The resulting representations pass into the next layer, where the process begins again.</p>
   <p>By the later layers, a token can carry information gathered from many earlier positions in the available context. Its vector has become a record not only of which token it is, but of how that occurrence is being used here.</p>
   <p>The next entry introduces the other major calculations within a transformer layer: the neurons and the transformations they perform.</p>
-
-  <div class="poem">
-    <p class="pkick">in the poems</p>
-    <p>In the poems, the repeated movement of echo and return offers one way of imagining attention: each new token was generated in relation to tokens that came before it.</p>
-  </div>
-
-  <p class="terms">terms from this page: <b>transformer &middot; attention &middot; query &middot; key &middot; value &middot; attention weight &middot; context window &middot; contextual representation</b></p>
-
-  <div class="note">
-    <p class="nkick">a note on the visualizations</p>
-    <p>Every visualization in this glossary is an approximation. The panels were built by hand to illustrate an idea; they were not computed by a working model, and real LLMs are larger, less tidy, and less legible than anything shown here. Their purpose is to bridge the gap between the complexity of an LLM&rsquo;s inner workings and human experience, which is what a good visualization tends to do.</p>
-    <details>
-      <summary>notes on this page</summary>
-      <p>The attention weights on this page were set by hand to illustrate the idea. A working LLM calculates queries, keys, values, and attention weights from its current representations using transformations learned during training.</p>
-    <p>For each token, each attention head produces its own set of weights. The weights within that set add up to one, making them relative proportions within the weighted combination. This mathematical normalization is the only sense in which attention behaves like a fixed &ldquo;budget&rdquo;; it does not describe a literal quantity of awareness or notice.</p>
-    <p>An attention weight is not a general measure of how important a word is to the model&rsquo;s response. It describes one connection involving one token, in one attention head, at one layer of the transformer.</p>
-    <p>Real transformers calculate several attention patterns at once, using multiple heads, and repeat the process across many layers. Different heads can form different patterns of connection. No single attention pattern determines a token&rsquo;s representation on its own.</p>
-    <p>The flowing particles in the interactive illustrate the weighted combining of information; they are not a picture of anything physically moving inside the model. The beam panel also compresses many heads, layers, and additional calculations into one hand-drawn movement.</p>
-    <p>Attention is not the only process that alters a token&rsquo;s representation. Each transformer layer contains other transformations, introduced in the next entry, and preserves information through connections that this page leaves aside. Positional information, which allows the model to distinguish where tokens occur in the sequence, is also omitted from the teaching diagrams.</p>
-    </details>
-  </div>
-
-  <div class="sources">
-    <p class="skick">sources</p>
-    <p>The explanation of causal self-attention, scaled attention weights, and multi-head attention draws on Ashish Vaswani et al., &ldquo;Attention Is All You Need&rdquo;, 2017.</p>
-    <p>The earlier development of attention in neural language systems draws on Dzmitry Bahdanau, Kyunghyun Cho, and Yoshua Bengio, &ldquo;Neural Machine Translation by Jointly Learning to Align and Translate&rdquo;, 2015.</p>
-    <p>The account of contextual representations draws on Daniel Jurafsky and James H. Martin, <em>Speech and Language Processing</em>, third-edition draft, and Jay Alammar, &ldquo;The Illustrated Transformer&rdquo;, 2018.</p>
-  </div>
   <div class="fig-at"><div class="stage">
   
   
@@ -551,6 +523,35 @@ body{animation:pagein 620ms ease both}
 
   
 </div></div>
+
+
+  <div class="poem">
+    <p class="pkick">in the poems</p>
+    <p>In the poems, the repeated movement of echo and return offers one way of imagining attention: each new token was generated in relation to tokens that came before it.</p>
+  </div>
+
+  <p class="terms">terms from this page: <b>transformer &middot; attention &middot; query &middot; key &middot; value &middot; attention weight &middot; context window &middot; contextual representation</b></p>
+
+  <div class="note">
+    <p class="nkick">a note on the visualizations</p>
+    <p>Every visualization in this glossary is an approximation. The panels were built by hand to illustrate an idea; they were not computed by a working model, and real LLMs are larger, less tidy, and less legible than anything shown here. Their purpose is to bridge the gap between the complexity of an LLM&rsquo;s inner workings and human experience, which is what a good visualization tends to do.</p>
+    <details>
+      <summary>notes on this page</summary>
+      <p>The attention weights on this page were set by hand to illustrate the idea. A working LLM calculates queries, keys, values, and attention weights from its current representations using transformations learned during training.</p>
+    <p>For each token, each attention head produces its own set of weights. The weights within that set add up to one, making them relative proportions within the weighted combination. This mathematical normalization is the only sense in which attention behaves like a fixed &ldquo;budget&rdquo;; it does not describe a literal quantity of awareness or notice.</p>
+    <p>An attention weight is not a general measure of how important a word is to the model&rsquo;s response. It describes one connection involving one token, in one attention head, at one layer of the transformer.</p>
+    <p>Real transformers calculate several attention patterns at once, using multiple heads, and repeat the process across many layers. Different heads can form different patterns of connection. No single attention pattern determines a token&rsquo;s representation on its own.</p>
+    <p>The flowing particles in the interactive illustrate the weighted combining of information; they are not a picture of anything physically moving inside the model. The beam panel also compresses many heads, layers, and additional calculations into one hand-drawn movement.</p>
+    <p>Attention is not the only process that alters a token&rsquo;s representation. Each transformer layer contains other transformations, introduced in the next entry, and preserves information through connections that this page leaves aside. Positional information, which allows the model to distinguish where tokens occur in the sequence, is also omitted from the teaching diagrams.</p>
+    </details>
+  </div>
+
+  <div class="sources">
+    <p class="skick">sources</p>
+    <p>The explanation of causal self-attention, scaled attention weights, and multi-head attention draws on Ashish Vaswani et al., &ldquo;Attention Is All You Need&rdquo;, 2017.</p>
+    <p>The earlier development of attention in neural language systems draws on Dzmitry Bahdanau, Kyunghyun Cho, and Yoshua Bengio, &ldquo;Neural Machine Translation by Jointly Learning to Align and Translate&rdquo;, 2015.</p>
+    <p>The account of contextual representations draws on Daniel Jurafsky and James H. Martin, <em>Speech and Language Processing</em>, third-edition draft, and Jay Alammar, &ldquo;The Illustrated Transformer&rdquo;, 2018.</p>
+  </div>
 
 </section>
 </main>

@@ -43,7 +43,7 @@ a.home{
 a.home:hover,a.home:focus-visible{color:var(--ink)}
 a.home:focus-visible{outline:1px solid var(--epigraph);outline-offset:3px}
 
-header{padding:7rem 0 3.6rem;text-align:center}
+header.wrap{padding:5.5rem 1.5rem 0.6rem;text-align:center}
 .kicker{
   font-family:var(--sans);font-size:0.64rem;letter-spacing:0.3em;text-transform:uppercase;
   color:var(--silver-deep);margin:0 0 1.1rem;
@@ -56,7 +56,7 @@ h1{
   font-style:italic;color:var(--ink-soft);font-size:1.15rem;margin:0.8rem 0 0;
 }
 
-section{margin:3.2rem 0}
+section.wrap{margin:2.8rem auto}
 .seckick{
   font-family:var(--sans);font-size:0.62rem;letter-spacing:0.28em;text-transform:uppercase;
   color:var(--moss);margin:0 0 1rem;
@@ -298,6 +298,7 @@ body{animation:pagein 620ms ease both}
   <p>Temperature is often described as a creativity setting, and it is easy to see why. At 0.2, the line will end in <em>water</em> nearly every time. At 2.5, the sentence might find the sea, or the dark, or somewhere stranger.</p>
   <p>It is worth being precise about what the setting does. Temperature does not add ideas, moods, or intentions. It rescales scores the model has already computed. A higher temperature gives more probability to alternatives that previously held smaller shares.</p>
   <p>A wider field of possible choices may produce language that feels more surprising, but it may also produce language that is less coherent. Temperature changes the amount of variation in the draw; it does not measure creativity.</p>
+  <p>Sampling is also one of the routes by which a fluent falsehood can arise. A draw can commit to a token that was possible but wrong, and the loop then continues coherently from it, since every later token is predicted from a context that now includes the error. Lowering the temperature reduces this kind of variation but does not make the distribution truthful; the most likely continuation is only the most likely one.</p>
   <p>The model produced the scores beneath the distribution by processing the text already in context through parameters learned during training. The next entry introduces how those parameters were shaped.</p>
 
   <div class="poem">
@@ -314,9 +315,9 @@ body{animation:pagein 620ms ease both}
     <details>
       <summary>notes on this page</summary>
       <p>The candidate probabilities on this page were set by hand and carried over from the invented step in inference. The sixth bar gathers all remaining tokens into <em>elsewhere</em>. The temperature arithmetic, however, is the real operation in miniature: the scores are divided by the temperature and then converted into shares by the softmax.</p>
-      <p>Working systems may combine temperature with cutoffs that this page leaves aside. In top-k sampling, only a fixed number of the most likely tokens remain in the draw. In top-p sampling, the system keeps the smallest group of likely tokens whose probabilities together reach a chosen threshold. The remaining tokens are excluded before sampling.</p>
+      <p>Working systems may combine temperature with cutoffs that this page leaves aside. In top-k sampling, only a fixed number of the most likely tokens remain in the draw. In top-p sampling, the surrounding system keeps the smallest group of likely tokens whose probabilities together reach a chosen threshold. The remaining tokens are excluded before sampling.</p>
       <p>A temperature setting of zero conventionally means greedy decoding; the temperature calculation itself cannot divide scores by zero. Even greedy decoding is not always perfectly repeatable in practice, since the model, surrounding context, system settings, or numerical details of the computation may vary between runs.</p>
-      <p>The provider of a system chooses its default decoding settings, and most people interacting through a chat interface are not shown exactly what those settings are.</p>
+      <p>The surrounding system applies the decoding settings its provider has chosen, and most people using a chat service are not shown exactly what those settings are.</p>
     </details>
   </div>
 

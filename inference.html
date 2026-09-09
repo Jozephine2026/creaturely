@@ -43,7 +43,7 @@ a.home{
 a.home:hover,a.home:focus-visible{color:var(--ink)}
 a.home:focus-visible{outline:1px solid var(--epigraph);outline-offset:3px}
 
-header{padding:7rem 0 3.6rem;text-align:center}
+header.wrap{padding:5.5rem 1.5rem 0.6rem;text-align:center}
 .kicker{
   font-family:var(--sans);font-size:0.64rem;letter-spacing:0.3em;text-transform:uppercase;
   color:var(--silver-deep);margin:0 0 1.1rem;
@@ -56,7 +56,7 @@ h1{
   font-style:italic;color:var(--ink-soft);font-size:1.15rem;margin:0.8rem 0 0;
 }
 
-section{margin:3.2rem 0}
+section.wrap{margin:2.8rem auto}
 .seckick{
   font-family:var(--sans);font-size:0.62rem;letter-spacing:0.28em;text-transform:uppercase;
   color:var(--moss);margin:0 0 1rem;
@@ -234,7 +234,7 @@ body{animation:pagein 620ms ease both}
 .note details p{margin-top:0.55rem}
 
 /* the closing image: a second register, kept in its own colours */
-.figure{margin:-1.2rem 0 2.8rem}
+.figure{margin:0.4rem 0 3rem}
 .figure .fkick{font-family:var(--sans);font-size:0.6rem;letter-spacing:0.28em;text-transform:uppercase;color:#8d6f9e;margin:0 0 0.6rem}
 .figure .fintro{color:var(--ink-soft);margin:0 0 1.1rem}
 .figwrap{position:relative;border:1px solid #d3e3e2;border-radius:4px;background:#f8fefe;aspect-ratio:16/9;overflow:hidden;cursor:crosshair}
@@ -308,11 +308,12 @@ body{animation:pagein 620ms ease both}
 <section class="wrap">
   <p>Watch the counter under the candidates. Without shortcuts, every cycle would send the growing sequence through the stack again. Working systems usually store some of the results already calculated for earlier tokens so that they do not need to repeat all of that work. Only the newest token needs a new pass through the stack, although its attention can still draw on stored information from the tokens before it. As the sequence grows, this requires increasing amounts of memory and computation.</p>
   <p>Notice also that the model did not retrieve a finished sentence stored somewhere inside it. The line is assembled one token at a time. Until the last token is produced, the complete sentence does not exist.</p>
+  <p>Nothing in this loop checks a claim against the world. At every step the model produces the token that best continues the text according to its learned patterns, and a fluent continuation is not the same as a true one. When a model states something false with the same confidence as something true, the behaviour is commonly called <em>hallucination</em>, although some researchers prefer <em>confabulation</em>, since nothing is perceived. The mechanism this page describes is enough to produce it: prediction rewards plausibility, the context may lack what the answer needs, and the loop commits to each token before the sentence is complete.</p>
 </section>
 
 <section class="wrap">
   <p class="seckick">ii &middot; the context window</p>
-  <p>The loop works from everything available so far, but &ldquo;everything&rdquo; has an edge. The entry on attention introduced the <em>context window</em>: the stretch of tokens the model can attend to at one time. In a conversation, your turns and the model&rsquo;s turns fill that window together, along with any instructions or other material supplied by the system.</p>
+  <p>The loop works from everything available so far, but &ldquo;everything&rdquo; has an edge. The entry on attention introduced the <em>context window</em>: the stretch of tokens the model can attend to at one time. In a conversation, your turns and the model&rsquo;s turns fill that window together, along with any instructions or other material supplied by the <em>surrounding system</em>: the software around the model that assembles its input, applies its settings, and returns its output to you.</p>
   <p>When the window is full, the surrounding system must stop, shorten, or replace some of what it supplies. In the simplest arrangement, the oldest tokens are left out of the next turn. The model does not archive them for itself. A surrounding system may save, summarize, or retrieve earlier material, but it must place that material back into the context before the model can use it again.</p>
 </section>
 
@@ -341,7 +342,7 @@ body{animation:pagein 620ms ease both}
     <p>Every line of the poems was produced this way: one token at a time, each generated from the context formed by the tokens before it.</p>
   </div>
 
-  <p class="terms">terms from this page: <b>inference &middot; logits &middot; probability distribution &middot; autoregressive &middot; context window</b></p>
+  <p class="terms">terms from this page: <b>inference &middot; logits &middot; probability distribution &middot; autoregressive &middot; surrounding system</b></p>
 
   <div class="note">
     <p class="nkick">a note on the visualizations</p>
@@ -350,7 +351,7 @@ body{animation:pagein 620ms ease both}
       <summary>notes on this page</summary>
       <p>The candidate tokens and their probabilities in the loop were set by hand, and the completed line is this page&rsquo;s invention rather than the output of a working model. A real step scores a large vocabulary containing tens of thousands of tokens or more. A model may end its reply by producing a special end token; the surrounding system may also stop generation because it reaches a length limit or another stopping condition.</p>
       <p>The window panel greatly compresses the scale. Real context windows are far larger, and their sizes vary widely among models. The context may also contain material the panel does not show, including system instructions, documents, images, tool results, or other information supplied alongside the conversation.</p>
-      <p>Products may add processes outside the model, such as saved conversation histories, summaries, retrieved notes, or memories. These do not ordinarily become part of the model&rsquo;s learned weights. The system supplies them as context when it wants the model to use them.</p>
+      <p>A chat service may add processes outside the model, such as saved conversation histories, summaries, retrieved notes, or memories. These do not ordinarily become part of the model&rsquo;s learned weights. The system supplies them as context when it wants the model to use them.</p>
       <p>Working systems also commonly use a key-value cache. During generation, this cache stores keys and values already calculated for earlier tokens so that they do not need to be recomputed at every step. The cache grows as new tokens are produced and is part of the model&rsquo;s temporary working state, not a permanent memory of the conversation.</p>
     </details>
   </div>

@@ -43,7 +43,7 @@ a.home{
 a.home:hover,a.home:focus-visible{color:var(--ink)}
 a.home:focus-visible{outline:1px solid var(--epigraph);outline-offset:3px}
 
-header{padding:7rem 0 3.6rem;text-align:center}
+header.wrap{padding:5.5rem 1.5rem 0.6rem;text-align:center}
 .kicker{
   font-family:var(--sans);font-size:0.64rem;letter-spacing:0.3em;text-transform:uppercase;
   color:var(--silver-deep);margin:0 0 1.1rem;
@@ -56,7 +56,7 @@ h1{
   font-style:italic;color:var(--ink-soft);font-size:1.15rem;margin:0.8rem 0 0;
 }
 
-section{margin:3.2rem 0}
+section.wrap{margin:2.8rem auto}
 .seckick{
   font-family:var(--sans);font-size:0.62rem;letter-spacing:0.28em;text-transform:uppercase;
   color:var(--moss);margin:0 0 1rem;
@@ -312,7 +312,7 @@ body{animation:pagein 620ms ease both}
       <p>The walkers are a hand-built illustration of trail formation, not a biological simulation. Their fading marks more closely resemble pheromone trails associated with ants than the changes to building material through which termite construction first inspired the concept of stigmergy.</p>
       <p>Stigmergy does not require an agent to lack all memory, awareness, or direct communication. These may also be present. Its defining feature is that an action leaves a trace in a shared medium and that trace influences a later action by the same or another agent.</p>
       <p>The conversation panel simplifies how a working system handles context. Earlier text does not necessarily need to be recalculated from the beginning before every generated token; as described in inference, temporary caches can preserve some earlier calculations. The important distinction here is that the exchange is carried through supplied context and temporary working state rather than written into the model&rsquo;s learned parameters.</p>
-      <p>A product may omit older turns, summarize them, retrieve saved material, or add memories and instructions from outside the model. The context is therefore not always a complete transcript. These processes can also be understood as forms of trace-tending performed by the surrounding system.</p>
+      <p>A chat service may omit older turns, summarize them, retrieve saved material, or add memories and instructions from outside the model. The context is therefore not always a complete transcript. These processes can also be understood as forms of trace-tending performed by the surrounding system.</p>
       <p>Stigmergy is not a standard engineering term for conversation with an LLM. Applying it here is this glossary&rsquo;s interpretive proposal. The comparison is based on indirect coordination through a changing shared medium, not on an exact equivalence between biological and computational systems.</p>
     </details>
   </div>
