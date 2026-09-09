@@ -83,10 +83,10 @@ body.done .motif{pointer-events:auto;cursor:pointer}
 .cloudbox{width:100%;aspect-ratio:1/1}
 /* a faint index beneath each cloud: present once the ring has settled, quiet while touched */
 .motif{overflow:visible}
-.motif .entry{position:absolute;left:50%;top:86%;transform:translate(-50%,0);white-space:nowrap;
+.motif .entry{position:absolute;left:50%;top:76%;transform:translate(-50%,0);white-space:normal;width:150%;text-align:center;line-height:1.5;
   font-family:"Avenir Next","Helvetica Neue",Arial,sans-serif;font-size:0.56rem;letter-spacing:0.16em;text-transform:uppercase;
   color:#8A8D87;opacity:0;transition:opacity 1.4s ease;pointer-events:none}
-.motif.glyph .entry{top:92%}
+.motif.glyph .entry{top:84%}
 body.done .motif:hover .entry,body.done .motif.touched .entry{opacity:0.7}
 #copyline{position:fixed;right:1.3rem;bottom:0.9rem;text-align:right;font-family:"Avenir Next","Helvetica Neue",Arial,sans-serif;font-size:0.5rem;letter-spacing:0.14em;text-transform:uppercase;color:#8A8D87;opacity:0;transition:opacity 1.6s ease;pointer-events:none;z-index:5}
 body.done #copyline{opacity:0.6}
@@ -146,7 +146,7 @@ const MOTIFS = [
   {id:"moth-swallowtail", name:"sphinx moth · emergence", row:"tactile", href:"emergence.html", angle:324},
   {id:"star-seahorse", name:"star seahorse · neurons & layers", row:"photonic", href:"neurons.html", angle:108},
   {id:"ampersand",     name:"on collaboration and authorship", row:"glyph", href:"introduction.html", glyph:true, side:-1},
-  {id:"asterisk",      name:"about the project", row:"glyph", href:"#", glyph:true, side:1}
+  {id:"asterisk",      name:"about the project", row:"glyph", href:"about.html", glyph:true, side:1}
 ];
 
 const STYLE = {
