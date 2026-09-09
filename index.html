@@ -81,6 +81,14 @@ body.done .motif{pointer-events:auto;cursor:pointer}
 .motif:focus{outline:none}
 .motif:focus-visible{outline:1px solid var(--focus);outline-offset:6px;opacity:1}
 .cloudbox{width:100%;aspect-ratio:1/1}
+/* a faint index beneath each cloud: present once the ring has settled, quiet while touched */
+.motif .entry{position:absolute;left:50%;top:84%;transform:translate(-50%,0);white-space:nowrap;
+  font-family:"Avenir Next","Helvetica Neue",Arial,sans-serif;font-size:0.56rem;letter-spacing:0.16em;text-transform:uppercase;
+  color:#8A8D87;opacity:0;transition:opacity 1.4s ease;pointer-events:none}
+.motif.glyph .entry{top:92%}
+body.done .motif:hover .entry{opacity:0.7}
+#copyline{position:fixed;right:1.3rem;bottom:0.9rem;text-align:right;font-family:"Avenir Next","Helvetica Neue",Arial,sans-serif;font-size:0.5rem;letter-spacing:0.14em;text-transform:uppercase;color:#8A8D87;opacity:0;transition:opacity 1.6s ease;pointer-events:none;z-index:5}
+body.done #copyline{opacity:0.6}
 </style>
 </head>
 <body>
@@ -177,6 +185,9 @@ const T = {
   typeStart:900,      /* the word begins to appear           */
   typeStep:320,       /* per letter                          */
   holdAfter:1800,     /* the word rests, complete: a breath   */
+  arrivalStep:520,    /* clouds appear one after another      */
+  arrivalGather:1300, /* a cloud gathers into its creature    */
+  arrivalHold:2600,   /* the creature holds before loosening  */
   releaseWindow:7000, /* each letter leaves at its own moment
                          somewhere inside this window        */
   trickle:3400,       /* window over which a letter's cloud
@@ -208,7 +219,9 @@ MOTIFS.forEach(m => {
   a.id = "motif-" + m.id;
   a.href = m.href;
   a.setAttribute("aria-label", m.name);
-  a.innerHTML = `<div class="cloudbox"></div>`;
+  const entry = m.glyph ? (m.id === "ampersand" ? "introduction" : "about")
+                        : m.name.split("\u00b7")[1].trim();
+  a.innerHTML = `<div class="cloudbox"></div><span class="entry">${entry}</span>`;
   ringEl.appendChild(a);
 });
 
@@ -604,22 +617,34 @@ function tick(now){
 }
 
 function run(){
-  /* the whole word fades in together */
+  /* the whole word fades in together, rests, and fades out */
   timers.push(setTimeout(()=>letterSpans.forEach(s=>s.classList.add("in")), T.typeStart));
   const typed = T.typeStart + 2800;
-  const releaseStart = typed + T.holdAfter;
-  const departureOrder = letterSpans.map((_, i) => i).sort(() => Math.random() - 0.5);
-  /* each letter chooses its own moment */
-  let latest = 0;
-  LETTERS.forEach((_,i)=>{
-    /* random order, evenly spaced: the first leaves promptly, the rest follow
-       in an order nobody chose */
-    const at = releaseStart + (departureOrder.indexOf(i) / letterSpans.length) * T.releaseWindow + Math.random()*400;
+  const wordOut = typed + T.holdAfter;
+  timers.push(setTimeout(()=>{ wordEl.style.transition = "opacity 1400ms ease"; wordEl.style.opacity = "0"; }, wordOut));
+
+  /* then the ring takes shape: each cloud appears in its colour, gathers
+     into its creature the way the animations do, holds, and loosens */
+  const ringStart = wordOut + 1500;
+  const creatures = MOTIFS.filter(mm => !mm.glyph).sort((a,b)=>a.angle-b.angle);   /* clockwise from the top */
+  let latest = ringStart;
+  creatures.forEach((mm, i) => {
+    const at = ringStart + i*T.arrivalStep;
     latest = Math.max(latest, at);
-    timers.push(setTimeout(()=>releaseLetter(i), at));
+    timers.push(setTimeout(()=>{
+      const c = clouds[mm.id], now = performance.now();
+      c.state = "floating"; c.stateT = now;
+      c.parts.forEach(p => { p.flight = null; p.born = now + Math.random()*900; });
+    }, at));
+    timers.push(setTimeout(()=>{
+      const c = clouds[mm.id];
+      beginMorph(c, performance.now(), "condensing");
+      c.disperseTimer = setTimeout(()=>{ if(c.state === "formed" || c.state === "condensing") beginMorph(c, performance.now(), "dispersing"); }, T.arrivalHold);
+    }, at + T.arrivalGather));
   });
-  gatherGlyph("asterisk",  latest + 2500);
-  gatherGlyph("ampersand", latest + 4500);
+  gatherGlyph("asterisk",  latest + 2200);
+  gatherGlyph("ampersand", latest + 3600);
+  timers.push(setTimeout(settleAll, latest + T.arrivalGather + T.arrivalHold + 600));
 }
 
 window.addEventListener("keydown", e=>{
@@ -671,5 +696,6 @@ window.addEventListener("pageshow", e=>{
   if(e.persisted){ location.reload(); return; }
 });
 </script>
+<p id="copyline">&copy; 2026 Alexandra Emberley &middot; <em>creaturely</em></p>
 </body>
 </html>
