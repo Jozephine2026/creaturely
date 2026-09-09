@@ -43,7 +43,7 @@ a.home{
 a.home:hover,a.home:focus-visible{color:var(--ink)}
 a.home:focus-visible{outline:1px solid var(--epigraph);outline-offset:3px}
 
-header.wrap{padding:5.5rem 1.5rem 0.6rem;text-align:center}
+header.wrap{padding:5.5rem 1.5rem 0.6rem;text-align:left}
 .kicker{
   font-family:var(--sans);font-size:0.64rem;letter-spacing:0.3em;text-transform:uppercase;
   color:var(--silver-deep);margin:0 0 1.1rem;
@@ -350,7 +350,7 @@ body{animation:pagein 620ms ease both}
 
   <div class="note">
     <p class="nkick">a note on the visualizations</p>
-    <p>Every visualization in this glossary is an approximation. The panels were built by hand to illustrate an idea; they were not computed by a working model, and real LLMs are larger, less tidy, and less legible than anything shown here. Their purpose is to bridge the gap between the complexity of an LLM&rsquo;s inner workings and human experience, which is what a good visualization tends to do.</p>
+    <p>The visualizations in this glossary are approximations. They were made to illustrate the concepts and are not actual representations of what happens inside a working model. Their purpose is to help bridge a gap between the complexity of an LLM&rsquo;s inner workings and human experience.</p>
     <details>
       <summary>notes on this page</summary>
       <p>The candidate tokens and their probabilities in the loop were set by hand, and the completed line is this page&rsquo;s invention rather than the output of a working model. A real step scores a large vocabulary containing tens of thousands of tokens or more. A model may end its reply by producing a special end token; the surrounding system may also stop generation because it reaches a length limit or another stopping condition.</p>
@@ -366,7 +366,7 @@ body{animation:pagein 620ms ease both}
     <p>The description of transformer language models as autoregressive next-token predictors draws on Alec Radford et al., <a href="https://cdn.openai.com/better-language-models/language_models_are_unsupervised_multitask_learners.pdf">&ldquo;Language Models Are Unsupervised Multitask Learners&rdquo;</a>, 2019, and Tom B. Brown et al., <a href="https://arxiv.org/abs/2005.14165">&ldquo;Language Models Are Few-Shot Learners&rdquo;</a>, 2020.</p>
     <p>The explanation of the key-value cache used during inference draws on Woosuk Kwon et al., <a href="https://arxiv.org/abs/2309.06180">&ldquo;Efficient Memory Management for Large Language Model Serving with PagedAttention&rdquo;</a>, 2023.</p>
   </div>
-  <p class="colophon">&copy; 2026 Alexandra Emberley. This glossary was written and built by Alexandra Emberley in collaboration with a large language model, August to September 2026, as part of <em>creaturely</em>. Its complete version history is public at <a href="https://github.com/Jozephine2026/creaturely/commits/main">github.com/Jozephine2026/creaturely</a>.</p>
+  <p class="colophon">&copy; 2026 Alexandra Emberley. This glossary was written and built by Alexandra Emberley in collaboration with a large language model, as part of <em>creaturely</em>.</p>
 </section>
 </main>
 

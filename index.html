@@ -82,11 +82,12 @@ body.done .motif{pointer-events:auto;cursor:pointer}
 .motif:focus-visible{outline:1px solid var(--focus);outline-offset:6px;opacity:1}
 .cloudbox{width:100%;aspect-ratio:1/1}
 /* a faint index beneath each cloud: present once the ring has settled, quiet while touched */
-.motif .entry{position:absolute;left:50%;top:84%;transform:translate(-50%,0);white-space:nowrap;
+.motif{overflow:visible}
+.motif .entry{position:absolute;left:50%;top:86%;transform:translate(-50%,0);white-space:nowrap;
   font-family:"Avenir Next","Helvetica Neue",Arial,sans-serif;font-size:0.56rem;letter-spacing:0.16em;text-transform:uppercase;
   color:#8A8D87;opacity:0;transition:opacity 1.4s ease;pointer-events:none}
 .motif.glyph .entry{top:92%}
-body.done .motif:hover .entry{opacity:0.7}
+body.done .motif:hover .entry,body.done .motif.touched .entry{opacity:0.7}
 #copyline{position:fixed;right:1.3rem;bottom:0.9rem;text-align:right;font-family:"Avenir Next","Helvetica Neue",Arial,sans-serif;font-size:0.5rem;letter-spacing:0.14em;text-transform:uppercase;color:#8A8D87;opacity:0;transition:opacity 1.6s ease;pointer-events:none;z-index:5}
 body.done #copyline{opacity:0.6}
 </style>
@@ -482,6 +483,7 @@ const coarse = window.matchMedia("(hover: none)").matches;
 
 function attend(c){
   if(!document.body.classList.contains("done")) return;
+  c.anchor.classList.add("touched");
   if(c.disperseTimer){ clearTimeout(c.disperseTimer); c.disperseTimer = null; }
   if(c.state === "floating" || c.state === "dispersing"){
     beginMorph(c, performance.now(), "condensing");
@@ -490,6 +492,7 @@ function attend(c){
 function release(c, delay){
   if(c.disperseTimer) clearTimeout(c.disperseTimer);
   c.disperseTimer = setTimeout(()=>{
+    c.anchor.classList.remove("touched");
     if(c.state === "formed" || c.state === "condensing"){
       beginMorph(c, performance.now(), "dispersing");
     }

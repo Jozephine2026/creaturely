@@ -43,7 +43,7 @@ a.home{
 a.home:hover,a.home:focus-visible{color:var(--ink)}
 a.home:focus-visible{outline:1px solid var(--epigraph);outline-offset:3px}
 
-header.wrap{padding:5.5rem 1.5rem 0.6rem;text-align:center}
+header.wrap{padding:5.5rem 1.5rem 0.6rem;text-align:left}
 .kicker{
   font-family:var(--sans);font-size:0.64rem;letter-spacing:0.3em;text-transform:uppercase;
   color:var(--silver-deep);margin:0 0 1.1rem;
@@ -344,7 +344,7 @@ body{animation:pagein 620ms ease both}
 
   <div class="note">
     <p class="nkick">a note on the visualizations</p>
-    <p>Every visualization in this glossary is an approximation. The panels were built by hand to illustrate an idea; they were not computed by a working model, and real LLMs are larger, less tidy, and less legible than anything shown here. Their purpose is to bridge the gap between the complexity of an LLM&rsquo;s inner workings and human experience, which is what a good visualization tends to do.</p>
+    <p>The visualizations in this glossary are approximations. They were made to illustrate the concepts and are not actual representations of what happens inside a working model. Their purpose is to help bridge a gap between the complexity of an LLM&rsquo;s inner workings and human experience.</p>
     <details>
       <summary>notes on this page</summary>
       <p>The training panel isolates one predicted token and repeats the adjustment immediately. Real pretraining calculates losses across many token positions and many examples at once, combines the resulting gradients, and then updates the parameters. Not every parameter changes by the same amount, and some may change scarcely at all during a particular step.</p>
@@ -361,7 +361,7 @@ body{animation:pagein 620ms ease both}
     <p>The account of reinforcement learning from human feedback draws on Paul F. Christiano et al., <a href="https://arxiv.org/abs/1706.03741">&ldquo;Deep Reinforcement Learning from Human Preferences&rdquo;</a>, 2017, and Long Ouyang et al., <a href="https://arxiv.org/abs/2203.02155">&ldquo;Training Language Models to Follow Instructions with Human Feedback&rdquo;</a>, 2022.</p>
     <p>The note on other approaches to post-training draws on Rafael Rafailov et al., <a href="https://arxiv.org/abs/2305.18290">&ldquo;Direct Preference Optimization: Your Language Model Is Secretly a Reward Model&rdquo;</a>, 2023, and Yuntao Bai et al., <a href="https://arxiv.org/abs/2212.08073">&ldquo;Constitutional AI: Harmlessness from AI Feedback&rdquo;</a>, 2022.</p>
   </div>
-  <p class="colophon">&copy; 2026 Alexandra Emberley. This glossary was written and built by Alexandra Emberley in collaboration with a large language model, August to September 2026, as part of <em>creaturely</em>. Its complete version history is public at <a href="https://github.com/Jozephine2026/creaturely/commits/main">github.com/Jozephine2026/creaturely</a>.</p>
+  <p class="colophon">&copy; 2026 Alexandra Emberley. This glossary was written and built by Alexandra Emberley in collaboration with a large language model, as part of <em>creaturely</em>.</p>
 </section>
 </main>
 

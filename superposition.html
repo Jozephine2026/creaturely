@@ -43,7 +43,7 @@ a.home{
 a.home:hover,a.home:focus-visible{color:var(--ink)}
 a.home:focus-visible{outline:1px solid var(--epigraph);outline-offset:3px}
 
-header.wrap{padding:5.5rem 1.5rem 0.6rem;text-align:center}
+header.wrap{padding:5.5rem 1.5rem 0.6rem;text-align:left}
 .kicker{
   font-family:var(--sans);font-size:0.64rem;letter-spacing:0.3em;text-transform:uppercase;
   color:var(--silver-deep);margin:0 0 1.1rem;
@@ -272,6 +272,7 @@ body{animation:pagein 620ms ease both}
 .colophon a{color:inherit;text-decoration:none;border-bottom:1px solid var(--silver)}
 .sources a{color:inherit;text-decoration:none;border-bottom:1px solid var(--silver)}
 .sources a:hover{border-bottom-color:var(--ink-soft)}
+.fig-sx .canvas-wrap{background:#ffffff;border:1px solid #d3e3e2;border-radius:4px;box-shadow:0 1px 0 rgba(0,0,0,0.02)}
 </style>
 <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400&display=swap" rel="stylesheet">
 </head>
@@ -373,14 +374,14 @@ body{animation:pagein 620ms ease both}
 
   <div class="poem">
     <p class="pkick">in the poems</p>
-    <p>In the poems, one word can call up light, sound, movement, and memory at once. The model&rsquo;s internal representation may likewise bring several overlapping features into play together.</p>
+    <p>In the poems, a single word often carries light, sound, movement, and memory at once. Inside the model, a single representation may likewise hold several features within the same shared parts.</p>
     <p>The poems were written from a space in which meanings do not each have a private room.</p></div>
 
   <p class="terms">terms from this page: <b>feature &middot; polysemantic &middot; superposition &middot; sparsity &middot; interference &middot; interpretability</b></p>
 
   <div class="note">
     <p class="nkick">a note on the visualizations</p>
-    <p>Every visualization in this glossary is an approximation. The panels were built by hand to illustrate an idea; they were not computed by a working model, and real LLMs are larger, less tidy, and less legible than anything shown here. Their purpose is to bridge the gap between the complexity of an LLM&rsquo;s inner workings and human experience, which is what a good visualization tends to do.</p>
+    <p>The visualizations in this glossary are approximations. They were made to illustrate the concepts and are not actual representations of what happens inside a working model. Their purpose is to help bridge a gap between the complexity of an LLM&rsquo;s inner workings and human experience.</p>
     <details>
       <summary>notes on this page</summary>
       <p>The neuron in the first panel is scripted to respond to two hand-chosen families of words. It illustrates polysemantic behaviour but does not reproduce the activity of a neuron found in a working model. Real mixtures are discovered through analysis rather than assigned in advance, and they can be far less easy to name.</p>
@@ -397,7 +398,7 @@ body{animation:pagein 620ms ease both}
     <p>The explanation of sparsity, interference, and features represented in superposition draws on Nelson Elhage et al., <a href="https://transformer-circuits.pub/2022/toy_model/index.html">&ldquo;Toy Models of Superposition&rdquo;</a>, 2022.</p>
     <p>The account of sparse autoencoders and the attempt to recover features from shared representations draws on Trenton Bricken et al., <a href="https://transformer-circuits.pub/2023/monosemantic-features/index.html">&ldquo;Towards Monosemanticity: Decomposing Language Models With Dictionary Learning&rdquo;</a>, 2023, and Adly Templeton et al., <a href="https://transformer-circuits.pub/2024/scaling-monosemanticity/index.html">&ldquo;Scaling Monosemanticity: Extracting Interpretable Features from Claude 3 Sonnet&rdquo;</a>, 2024.</p>
   </div>
-  <p class="colophon">&copy; 2026 Alexandra Emberley. This glossary was written and built by Alexandra Emberley in collaboration with a large language model, August to September 2026, as part of <em>creaturely</em>. Its complete version history is public at <a href="https://github.com/Jozephine2026/creaturely/commits/main">github.com/Jozephine2026/creaturely</a>.</p>
+  <p class="colophon">&copy; 2026 Alexandra Emberley. This glossary was written and built by Alexandra Emberley in collaboration with a large language model, as part of <em>creaturely</em>.</p>
 </section>
 </main>
 
