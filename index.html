@@ -87,7 +87,7 @@ body.done .motif,.motif.ready{pointer-events:auto;cursor:pointer}
   font-family:"Avenir Next","Helvetica Neue",Arial,sans-serif;font-size:0.68rem;letter-spacing:0.06em;text-transform:none;font-style:italic;font-family:var(--serif);
   color:#8A8D87;opacity:0;transition:opacity 0.9s ease 0s;pointer-events:none}
 .motif.glyph .entry{top:100%}
-.motif.ready:hover .entry,.motif.touched .entry{opacity:0.75;transition-delay:1.3s}
+.motif .entry{display:none}
 #copyline{position:fixed;right:1.3rem;bottom:0.9rem;text-align:right;font-family:"Avenir Next","Helvetica Neue",Arial,sans-serif;font-size:0.5rem;letter-spacing:0.14em;text-transform:uppercase;color:#8A8D87;opacity:0;transition:opacity 1.6s ease;pointer-events:none;z-index:5}
 body.done #copyline{opacity:0.6}
 </style>
@@ -132,11 +132,11 @@ const OUTLINES = {"shooting-star":{"w":0.82,"h":1.0,"pts":[0.013,0.0,0.005,0.001
    ========================================================= */
 
 const MOTIFS = [
-  {id:"shooting-star", name:"shooting star \u00b7 animations", row:"photonic", href:"animations.html", angle:0},
-  {id:"swallow",       name:"tree swallow \u00b7 collars",     row:"sonic",    href:"collars.html",    angle:1},
-  {id:"moth-swallowtail", name:"sphinx moth \u00b7 glossary",  row:"tactile",  href:"glossary.html",   angle:2},
-  {id:"ampersand", name:"& \u00b7 introduction", row:"glyph", href:"introduction.html", glyph:true, side:-1},
-  {id:"asterisk",  name:"* \u00b7 about",        row:"glyph", href:"about.html",        glyph:true, side:1}
+  {id:"seahorse",         name:"seahorse \u00b7 collars",           row:"photonic", href:"collars.html",      angle:0},
+  {id:"swallow",          name:"tree swallow \u00b7 glossary",      row:"sonic",    href:"glossary.html",     angle:72},
+  {id:"asterisk",         name:"* \u00b7 about",                    row:"glyph",    href:"about.html",        angle:144, glyph:true},
+  {id:"moth-swallowtail", name:"sphinx moth \u00b7 introduction",   row:"tactile",  href:"introduction.html", angle:216},
+  {id:"shooting-star",    name:"shooting star \u00b7 animations",   row:"photonic", href:"animations.html",   angle:288}
 ];
 
 const STYLE = {
@@ -218,19 +218,15 @@ MOTIFS.forEach(m => {
 
 /* place the twelve on the circle; recalculated on resize */
 function layoutRing(){
+  /* five around an empty centre: the collar again */
   const W = ringEl.clientWidth;
+  const r = W * 0.33;
   MOTIFS.forEach(m => {
     const a = document.getElementById("motif-" + m.id);
-    if(m.glyph){
-      const cell = W * 0.10;
-      a.style.left = (W/2 + m.side * W*0.07) + "px";
-      a.style.top  = (W*0.86) + "px";
-      a.style.width = cell + "px";
-      return;
-    }
-    const cell = W * 0.26;
-    a.style.left = (W/2 + (m.angle-1) * W*0.31) + "px";
-    a.style.top  = (W*0.42) + "px";
+    const th = m.angle * Math.PI/180;
+    const cell = m.glyph ? W * 0.11 : W * 0.26;
+    a.style.left = (W/2 + r*Math.sin(th)) + "px";
+    a.style.top  = (W/2 - r*Math.cos(th)) + "px";
     a.style.width = cell + "px";
   });
 }
@@ -331,7 +327,7 @@ function frameOf(c){
   const cy = r.top + r.height/2 + c.jit[1];
   const S = Math.min(r.width, r.height) * 0.94;
   /* the cloud's spread is the same for every creature; only the form is trimmed */
-  const S0 = (c.id === "ampersand" || c.id === "asterisk") ? S : ringEl.clientWidth * 0.26 * 0.94;
+  const S0 = (c.id === "asterisk") ? S : ringEl.clientWidth * 0.26 * 0.94;
   return {cx, cy, S, S0, x:cx - c.o.w*S/2, y:cy - c.o.h*S/2};
 }
 
@@ -634,8 +630,7 @@ function run(){
       c.disperseTimer = setTimeout(()=>{ if(c.state === "formed" || c.state === "condensing") beginMorph(c, performance.now(), "dispersing"); c.anchor.classList.add("ready"); }, T.arrivalHold);
     }, at + T.arrivalGather));
   });
-  gatherGlyph("asterisk",  latest + 2200);
-  gatherGlyph("ampersand", latest + 3600);
+  gatherGlyph("asterisk", latest + 1800);
   timers.push(setTimeout(settleAll, latest + T.arrivalGather + T.arrivalHold + 600));
 }
 
