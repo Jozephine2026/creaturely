@@ -3,7 +3,7 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>creaturely</title>
+<title>creaturely · a glossary</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+Mono:wght@400&display=swap" rel="stylesheet">
@@ -69,7 +69,7 @@ body{
    the centre left empty where the neck would go */
 #ring{
   position:relative;
-  width:min(94vw,100vh);
+  width:min(94vw,90vh);
   aspect-ratio:1/1;
 }
 .motif{
@@ -90,6 +90,9 @@ body.done .motif,.motif.ready{pointer-events:auto;cursor:pointer}
 .motif.ready:hover .entry,.motif.touched .entry{opacity:0.75;transition-delay:1.3s}
 #copyline{position:fixed;right:1.3rem;bottom:0.9rem;text-align:right;font-family:"Avenir Next","Helvetica Neue",Arial,sans-serif;font-size:0.5rem;letter-spacing:0.14em;text-transform:uppercase;color:#8A8D87;opacity:0;transition:opacity 1.6s ease;pointer-events:none;z-index:5}
 body.done #copyline{opacity:0.6}
+#doorline{position:fixed;left:1.3rem;top:1.1rem;font-family:var(--serif);font-style:italic;font-size:0.9rem;color:#8A8D87;text-decoration:none;opacity:0;transition:opacity 1.6s ease;z-index:6}
+body.done #doorline{opacity:0.55}
+#doorline:hover{opacity:0.9}
 </style>
 </head>
 <body>
@@ -132,11 +135,19 @@ const OUTLINES = {"shooting-star":{"w":0.82,"h":1.0,"pts":[0.013,0.0,0.005,0.001
    ========================================================= */
 
 const MOTIFS = [
-  {id:"shooting-star", name:"shooting star \u00b7 animations", row:"photonic", href:"animations.html", angle:0},
-  {id:"swallow",       name:"tree swallow \u00b7 collars",     row:"sonic",    href:"collars.html",    angle:1},
-  {id:"moth-swallowtail", name:"sphinx moth \u00b7 glossary",  row:"tactile",  href:"glossary.html",   angle:2},
-  {id:"ampersand", name:"& \u00b7 introduction", row:"glyph", href:"introduction.html", glyph:true, side:-1},
-  {id:"asterisk",  name:"* \u00b7 about",        row:"glyph", href:"about.html",        glyph:true, side:1}
+  /* ten creatures, evenly spaced, read clockwise from the
+     shooting star at the top, in the order of the guide.
+     the two glyphs hang below the ring, like a maker's mark. */
+  {id:"shooting-star", name:"shooting star · tokens & embedding", row:"photonic", href:"tokens.html", angle:0},
+  {id:"coral", name:"coral · vectors", row:"photonic", href:"vectors.html", angle:36},
+  {id:"seahorse", name:"seahorse · attention", row:"photonic", href:"attention.html", angle:72},
+  {id:"osprey", name:"osprey · inference", row:"sonic", href:"inference.html", angle:144},
+  {id:"swallow", name:"tree swallow · sampling & temperature", row:"sonic", href:"sampling.html", angle:180},
+  {id:"nightingale", name:"nightingale · training", row:"sonic", href:"training.html", angle:216},
+  {id:"moth-tiger", name:"scarlet tiger · superposition", row:"tactile", href:"superposition.html", angle:252},
+  {id:"moth-hawk", name:"hawkmoth · stigmergy", row:"tactile", href:"stigmergy.html", angle:288},
+  {id:"moth-swallowtail", name:"sphinx moth · emergence", row:"tactile", href:"emergence.html", angle:324},
+  {id:"star-seahorse", name:"star seahorse · neurons & layers", row:"photonic", href:"neurons.html", angle:108},
 ];
 
 const STYLE = {
@@ -176,7 +187,7 @@ const T = {
   typeStart:900,      /* the word begins to appear           */
   typeStep:320,       /* per letter                          */
   holdAfter:1800,     /* the word rests, complete: a breath   */
-  arrivalStep:700,    /* clouds appear one after another      */
+  arrivalStep:520,    /* clouds appear one after another      */
   arrivalGather:1300, /* a cloud gathers into its creature    */
   arrivalHold:2600,   /* the creature holds before loosening  */
   releaseWindow:7000, /* each letter leaves at its own moment
@@ -222,15 +233,20 @@ function layoutRing(){
   MOTIFS.forEach(m => {
     const a = document.getElementById("motif-" + m.id);
     if(m.glyph){
-      const cell = W * 0.10;
-      a.style.left = (W/2 + m.side * W*0.07) + "px";
-      a.style.top  = (W*0.86) + "px";
+      /* the clasp: ampersand and asterisk at the centre of the ring */
+      const cell = W * 0.105;
+      a.style.left = (W/2 + m.side * W*0.085) + "px";
+      a.style.top  = (W/2) + "px";
       a.style.width = cell + "px";
       return;
     }
-    const cell = W * 0.26;
-    a.style.left = (W/2 + (m.angle-1) * W*0.31) + "px";
-    a.style.top  = (W*0.42) + "px";
+    /* the four Photonic forms run slightly smaller to sit level with the flock */
+    const PHOTONIC_TRIM = {"shooting-star":0.88, "coral":0.88, "seahorse":0.88, "star-seahorse":0.88, "nightingale":1.08, "moth-tiger":0.9};
+    const cell = W * 0.17 * (PHOTONIC_TRIM[m.id] || 1);
+    const r = W/2 - (W*0.17)/2 - W*0.005;
+    const th = m.angle * Math.PI/180;
+    a.style.left = (W/2 + r*Math.sin(th)) + "px";
+    a.style.top  = (W/2 - r*Math.cos(th)) + "px";
     a.style.width = cell + "px";
   });
 }
@@ -331,7 +347,7 @@ function frameOf(c){
   const cy = r.top + r.height/2 + c.jit[1];
   const S = Math.min(r.width, r.height) * 0.94;
   /* the cloud's spread is the same for every creature; only the form is trimmed */
-  const S0 = (c.id === "ampersand" || c.id === "asterisk") ? S : ringEl.clientWidth * 0.26 * 0.94;
+  const S0 = (c.id === "ampersand" || c.id === "asterisk") ? S : ringEl.clientWidth * 0.17 * 0.94;
   return {cx, cy, S, S0, x:cx - c.o.w*S/2, y:cy - c.o.h*S/2};
 }
 
@@ -634,9 +650,7 @@ function run(){
       c.disperseTimer = setTimeout(()=>{ if(c.state === "formed" || c.state === "condensing") beginMorph(c, performance.now(), "dispersing"); c.anchor.classList.add("ready"); }, T.arrivalHold);
     }, at + T.arrivalGather));
   });
-  gatherGlyph("asterisk",  latest + 2200);
-  gatherGlyph("ampersand", latest + 3600);
-  timers.push(setTimeout(settleAll, latest + T.arrivalGather + T.arrivalHold + 600));
+    timers.push(setTimeout(settleAll, latest + T.arrivalGather + T.arrivalHold + 600));
 }
 
 window.addEventListener("keydown", e=>{
@@ -649,7 +663,7 @@ window.addEventListener("resize", ()=>{ sizeCanvas(); layoutRing(); });
 
 requestAnimationFrame(tick);
 /* returning from a glossary page: no ceremony, the ring simply fades in */
-const returning = location.hash === "#door" ||
+const returning = location.hash === "#ring" ||
   (document.referrer && (()=>{ try{ return new URL(document.referrer).origin === location.origin; }catch(e){ return false; } })());
 if(reduced){ settleAll(); }
 else if(returning){
@@ -688,6 +702,7 @@ window.addEventListener("pageshow", e=>{
   if(e.persisted){ location.reload(); return; }
 });
 </script>
+<a id="doorline" href="index.html">creaturely</a>
 <p id="copyline">&copy; 2026 Alexandra Emberley &middot; <em>creaturely</em></p>
 </body>
 </html>

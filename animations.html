@@ -3,7 +3,7 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>creaturely · about</title>
+<title>creaturely · animations</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=EB+Garamond:ital,wght@0,400;0,500;1,400&display=swap" rel="stylesheet">
@@ -220,33 +220,37 @@ h1.long{font-size:clamp(1.5rem,3.4vw,2.1rem);line-height:1.25;letter-spacing:0.0
 h1.long em{font-style:italic}
 section.wrap p a{color:inherit;text-decoration:none;border-bottom:1px solid var(--silver)}
 section.wrap p a:hover{border-bottom-color:var(--ink-soft)}
+.work{margin:0 0 3.4rem}
+.work img{width:100%;height:auto;display:block;border-radius:4px}
+.work video{width:100%;height:auto;display:block;border-radius:4px;background:#000}
+.work .cap{font-size:0.92rem;color:var(--ink-soft);margin:0.8rem 0 0;line-height:1.6}
+.work .cap em{font-style:italic}
 </style>
 </head>
 <body>
 
 
 <header class="wrap">
-  <p class="kicker"><a href="glossary.html#ring">creaturely: a glossary &middot; *</a></p>
-  <h1>about</h1>
+  <p class="kicker"><a href="index.html#door">creaturely</a></p>
+  <h1>animations</h1>
 </header>
 
 <main>
 <section class="wrap">
-  <p class="seckick">about</p>
-  <p>Alexandra Emberley is an interdisciplinary artist, educator, and researcher based in Toronto. Her practice spans hand and digital embroidery, drawing, printmaking, computational animation, and collaboration with AI. She holds an MFA in Textiles from the Rhode Island School of Design, an MFA in Printmaking from the University of Alberta, a PhD in Language, Culture and Teaching from York University, and a BA Hons in Philosophy and Cinema Studies from the University of Toronto. She is currently a sessional instructor at OCAD University, in Toronto.</p>
-
-  <p class="seckick">the works</p>
-  <p><em>creaturely</em> comprises three animated code poems, <em>photonic emergence</em>, <em>sonic field</em>, and <em>filament</em>, each based on a passage from the creature&rsquo;s earliest memories in Mary Shelley&rsquo;s <em>Frankenstein</em>; three embroidered collars; and this website, an interactive glossary of the processes inside a large language model, together with the essay that introduces the project.</p>
-
-  <p class="seckick">credits</p>
-  <p>The poems, animations, and glossary were made in collaboration with large language models, including Claude, developed by Anthropic, and ChatGPT, developed by OpenAI. The animations were written in Python. The website was built in HTML, CSS, and JavaScript, with its visualizations drawn on the canvas element. The type is EB Garamond, with IBM Plex Mono in the images.</p>
-  <p>The project was supported by the Alberta Foundation for the Arts.</p>
-
-  <p class="seckick">rights</p>
-  <p>The text and visualizations of this website are &copy; 2026 Alexandra Emberley and are made available under a <a href="https://creativecommons.org/licenses/by-nc-nd/4.0/">Creative Commons Attribution-NonCommercial-NoDerivatives 4.0</a> licence: they may be shared and taught from with attribution, but not sold or altered. This licence applies to the website only. The animated films and the embroidered collars are separate works, all rights reserved. Enquiries about exhibiting or reproducing them are welcome.</p>
-
-  <p class="seckick">contact</p>
-  <p><a href="mailto:aemberley2025@gmail.com">aemberley2025@gmail.com</a> &middot; <a href="https://www.alexandraemberley.ca">alexandraemberley.ca</a></p>
+  <p>Each animation begins with a poem written in the form of a Python script. Each poem takes as its starting point a quote from <em>Frankenstein</em>, in which the creature narrates his earliest memories of sensation and language. The animations borrow the logic of the calligram: language that assembles itself in the shape of what it names. The letters morph into forms such as a seahorse, birds, and moths, which then multiply, sing, or tremble in response to real-world data: hydrophone recordings, radio waves from the magnetosphere, birdsong, and fungal electrical signals.</p>
+  <p>The animations are best watched with sound.</p>
+  <div class="work">
+    <video controls preload="metadata" playsinline src="photonic-emergence.mp4"></video>
+    <p class="cap"><em>photonic emergence</em>, 2025. Animated code poem, made in collaboration with a large language model.</p>
+  </div>
+  <div class="work">
+    <video controls preload="metadata" playsinline src="sonic-field.mp4"></video>
+    <p class="cap"><em>sonic field</em>, 2026. Animated code poem, made in collaboration with a large language model.</p>
+  </div>
+  <div class="work">
+    <video controls preload="metadata" playsinline src="filament.mp4"></video>
+    <p class="cap"><em>filament</em>, 2026. Animated code poem, made in collaboration with a large language model.</p>
+  </div>
 </section>
 </main>
 
